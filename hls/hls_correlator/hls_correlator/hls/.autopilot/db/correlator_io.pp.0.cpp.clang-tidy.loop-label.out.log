@@ -1,0 +1,25 @@
+/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_io.pp.0.cpp:1318:7: warning: Added loop label VITIS_LOOP_1207_1:   [xilinx-label-all-loops]
+      for (i = 0; i < __N - 1; ++i) {
+      ^~~
+      VITIS_LOOP_1207_1: 
+/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_io.pp.0.cpp:1318:7: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_io.pp.0.cpp:2292:5: warning: Added loop label VITIS_LOOP_676_1:   [xilinx-label-all-loops]
+    for (unsigned i = low; i != high; ++i) {
+    ^~~
+    VITIS_LOOP_676_1: 
+/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_io.pp.0.cpp:2292:5: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_io.pp.0.cpp:2306:5: warning: Added loop label VITIS_LOOP_690_1:   [xilinx-label-all-loops]
+    for (unsigned i = low; i != high; ++i) {
+    ^~~
+    VITIS_LOOP_690_1: 
+/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_io.pp.0.cpp:2306:5: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_io.pp.0.cpp:2320:5: warning: Added loop label VITIS_LOOP_704_1:   [xilinx-label-all-loops]
+    for (unsigned i = low; i != high; ++i) {
+    ^~~
+    VITIS_LOOP_704_1: 
+/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_io.pp.0.cpp:2320:5: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_io.pp.0.cpp:3949:7: warning: Added loop label VITIS_LOOP_1247_1:   [xilinx-label-all-loops]
+      for (i = 0; i < __N - 1; ++i) {
+      ^~~
+      VITIS_LOOP_1247_1: 
+/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_io.pp.0.cpp:3949:7: note: FIX-IT applied suggested code changes

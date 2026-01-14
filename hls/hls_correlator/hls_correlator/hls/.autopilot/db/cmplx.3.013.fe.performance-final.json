@@ -1,0 +1,18 @@
+{
+  "0": {
+    "basicblocks": 25,
+    "calls": "",
+    "file": "correlator_top.cpp",
+    "fileloc": 3,
+    "instructions": 523,
+    "loads": {
+      "G": 23,
+      "L": 20
+    },
+    "name": "correlator",
+    "stores": {
+      "G": 44
+    },
+    "total_instructions": 823
+  }
+}

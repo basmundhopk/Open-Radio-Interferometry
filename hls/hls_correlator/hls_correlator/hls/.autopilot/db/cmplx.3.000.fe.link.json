@@ -1,0 +1,37 @@
+{
+  "0": {
+    "basicblocks": 41,
+    "calls": "2 2 2 2 1 1 1 1 1 1 1 1 1 1",
+    "file": "correlator_top.cpp",
+    "fileloc": 3,
+    "instructions": 542,
+    "loads": {
+      "G": 16,
+      "L": 10
+    },
+    "name": "correlator",
+    "stores": {
+      "G": 6,
+      "L": 18
+    },
+    "total_instructions": 9678
+  },
+  "1": {
+    "basicblocks": 1,
+    "calls": "",
+    "file": "correlator_io.cpp",
+    "fileloc": 11,
+    "instructions": 13,
+    "name": "pack_output",
+    "total_instructions": 119
+  },
+  "2": {
+    "basicblocks": 1,
+    "calls": "",
+    "file": "correlator_io.cpp",
+    "fileloc": 3,
+    "instructions": 28,
+    "name": "unpack",
+    "total_instructions": 117
+  }
+}

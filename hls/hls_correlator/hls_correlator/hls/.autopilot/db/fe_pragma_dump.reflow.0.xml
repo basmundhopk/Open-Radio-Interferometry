@@ -1,0 +1,67 @@
+<pragmas>
+<pragma file="" line="0" pragmaType="inline" parentfunction="write" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int<16>::ap_int<32, false>(ap_range_ref<32, false> const&)" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="get" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="range" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int_base<128, false>::ap_int_base<64, true>(ap_int_base<64, true> const&)" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int_base<64, true>& ap_int_base<64, true>::operator+=<16, true>(ap_int_base<16, true> const&)" off="0" region="0" recursive="0"/>
+<pragma file="/tools/Xilinx/Vitis_HLS/2023.2/common/technology/autopilot/etc/ap_common.h" line="523" pragmaType="inline" parentfunction="ssdm_int<128, false>::ssdm_int(unsigned __int128)" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_range_ref<128, false>::ap_range_ref(ap_int_base<128, false>*, int, int)" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_range_ref<32, false>::ap_range_ref(ap_int_base<32, false>*, int, int)" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int_base<16, true>::ap_int_base<32, false>(ap_range_ref<32, false> const&)" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="checkOverflowCsim" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int_base<16, true>::RType<16, true>::mult operator*<16, true, 16, true>(ap_int_base<16, true> const&, ap_int_base<16, true> const&)" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int_base<32, true>::RType<32, true>::minus operator-<32, true, 32, true>(ap_int_base<32, true> const&, ap_int_base<32, true> const&)" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int<64>::ap_int(int)" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="read" off="0" region="0" recursive="0"/>
+<pragma file="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp" line="98" pragmaType="pipeline" parentfunction="correlator" off="0" ii="1" rewind="0" style=""/>
+<pragma file="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp" line="60" pragmaType="pipeline" parentfunction="correlator" off="0" ii="1" rewind="0" style=""/>
+<pragma file="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp" line="22" pragmaType="interface" parentfunction="correlator" mode="axis" port="din_data_0" register="0" register_mode="both" name="" depth="2048"/>
+<pragma file="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp" line="23" pragmaType="interface" parentfunction="correlator" mode="axis" port="din_data_1" register="0" register_mode="both" name="" depth="2048"/>
+<pragma file="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp" line="24" pragmaType="interface" parentfunction="correlator" mode="axis" port="din_data_2" register="0" register_mode="both" name="" depth="2048"/>
+<pragma file="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp" line="25" pragmaType="interface" parentfunction="correlator" mode="axis" port="din_data_3" register="0" register_mode="both" name="" depth="2048"/>
+<pragma file="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp" line="27" pragmaType="interface" parentfunction="correlator" mode="axis" port="dout_data_00" register="0" register_mode="both" name="" depth="2048"/>
+<pragma file="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp" line="28" pragmaType="interface" parentfunction="correlator" mode="axis" port="dout_data_11" register="0" register_mode="both" name="" depth="2048"/>
+<pragma file="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp" line="29" pragmaType="interface" parentfunction="correlator" mode="axis" port="dout_data_22" register="0" register_mode="both" name="" depth="2048"/>
+<pragma file="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp" line="30" pragmaType="interface" parentfunction="correlator" mode="axis" port="dout_data_33" register="0" register_mode="both" name="" depth="2048"/>
+<pragma file="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp" line="31" pragmaType="interface" parentfunction="correlator" mode="axis" port="dout_data_01" register="0" register_mode="both" name="" depth="2048"/>
+<pragma file="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp" line="32" pragmaType="interface" parentfunction="correlator" mode="axis" port="dout_data_02" register="0" register_mode="both" name="" depth="2048"/>
+<pragma file="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp" line="33" pragmaType="interface" parentfunction="correlator" mode="axis" port="dout_data_03" register="0" register_mode="both" name="" depth="2048"/>
+<pragma file="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp" line="34" pragmaType="interface" parentfunction="correlator" mode="axis" port="dout_data_12" register="0" register_mode="both" name="" depth="2048"/>
+<pragma file="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp" line="35" pragmaType="interface" parentfunction="correlator" mode="axis" port="dout_data_13" register="0" register_mode="both" name="" depth="2048"/>
+<pragma file="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp" line="36" pragmaType="interface" parentfunction="correlator" mode="axis" port="dout_data_23" register="0" register_mode="both" name="" depth="2048"/>
+<pragma file="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp" line="38" pragmaType="interface" parentfunction="correlator" mode="s_axilite" port="integration_time_frames" bundle="control" offset="-1" name="" clock="" impl="" register="0"/>
+<pragma file="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp" line="39" pragmaType="interface" parentfunction="correlator" mode="s_axilite" port="" bundle="control" offset="-1" name="" clock="" impl="" register="0"/>
+<pragma file="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp" line="43" pragmaType="bind_storage" parentfunction="correlator" op="666" impl="22" latency="-1" variable="_ZZ10correlatorRN3hls6streamI7ap_uintILi32EELi0EEES4_S4_S4_RNS0_IS1_ILi128EELi0EEES7_S7_S7_S7_S7_S7_S7_S7_S7_iE15accumulator_ram"/>
+<pragma file="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp" line="45" pragmaType="array_partition" parentfunction="correlator" dim="2" factor="0" mode="complete" dynamic="0" variable="_ZZ10correlatorRN3hls6streamI7ap_uintILi32EELi0EEES4_S4_S4_RNS0_IS1_ILi128EELi0EEES7_S7_S7_S7_S7_S7_S7_S7_S7_iE15accumulator_ram"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="range" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int<16>::ap_int<33>(ap_int<33> const&)" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int_base<32, true>::RType<32, true>::plus operator+<32, true, 32, true>(ap_int_base<32, true> const&, ap_int_base<32, true> const&)" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int_base<33, true>::ap_int_base<32, true>(ap_int_base<32, true> const&)" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int_base<33, true>::ap_int_base(int)" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int<33>::ap_int<33, true>(ap_int_base<33, true> const&)" off="0" region="0" recursive="0"/>
+<pragma file="/tools/Xilinx/Vitis_HLS/2023.2/common/technology/autopilot/etc/ap_common.h" line="515" pragmaType="inline" parentfunction="_ZN8ssdm_intILi33ELb1EEC2EDq33_i" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int_base<16, true>::ap_int_base<33, true>(ap_int_base<33, true> const&)" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="checkOverflowCsim" off="0" region="0" recursive="0"/>
+<pragma file="/tools/Xilinx/Vitis_HLS/2023.2/common/technology/autopilot/etc/ap_common.h" line="515" pragmaType="inline" parentfunction="ssdm_int<16, true>::ssdm_int(short)" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int_base<32, true>::ap_int_base<16, true>(ap_int_base<16, true> const&)" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int_base<32, true>::ap_int_base(int)" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int<32>::ap_int<32, true>(ap_int_base<32, true> const&)" off="0" region="0" recursive="0"/>
+<pragma file="/tools/Xilinx/Vitis_HLS/2023.2/common/technology/autopilot/etc/ap_common.h" line="515" pragmaType="inline" parentfunction="ssdm_int<32, true>::ssdm_int(int)" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int_base<16, true>::operator-() const" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int<16>::ap_int<17>(ap_int<17> const&)" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int_base<16, true>::ap_int_base<17, true>(ap_int_base<17, true> const&)" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="checkOverflowBaseC" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int_base<1, false>::ap_int_base(int)" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int_base<1, false>::RType<16, true>::minus operator-<1, false, 16, true>(ap_int_base<1, false> const&, ap_int_base<16, true> const&)" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int_base<17, true>::ap_int_base<1, false>(ap_int_base<1, false> const&)" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int_base<17, true>::ap_int_base<16, true>(ap_int_base<16, true> const&)" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int_base<17, true>::ap_int_base(int)" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int<17>::ap_int<17, true>(ap_int_base<17, true> const&)" off="0" region="0" recursive="0"/>
+<pragma file="/tools/Xilinx/Vitis_HLS/2023.2/common/technology/autopilot/etc/ap_common.h" line="515" pragmaType="inline" parentfunction="_ZN8ssdm_intILi17ELb1EEC2EDq17_i" off="0" region="0" recursive="0"/>
+<pragma file="/tools/Xilinx/Vitis_HLS/2023.2/common/technology/autopilot/etc/ap_common.h" line="523" pragmaType="inline" parentfunction="_ZN8ssdm_intILi1ELb0EEC2EDq1_j" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="read" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int_base<64, true>::ap_int_base(int)" off="0" region="0" recursive="0"/>
+<pragma file="/tools/Xilinx/Vitis_HLS/2023.2/common/technology/autopilot/etc/ap_common.h" line="515" pragmaType="inline" parentfunction="ssdm_int<64, true>::ssdm_int(long)" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_range_ref<128, false>& ap_range_ref<128, false>::operator=<64, true>(ap_int_base<64, true> const&)" off="0" region="0" recursive="0"/>
+</pragmas>

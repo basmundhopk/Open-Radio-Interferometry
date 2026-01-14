@@ -1,0 +1,17 @@
+{
+    "0": {
+        "name": "pfb_multichannel",
+        "file": "pfb_top.cpp",
+        "fileloc": "3",
+        "instructions": "8796",
+        "total_instructions": "8796",
+        "calls": "",
+        "basicblocks": "27",
+        "loads": {
+            "G": "39"
+        },
+        "stores": {
+            "G": "4132"
+        }
+    }
+}

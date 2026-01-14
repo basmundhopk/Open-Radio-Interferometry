@@ -1,0 +1,34 @@
+#-----------------------------------------------------------
+# xsim v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:13:54 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Sat Jan 10 14:45:44 2026
+# Process ID: 24208
+# Current directory: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/sim/verilog
+# Command line: xsim -mode tcl -source {xsim.dir/correlator/xsim_script.tcl}
+# Log file: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/sim/verilog/xsim.log
+# Journal file: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/sim/verilog/xsim.jou
+# Running On: brett-System-Product-Name, OS: Linux, CPU Frequency: 5211.065 MHz, CPU Physical cores: 16, Host memory: 64925 MB
+#-----------------------------------------------------------
+source xsim.dir/correlator/xsim_script.tcl
+# xsim {correlator} -autoloadwcfg -tclbatch {correlator.tcl}
+Time resolution is 1 ps
+source correlator.tcl
+## run all
+////////////////////////////////////////////////////////////////////////////////////
+// Inter-Transaction Progress: Completed Transaction / Total Transaction
+// Intra-Transaction Progress: Measured Latency / Latency Estimation * 100%
+//
+// RTL Simulation : "Inter-Transaction Progress" ["Intra-Transaction Progress"] @ "Simulation Time"
+////////////////////////////////////////////////////////////////////////////////////
+// RTL Simulation : 0 / 5 [0.00%] @ "125000"
+// RTL Simulation : 1 / 5 [0.00%] @ "215545000"
+// RTL Simulation : 2 / 5 [0.00%] @ "236315000"
+// RTL Simulation : 3 / 5 [0.00%] @ "246795000"
+// RTL Simulation : 4 / 5 [0.00%] @ "267565000"
+// RTL Simulation : 5 / 5 [100.00%] @ "278045000"
+////////////////////////////////////////////////////////////////////////////////////
+$finish called at time : 278105 ns : File "/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/sim/verilog/correlator.autotb.v" Line 911
+## quit
+INFO: [Common 17-206] Exiting xsim at Sat Jan 10 14:45:46 2026...

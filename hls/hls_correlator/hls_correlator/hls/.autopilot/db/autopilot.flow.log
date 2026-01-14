@@ -1,0 +1,991 @@
+INFO-FLOW: Workspace /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls opened at Sat Jan 10 14:44:47 PST 2026
+Execute     send_msg_by_id INFO @200-1505@%s%s default  vivado 
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+Execute   apply_ini /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg 
+INFO: [HLS 200-1510] Running: apply_ini /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg 
+Execute     send_msg_by_id INFO @200-1909@%s /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg 
+INFO: [HLS 200-1909] Reading HLS ini file /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg
+Execute     send_msg_by_id INFO @200-1465@%s 'syn.file=correlator_top.cpp' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(7) 
+INFO: [HLS 200-1465] Applying ini 'syn.file=correlator_top.cpp' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(7)
+Execute     add_files /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp 
+INFO: [HLS 200-10] Adding design file '/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp' to the project
+Execute     send_msg_by_id INFO @200-1465@%s 'syn.file=correlator.h' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(8) 
+INFO: [HLS 200-1465] Applying ini 'syn.file=correlator.h' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(8)
+Execute     add_files /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator.h 
+INFO: [HLS 200-10] Adding design file '/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator.h' to the project
+Execute     send_msg_by_id INFO @200-1465@%s 'syn.file=correlator_io.cpp' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(9) 
+INFO: [HLS 200-1465] Applying ini 'syn.file=correlator_io.cpp' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(9)
+Execute     add_files /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_io.cpp 
+INFO: [HLS 200-10] Adding design file '/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_io.cpp' to the project
+Execute     send_msg_by_id INFO @200-1465@%s 'tb.file=correlator_tb.cpp' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(11) 
+INFO: [HLS 200-1465] Applying ini 'tb.file=correlator_tb.cpp' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(11)
+Execute     add_files -tb /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_tb.cpp 
+INFO: [HLS 200-10] Adding test bench file '/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_tb.cpp' to the project
+Execute     send_msg_by_id INFO @200-1465@%s 'syn.top=correlator' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(10) 
+INFO: [HLS 200-1465] Applying ini 'syn.top=correlator' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(10)
+Execute     set_top correlator 
+Execute     send_msg_by_id INFO @200-1465@%s 'flow_target=vivado' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(4) 
+INFO: [HLS 200-1465] Applying ini 'flow_target=vivado' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(4)
+Execute     send_msg_by_id INFO @200-1505@%s%s  vivado 
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Execute     send_msg_by_id INFO @200-1465@%s 'part=xc7z045ffg900-2' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(1) 
+INFO: [HLS 200-1465] Applying ini 'part=xc7z045ffg900-2' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(1)
+Execute     set_part xc7z045ffg900-2 
+Execute       create_platform xc7z045ffg900-2 -board  
+DBG:HLSDevice: Trying to load device library: /tools/Xilinx/Vitis_HLS/2023.2/lib/lnx64.o/libxv_hlsvwrap.so
+DBG:HLSDevice: first parts/arch.xml in RDI_DATADIR: /tools/Xilinx/Vivado/2023.2/data/parts/arch.xml
+DBG:HLSDevice: init success
+INFO: [HLS 200-1611] Setting target device to 'xc7z045-ffg900-2'
+Command       create_platform done; 0.37 sec.
+Execute       source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/common/xilinx.gen 
+Execute         source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/interface/plb46.gen 
+Execute         source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/interface/axi4.gen 
+Execute         source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/interface/nativeAXI4.gen 
+Execute           source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/interface/saxilite.gen 
+Execute         source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/scripts/xilinxcoregen.gen 
+Execute         source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/interface/XilEDKCoreGen.gen 
+Execute         source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/ip/util.gen 
+Execute         source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/ip/xfft.gen 
+Execute         source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/ip/xfir.gen 
+Execute         source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/ip/dds_compiler.gen 
+Execute         source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/DSP48/dsp48.gen 
+Execute       ap_part_info -name xc7z045-ffg900-2 -data info 
+Execute       config_compile -quiet -complex-mul-dsp=0 
+Command     set_part done; 0.41 sec.
+Execute     send_msg_by_id INFO @200-1465@%s 'package.output.format=ip_catalog' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(5) 
+INFO: [HLS 200-1465] Applying ini 'package.output.format=ip_catalog' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(5)
+Execute     config_export -format=ip_catalog 
+Command   apply_ini done; 0.47 sec.
+Execute   apply_ini /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/config.cmdline 
+INFO: [HLS 200-1510] Running: apply_ini /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/config.cmdline 
+Execute     send_msg_by_id INFO @200-1909@%s /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/config.cmdline 
+INFO: [HLS 200-1909] Reading HLS ini file /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/config.cmdline
+Execute   csynth_design 
+INFO: [HLS 200-1510] Running: csynth_design 
+INFO-FLOW: Running SLX 'csynth' proc: ::SLX::run_csynth
+Execute     elaborate -effort=medium -skip_syncheck=0 -keep_printf=0 -skip_cdt=0 -skip_transform=0 -ng=0 -g=0 -opt_fp=0 -from_csynth_design=1 
+INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 0.03 seconds. CPU system time: 0 seconds. Elapsed time: 0.03 seconds; current allocated memory: 274.117 MB.
+Execute       set_directive_top correlator -name=correlator 
+Execute       source /tools/Xilinx/Vitis_HLS/2023.2/tps/tcl/tcllib1.11.1/yaml/huddle.tcl 
+Execute       source /tools/Xilinx/Vitis_HLS/2023.2/tps/tcl/tcllib1.11.1/yaml/json2huddle.tcl 
+INFO: [HLS 200-10] Analyzing design file '/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_io.cpp' ... 
+INFO-FLOW: Compiling one TU...
+INFO-FLOW: Handling /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_io.cpp as C++
+Execute       ap_part_info -name xc7z045-ffg900-2 -data info 
+INFO-FLOW: Running: GCC PP 39
+INFO-FLOW: Source preprocessing
+INFO-FLOW: run_clang exec: /tools/Xilinx/Vitis_HLS/2023.2/lnx64/tools/clang-3.9-csynth/bin/clang /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_io.cpp -foptimization-record-file=/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_io.cpp.clang.diag.yml -mllvm -pass-remarks-missed=reflow|pasta|unroll -mllvm -pass-remarks=reflow|pasta|unroll|inline -fno-limit-debug-info -gcc-toolchain /tools/Xilinx/Vitis_HLS/2023.2/tps/lnx64/gcc-8.3.0 -fhls -fno-exceptions -insert-hls-directive=/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/all.directive.json -E -fno-math-errno -c -emit-llvm -mllvm -disable-llvm-optzns -Werror=implicit-function-declaration -Werror=implicit-hls-streams -Werror=return-type -Wpragmas -Wunused-parameter -Wdump-hls-pragmas -Wno-error=dump-hls-pragmas -hls-clock-period=10 -fno-threadsafe-statics -fno-use-cxa-atexit -std=gnu++14 -target fpga64-xilinx-linux-gnu -fno-threadsafe-statics -fno-use-cxa-atexit -D__VITIS_HLS__ -DAESL_SYN -D__SYNTHESIS__ -D__HLS_SYN__ -I /tools/Xilinx/Vitis_HLS/2023.2/common/technology/autopilot -I /tools/Xilinx/Vitis_HLS/2023.2/common/technology/autopilot/ap_sysc -include etc/autopilot_ssdm_op.h -D__DSP48E1__ -I /usr/include/x86_64-linux-gnu -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_io.pp.0.cpp -hls-platform-db-name=/tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/common/platform.db -hls-platform-name=zynq_medium -device-resource-info=BRAM_1090.000000_DSP_900.000000_FF_437200.000000_LUT_218600.000000_SLICE_54650.000000_URAM_0.000000 -device-name-info=xc7z045ffg900-2 > /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_io.cpp.clang.out.log 2> /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_io.cpp.clang.err.log
+INFO-FLOW: Done: GCC PP 39 time: 0.1 seconds per iteration
+INFO-FLOW: Source syntax check for synthesis
+INFO-FLOW: run_clang exec: /tools/Xilinx/Vitis_HLS/2023.2/lnx64/tools/clang-3.9-csynth/bin/clang -foptimization-record-file=/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/clang.diag.yml -mllvm -pass-remarks-missed=reflow|pasta|unroll -mllvm -pass-remarks=reflow|pasta|unroll|inline -fsyntax-only -fhls -target fpga64-xilinx-linux-gnu /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_io.pp.0.cpp -hls-platform-db-name=/tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/common/platform.db -hls-platform-name=zynq_medium -device-resource-info=BRAM_1090.000000_DSP_900.000000_FF_437200.000000_LUT_218600.000000_SLICE_54650.000000_URAM_0.000000 -device-name-info=xc7z045ffg900-2 > /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/clang.out.log 2> /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/clang.err.log
+Execute       clang_tidy xilinx-systemc-detector -desc systemc-detector /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_io.pp.0.cpp std=gnu++14 -target fpga  -directive=/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/.systemc_flag 
+INFO-FLOW: exec /tools/Xilinx/Vitis_HLS/2023.2/lnx64/tools/clang-3.9-csynth/bin/clang-tidy -header-filter=.* --checks=-*,xilinx-systemc-detector -import-directive=/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/.systemc_flag -fix-errors /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_io.pp.0.cpp -- -std=gnu++14 -target fpga -fhls -ferror-limit=0
+Command       clang_tidy done; 0.22 sec.
+INFO-FLOW: Running: clang-tidy CDT preprocess 39
+Execute       clang_tidy xilinx-directive2pragma -desc directive2pragma /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_io.pp.0.cpp std=gnu++14 -target fpga  -directive=/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/all.directive.json 
+INFO-FLOW: exec /tools/Xilinx/Vitis_HLS/2023.2/lnx64/tools/clang-3.9-csynth/bin/clang-tidy -header-filter=.* --checks=-*,xilinx-directive2pragma -import-directive=/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/all.directive.json -fix-errors /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_io.pp.0.cpp -- -std=gnu++14 -target fpga -fhls -ferror-limit=0
+Command       clang_tidy done; 0.2 sec.
+INFO-FLOW: Done: clang-tidy CDT preprocess 39 time: 0.2 seconds per iteration
+INFO-FLOW: Calling xilinx-label-all-loops ... 
+INFO-FLOW: Calling xilinx-aggregate-on-hls-vector ... 
+Execute       clang_tidy -errorcheck -desc loop-label xilinx-label-all-loops,xilinx-aggregate-on-hls-vector,,xilinx-warn-mayneed-no-ctor-attribute /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_io.pp.0.cpp std=gnu++14 -target fpga  
+INFO-FLOW: run_clang exec: /tools/Xilinx/Vitis_HLS/2023.2/lnx64/tools/clang-3.9-csynth/bin/clang-tidy -export-fixes=/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_io.pp.0.cpp.clang-tidy.loop-label.diag.yml -header-filter=.* --checks=-*,xilinx-label-all-loops,xilinx-aggregate-on-hls-vector,,xilinx-warn-mayneed-no-ctor-attribute -fix-errors /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_io.pp.0.cpp -- -std=gnu++14 -target fpga -fhls -ferror-limit=0 > /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_io.pp.0.cpp.clang-tidy.loop-label.out.log 2> /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_io.pp.0.cpp.clang-tidy.loop-label.err.log
+Execute         source /tools/Xilinx/Vitis_HLS/2023.2/tps/tcl/tcllib1.11.1/yaml/yaml.tcl 
+Command       clang_tidy done; 0.43 sec.
+INFO-FLOW: run_clang exec: /tools/Xilinx/Vitis_HLS/2023.2/lnx64/tools/clang-3.9-csynth/bin/xilinx-dataflow-lawyer -export-fixes=/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_io.pp.0.cpp.xilinx-dataflow-lawyer.diag.yml /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_io.pp.0.cpp -- -std=gnu++14 -target fpga -fhls -ferror-limit=0 -fstrict-dataflow > /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_io.pp.0.cpp.xilinx-dataflow-lawyer.out.log 2> /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_io.pp.0.cpp.xilinx-dataflow-lawyer.err.log
+Execute       ap_part_info -name xc7z045-ffg900-2 -data info 
+INFO-FLOW: compiling source code to llvm bc
+INFO-FLOW: run_clang exec: /tools/Xilinx/Vitis_HLS/2023.2/lnx64/tools/clang-3.9-csynth/bin/clang -foptimization-record-file=/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_io.pp.0.cpp.clang.diag.yml -mllvm -pass-remarks-missed=reflow|pasta|unroll -mllvm -pass-remarks=reflow|pasta|unroll|inline -fno-limit-debug-info -fhls -flto -fno-exceptions -Wno-error=c++11-narrowing -hls-emit-hint-scope /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_io.pp.0.cpp -fno-math-errno -c -emit-llvm -mllvm -disable-llvm-optzns -Werror=implicit-function-declaration -Werror=implicit-hls-streams -Werror=return-type -Wpragmas -Wunused-parameter -Wdump-hls-pragmas -Wno-error=dump-hls-pragmas -hls-clock-period=10 -fno-threadsafe-statics -fno-use-cxa-atexit -std=gnu++14 -target fpga64-xilinx-linux-gnu -D__VITIS_HLS__ -DAESL_SYN -D__SYNTHESIS__ -D__HLS_SYN__ -I /tools/Xilinx/Vitis_HLS/2023.2/common/technology/autopilot -I /tools/Xilinx/Vitis_HLS/2023.2/common/technology/autopilot/ap_sysc -include etc/autopilot_ssdm_op.h -D__DSP48E1__ -g -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_io.bc -hls-platform-db-name=/tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/common/platform.db -hls-platform-name=zynq_medium -device-resource-info=BRAM_1090.000000_DSP_900.000000_FF_437200.000000_LUT_218600.000000_SLICE_54650.000000_URAM_0.000000 -device-name-info=xc7z045ffg900-2 > /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_io.pp.0.cpp.clang.out.log 2> /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_io.pp.0.cpp.clang.err.log
+INFO: [HLS 200-10] Analyzing design file '/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp' ... 
+INFO-FLOW: Compiling one TU...
+INFO-FLOW: Handling /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp as C++
+Execute       ap_part_info -name xc7z045-ffg900-2 -data info 
+INFO-FLOW: Running: GCC PP 39
+INFO-FLOW: Source preprocessing
+INFO-FLOW: run_clang exec: /tools/Xilinx/Vitis_HLS/2023.2/lnx64/tools/clang-3.9-csynth/bin/clang /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp -foptimization-record-file=/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_top.cpp.clang.diag.yml -mllvm -pass-remarks-missed=reflow|pasta|unroll -mllvm -pass-remarks=reflow|pasta|unroll|inline -fno-limit-debug-info -gcc-toolchain /tools/Xilinx/Vitis_HLS/2023.2/tps/lnx64/gcc-8.3.0 -fhls -fno-exceptions -insert-hls-directive=/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/all.directive.json -E -fno-math-errno -c -emit-llvm -mllvm -disable-llvm-optzns -Werror=implicit-function-declaration -Werror=implicit-hls-streams -Werror=return-type -Wpragmas -Wunused-parameter -Wdump-hls-pragmas -Wno-error=dump-hls-pragmas -hls-clock-period=10 -fno-threadsafe-statics -fno-use-cxa-atexit -std=gnu++14 -target fpga64-xilinx-linux-gnu -fno-threadsafe-statics -fno-use-cxa-atexit -D__VITIS_HLS__ -DAESL_SYN -D__SYNTHESIS__ -D__HLS_SYN__ -I /tools/Xilinx/Vitis_HLS/2023.2/common/technology/autopilot -I /tools/Xilinx/Vitis_HLS/2023.2/common/technology/autopilot/ap_sysc -include etc/autopilot_ssdm_op.h -D__DSP48E1__ -I /usr/include/x86_64-linux-gnu -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_top.pp.0.cpp -hls-platform-db-name=/tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/common/platform.db -hls-platform-name=zynq_medium -device-resource-info=BRAM_1090.000000_DSP_900.000000_FF_437200.000000_LUT_218600.000000_SLICE_54650.000000_URAM_0.000000 -device-name-info=xc7z045ffg900-2 > /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_top.cpp.clang.out.log 2> /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_top.cpp.clang.err.log
+INFO-FLOW: Done: GCC PP 39 time: 0.1 seconds per iteration
+INFO-FLOW: Source syntax check for synthesis
+INFO-FLOW: run_clang exec: /tools/Xilinx/Vitis_HLS/2023.2/lnx64/tools/clang-3.9-csynth/bin/clang -foptimization-record-file=/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/clang.diag.yml -mllvm -pass-remarks-missed=reflow|pasta|unroll -mllvm -pass-remarks=reflow|pasta|unroll|inline -fsyntax-only -fhls -target fpga64-xilinx-linux-gnu /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_top.pp.0.cpp -hls-platform-db-name=/tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/common/platform.db -hls-platform-name=zynq_medium -device-resource-info=BRAM_1090.000000_DSP_900.000000_FF_437200.000000_LUT_218600.000000_SLICE_54650.000000_URAM_0.000000 -device-name-info=xc7z045ffg900-2 > /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/clang.out.log 2> /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/clang.err.log
+Execute       clang_tidy xilinx-systemc-detector -desc systemc-detector /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_top.pp.0.cpp std=gnu++14 -target fpga  -directive=/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/.systemc_flag 
+INFO-FLOW: exec /tools/Xilinx/Vitis_HLS/2023.2/lnx64/tools/clang-3.9-csynth/bin/clang-tidy -header-filter=.* --checks=-*,xilinx-systemc-detector -import-directive=/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/.systemc_flag -fix-errors /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_top.pp.0.cpp -- -std=gnu++14 -target fpga -fhls -ferror-limit=0
+Command       clang_tidy done; 0.2 sec.
+INFO-FLOW: Running: clang-tidy CDT preprocess 39
+Execute       clang_tidy xilinx-directive2pragma -desc directive2pragma /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_top.pp.0.cpp std=gnu++14 -target fpga  -directive=/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/all.directive.json 
+INFO-FLOW: exec /tools/Xilinx/Vitis_HLS/2023.2/lnx64/tools/clang-3.9-csynth/bin/clang-tidy -header-filter=.* --checks=-*,xilinx-directive2pragma -import-directive=/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/all.directive.json -fix-errors /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_top.pp.0.cpp -- -std=gnu++14 -target fpga -fhls -ferror-limit=0
+Command       clang_tidy done; 0.36 sec.
+INFO-FLOW: Done: clang-tidy CDT preprocess 39 time: 0.4 seconds per iteration
+INFO-FLOW: Calling xilinx-label-all-loops ... 
+INFO-FLOW: Calling xilinx-aggregate-on-hls-vector ... 
+Execute       clang_tidy -errorcheck -desc loop-label xilinx-label-all-loops,xilinx-aggregate-on-hls-vector,,xilinx-warn-mayneed-no-ctor-attribute /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_top.pp.0.cpp std=gnu++14 -target fpga  
+INFO-FLOW: run_clang exec: /tools/Xilinx/Vitis_HLS/2023.2/lnx64/tools/clang-3.9-csynth/bin/clang-tidy -export-fixes=/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_top.pp.0.cpp.clang-tidy.loop-label.diag.yml -header-filter=.* --checks=-*,xilinx-label-all-loops,xilinx-aggregate-on-hls-vector,,xilinx-warn-mayneed-no-ctor-attribute -fix-errors /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_top.pp.0.cpp -- -std=gnu++14 -target fpga -fhls -ferror-limit=0 > /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_top.pp.0.cpp.clang-tidy.loop-label.out.log 2> /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_top.pp.0.cpp.clang-tidy.loop-label.err.log
+Command       clang_tidy done; 0.46 sec.
+INFO-FLOW: run_clang exec: /tools/Xilinx/Vitis_HLS/2023.2/lnx64/tools/clang-3.9-csynth/bin/xilinx-dataflow-lawyer -export-fixes=/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_top.pp.0.cpp.xilinx-dataflow-lawyer.diag.yml /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_top.pp.0.cpp -- -std=gnu++14 -target fpga -fhls -ferror-limit=0 -fstrict-dataflow > /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_top.pp.0.cpp.xilinx-dataflow-lawyer.out.log 2> /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_top.pp.0.cpp.xilinx-dataflow-lawyer.err.log
+Execute       ap_part_info -name xc7z045-ffg900-2 -data info 
+INFO-FLOW: compiling source code to llvm bc
+INFO-FLOW: run_clang exec: /tools/Xilinx/Vitis_HLS/2023.2/lnx64/tools/clang-3.9-csynth/bin/clang -foptimization-record-file=/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_top.pp.0.cpp.clang.diag.yml -mllvm -pass-remarks-missed=reflow|pasta|unroll -mllvm -pass-remarks=reflow|pasta|unroll|inline -fno-limit-debug-info -fhls -flto -fno-exceptions -Wno-error=c++11-narrowing -hls-emit-hint-scope /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_top.pp.0.cpp -fno-math-errno -c -emit-llvm -mllvm -disable-llvm-optzns -Werror=implicit-function-declaration -Werror=implicit-hls-streams -Werror=return-type -Wpragmas -Wunused-parameter -Wdump-hls-pragmas -Wno-error=dump-hls-pragmas -hls-clock-period=10 -fno-threadsafe-statics -fno-use-cxa-atexit -std=gnu++14 -target fpga64-xilinx-linux-gnu -D__VITIS_HLS__ -DAESL_SYN -D__SYNTHESIS__ -D__HLS_SYN__ -I /tools/Xilinx/Vitis_HLS/2023.2/common/technology/autopilot -I /tools/Xilinx/Vitis_HLS/2023.2/common/technology/autopilot/ap_sysc -include etc/autopilot_ssdm_op.h -D__DSP48E1__ -g -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_top.bc -hls-platform-db-name=/tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/common/platform.db -hls-platform-name=zynq_medium -device-resource-info=BRAM_1090.000000_DSP_900.000000_FF_437200.000000_LUT_218600.000000_SLICE_54650.000000_URAM_0.000000 -device-name-info=xc7z045ffg900-2 > /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_top.pp.0.cpp.clang.out.log 2> /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_top.pp.0.cpp.clang.err.log
+INFO: [HLS 200-111] Finished Source Code Analysis and Preprocessing: CPU user time: 2.98 seconds. CPU system time: 0.36 seconds. Elapsed time: 3.36 seconds; current allocated memory: 276.816 MB.
+INFO-FLOW: Linking Debug ...
+INFO-FLOW: Linking dut bc code.
+Execute       run_link_or_opt -out /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.0.bc -args  "/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_io.g.bc" "/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_top.g.bc"  
+INFO-FLOW: run_clang exec: /tools/Xilinx/Vitis_HLS/2023.2/lnx64/tools/clang-3.9-csynth/bin/llvm-link /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_io.g.bc /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_top.g.bc -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.0.bc > /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.0.bc.llvm-link.out.log 2> /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.0.bc.llvm-link.err.log
+INFO-FLOW: 
+Execute       run_link_or_opt -opt -out /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.1.lower.bc -args /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.0.bc -reflow-lower-math-intrinsics 
+INFO-FLOW: run_clang exec: /tools/Xilinx/Vitis_HLS/2023.2/lnx64/tools/clang-3.9-csynth/bin/opt -pass-remarks-missed=reflow|pasta|unroll -pass-remarks=reflow|pasta|unroll|inline -pass-remarks-output=/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.1.lower.bc.opt.diag.yml /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.0.bc -reflow-lower-math-intrinsics -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.1.lower.bc > /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.1.lower.bc.opt.out.log 2> /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.1.lower.bc.opt.err.log
+INFO-FLOW: 
+INFO-FLOW: Running: gen_design_size_report post-opt
+INFO-FLOW: Done: gen_design_size_report post-opt time: 0 seconds per iteration
+INFO-FLOW: Linking math bc lib
+Execute       run_link_or_opt -out /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.2.m1.bc -args /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.1.lower.bc -only-needed /tools/Xilinx/Vitis_HLS/2023.2/lnx64/lib/libhlsm_39.bc /tools/Xilinx/Vitis_HLS/2023.2/lnx64/lib/libhlsmc++_39.bc 
+INFO-FLOW: run_clang exec: /tools/Xilinx/Vitis_HLS/2023.2/lnx64/tools/clang-3.9-csynth/bin/llvm-link /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.1.lower.bc -only-needed /tools/Xilinx/Vitis_HLS/2023.2/lnx64/lib/libhlsm_39.bc /tools/Xilinx/Vitis_HLS/2023.2/lnx64/lib/libhlsmc++_39.bc -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.2.m1.bc > /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.2.m1.bc.llvm-link.out.log 2> /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.2.m1.bc.llvm-link.err.log
+INFO-FLOW: 
+Command       run_link_or_opt done; 0.61 sec.
+Execute       run_link_or_opt -opt -out /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.3.fpc.bc -args /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.2.m1.bc -reflow-globaldce -hls-top-function-name=correlator -reflow-float-conversion 
+INFO-FLOW: run_clang exec: /tools/Xilinx/Vitis_HLS/2023.2/lnx64/tools/clang-3.9-csynth/bin/opt -pass-remarks-missed=reflow|pasta|unroll -pass-remarks=reflow|pasta|unroll|inline -pass-remarks-output=/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.3.fpc.bc.opt.diag.yml /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.2.m1.bc -reflow-globaldce -hls-top-function-name=correlator -reflow-float-conversion -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.3.fpc.bc > /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.3.fpc.bc.opt.out.log 2> /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.3.fpc.bc.opt.err.log
+INFO-FLOW: 
+INFO-FLOW: Running: gen_design_size_report post-opt
+INFO-FLOW: Done: gen_design_size_report post-opt time: 0 seconds per iteration
+Command       run_link_or_opt done; 0.25 sec.
+Execute       run_link_or_opt -out /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.4.m2.bc -args /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.3.fpc.bc -only-needed /tools/Xilinx/Vitis_HLS/2023.2/lnx64/lib/libfloatconversion_39.bc 
+INFO-FLOW: run_clang exec: /tools/Xilinx/Vitis_HLS/2023.2/lnx64/tools/clang-3.9-csynth/bin/llvm-link /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.3.fpc.bc -only-needed /tools/Xilinx/Vitis_HLS/2023.2/lnx64/lib/libfloatconversion_39.bc -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.4.m2.bc > /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.4.m2.bc.llvm-link.out.log 2> /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.4.m2.bc.llvm-link.err.log
+INFO-FLOW: 
+Execute       run_link_or_opt -opt -out /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.5.gdce.bc -args /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.4.m2.bc -reflow-globaldce -hls-top-function-name=correlator 
+INFO-FLOW: run_clang exec: /tools/Xilinx/Vitis_HLS/2023.2/lnx64/tools/clang-3.9-csynth/bin/opt -pass-remarks-missed=reflow|pasta|unroll -pass-remarks=reflow|pasta|unroll|inline -pass-remarks-output=/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.5.gdce.bc.opt.diag.yml /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.4.m2.bc -reflow-globaldce -hls-top-function-name=correlator -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.5.gdce.bc > /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.5.gdce.bc.opt.out.log 2> /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.5.gdce.bc.opt.err.log
+INFO-FLOW: 
+INFO-FLOW: Running: gen_design_size_report post-opt
+INFO-FLOW: Done: gen_design_size_report post-opt time: 0 seconds per iteration
+Execute       send_msg_by_id INFO @200-777@%s Vivado 
+INFO: [HLS 200-777] Using interface defaults for 'Vivado' flow target.
+Execute       is_m_axi_addr64 
+INFO-FLOW: Doing LTO.
+INFO-FLOW: run_clang (background poll_ms 5000) exec: /tools/Xilinx/Vitis_HLS/2023.2/lnx64/tools/clang-3.9-csynth/bin/clang -foptimization-record-file=/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.0.bc.clang.reflow.diag.yml -mllvm -pass-remarks-missed=reflow|pasta|unroll -mllvm -pass-remarks=reflow|pasta|unroll|inline -fhls -mllvm -hls-top-function-name=correlator -mllvm -hls-db-dir -mllvm /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db -emit-llvm -c -target fpga64-xilinx-none -mllvm -xcl-xmlinfo=/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/kernel.internal.xml -mllvm -top-io-mapping-info=/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/top-io-fe.xml -mllvm -hls-bitcode-version=3.1 -mllvm -reflow-enable-slave-interface-default-setting=true -mllvm -gen-kernel-xml=false -mllvm -default-maxi-offset=slave -mllvm -maxi-latency=0 -mllvm -hls-maxi-data-size-in-bits=8 -mllvm -hls-maxi-max-data-size-in-bits=1024 -mllvm -hls-max-widen-size-in-bits=0 -mllvm -xcl-kernel-max-mem-ports=0 -mllvm -maxi-read-trans=16 -mllvm -maxi-write-trans=16 -mllvm -maxi-read-burst-len=16 -mllvm -maxi-write-burst-len=16 -mllvm -reflow-enable-saxi-64bits=0 -mllvm -reflow-basic-block-instr-threshold=200000 -mllvm -reflow-auto-pipeline-threshold=64 -mllvm -reflow-enable-maxi-auto-id-channel=0 -mllvm -enable-fp-thr=0 -mllvm -reflow-bdd-simplify-threshold=1048576 -mllvm -reflow-fanout-threshold=16 -mllvm -assume-maxi-align=1 -mllvm -reflow-pipeline-style-llvm-setting=2 -mllvm -reflow-enable-dataflow-strict-mode-checking=1 -ftime-report -mllvm -time-passes -mllvm -reflow-auto-array-partition-mode=default -mllvm -reflow-enable-auto-array-partition=true -mllvm -reflow-enable-auto-parallel-performance-driven=true -mllvm -reflow-enable-partition-for-automation=true -mllvm -reflow-aggregate-bitwidth-threshold=4096 -mllvm -reflow-reserved-saxilite-registers=0 -mllvm -enable-reflow-auto-loop-pipeline -mllvm -reflow-max-unroll-threshold=409600 -mllvm -reflow-assume-no-address-wrap=true -mllvm -reflow-enable-occurrence-inference=true -mllvm -reflow-emit-hint-scope=true -mllvm -hls -mllvm -disable-inlined-alloca-merging=true -mllvm -default-clock-period=10 -x ir /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.5.gdce.bc -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.lto.bc -hls-platform-db-name=/tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/common/platform.db -hls-platform-name=zynq_medium -device-resource-info=BRAM_1090.000000_DSP_900.000000_FF_437200.000000_LUT_218600.000000_SLICE_54650.000000_URAM_0.000000 -device-name-info=xc7z045ffg900-2 2> /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.ld.0.bc.clang.reflow.err.log bg_poll_cmd: ::AP::poll_clang_39_closed_source
+Execute       send_msg_by_id INFO @200-1995@%s%s%s 9,678 Compile/Link /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt 
+INFO: [HLS 200-1995] There were 9,678 instructions in the design after the 'Compile/Link' phase of compilation. See the Design Size Report for more details: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt
+Execute       send_msg_by_id INFO @200-1995@%s%s%s 1,872 Unroll/Inline (step 1) /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt 
+INFO: [HLS 200-1995] There were 1,872 instructions in the design after the 'Unroll/Inline (step 1)' phase of compilation. See the Design Size Report for more details: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt
+Execute       send_msg_by_id INFO @200-1995@%s%s%s 1,294 Unroll/Inline (step 2) /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt 
+INFO: [HLS 200-1995] There were 1,294 instructions in the design after the 'Unroll/Inline (step 2)' phase of compilation. See the Design Size Report for more details: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt
+Execute       send_msg_by_id INFO @200-1995@%s%s%s 1,158 Unroll/Inline (step 3) /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt 
+INFO: [HLS 200-1995] There were 1,158 instructions in the design after the 'Unroll/Inline (step 3)' phase of compilation. See the Design Size Report for more details: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt
+Execute       send_msg_by_id INFO @200-1995@%s%s%s 802 Unroll/Inline (step 4) /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt 
+INFO: [HLS 200-1995] There were 802 instructions in the design after the 'Unroll/Inline (step 4)' phase of compilation. See the Design Size Report for more details: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt
+Execute       send_msg_by_id INFO @200-1995@%s%s%s 1,345 Array/Struct (step 1) /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt 
+INFO: [HLS 200-1995] There were 1,345 instructions in the design after the 'Array/Struct (step 1)' phase of compilation. See the Design Size Report for more details: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt
+Execute       send_msg_by_id INFO @200-1995@%s%s%s 971 Array/Struct (step 2) /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt 
+INFO: [HLS 200-1995] There were 971 instructions in the design after the 'Array/Struct (step 2)' phase of compilation. See the Design Size Report for more details: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt
+Execute       send_msg_by_id INFO @200-1995@%s%s%s 971 Array/Struct (step 3) /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt 
+INFO: [HLS 200-1995] There were 971 instructions in the design after the 'Array/Struct (step 3)' phase of compilation. See the Design Size Report for more details: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt
+Execute       send_msg_by_id INFO @200-1995@%s%s%s 971 Array/Struct (step 4) /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt 
+INFO: [HLS 200-1995] There were 971 instructions in the design after the 'Array/Struct (step 4)' phase of compilation. See the Design Size Report for more details: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt
+Execute       send_msg_by_id INFO @200-1995@%s%s%s 972 Array/Struct (step 5) /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt 
+INFO: [HLS 200-1995] There were 972 instructions in the design after the 'Array/Struct (step 5)' phase of compilation. See the Design Size Report for more details: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt
+Execute       send_msg_by_id INFO @200-1995@%s%s%s 972 Performance (step 1) /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt 
+INFO: [HLS 200-1995] There were 972 instructions in the design after the 'Performance (step 1)' phase of compilation. See the Design Size Report for more details: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt
+Execute       send_msg_by_id INFO @200-1995@%s%s%s 823 Performance (step 2) /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt 
+INFO: [HLS 200-1995] There were 823 instructions in the design after the 'Performance (step 2)' phase of compilation. See the Design Size Report for more details: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt
+Execute       send_msg_by_id INFO @200-1995@%s%s%s 823 Performance (step 3) /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt 
+INFO: [HLS 200-1995] There were 823 instructions in the design after the 'Performance (step 3)' phase of compilation. See the Design Size Report for more details: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt
+Execute       send_msg_by_id INFO @200-1995@%s%s%s 823 Performance (step 4) /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt 
+INFO: [HLS 200-1995] There were 823 instructions in the design after the 'Performance (step 4)' phase of compilation. See the Design Size Report for more details: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt
+Execute       send_msg_by_id INFO @200-1995@%s%s%s 779 HW Transforms (step 1) /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt 
+INFO: [HLS 200-1995] There were 779 instructions in the design after the 'HW Transforms (step 1)' phase of compilation. See the Design Size Report for more details: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt
+Execute       send_msg_by_id INFO @200-1995@%s%s%s 767 HW Transforms (step 2) /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt 
+INFO: [HLS 200-1995] There were 767 instructions in the design after the 'HW Transforms (step 2)' phase of compilation. See the Design Size Report for more details: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt
+WARNING: [HLS 214-387] Ignore depth setting for top argument 'din_data_0' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0)
+WARNING: [HLS 214-387] Ignore depth setting for top argument 'din_data_1' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0)
+WARNING: [HLS 214-387] Ignore depth setting for top argument 'din_data_2' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0)
+WARNING: [HLS 214-387] Ignore depth setting for top argument 'din_data_3' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0)
+WARNING: [HLS 214-387] Ignore depth setting for top argument 'dout_data_00' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0)
+WARNING: [HLS 214-387] Ignore depth setting for top argument 'dout_data_11' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0)
+WARNING: [HLS 214-387] Ignore depth setting for top argument 'dout_data_22' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0)
+WARNING: [HLS 214-387] Ignore depth setting for top argument 'dout_data_33' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0)
+WARNING: [HLS 214-387] Ignore depth setting for top argument 'dout_data_01' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0)
+WARNING: [HLS 214-387] Ignore depth setting for top argument 'dout_data_02' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0)
+WARNING: [HLS 214-387] Ignore depth setting for top argument 'dout_data_03' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0)
+WARNING: [HLS 214-387] Ignore depth setting for top argument 'dout_data_12' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0)
+WARNING: [HLS 214-387] Ignore depth setting for top argument 'dout_data_13' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0)
+WARNING: [HLS 214-387] Ignore depth setting for top argument 'dout_data_23' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_112_4' is marked as complete unroll implied by the pipeline pragma (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:112:32)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_112_4' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:112:32) in function 'correlator' completely with a factor of 10 (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0)
+WARNING: [HLS 214-366] Duplicating function 'std::complex<ap_int<16> >::imag() const (.35)' as different function signatures were detected between this call site and other call site(s). This may impact the resources used in the design. (/tools/Xilinx/Vitis_HLS/2023.2/tps/lnx64/gcc-8.3.0/lib/gcc/x86_64-pc-linux-gnu/8.3.0/../../../../include/c++/8.3.0/complex:699:44)
+WARNING: [HLS 214-366] Duplicating function 'std::complex<ap_int<16> >::imag() const (.35)' as different function signatures were detected between this call site and other call site(s). This may impact the resources used in the design.
+WARNING: [HLS 214-366] Duplicating function 'std::complex<ap_int<16> >::real() const (.38)' as different function signatures were detected between this call site and other call site(s). This may impact the resources used in the design. (/tools/Xilinx/Vitis_HLS/2023.2/tps/lnx64/gcc-8.3.0/lib/gcc/x86_64-pc-linux-gnu/8.3.0/../../../../include/c++/8.3.0/complex:699:31)
+WARNING: [HLS 214-366] Duplicating function 'std::complex<ap_int<16> >::real() const (.38)' as different function signatures were detected between this call site and other call site(s). This may impact the resources used in the design.
+INFO: [HLS 214-178] Inlining function 'unpack(ap_uint<32>)' into 'correlator(hls::stream<ap_uint<32>, 0>&, hls::stream<ap_uint<32>, 0>&, hls::stream<ap_uint<32>, 0>&, hls::stream<ap_uint<32>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, int)' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0)
+INFO: [HLS 214-178] Inlining function 'pack_output(std::complex<ap_int<64> >)' into 'correlator(hls::stream<ap_uint<32>, 0>&, hls::stream<ap_uint<32>, 0>&, hls::stream<ap_uint<32>, 0>&, hls::stream<ap_uint<32>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, int)' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0)
+INFO: [HLS 214-248] Applying array_partition to '_ZZ10correlatorRN3hls6streamI7ap_uintILi32EELi0EEES4_S4_S4_RNS0_IS1_ILi128EELi0EEES7_S7_S7_S7_S7_S7_S7_S7_S7_iE15accumulator_ram._M_real': Complete partitioning on dimension 2. (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:41:0)
+INFO: [HLS 214-248] Applying array_partition to '_ZZ10correlatorRN3hls6streamI7ap_uintILi32EELi0EEES4_S4_S4_RNS0_IS1_ILi128EELi0EEES7_S7_S7_S7_S7_S7_S7_S7_S7_iE15accumulator_ram._M_imag': Complete partitioning on dimension 2. (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:41:0)
+INFO: [HLS 214-376] automatically set the pipeline for Loop< VITIS_LOOP_54_3> at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:54:34 
+INFO-FLOW: DBG:PUTS: copy_raw_kernel_xml ap_link_39: kernel.xml not generated: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/kernel.internal.xml
+INFO: [HLS 200-111] Finished Compiling Optimization and Transform: CPU user time: 1.06 seconds. CPU system time: 0.15 seconds. Elapsed time: 6 seconds; current allocated memory: 278.480 MB.
+INFO: [HLS 200-111] Finished Checking Pragmas: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0 seconds; current allocated memory: 278.480 MB.
+Execute       opt_and_import_c a -opt_level=2 -skip_syncheck=0 -ng=0 -keep_printf=0 
+Execute         cleanup_all_models 
+INFO: [HLS 200-10] Starting code transformations ...
+INFO-FLOW: Running Standard Transforms...
+Execute         transform -hls -share-std-xform -demangle-name -inline-byval-memcpy -always-inline -promote-dbg-pointer -interface-preproc -mem2reg -scalarrepl -mem2reg -keep-read-access -instcombine -dce -promote-dbg-pointer -bitop-raise -loop-simplify -indvarspre -indvars -loop-simplify -xunroll -constprop -instcombine -simplifycfg -indvars -simplifycfg -dce -globaldce -basicaa -simplifycfg -mem2reg -globalopt -global-constprop -deadargelim -instcombine -simplifycfg -scalarrepl -instcombine -reassociate -licm -simplifycfg -loop-simplify -indvars -instcombine -simplifycfg -mem2reg -loop-simplify -indvars -instcombine -gvn -gvn -instcombine -adce -break-crit-edges -simplifycfg -loop-delete -global-array-opt -dce -dse -adce -find-syn-modules -top correlator -deadargelim -mem2reg -instcombine -dce -presyn-prepare -interface-preproc -syn-check -check-rec-only -find-region -simplifycfg -func-extr -function-inline -globaldce -mem2reg -instcombine -dce -gvn -globaldce -adce -adse -constprop -instcombine -bit-constprop -instcombine -dce -simplifycfg -bitop-raise -simplifycfg -dce -loop-delete -reassociate -globalopt -global-privatize -mem2reg -dce -global-constprop -pointer-simplify -constprop -dce -auto-shift-reg-idiom -promote-dbg-pointer -norm-name /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.0.bc -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.1.bc -f -phase std-opt 
+INFO: [HLS 200-111] Finished Standard Transforms: CPU user time: 0.01 seconds. CPU system time: 0 seconds. Elapsed time: 0.02 seconds; current allocated memory: 279.273 MB.
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO-FLOW: Checking Synthesizability 1/2..
+Execute         transform -hls -syn-check -check-rec-only -scalarrepl -norm-name -dce -mem2reg -instcombine -directive-preproc -mem2reg -dse -dce -dce -pag -array-normalize -instcombine -dce -array-seg-normalize -instcombine -dce -data-pack -instcombine -dce -inst-simplify -array-flatten -instcombine -dce -array-burst -dce -deadargelim -promote-global-argument -simplifycfg -mem2reg -globaldce -dce -deadargelim -dce -instcombine -function-inline -globaldce -dce -doublePtrSimplify -doublePtrElim -dce -doublePtrSimplify -promote-dbg-pointer -dce -scalarrepl -dse -adse -instcombine -ptrLegalization -simplifycfg -dce -instcombine -pointer-simplify -ptrArgReplace -dce -instcombine -resolve-double-ptr -scalarrepl -norm-name -dce -mem2reg -instcombine -ptrLegalization -simplifycfg -deadargelim -instcombine -dce -inst-simplify -directive-preproc -mem2reg -dse -dce -globaldce /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.1.bc -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.2.prechk.bc -f 
+INFO-FLOW: Checking Synthesizability 2/2..
+Execute         transform -syn-check /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.2.prechk.bc -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.2.bc -f -phase syn-check 
+INFO: [HLS 200-111] Finished Checking Synthesizability: CPU user time: 0.02 seconds. CPU system time: 0 seconds. Elapsed time: 0.01 seconds; current allocated memory: 280.172 MB.
+INFO-FLOW: Compiler optimizing ...
+INFO-FLOW: Share syncheck's 1.bc for syn flow: copy /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.g.1.bc to /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.o.1.bc
+INFO-FLOW: Presyn 1...
+Execute         transform -hls -tmp /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db -interface-port-rename -directive-preproc -mem2reg -dse -dce -scalarrepl -norm-name -deadargelim -mem2reg -instcombine -dce -simplifycfg -dce -resource-proc -clib-intrinsic-prepare -dce -func-buffer -dce -pag -array-normalize -func-legal -instcombine -gvn -constprop -dce -simplifycfg -mem2reg -globaldce -resolve-double-ptr -dce -deadargelim -dce -instcombine -ptrArgReplace -mem2reg -dce -array-seg-normalize -deadargelim -instcombine -dce -directive-preproc -mem2reg -dse -dce -pointer-simplify -dce -port-alignment -dce -interface-preproc -data-pack -instcombine -dce -basicaa -aggr-aa -aggrmodref-aa -aggr-aa -gvn -gvn -basicaa -aggr-aa -aggrmodref-aa -aggr-aa -dse -adse -adce -loop-simplify -indvars -instcombine -gvn -loop-simplify -mem2reg -dce -find-region -instcombine -inst-simplify -interface-preproc -cfgopt -instcombine -indvars -auto-loop-unroll -loop-simplify -loop-bound -xunroll -constprop -instcombine -simplifycfg -indvars -simplifycfg -dce -globaldce -clean-region -attach-range -gvn -inst-simplify -constprop -simplifycfg -dce -pointer-simplify -dce -globalopt -constprop -dce -array-promote -scalar-auto-dep-elim -constprop -dce -ptrArgReplace -mem2reg -simplifycfg -dce -instcombine -dce -array-transform-check -array-reshape -instcombine -simplifycfg -dce -ptrArgReplace -deadargelim -mem2reg -instcombine -simplifycfg -dce -indvars -loop-simplify -loop-bound -xunroll -constprop -instcombine -simplifycfg -indvars -simplifycfg -dce -globaldce -basicaa -aggr-aa -aggrmodref-aa -aggr-aa -dse -duplicate-dataflow-processes -globaldce -instcombine -array-partition -prepare-dynamic-array-partition -instcombine -simplifycfg -dce -ptrArgReplace -global-constprop -deadargelim -mem2reg -func-legal -dce -global-constprop -deadargelim -mem2reg -simplifycfg -dce -merge-param -deadargelim -globalopt -constprop -dce -array-promote -scalar-auto-dep-elim -constprop -dce -ptrArgReplace -mem2reg -simplifycfg -dce -mem-intrinsic-preproc -dce -global-internalize -global-privatize -mem2reg -globaldce -promote-global-argument -ptrArgReplace -mem2reg -dce -globalopt -mergereturn -simplify-global-access -mem2reg -dce -pointer-simplify -dce -functionattrs -basicaa -aggr-aa -aggrmodref-aa -aggr-aa -gvn -gvn -basicaa -aggr-aa -aggrmodref-aa -aggr-aa -dse -adse -adce -dce -norm-name -basicaa -aggr-aa -aggrmodref-aa -aggr-aa -accesses-merge -function-inline -complex-op-raise -inst-simplify -globaldce -func-legal -dce -loop-bound -arraycheck -bitwidthmin2 -bitwidthmin2 -on-by-dataflow -loop-delete -instcombine -simplifycfg -globaldce -dce -gvn -deadargelim -dce -loop-simplify -clean-region -simplifycfg -propagate-stable-arguments -loop-stream -instcombine -simplifycfg -dce -globaldce -duplicate-dataflow-processes -stream-intrinsic-preproc -dce -check-ap-stream -loop-simplify -eliminate-keepreads -extract-dataflow-in-loop -loop-simplify -dce -gvn -deadargelim -dse -duplicate-dataflow-processes -check-dataflow-syntax -legalize-stream-variable -globaldce -legalize-global -extract-subproc -dce -dead-channel-elimination -canonicalize-gep -globaldce -dce -gvn -hls-dead-arg-elim -deadargelim -directive-preproc -canonicalize-dataflow -dce -globaldce -scalar-preprocessing -scalar-propagation2 -scalar-stream -deadargelim -globaldce -mem2reg -check-dataflow-channels -function-stream -dce -globaldce -prop-fifo-spec -internal-stream-gen -canonicalize-gep -globaldce -dce -gvn -deadargelim -mergereturn -indvars -loop-simplify -instcombine -array-stream -array-seg-normalize -array-partition -clean-array-spec -func-legal -instcombine -simplifycfg -dce -bundle-memfifo-ops -deadargelim -directive-preproc -mem2reg -dse -dce -group-axi-access -licm -simplifycfg -dce -loop-delete -hls-display -norm-name /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.o.1.bc -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.o.1.tmp.bc -f 
+INFO-FLOW: Presyn 2...
+Execute         transform -hls -keep-callgraph -scalarrepl -mem2reg -port-alignment -attach-range -dce -pipe-mux-gen -indvars -loop-bound -inst-simplify -instcombine -dce -merge-array-access -mem2reg -dce -clean-region -mergereturn -if-conv -instcombine -dce -constprop -basicaa -aggr-aa -aggrmodref-aa -aggr-aa -gvn -gvn -basicaa -aggr-aa -aggrmodref-aa -aggr-aa -dse -adse -adce -scalarrepl -mem2reg -global-constprop -deadargelim -deadargelim -instcombine -dce -simplifycfg -ptrArgReplace -mem2reg -function-inline -globaldce -mem2reg -instcombine -dce -expr-balance -instcombine -dce -bitwidthmin2 -bitwidthmin2 -interface-preproc -directive-preproc -inst-rectify -instcombine -dce -functionattrs -constprop -instcombine -bit-constprop -simplify-global-access -globalopt -globaldce -inst-simplify -instcombine -elimdeaddata -dce -loop-delete -simplifycfg -loop-simplify -barrier -norm-name /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.o.1.tmp.bc -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.o.2.bc -f -phase presyn 
+INFO: [HLS 200-111] Finished Loop, function and other optimizations: CPU user time: 0.06 seconds. CPU system time: 0 seconds. Elapsed time: 0.06 seconds; current allocated memory: 304.160 MB.
+INFO-FLOW: Building ssdm...
+Execute         transform -hls -auto-function-inline -globaldce -ptrArgReplace -mem2reg -dce -reset-lda -loop-simplify -indvars -aggr-aa -licm -loop-dep -loop-bound -licm -loop-simplify -loop-sink-hoist -flattenloopnest -array-flatten -gvn -instcombine -dce -array-map -dce -func-legal -gvn -adce -instcombine -cfgopt -simplifycfg-lite -loop-simplify -array-burst -promote-global-argument -dce -array-seg-normalize -basicaa -aggrmodref-aa -globalsmodref-aa -aggr-aa -gvn -gvn -basicaa -aggrmodref-aa -globalsmodref-aa -aggr-aa -dse -adse -adce -licm -inst-simplify -dce -globaldce -instcombine -array-stream -eliminate-keepreads -instcombine -dce -deadargelim -doublePtrSimplify -doublePtrElim -dce -doublePtrSimplify -promote-dbg-pointer -dce -scalarrepl -mem2reg -norm-name -mem2reg -instcombine -dse -adse -adce -ptrLegalization -dce -array-flatten -dce -instcombine -check-doubleptr -loop-rot -constprop -cfgopt -simplifycfg-lite -loop-simplify -indvars -pointer-simplify -dce -loop-bound -loop-simplify -loop-preproc -constprop -global-constprop -gvn -mem2reg -instcombine -dce -loop-bound -loop-merge -dce -deadargelim -dce -canonicalize-dataflow -dce -deadargelim -globaldce -mem2reg -bram-byte-enable -inst-simplify -inst-rectify -instcombine -adce -deadargelim -load-elim -read-loop-dep -loop-simplify -loop-extract-inner -directive-preproc -bitwidthmin2 -bitwidthmin2 -read-loop-dep -interface-preproc -directive-preproc -interface-gen -bram-byte-enable-spec-prop -deadargelim -inst-simplify -dce -mem2reg -instcombine -gvn -dce -adse -loop-bound -instcombine -cfgopt -simplifycfg-lite -loop-simplify -clean-region -io-protocol -find-region -mem2reg -bitop-raise -complex-op-raise -inst-simplify -inst-rectify -instcombine -adce -deadargelim -float-op-raise -loop-simplify -phi-opt -bitop-raise -cfgopt -simplifycfg-lite -strip-dead-prototypes -interface-lower -bitop-lower -intrinsic-lower -auto-function-inline -basicaa -aggrmodref-aa -globalsmodref-aa -aggr-aa -inst-simplify -simplifycfg-lite -loop-simplify -mergereturn -inst-simplify -inst-rectify -globaldce -dce -load-elim -bitop-lower -float-op-raise -fma-raise -loop-rewind -pointer-simplify -dce -cfgopt -dce -loop-bound -loop-dep -read-loop-dep -dce -dyn-mem-reuse -dce -recurrence-min -dce -share-scalar-alloca -deadargelim -dce -check-stream -norm-name -legalize -validate-dataflow -inst-clarity -bitwidth -dce -dump-loop-dep-to-ir -check-all-ssdm -dump-complexity-metric -cdfg-build /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.o.2.bc -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/a.o.3.bc -f -phase build-ssdm 
+INFO: [HLS 200-2061] Successfully converted nested loops 'VITIS_LOOP_52_1'(/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:52:26) and 'VITIS_LOOP_53_2'(/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:53:30) in function 'correlator' into perfectly nested loops.
+INFO: [XFORM 203-541] Flattening a loop nest 'VITIS_LOOP_53_2' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:53:30) in function 'correlator'.
+INFO: [XFORM 203-541] Flattening a loop nest 'VITIS_LOOP_52_1' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:52:26) in function 'correlator'.
+Execute           auto_get_db
+INFO: [HLS 200-111] Finished Architecture Synthesis: CPU user time: 0.04 seconds. CPU system time: 0 seconds. Elapsed time: 0.04 seconds; current allocated memory: 325.770 MB.
+INFO-FLOW: Finish building internal data model.
+Command       opt_and_import_c done; 0.13 sec.
+Command     elaborate done; 9.49 sec.
+Execute     ap_eval exec zip -j /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/dut.hcp $dbDir/a.o.3.bc $dbDir/${topname}.rtl_wrap.cfg.tcl $dbDir/apatb_${topname}.cpp $dbDir/apatb_${topname}_util.cpp $dbDir/apatb_${topname}_ir.ll $dbDir/mapper_${topname}.cpp $dbDir/top-io-fe.xml $dbDir/kernel.internal.xml $workdir/../hls.app 
+Execute     autosyn -from_csynth_design=1 
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO-FLOW: Synthesizing C/C++ design ...
+INFO: [HLS 200-10] Synthesizing 'correlator' ...
+Execute       ap_set_top_model correlator 
+Execute       get_model_list correlator -filter all-wo-channel -topdown 
+Execute       preproc_iomode -model correlator 
+Execute       preproc_iomode -model correlator_Pipeline_Offload_Loop 
+Execute       preproc_iomode -model correlator_Pipeline_Process_Frame_Loop 
+Execute       preproc_iomode -model correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 
+Execute       create_clock 
+Execute         ap_set_clock -name default -period 10 -unit ns -default=false 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+Execute       get_model_list correlator -filter all-wo-channel 
+INFO-FLOW: Model list for configure: correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 correlator_Pipeline_Process_Frame_Loop correlator_Pipeline_Offload_Loop correlator
+INFO-FLOW: Configuring Module : correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 ...
+Execute       set_default_model correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 
+Execute       apply_spec_resource_limit correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 
+INFO-FLOW: Configuring Module : correlator_Pipeline_Process_Frame_Loop ...
+Execute       set_default_model correlator_Pipeline_Process_Frame_Loop 
+Execute       apply_spec_resource_limit correlator_Pipeline_Process_Frame_Loop 
+INFO-FLOW: Configuring Module : correlator_Pipeline_Offload_Loop ...
+Execute       set_default_model correlator_Pipeline_Offload_Loop 
+Execute       apply_spec_resource_limit correlator_Pipeline_Offload_Loop 
+INFO-FLOW: Configuring Module : correlator ...
+Execute       set_default_model correlator 
+Execute       apply_spec_resource_limit correlator 
+INFO-FLOW: Model list for preprocess: correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 correlator_Pipeline_Process_Frame_Loop correlator_Pipeline_Offload_Loop correlator
+INFO-FLOW: Preprocessing Module: correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 ...
+Execute       set_default_model correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 
+Execute       cdfg_preprocess -model correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 
+Execute       rtl_gen_preprocess correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 
+INFO-FLOW: Preprocessing Module: correlator_Pipeline_Process_Frame_Loop ...
+Execute       set_default_model correlator_Pipeline_Process_Frame_Loop 
+Execute       cdfg_preprocess -model correlator_Pipeline_Process_Frame_Loop 
+Execute       rtl_gen_preprocess correlator_Pipeline_Process_Frame_Loop 
+INFO-FLOW: Preprocessing Module: correlator_Pipeline_Offload_Loop ...
+Execute       set_default_model correlator_Pipeline_Offload_Loop 
+Execute       cdfg_preprocess -model correlator_Pipeline_Offload_Loop 
+Execute       rtl_gen_preprocess correlator_Pipeline_Offload_Loop 
+INFO-FLOW: Preprocessing Module: correlator ...
+Execute       set_default_model correlator 
+Execute       cdfg_preprocess -model correlator 
+Execute       rtl_gen_preprocess correlator 
+INFO-FLOW: Model list for synthesis: correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 correlator_Pipeline_Process_Frame_Loop correlator_Pipeline_Offload_Loop correlator
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+Execute       set_default_model correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 
+Execute       schedule -model correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3'.
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 1, Depth = 3, loop 'VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3'
+INFO: [SCHED 204-11] Finished scheduling.
+Command       schedule done; 0.11 sec.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.04 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.13 seconds; current allocated memory: 328.883 MB.
+Execute       syn_report -verbosereport -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3.verbose.sched.rpt 
+Execute         list_part -family xc7z045-ffg900-2 
+Execute           ap_family_info -name xc7z045-ffg900-2 -data names 
+Execute           ap_part_info -quiet -name xc7z045-ffg900-2 -data family 
+Execute       db_write -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3.sched.adb -f 
+INFO-FLOW: Finish scheduling correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3.
+Execute       set_default_model correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 
+Execute       bind -model correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.01 seconds. CPU system time: 0 seconds. Elapsed time: 0.01 seconds; current allocated memory: 328.883 MB.
+Execute       syn_report -verbosereport -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3.verbose.bind.rpt 
+Execute         list_part -family xc7z045-ffg900-2 
+Execute           ap_family_info -name xc7z045-ffg900-2 -data names 
+Execute           ap_part_info -quiet -name xc7z045-ffg900-2 -data family 
+Execute       db_write -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3.bind.adb -f 
+INFO-FLOW: Finish binding correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'correlator_Pipeline_Process_Frame_Loop' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+Execute       set_default_model correlator_Pipeline_Process_Frame_Loop 
+Execute       schedule -model correlator_Pipeline_Process_Frame_Loop 
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln389_15) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln389_14) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln389_13) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln389_12) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln389_11) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln389_10) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln389_9) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln389_8) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln389_7) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln389_6) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln389_5) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln389_4) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln389_3) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln389_2) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln389_1) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln389) to 3 in order to utilize available DSP registers.
+INFO: [SCHED 204-61] Pipelining loop 'Process_Frame_Loop'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 5, loop 'Process_Frame_Loop'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.07 seconds. CPU system time: 0 seconds. Elapsed time: 0.11 seconds; current allocated memory: 329.930 MB.
+Execute       syn_report -verbosereport -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_Pipeline_Process_Frame_Loop.verbose.sched.rpt 
+Execute         list_part -family xc7z045-ffg900-2 
+Execute           ap_family_info -name xc7z045-ffg900-2 -data names 
+Execute           ap_part_info -quiet -name xc7z045-ffg900-2 -data family 
+Execute       db_write -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_Pipeline_Process_Frame_Loop.sched.adb -f 
+INFO-FLOW: Finish scheduling correlator_Pipeline_Process_Frame_Loop.
+Execute       set_default_model correlator_Pipeline_Process_Frame_Loop 
+Execute       bind -model correlator_Pipeline_Process_Frame_Loop 
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.01 seconds. CPU system time: 0 seconds. Elapsed time: 0.01 seconds; current allocated memory: 329.930 MB.
+Execute       syn_report -verbosereport -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_Pipeline_Process_Frame_Loop.verbose.bind.rpt 
+Execute         list_part -family xc7z045-ffg900-2 
+Execute           ap_family_info -name xc7z045-ffg900-2 -data names 
+Execute           ap_part_info -quiet -name xc7z045-ffg900-2 -data family 
+Execute       db_write -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_Pipeline_Process_Frame_Loop.bind.adb -f 
+INFO-FLOW: Finish binding correlator_Pipeline_Process_Frame_Loop.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'correlator_Pipeline_Offload_Loop' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+Execute       set_default_model correlator_Pipeline_Offload_Loop 
+Execute       schedule -model correlator_Pipeline_Offload_Loop 
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'Offload_Loop'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 2, loop 'Offload_Loop'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.03 seconds. CPU system time: 0 seconds. Elapsed time: 0.02 seconds; current allocated memory: 330.461 MB.
+Execute       syn_report -verbosereport -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_Pipeline_Offload_Loop.verbose.sched.rpt 
+Execute         list_part -family xc7z045-ffg900-2 
+Execute           ap_family_info -name xc7z045-ffg900-2 -data names 
+Execute           ap_part_info -quiet -name xc7z045-ffg900-2 -data family 
+Execute       db_write -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_Pipeline_Offload_Loop.sched.adb -f 
+INFO-FLOW: Finish scheduling correlator_Pipeline_Offload_Loop.
+Execute       set_default_model correlator_Pipeline_Offload_Loop 
+Execute       bind -model correlator_Pipeline_Offload_Loop 
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.01 seconds. CPU system time: 0 seconds. Elapsed time: 0.01 seconds; current allocated memory: 330.461 MB.
+Execute       syn_report -verbosereport -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_Pipeline_Offload_Loop.verbose.bind.rpt 
+Execute         list_part -family xc7z045-ffg900-2 
+Execute           ap_family_info -name xc7z045-ffg900-2 -data names 
+Execute           ap_part_info -quiet -name xc7z045-ffg900-2 -data family 
+Execute       db_write -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_Pipeline_Offload_Loop.bind.adb -f 
+INFO-FLOW: Finish binding correlator_Pipeline_Offload_Loop.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'correlator' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+Execute       set_default_model correlator 
+Execute       schedule -model correlator 
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.01 seconds. CPU system time: 0 seconds. Elapsed time: 0.02 seconds; current allocated memory: 331.023 MB.
+Execute       syn_report -verbosereport -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.verbose.sched.rpt 
+Execute         list_part -family xc7z045-ffg900-2 
+Execute           ap_family_info -name xc7z045-ffg900-2 -data names 
+Execute           ap_part_info -quiet -name xc7z045-ffg900-2 -data family 
+Execute       db_write -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.sched.adb -f 
+INFO-FLOW: Finish scheduling correlator.
+Execute       set_default_model correlator 
+Execute       bind -model correlator 
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.01 seconds. CPU system time: 0 seconds. Elapsed time: 0.01 seconds; current allocated memory: 331.023 MB.
+Execute       syn_report -verbosereport -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.verbose.bind.rpt 
+Execute         list_part -family xc7z045-ffg900-2 
+Execute           ap_family_info -name xc7z045-ffg900-2 -data names 
+Execute           ap_part_info -quiet -name xc7z045-ffg900-2 -data family 
+Execute       db_write -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.bind.adb -f 
+INFO-FLOW: Finish binding correlator.
+Execute       get_model_list correlator -filter all-wo-channel 
+INFO-FLOW: Preprocessing for RTLGen ...
+Execute       rtl_gen_preprocess correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 
+Execute       rtl_gen_preprocess correlator_Pipeline_Process_Frame_Loop 
+Execute       rtl_gen_preprocess correlator_Pipeline_Offload_Loop 
+Execute       rtl_gen_preprocess correlator 
+INFO-FLOW: Model list for RTL generation: correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 correlator_Pipeline_Process_Frame_Loop correlator_Pipeline_Offload_Loop correlator
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+Execute       create_rtl_model correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 -top_prefix correlator_ -sub_prefix correlator_ -mg_file /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3.compgen.tcl 
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3' pipeline 'VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Finished creating RTL model for 'correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.01 seconds. CPU system time: 0 seconds. Elapsed time: 0.01 seconds; current allocated memory: 331.262 MB.
+Execute       source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.rtl_wrap.cfg.tcl 
+Execute       gen_rtl correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 -style xilinx -f -lang vhdl -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/vhdl/correlator_correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 
+Execute       gen_rtl correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 -style xilinx -f -lang vlog -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/verilog/correlator_correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 
+Execute       syn_report -csynth -model correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3_csynth.rpt 
+Execute         list_part -family xc7z045-ffg900-2 
+Execute           ap_family_info -name xc7z045-ffg900-2 -data names 
+Execute           ap_part_info -quiet -name xc7z045-ffg900-2 -data family 
+Execute       syn_report -rtlxml -model correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3_csynth.xml 
+Execute         list_part -family xc7z045-ffg900-2 
+Execute           ap_family_info -name xc7z045-ffg900-2 -data names 
+Execute           ap_part_info -quiet -name xc7z045-ffg900-2 -data family 
+Execute       syn_report -verbosereport -model correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3.verbose.rpt 
+Execute         list_part -family xc7z045-ffg900-2 
+Execute           ap_family_info -name xc7z045-ffg900-2 -data names 
+Execute           ap_part_info -quiet -name xc7z045-ffg900-2 -data family 
+Execute       db_write -model correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 -f -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3.adb 
+Execute       db_write -model correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 -bindview -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/design.bindinfo.xml 
+Execute       gen_tb_info correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 -p /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'correlator_Pipeline_Process_Frame_Loop' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+Execute       create_rtl_model correlator_Pipeline_Process_Frame_Loop -top_prefix correlator_ -sub_prefix correlator_ -mg_file /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_Pipeline_Process_Frame_Loop.compgen.tcl 
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'correlator_Pipeline_Process_Frame_Loop' pipeline 'Process_Frame_Loop' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'ama_submuladd_1ns_16s_16s_16ns_16_4_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mac_muladd_16s_16s_16ns_16_4_1': 15 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_16s_16s_16_1_1': 16 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'correlator_Pipeline_Process_Frame_Loop'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.04 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.04 seconds; current allocated memory: 334.938 MB.
+Execute       source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.rtl_wrap.cfg.tcl 
+Execute       gen_rtl correlator_Pipeline_Process_Frame_Loop -style xilinx -f -lang vhdl -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/vhdl/correlator_correlator_Pipeline_Process_Frame_Loop 
+Execute       gen_rtl correlator_Pipeline_Process_Frame_Loop -style xilinx -f -lang vlog -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/verilog/correlator_correlator_Pipeline_Process_Frame_Loop 
+Execute       syn_report -csynth -model correlator_Pipeline_Process_Frame_Loop -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/correlator_Pipeline_Process_Frame_Loop_csynth.rpt 
+Execute         list_part -family xc7z045-ffg900-2 
+Execute           ap_family_info -name xc7z045-ffg900-2 -data names 
+Execute           ap_part_info -quiet -name xc7z045-ffg900-2 -data family 
+Execute       syn_report -rtlxml -model correlator_Pipeline_Process_Frame_Loop -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/correlator_Pipeline_Process_Frame_Loop_csynth.xml 
+Execute         list_part -family xc7z045-ffg900-2 
+Execute           ap_family_info -name xc7z045-ffg900-2 -data names 
+Execute           ap_part_info -quiet -name xc7z045-ffg900-2 -data family 
+Execute       syn_report -verbosereport -model correlator_Pipeline_Process_Frame_Loop -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_Pipeline_Process_Frame_Loop.verbose.rpt 
+Execute         list_part -family xc7z045-ffg900-2 
+Execute           ap_family_info -name xc7z045-ffg900-2 -data names 
+Execute           ap_part_info -quiet -name xc7z045-ffg900-2 -data family 
+Execute       db_write -model correlator_Pipeline_Process_Frame_Loop -f -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_Pipeline_Process_Frame_Loop.adb 
+Execute       db_write -model correlator_Pipeline_Process_Frame_Loop -bindview -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/design.bindinfo.xml 
+Execute       gen_tb_info correlator_Pipeline_Process_Frame_Loop -p /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_Pipeline_Process_Frame_Loop 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'correlator_Pipeline_Offload_Loop' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+Execute       create_rtl_model correlator_Pipeline_Offload_Loop -top_prefix correlator_ -sub_prefix correlator_ -mg_file /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_Pipeline_Offload_Loop.compgen.tcl 
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'correlator_Pipeline_Offload_Loop' pipeline 'Offload_Loop' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Finished creating RTL model for 'correlator_Pipeline_Offload_Loop'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.04 seconds. CPU system time: 0 seconds. Elapsed time: 0.06 seconds; current allocated memory: 338.812 MB.
+Execute       source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.rtl_wrap.cfg.tcl 
+Execute       gen_rtl correlator_Pipeline_Offload_Loop -style xilinx -f -lang vhdl -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/vhdl/correlator_correlator_Pipeline_Offload_Loop 
+Execute       gen_rtl correlator_Pipeline_Offload_Loop -style xilinx -f -lang vlog -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/verilog/correlator_correlator_Pipeline_Offload_Loop 
+Execute       syn_report -csynth -model correlator_Pipeline_Offload_Loop -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/correlator_Pipeline_Offload_Loop_csynth.rpt 
+Execute         list_part -family xc7z045-ffg900-2 
+Execute           ap_family_info -name xc7z045-ffg900-2 -data names 
+Execute           ap_part_info -quiet -name xc7z045-ffg900-2 -data family 
+Execute       syn_report -rtlxml -model correlator_Pipeline_Offload_Loop -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/correlator_Pipeline_Offload_Loop_csynth.xml 
+Execute         list_part -family xc7z045-ffg900-2 
+Execute           ap_family_info -name xc7z045-ffg900-2 -data names 
+Execute           ap_part_info -quiet -name xc7z045-ffg900-2 -data family 
+Execute       syn_report -verbosereport -model correlator_Pipeline_Offload_Loop -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_Pipeline_Offload_Loop.verbose.rpt 
+Execute         list_part -family xc7z045-ffg900-2 
+Execute           ap_family_info -name xc7z045-ffg900-2 -data names 
+Execute           ap_part_info -quiet -name xc7z045-ffg900-2 -data family 
+Execute       db_write -model correlator_Pipeline_Offload_Loop -f -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_Pipeline_Offload_Loop.adb 
+Execute       db_write -model correlator_Pipeline_Offload_Loop -bindview -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/design.bindinfo.xml 
+Execute       gen_tb_info correlator_Pipeline_Offload_Loop -p /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_Pipeline_Offload_Loop 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'correlator' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+Execute       create_rtl_model correlator -top_prefix  -sub_prefix correlator_ -mg_file /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.compgen.tcl 
+WARNING: [RTGEN 206-101] Design contains AXI ports. Reset is fixed to synchronous and active low.
+INFO: [RTGEN 206-500] Setting interface mode on port 'correlator/din_data_0' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'correlator/din_data_1' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'correlator/din_data_2' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'correlator/din_data_3' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'correlator/dout_data_00' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'correlator/dout_data_11' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'correlator/dout_data_22' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'correlator/dout_data_33' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'correlator/dout_data_01' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'correlator/dout_data_02' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'correlator/dout_data_03' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'correlator/dout_data_12' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'correlator/dout_data_13' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'correlator/dout_data_23' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'correlator/integration_time_frames' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on function 'correlator' to 's_axilite & ap_ctrl_hs'.
+WARNING: [RTGEN 206-101] Register 'first_run' is power-on initialization.
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_19_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_19_Rbkb' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_17_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_17_Rcud' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_18_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_18_RdEe' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_16_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_16_ReOg' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_7_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_7_RAfYi' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_15_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_15_Rg8j' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_6_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_6_RAhbi' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_14_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_14_Ribs' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_5_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_5_RAjbC' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_13_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_13_RkbM' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_4_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_4_RAlbW' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_12_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_12_Rmb6' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_3_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_3_RAncg' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_11_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_11_Rocq' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_2_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_2_RApcA' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_10_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_10_RqcK' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_1_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_1_RArcU' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_9_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_9_RAsc4' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_RAM_tde' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_8_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_8_RAudo' due to the length limit 80
+WARNING: [RTGEN 206-101] Register 'bank_sel' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'frame_count' is power-on initialization.
+INFO: [RTGEN 206-100] Bundling port 'integration_time_frames' and 'return' to AXI-Lite port control.
+INFO: [RTGEN 206-100] Finished creating RTL model for 'correlator'.
+INFO: [RTMG 210-278] Implementing memory 'correlator_correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_19_Rbkb' using block RAMs.
+INFO: [RTMG 210-278] Implementing memory 'correlator_correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_17_Rcud' using block RAMs.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.06 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.05 seconds; current allocated memory: 343.766 MB.
+Execute       source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.rtl_wrap.cfg.tcl 
+Execute       gen_rtl correlator -istop -style xilinx -f -lang vhdl -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/vhdl/correlator 
+Execute       gen_rtl correlator -istop -style xilinx -f -lang vlog -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/verilog/correlator 
+Execute       syn_report -csynth -model correlator -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/correlator_csynth.rpt 
+Execute         list_part -family xc7z045-ffg900-2 
+Execute           ap_family_info -name xc7z045-ffg900-2 -data names 
+Execute           ap_part_info -quiet -name xc7z045-ffg900-2 -data family 
+Execute       syn_report -rtlxml -model correlator -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/correlator_csynth.xml 
+Execute         list_part -family xc7z045-ffg900-2 
+Execute           ap_family_info -name xc7z045-ffg900-2 -data names 
+Execute           ap_part_info -quiet -name xc7z045-ffg900-2 -data family 
+Execute       syn_report -verbosereport -model correlator -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.verbose.rpt 
+Execute         list_part -family xc7z045-ffg900-2 
+Execute           ap_family_info -name xc7z045-ffg900-2 -data names 
+Execute           ap_part_info -quiet -name xc7z045-ffg900-2 -data family 
+Execute       db_write -model correlator -f -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.adb 
+Execute       db_write -model correlator -bindview -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/design.bindinfo.xml 
+Execute       gen_tb_info correlator -p /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator 
+Execute       export_constraint_db -f -tool general -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.constraint.tcl 
+Execute       syn_report -designview -model correlator -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.design.xml 
+Execute       syn_report -csynthDesign -model correlator -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth.rpt -MHOut /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/kernel_module_hierarchy.tcl 
+Execute         list_part -family xc7z045-ffg900-2 
+Execute           ap_family_info -name xc7z045-ffg900-2 -data names 
+Execute           ap_part_info -quiet -name xc7z045-ffg900-2 -data family 
+Execute       syn_report -wcfg -model correlator -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_dataflow_ana.wcfg 
+Execute       syn_report -protoinst -model correlator -o /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.protoinst 
+Execute       sc_get_clocks correlator 
+Execute       sc_get_portdomain correlator 
+INFO-FLOW: Model list for RTL component generation: correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 correlator_Pipeline_Process_Frame_Loop correlator_Pipeline_Offload_Loop correlator
+INFO-FLOW: Handling components in module [correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3] ... 
+Execute       source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3.compgen.tcl 
+INFO-FLOW: Found component correlator_flow_control_loop_pipe_sequential_init.
+INFO-FLOW: Append model correlator_flow_control_loop_pipe_sequential_init
+INFO-FLOW: Handling components in module [correlator_Pipeline_Process_Frame_Loop] ... 
+Execute       source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_Pipeline_Process_Frame_Loop.compgen.tcl 
+INFO-FLOW: Found component correlator_mul_16s_16s_16_1_1.
+INFO-FLOW: Append model correlator_mul_16s_16s_16_1_1
+INFO-FLOW: Found component correlator_ama_submuladd_1ns_16s_16s_16ns_16_4_1.
+INFO-FLOW: Append model correlator_ama_submuladd_1ns_16s_16s_16ns_16_4_1
+INFO-FLOW: Found component correlator_mac_muladd_16s_16s_16ns_16_4_1.
+INFO-FLOW: Append model correlator_mac_muladd_16s_16s_16ns_16_4_1
+INFO-FLOW: Found component correlator_flow_control_loop_pipe_sequential_init.
+INFO-FLOW: Append model correlator_flow_control_loop_pipe_sequential_init
+INFO-FLOW: Handling components in module [correlator_Pipeline_Offload_Loop] ... 
+Execute       source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_Pipeline_Offload_Loop.compgen.tcl 
+INFO-FLOW: Found component correlator_flow_control_loop_pipe_sequential_init.
+INFO-FLOW: Append model correlator_flow_control_loop_pipe_sequential_init
+INFO-FLOW: Handling components in module [correlator] ... 
+Execute       source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.compgen.tcl 
+INFO-FLOW: Found component correlator_correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_19_Rbkb.
+INFO-FLOW: Append model correlator_correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_19_Rbkb
+INFO-FLOW: Found component correlator_correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_17_Rcud.
+INFO-FLOW: Append model correlator_correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_17_Rcud
+INFO-FLOW: Found component correlator_control_s_axi.
+INFO-FLOW: Append model correlator_control_s_axi
+INFO-FLOW: Found component correlator_regslice_both.
+INFO-FLOW: Append model correlator_regslice_both
+INFO-FLOW: Found component correlator_regslice_both.
+INFO-FLOW: Append model correlator_regslice_both
+INFO-FLOW: Found component correlator_regslice_both.
+INFO-FLOW: Append model correlator_regslice_both
+INFO-FLOW: Found component correlator_regslice_both.
+INFO-FLOW: Append model correlator_regslice_both
+INFO-FLOW: Found component correlator_regslice_both.
+INFO-FLOW: Append model correlator_regslice_both
+INFO-FLOW: Found component correlator_regslice_both.
+INFO-FLOW: Append model correlator_regslice_both
+INFO-FLOW: Found component correlator_regslice_both.
+INFO-FLOW: Append model correlator_regslice_both
+INFO-FLOW: Found component correlator_regslice_both.
+INFO-FLOW: Append model correlator_regslice_both
+INFO-FLOW: Found component correlator_regslice_both.
+INFO-FLOW: Append model correlator_regslice_both
+INFO-FLOW: Found component correlator_regslice_both.
+INFO-FLOW: Append model correlator_regslice_both
+INFO-FLOW: Found component correlator_regslice_both.
+INFO-FLOW: Append model correlator_regslice_both
+INFO-FLOW: Found component correlator_regslice_both.
+INFO-FLOW: Append model correlator_regslice_both
+INFO-FLOW: Found component correlator_regslice_both.
+INFO-FLOW: Append model correlator_regslice_both
+INFO-FLOW: Found component correlator_regslice_both.
+INFO-FLOW: Append model correlator_regslice_both
+INFO-FLOW: Append model correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3
+INFO-FLOW: Append model correlator_Pipeline_Process_Frame_Loop
+INFO-FLOW: Append model correlator_Pipeline_Offload_Loop
+INFO-FLOW: Append model correlator
+INFO-FLOW: Generating RTL model list ...
+INFO-FLOW: All models in this session: correlator_flow_control_loop_pipe_sequential_init correlator_mul_16s_16s_16_1_1 correlator_ama_submuladd_1ns_16s_16s_16ns_16_4_1 correlator_mac_muladd_16s_16s_16ns_16_4_1 correlator_flow_control_loop_pipe_sequential_init correlator_flow_control_loop_pipe_sequential_init correlator_correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_19_Rbkb correlator_correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_17_Rcud correlator_control_s_axi correlator_regslice_both correlator_regslice_both correlator_regslice_both correlator_regslice_both correlator_regslice_both correlator_regslice_both correlator_regslice_both correlator_regslice_both correlator_regslice_both correlator_regslice_both correlator_regslice_both correlator_regslice_both correlator_regslice_both correlator_regslice_both correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 correlator_Pipeline_Process_Frame_Loop correlator_Pipeline_Offload_Loop correlator
+INFO-FLOW: Generating /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/autopilot.rtl.models.txt file...
+INFO-FLOW: To file: write model correlator_flow_control_loop_pipe_sequential_init
+INFO-FLOW: To file: write model correlator_mul_16s_16s_16_1_1
+INFO-FLOW: To file: write model correlator_ama_submuladd_1ns_16s_16s_16ns_16_4_1
+INFO-FLOW: To file: write model correlator_mac_muladd_16s_16s_16ns_16_4_1
+INFO-FLOW: To file: write model correlator_flow_control_loop_pipe_sequential_init
+INFO-FLOW: To file: write model correlator_flow_control_loop_pipe_sequential_init
+INFO-FLOW: To file: write model correlator_correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_19_Rbkb
+INFO-FLOW: To file: write model correlator_correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_17_Rcud
+INFO-FLOW: To file: write model correlator_control_s_axi
+INFO-FLOW: To file: write model correlator_regslice_both
+INFO-FLOW: To file: write model correlator_regslice_both
+INFO-FLOW: To file: write model correlator_regslice_both
+INFO-FLOW: To file: write model correlator_regslice_both
+INFO-FLOW: To file: write model correlator_regslice_both
+INFO-FLOW: To file: write model correlator_regslice_both
+INFO-FLOW: To file: write model correlator_regslice_both
+INFO-FLOW: To file: write model correlator_regslice_both
+INFO-FLOW: To file: write model correlator_regslice_both
+INFO-FLOW: To file: write model correlator_regslice_both
+INFO-FLOW: To file: write model correlator_regslice_both
+INFO-FLOW: To file: write model correlator_regslice_both
+INFO-FLOW: To file: write model correlator_regslice_both
+INFO-FLOW: To file: write model correlator_regslice_both
+INFO-FLOW: To file: write model correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3
+INFO-FLOW: To file: write model correlator_Pipeline_Process_Frame_Loop
+INFO-FLOW: To file: write model correlator_Pipeline_Offload_Loop
+INFO-FLOW: To file: write model correlator
+INFO-FLOW: Generating /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/autopilot.rtl.models.tcl file...
+INFO-FLOW: Finished generating RTL model list.
+
+
+INFO-FLOW: RTL Generation done.
+INFO-FLOW: CAS Generation done.
+INFO-FLOW: CBC Generation done.
+INFO-FLOW: DBG:PROC: ::AESL_AUTOMG::auto_generate_csynth_design
+INFO-FLOW: DBG:PUTS: read_platform_lib /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/global.setting.tcl
+Execute       source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/generic/autopilot/common.gen 
+Execute         source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/generic/autopilot/APCoreGen.gen 
+Execute       source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/generic/autopilot/op.gen 
+Execute       source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/generic/autopilot/op_simcore.gen 
+Execute       source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/generic/autopilot/interface.gen 
+Execute       source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/global.setting.tcl 
+Execute       source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/common/xilinx.gen 
+Execute         source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/interface/plb46.gen 
+Execute         source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/interface/axi4.gen 
+Execute         source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/interface/nativeAXI4.gen 
+Execute           source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/interface/saxilite.gen 
+Execute         source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/scripts/xilinxcoregen.gen 
+Execute         source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/interface/XilEDKCoreGen.gen 
+Execute         source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/ip/util.gen 
+Execute         source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/ip/xfft.gen 
+Execute         source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/ip/xfir.gen 
+Execute         source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/ip/dds_compiler.gen 
+Execute         source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/DSP48/dsp48.gen 
+INFO-FLOW: DBG:PUTS:   using AESL_AUTOCG::g_clock_period=10.000 (was NA)
+INFO-FLOW: DBG:PROC: ::AESL_AUTOMG::generate_ip_cores gen_sim_model='1' gen_fp_models='0' gen_for_export='0' dstSCDir='' dstVhdlDir='/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/vhdl' dstVlogDir='/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/vlog' tclDir='/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db' modelList='correlator_flow_control_loop_pipe_sequential_init
+correlator_mul_16s_16s_16_1_1
+correlator_ama_submuladd_1ns_16s_16s_16ns_16_4_1
+correlator_mac_muladd_16s_16s_16ns_16_4_1
+correlator_flow_control_loop_pipe_sequential_init
+correlator_flow_control_loop_pipe_sequential_init
+correlator_correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_19_Rbkb
+correlator_correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_17_Rcud
+correlator_control_s_axi
+correlator_regslice_both
+correlator_regslice_both
+correlator_regslice_both
+correlator_regslice_both
+correlator_regslice_both
+correlator_regslice_both
+correlator_regslice_both
+correlator_regslice_both
+correlator_regslice_both
+correlator_regslice_both
+correlator_regslice_both
+correlator_regslice_both
+correlator_regslice_both
+correlator_regslice_both
+correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3
+correlator_Pipeline_Process_Frame_Loop
+correlator_Pipeline_Offload_Loop
+correlator
+' expOnly='0'
+Execute       source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/global.setting.tcl 
+Execute       ap_part_info -name xc7z045-ffg900-2 -data names -quiet 
+Execute       ap_part_info -name xc7z045-ffg900-2 -data info -quiet 
+Execute       source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/global.setting.tcl 
+Execute       source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/global.setting.tcl 
+Execute       source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3.compgen.tcl 
+Execute       source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_Pipeline_Process_Frame_Loop.compgen.tcl 
+Execute         ap_part_info -name xc7z045-ffg900-2 -data names -quiet 
+Execute         ap_part_info -name xc7z045-ffg900-2 -data info -quiet 
+Execute         ap_part_info -name xc7z045-ffg900-2 -data info 
+Execute         ap_part_info -name xc7z045-ffg900-2 -data names -quiet 
+Execute         ap_part_info -name xc7z045-ffg900-2 -data info -quiet 
+Execute         ap_part_info -name xc7z045-ffg900-2 -data info 
+Execute       source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_Pipeline_Offload_Loop.compgen.tcl 
+Execute       source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.compgen.tcl 
+Execute         source ./control.slave.tcl 
+INFO: [HLS 200-111] Finished Generating all RTL models: CPU user time: 0.12 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.13 seconds; current allocated memory: 348.082 MB.
+INFO-FLOW: DBG:PROC: ::HLSREPORTS::create_csynth_xml bind_info_var='bind_info' RtlSubPrefix='correlator_' outfile=''
+INFO-FLOW: Running: create_csynth_xml read xml data
+INFO-FLOW: Done: create_csynth_xml read xml data time: 0 seconds per iteration
+INFO-FLOW: Running: create_csynth_xml bind info
+INFO-FLOW: Done: create_csynth_xml bind info time: 0 seconds per iteration
+INFO-FLOW: Running: create_csynth_xml config info
+INFO-FLOW: Done: create_csynth_xml config info time: 0 seconds per iteration
+INFO-FLOW: Running: create_csynth_xml write xml
+INFO-FLOW: Done: create_csynth_xml write xml time: 0 seconds per iteration
+INFO-FLOW: DBG:PUTS:      create_csynth_xml wrote csynth_xml=/home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth.xml
+INFO-FLOW: DBG:PROC: ::AP::DESIGN_DATA::generate_json generate_bd_files='0' generate_xo_files='0' modelList='correlator_flow_control_loop_pipe_sequential_init
+correlator_mul_16s_16s_16_1_1
+correlator_ama_submuladd_1ns_16s_16s_16ns_16_4_1
+correlator_mac_muladd_16s_16s_16ns_16_4_1
+correlator_flow_control_loop_pipe_sequential_init
+correlator_flow_control_loop_pipe_sequential_init
+correlator_correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_19_Rbkb
+correlator_correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_17_Rcud
+correlator_control_s_axi
+correlator_regslice_both
+correlator_regslice_both
+correlator_regslice_both
+correlator_regslice_both
+correlator_regslice_both
+correlator_regslice_both
+correlator_regslice_both
+correlator_regslice_both
+correlator_regslice_both
+correlator_regslice_both
+correlator_regslice_both
+correlator_regslice_both
+correlator_regslice_both
+correlator_regslice_both
+correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3
+correlator_Pipeline_Process_Frame_Loop
+correlator_Pipeline_Offload_Loop
+correlator
+' rtl_lang='both' bootstrap_tcl='false' outdir='' outfilename=''
+Execute       source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/global.setting.tcl 
+Execute       source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/global.setting.tcl 
+Execute       source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/top-io-be.tcl 
+Execute       source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.tbgen.tcl 
+Execute       source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.compgen.dataonly.tcl 
+Execute       source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.compgen.dataonly.tcl 
+Execute       source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.rtl_wrap.cfg.tcl 
+Execute       source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.compgen.dataonly.tcl 
+Execute       source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3.tbgen.tcl 
+Execute       source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_Pipeline_Process_Frame_Loop.tbgen.tcl 
+Execute       source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator_Pipeline_Offload_Loop.tbgen.tcl 
+Execute       source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.tbgen.tcl 
+Execute       source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/global.setting.tcl 
+Execute       ap_part_info -name xc7z045-ffg900-2 -data names -quiet 
+Execute       ap_part_info -name xc7z045-ffg900-2 -data info -quiet 
+Execute       source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.constraint.tcl 
+Execute       sc_get_clocks correlator 
+Execute       source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/global.setting.tcl 
+INFO-FLOW: DBG:PROC: ::HLSREPORTS::add_csynth_report_sections bind_info_dict='adapter_nodes {{BINDTYPE adapter ID {} IMPL {} LATENCY {} OPTYPE {} PRAGMA {} RTLNAME control_s_axi_U SOURCE {} VARIABLE {} LOOP {} BUNDLEDNAME control DSP 0 BRAM 0 URAM 0 STORAGESUBTYPE s_axilite STORAGESIZE {} STORAGEUSAGE interface DISPNAME {bind_adapter }}} report_dict {TOPINST correlator MODULE2INSTS {correlator correlator correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 grp_correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3_fu_147 correlator_Pipeline_Process_Frame_Loop grp_correlator_Pipeline_Process_Frame_Loop_fu_191 correlator_Pipeline_Offload_Loop grp_correlator_Pipeline_Offload_Loop_fu_236} INST2MODULE {correlator correlator grp_correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3_fu_147 correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 grp_correlator_Pipeline_Process_Frame_Loop_fu_191 correlator_Pipeline_Process_Frame_Loop grp_correlator_Pipeline_Offload_Loop_fu_236 correlator_Pipeline_Offload_Loop} INSTDATA {correlator {DEPTH 1 CHILDREN {grp_correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3_fu_147 grp_correlator_Pipeline_Process_Frame_Loop_fu_191 grp_correlator_Pipeline_Offload_Loop_fu_236}} grp_correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3_fu_147 {DEPTH 2 CHILDREN {}} grp_correlator_Pipeline_Process_Frame_Loop_fu_191 {DEPTH 2 CHILDREN {}} grp_correlator_Pipeline_Offload_Loop_fu_236 {DEPTH 2 CHILDREN {}}} MODULEDATA {correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 {BINDINFO {{BINDTYPE op ID {} IMPL fabric LATENCY 0 OPTYPE add PRAGMA {} RTLNAME add_ln52_1_fu_529_p2 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:52 VARIABLE add_ln52_1 LOOP VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 BUNDLEDNAME {} DSP 0 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL fabric LATENCY 0 OPTYPE add PRAGMA {} RTLNAME add_ln52_fu_544_p2 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:52 VARIABLE add_ln52 LOOP VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 BUNDLEDNAME {} DSP 0 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL fabric LATENCY 0 OPTYPE add PRAGMA {} RTLNAME add_ln53_fu_594_p2 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:53 VARIABLE add_ln53 LOOP VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 BUNDLEDNAME {} DSP 0 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL fabric LATENCY 0 OPTYPE add PRAGMA {} RTLNAME add_ln55_fu_630_p2 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:55 VARIABLE add_ln55 LOOP VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 BUNDLEDNAME {} DSP 0 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL fabric LATENCY 0 OPTYPE add PRAGMA {} RTLNAME add_ln54_fu_636_p2 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:54 VARIABLE add_ln54 LOOP VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 BUNDLEDNAME {} DSP 0 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL fabric LATENCY 0 OPTYPE add PRAGMA {} RTLNAME add_ln53_1_fu_642_p2 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:53 VARIABLE add_ln53_1 LOOP VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 BUNDLEDNAME {} DSP 0 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}}} AREA {DSP 0 BRAM 0 URAM 0}} correlator_Pipeline_Process_Frame_Loop {BINDINFO {{BINDTYPE op ID {} IMPL fabric LATENCY 0 OPTYPE add PRAGMA {} RTLNAME add_ln59_fu_414_p2 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:59 VARIABLE add_ln59 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 0 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL fabric LATENCY 0 OPTYPE add PRAGMA {} RTLNAME add_ln76_fu_420_p2 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:76 VARIABLE add_ln76 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 0 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL dsp_slice LATENCY 3 OPTYPE sub PRAGMA {} RTLNAME ama_submuladd_1ns_16s_16s_16ns_16_4_1_U37 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:70 VARIABLE sub_ln699 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op sub}} {BINDTYPE op ID {} IMPL fabric LATENCY 0 OPTYPE sub PRAGMA {} RTLNAME sub_ln699_1_fu_487_p2 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:71 VARIABLE sub_ln699_1 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 0 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op sub}} {BINDTYPE op ID {} IMPL fabric LATENCY 0 OPTYPE sub PRAGMA {} RTLNAME sub_ln699_2_fu_492_p2 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:72 VARIABLE sub_ln699_2 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 0 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op sub}} {BINDTYPE op ID {} IMPL auto LATENCY 0 OPTYPE mul PRAGMA {} RTLNAME mul_16s_16s_16_1_1_U21 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:76 VARIABLE mul_ln389 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op mul}} {BINDTYPE op ID {} IMPL dsp_slice LATENCY 3 OPTYPE mul PRAGMA {} RTLNAME mac_muladd_16s_16s_16ns_16_4_1_U38 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:76 VARIABLE mul_ln389_1 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op mul}} {BINDTYPE op ID {} IMPL dsp_slice LATENCY 3 OPTYPE add PRAGMA {} RTLNAME mac_muladd_16s_16s_16ns_16_4_1_U38 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:76 VARIABLE add_ln389 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL fabric LATENCY 0 OPTYPE add PRAGMA {} RTLNAME this_0_0_i_fu_583_p2 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:76 VARIABLE this_0_0_i LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 0 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL auto LATENCY 0 OPTYPE mul PRAGMA {} RTLNAME mul_16s_16s_16_1_1_U22 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:77 VARIABLE mul_ln389_2 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op mul}} {BINDTYPE op ID {} IMPL dsp_slice LATENCY 3 OPTYPE mul PRAGMA {} RTLNAME mac_muladd_16s_16s_16ns_16_4_1_U39 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:77 VARIABLE mul_ln389_3 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op mul}} {BINDTYPE op ID {} IMPL dsp_slice LATENCY 3 OPTYPE add PRAGMA {} RTLNAME mac_muladd_16s_16s_16ns_16_4_1_U39 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:77 VARIABLE add_ln389_1 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL fabric LATENCY 0 OPTYPE add PRAGMA {} RTLNAME this_0_0_i129_fu_592_p2 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:77 VARIABLE this_0_0_i129 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 0 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL auto LATENCY 0 OPTYPE mul PRAGMA {} RTLNAME mul_16s_16s_16_1_1_U23 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:78 VARIABLE mul_ln389_4 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op mul}} {BINDTYPE op ID {} IMPL dsp_slice LATENCY 3 OPTYPE mul PRAGMA {} RTLNAME mac_muladd_16s_16s_16ns_16_4_1_U40 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:78 VARIABLE mul_ln389_5 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op mul}} {BINDTYPE op ID {} IMPL dsp_slice LATENCY 3 OPTYPE add PRAGMA {} RTLNAME mac_muladd_16s_16s_16ns_16_4_1_U40 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:78 VARIABLE add_ln389_2 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL fabric LATENCY 0 OPTYPE add PRAGMA {} RTLNAME this_0_0_i142_fu_601_p2 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:78 VARIABLE this_0_0_i142 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 0 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL auto LATENCY 0 OPTYPE mul PRAGMA {} RTLNAME mul_16s_16s_16_1_1_U24 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:79 VARIABLE mul_ln389_6 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op mul}} {BINDTYPE op ID {} IMPL dsp_slice LATENCY 3 OPTYPE mul PRAGMA {} RTLNAME mac_muladd_16s_16s_16ns_16_4_1_U41 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:79 VARIABLE mul_ln389_7 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op mul}} {BINDTYPE op ID {} IMPL dsp_slice LATENCY 3 OPTYPE add PRAGMA {} RTLNAME mac_muladd_16s_16s_16ns_16_4_1_U41 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:79 VARIABLE add_ln389_3 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL fabric LATENCY 0 OPTYPE add PRAGMA {} RTLNAME this_0_0_i155_fu_610_p2 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:79 VARIABLE this_0_0_i155 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 0 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL auto LATENCY 0 OPTYPE mul PRAGMA {} RTLNAME mul_16s_16s_16_1_1_U25 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:81 VARIABLE mul_ln389_8 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op mul}} {BINDTYPE op ID {} IMPL dsp_slice LATENCY 3 OPTYPE mul PRAGMA {} RTLNAME mac_muladd_16s_16s_16ns_16_4_1_U42 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:81 VARIABLE mul_ln389_9 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op mul}} {BINDTYPE op ID {} IMPL dsp_slice LATENCY 3 OPTYPE add PRAGMA {} RTLNAME mac_muladd_16s_16s_16ns_16_4_1_U42 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:81 VARIABLE add_ln389_4 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL dsp_slice LATENCY 3 OPTYPE mul PRAGMA {} RTLNAME ama_submuladd_1ns_16s_16s_16ns_16_4_1_U37 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:81 VARIABLE mul_ln389_10 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op mul}} {BINDTYPE op ID {} IMPL auto LATENCY 0 OPTYPE mul PRAGMA {} RTLNAME mul_16s_16s_16_1_1_U26 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:81 VARIABLE mul_ln389_11 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op mul}} {BINDTYPE op ID {} IMPL dsp_slice LATENCY 3 OPTYPE add PRAGMA {} RTLNAME ama_submuladd_1ns_16s_16s_16ns_16_4_1_U37 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:81 VARIABLE add_ln389_5 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL fabric LATENCY 0 OPTYPE add PRAGMA {} RTLNAME this_0_0_i168_fu_619_p2 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:81 VARIABLE this_0_0_i168 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 0 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL fabric LATENCY 0 OPTYPE add PRAGMA {} RTLNAME this_1_0_i170_fu_628_p2 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:81 VARIABLE this_1_0_i170 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 0 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL auto LATENCY 0 OPTYPE mul PRAGMA {} RTLNAME mul_16s_16s_16_1_1_U27 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:82 VARIABLE mul_ln389_12 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op mul}} {BINDTYPE op ID {} IMPL dsp_slice LATENCY 3 OPTYPE mul PRAGMA {} RTLNAME mac_muladd_16s_16s_16ns_16_4_1_U43 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:82 VARIABLE mul_ln389_13 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op mul}} {BINDTYPE op ID {} IMPL dsp_slice LATENCY 3 OPTYPE add PRAGMA {} RTLNAME mac_muladd_16s_16s_16ns_16_4_1_U43 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:82 VARIABLE add_ln389_6 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL auto LATENCY 0 OPTYPE mul PRAGMA {} RTLNAME mul_16s_16s_16_1_1_U28 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:82 VARIABLE mul_ln389_14 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op mul}} {BINDTYPE op ID {} IMPL dsp_slice LATENCY 3 OPTYPE mul PRAGMA {} RTLNAME mac_muladd_16s_16s_16ns_16_4_1_U44 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:82 VARIABLE mul_ln389_15 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op mul}} {BINDTYPE op ID {} IMPL dsp_slice LATENCY 3 OPTYPE add PRAGMA {} RTLNAME mac_muladd_16s_16s_16ns_16_4_1_U44 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:82 VARIABLE add_ln389_7 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL fabric LATENCY 0 OPTYPE add PRAGMA {} RTLNAME this_0_0_i182_fu_637_p2 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:82 VARIABLE this_0_0_i182 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 0 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL fabric LATENCY 0 OPTYPE add PRAGMA {} RTLNAME this_1_0_i184_fu_646_p2 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:82 VARIABLE this_1_0_i184 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 0 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL auto LATENCY 0 OPTYPE mul PRAGMA {} RTLNAME mul_16s_16s_16_1_1_U29 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:83 VARIABLE mul_ln389_16 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op mul}} {BINDTYPE op ID {} IMPL dsp_slice LATENCY 3 OPTYPE mul PRAGMA {} RTLNAME mac_muladd_16s_16s_16ns_16_4_1_U45 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:83 VARIABLE mul_ln389_17 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op mul}} {BINDTYPE op ID {} IMPL dsp_slice LATENCY 3 OPTYPE add PRAGMA {} RTLNAME mac_muladd_16s_16s_16ns_16_4_1_U45 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:83 VARIABLE add_ln389_8 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL auto LATENCY 0 OPTYPE mul PRAGMA {} RTLNAME mul_16s_16s_16_1_1_U30 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:83 VARIABLE mul_ln389_18 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op mul}} {BINDTYPE op ID {} IMPL dsp_slice LATENCY 3 OPTYPE mul PRAGMA {} RTLNAME mac_muladd_16s_16s_16ns_16_4_1_U46 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:83 VARIABLE mul_ln389_19 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op mul}} {BINDTYPE op ID {} IMPL dsp_slice LATENCY 3 OPTYPE add PRAGMA {} RTLNAME mac_muladd_16s_16s_16ns_16_4_1_U46 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:83 VARIABLE add_ln389_9 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL fabric LATENCY 0 OPTYPE add PRAGMA {} RTLNAME this_0_0_i196_fu_655_p2 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:83 VARIABLE this_0_0_i196 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 0 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL fabric LATENCY 0 OPTYPE add PRAGMA {} RTLNAME this_1_0_i198_fu_664_p2 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:83 VARIABLE this_1_0_i198 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 0 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL auto LATENCY 0 OPTYPE mul PRAGMA {} RTLNAME mul_16s_16s_16_1_1_U31 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:84 VARIABLE mul_ln389_20 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op mul}} {BINDTYPE op ID {} IMPL dsp_slice LATENCY 3 OPTYPE mul PRAGMA {} RTLNAME mac_muladd_16s_16s_16ns_16_4_1_U47 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:84 VARIABLE mul_ln389_21 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op mul}} {BINDTYPE op ID {} IMPL dsp_slice LATENCY 3 OPTYPE add PRAGMA {} RTLNAME mac_muladd_16s_16s_16ns_16_4_1_U47 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:84 VARIABLE add_ln389_10 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL auto LATENCY 0 OPTYPE mul PRAGMA {} RTLNAME mul_16s_16s_16_1_1_U32 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:84 VARIABLE mul_ln389_22 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op mul}} {BINDTYPE op ID {} IMPL dsp_slice LATENCY 3 OPTYPE mul PRAGMA {} RTLNAME mac_muladd_16s_16s_16ns_16_4_1_U48 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:84 VARIABLE mul_ln389_23 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op mul}} {BINDTYPE op ID {} IMPL dsp_slice LATENCY 3 OPTYPE add PRAGMA {} RTLNAME mac_muladd_16s_16s_16ns_16_4_1_U48 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:84 VARIABLE add_ln389_11 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL fabric LATENCY 0 OPTYPE add PRAGMA {} RTLNAME this_0_0_i210_fu_673_p2 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:84 VARIABLE this_0_0_i210 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 0 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL fabric LATENCY 0 OPTYPE add PRAGMA {} RTLNAME this_1_0_i212_fu_682_p2 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:84 VARIABLE this_1_0_i212 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 0 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL auto LATENCY 0 OPTYPE mul PRAGMA {} RTLNAME mul_16s_16s_16_1_1_U33 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:85 VARIABLE mul_ln389_24 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op mul}} {BINDTYPE op ID {} IMPL dsp_slice LATENCY 3 OPTYPE mul PRAGMA {} RTLNAME mac_muladd_16s_16s_16ns_16_4_1_U49 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:85 VARIABLE mul_ln389_25 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op mul}} {BINDTYPE op ID {} IMPL dsp_slice LATENCY 3 OPTYPE add PRAGMA {} RTLNAME mac_muladd_16s_16s_16ns_16_4_1_U49 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:85 VARIABLE add_ln389_12 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL auto LATENCY 0 OPTYPE mul PRAGMA {} RTLNAME mul_16s_16s_16_1_1_U34 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:85 VARIABLE mul_ln389_26 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op mul}} {BINDTYPE op ID {} IMPL dsp_slice LATENCY 3 OPTYPE mul PRAGMA {} RTLNAME mac_muladd_16s_16s_16ns_16_4_1_U50 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:85 VARIABLE mul_ln389_27 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op mul}} {BINDTYPE op ID {} IMPL dsp_slice LATENCY 3 OPTYPE add PRAGMA {} RTLNAME mac_muladd_16s_16s_16ns_16_4_1_U50 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:85 VARIABLE add_ln389_13 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL fabric LATENCY 0 OPTYPE add PRAGMA {} RTLNAME this_0_0_i224_fu_691_p2 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:85 VARIABLE this_0_0_i224 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 0 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL fabric LATENCY 0 OPTYPE add PRAGMA {} RTLNAME this_1_0_i226_fu_700_p2 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:85 VARIABLE this_1_0_i226 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 0 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL auto LATENCY 0 OPTYPE mul PRAGMA {} RTLNAME mul_16s_16s_16_1_1_U35 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:86 VARIABLE mul_ln389_28 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op mul}} {BINDTYPE op ID {} IMPL dsp_slice LATENCY 3 OPTYPE mul PRAGMA {} RTLNAME mac_muladd_16s_16s_16ns_16_4_1_U51 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:86 VARIABLE mul_ln389_29 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op mul}} {BINDTYPE op ID {} IMPL dsp_slice LATENCY 3 OPTYPE add PRAGMA {} RTLNAME mac_muladd_16s_16s_16ns_16_4_1_U51 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:86 VARIABLE add_ln389_14 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL auto LATENCY 0 OPTYPE mul PRAGMA {} RTLNAME mul_16s_16s_16_1_1_U36 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:86 VARIABLE mul_ln389_30 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op mul}} {BINDTYPE op ID {} IMPL dsp_slice LATENCY 3 OPTYPE mul PRAGMA {} RTLNAME mac_muladd_16s_16s_16ns_16_4_1_U52 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:86 VARIABLE mul_ln389_31 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op mul}} {BINDTYPE op ID {} IMPL dsp_slice LATENCY 3 OPTYPE add PRAGMA {} RTLNAME mac_muladd_16s_16s_16ns_16_4_1_U52 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:86 VARIABLE add_ln389_15 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 1 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL fabric LATENCY 0 OPTYPE add PRAGMA {} RTLNAME this_0_0_i238_fu_709_p2 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:86 VARIABLE this_0_0_i238 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 0 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL fabric LATENCY 0 OPTYPE add PRAGMA {} RTLNAME this_1_0_i240_fu_718_p2 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:86 VARIABLE this_1_0_i240 LOOP Process_Frame_Loop BUNDLEDNAME {} DSP 0 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}}} AREA {DSP 32 BRAM 0 URAM 0}} correlator_Pipeline_Offload_Loop {BINDINFO {{BINDTYPE op ID {} IMPL fabric LATENCY 0 OPTYPE add PRAGMA {} RTLNAME add_ln97_fu_564_p2 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:97 VARIABLE add_ln97 LOOP Offload_Loop BUNDLEDNAME {} DSP 0 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE op ID {} IMPL fabric LATENCY 0 OPTYPE add PRAGMA {} RTLNAME add_ln100_fu_570_p2 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:100 VARIABLE add_ln100 LOOP Offload_Loop BUNDLEDNAME {} DSP 0 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}}} AREA {DSP 0 BRAM 0 URAM 0}} correlator {BINDINFO {{BINDTYPE op ID {} IMPL fabric LATENCY 0 OPTYPE add PRAGMA {} RTLNAME add_ln89_fu_328_p2 SOURCE /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:89 VARIABLE add_ln89 LOOP {} BUNDLEDNAME {} DSP 0 BRAM 0 URAM 0 STORAGESUBTYPE {} DISPNAME {bind_op add}} {BINDTYPE storage ID {} IMPL bram LATENCY 1 OPTYPE ram_2p PRAGMA pragma RTLNAME correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_19_U SOURCE {} VARIABLE correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_19 LOOP {} BUNDLEDNAME {} DSP 0 BRAM 8 URAM 0 STORAGESUBTYPE {} STORAGESIZE {64 2048 1} STORAGEUSAGE ram_2p DISPNAME {bind_storage ram_2p}} {BINDTYPE storage ID {} IMPL bram LATENCY 1 OPTYPE ram_2p PRAGMA pragma RTLNAME correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_17_U SOURCE {} VARIABLE correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_17 LOOP {} BUNDLEDNAME {} DSP 0 BRAM 1 URAM 0 STORAGESUBTYPE {} STORAGESIZE {1 2048 1} STORAGEUSAGE ram_2p DISPNAME {bind_storage ram_2p}} {BINDTYPE storage ID {} IMPL bram LATENCY 1 OPTYPE ram_2p PRAGMA pragma RTLNAME correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_18_U SOURCE {} VARIABLE correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_18 LOOP {} BUNDLEDNAME {} DSP 0 BRAM 8 URAM 0 STORAGESUBTYPE {} STORAGESIZE {64 2048 1} STORAGEUSAGE ram_2p DISPNAME {bind_storage ram_2p}} {BINDTYPE storage ID {} IMPL bram LATENCY 1 OPTYPE ram_2p PRAGMA pragma RTLNAME correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_16_U SOURCE {} VARIABLE correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_16 LOOP {} BUNDLEDNAME {} DSP 0 BRAM 1 URAM 0 STORAGESUBTYPE {} STORAGESIZE {1 2048 1} STORAGEUSAGE ram_2p DISPNAME {bind_storage ram_2p}} {BINDTYPE storage ID {} IMPL bram LATENCY 1 OPTYPE ram_2p PRAGMA pragma RTLNAME correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_7_U SOURCE {} VARIABLE correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_7 LOOP {} BUNDLEDNAME {} DSP 0 BRAM 8 URAM 0 STORAGESUBTYPE {} STORAGESIZE {64 2048 1} STORAGEUSAGE ram_2p DISPNAME {bind_storage ram_2p}} {BINDTYPE storage ID {} IMPL bram LATENCY 1 OPTYPE ram_2p PRAGMA pragma RTLNAME correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_15_U SOURCE {} VARIABLE correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_15 LOOP {} BUNDLEDNAME {} DSP 0 BRAM 1 URAM 0 STORAGESUBTYPE {} STORAGESIZE {1 2048 1} STORAGEUSAGE ram_2p DISPNAME {bind_storage ram_2p}} {BINDTYPE storage ID {} IMPL bram LATENCY 1 OPTYPE ram_2p PRAGMA pragma RTLNAME correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_6_U SOURCE {} VARIABLE correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_6 LOOP {} BUNDLEDNAME {} DSP 0 BRAM 8 URAM 0 STORAGESUBTYPE {} STORAGESIZE {64 2048 1} STORAGEUSAGE ram_2p DISPNAME {bind_storage ram_2p}} {BINDTYPE storage ID {} IMPL bram LATENCY 1 OPTYPE ram_2p PRAGMA pragma RTLNAME correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_14_U SOURCE {} VARIABLE correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_14 LOOP {} BUNDLEDNAME {} DSP 0 BRAM 1 URAM 0 STORAGESUBTYPE {} STORAGESIZE {1 2048 1} STORAGEUSAGE ram_2p DISPNAME {bind_storage ram_2p}} {BINDTYPE storage ID {} IMPL bram LATENCY 1 OPTYPE ram_2p PRAGMA pragma RTLNAME correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_5_U SOURCE {} VARIABLE correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_5 LOOP {} BUNDLEDNAME {} DSP 0 BRAM 8 URAM 0 STORAGESUBTYPE {} STORAGESIZE {64 2048 1} STORAGEUSAGE ram_2p DISPNAME {bind_storage ram_2p}} {BINDTYPE storage ID {} IMPL bram LATENCY 1 OPTYPE ram_2p PRAGMA pragma RTLNAME correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_13_U SOURCE {} VARIABLE correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_13 LOOP {} BUNDLEDNAME {} DSP 0 BRAM 8 URAM 0 STORAGESUBTYPE {} STORAGESIZE {64 2048 1} STORAGEUSAGE ram_2p DISPNAME {bind_storage ram_2p}} {BINDTYPE storage ID {} IMPL bram LATENCY 1 OPTYPE ram_2p PRAGMA pragma RTLNAME correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_4_U SOURCE {} VARIABLE correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_4 LOOP {} BUNDLEDNAME {} DSP 0 BRAM 8 URAM 0 STORAGESUBTYPE {} STORAGESIZE {64 2048 1} STORAGEUSAGE ram_2p DISPNAME {bind_storage ram_2p}} {BINDTYPE storage ID {} IMPL bram LATENCY 1 OPTYPE ram_2p PRAGMA pragma RTLNAME correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_12_U SOURCE {} VARIABLE correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_12 LOOP {} BUNDLEDNAME {} DSP 0 BRAM 8 URAM 0 STORAGESUBTYPE {} STORAGESIZE {64 2048 1} STORAGEUSAGE ram_2p DISPNAME {bind_storage ram_2p}} {BINDTYPE storage ID {} IMPL bram LATENCY 1 OPTYPE ram_2p PRAGMA pragma RTLNAME correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_3_U SOURCE {} VARIABLE correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_3 LOOP {} BUNDLEDNAME {} DSP 0 BRAM 8 URAM 0 STORAGESUBTYPE {} STORAGESIZE {64 2048 1} STORAGEUSAGE ram_2p DISPNAME {bind_storage ram_2p}} {BINDTYPE storage ID {} IMPL bram LATENCY 1 OPTYPE ram_2p PRAGMA pragma RTLNAME correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_11_U SOURCE {} VARIABLE correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_11 LOOP {} BUNDLEDNAME {} DSP 0 BRAM 8 URAM 0 STORAGESUBTYPE {} STORAGESIZE {64 2048 1} STORAGEUSAGE ram_2p DISPNAME {bind_storage ram_2p}} {BINDTYPE storage ID {} IMPL bram LATENCY 1 OPTYPE ram_2p PRAGMA pragma RTLNAME correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_2_U SOURCE {} VARIABLE correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_2 LOOP {} BUNDLEDNAME {} DSP 0 BRAM 8 URAM 0 STORAGESUBTYPE {} STORAGESIZE {64 2048 1} STORAGEUSAGE ram_2p DISPNAME {bind_storage ram_2p}} {BINDTYPE storage ID {} IMPL bram LATENCY 1 OPTYPE ram_2p PRAGMA pragma RTLNAME correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_10_U SOURCE {} VARIABLE correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_10 LOOP {} BUNDLEDNAME {} DSP 0 BRAM 8 URAM 0 STORAGESUBTYPE {} STORAGESIZE {64 2048 1} STORAGEUSAGE ram_2p DISPNAME {bind_storage ram_2p}} {BINDTYPE storage ID {} IMPL bram LATENCY 1 OPTYPE ram_2p PRAGMA pragma RTLNAME correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_1_U SOURCE {} VARIABLE correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_1 LOOP {} BUNDLEDNAME {} DSP 0 BRAM 8 URAM 0 STORAGESUBTYPE {} STORAGESIZE {64 2048 1} STORAGEUSAGE ram_2p DISPNAME {bind_storage ram_2p}} {BINDTYPE storage ID {} IMPL bram LATENCY 1 OPTYPE ram_2p PRAGMA pragma RTLNAME correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_9_U SOURCE {} VARIABLE correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_9 LOOP {} BUNDLEDNAME {} DSP 0 BRAM 8 URAM 0 STORAGESUBTYPE {} STORAGESIZE {64 2048 1} STORAGEUSAGE ram_2p DISPNAME {bind_storage ram_2p}} {BINDTYPE storage ID {} IMPL bram LATENCY 1 OPTYPE ram_2p PRAGMA pragma RTLNAME correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_U SOURCE {} VARIABLE correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea LOOP {} BUNDLEDNAME {} DSP 0 BRAM 8 URAM 0 STORAGESUBTYPE {} STORAGESIZE {64 2048 1} STORAGEUSAGE ram_2p DISPNAME {bind_storage ram_2p}} {BINDTYPE storage ID {} IMPL bram LATENCY 1 OPTYPE ram_2p PRAGMA pragma RTLNAME correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_8_U SOURCE {} VARIABLE correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_8 LOOP {} BUNDLEDNAME {} DSP 0 BRAM 8 URAM 0 STORAGESUBTYPE {} STORAGESIZE {64 2048 1} STORAGEUSAGE ram_2p DISPNAME {bind_storage ram_2p}}} AREA {DSP 32 BRAM 132 URAM 0}}}}'
+INFO-FLOW: DBG:PUTS:      update_csynth_reports json2rpt_hw_sw_interfaces
+INFO-FLOW: Running: gen_csynth_sec_pragma
+INFO-FLOW: Done: gen_csynth_sec_pragma time: 0 seconds per iteration
+INFO-FLOW: DBG:PUTS:      update_csynth_reports wrote xml
+INFO-FLOW: DBG:PUTS:      update_csynth_reports appended to csynth rpt file
+INFO: [HLS 200-111] Finished Updating report files: CPU user time: 0.22 seconds. CPU system time: 0 seconds. Elapsed time: 0.22 seconds; current allocated memory: 355.922 MB.
+INFO: [VHDL 208-304] Generating VHDL RTL for correlator.
+INFO: [VLOG 209-307] Generating Verilog RTL for correlator.
+Execute       syn_report -model correlator -printsummary 
+INFO: [HLS 200-790] **** Loop Constraint Status: All loop constraints were satisfied.
+INFO: [HLS 200-789] **** Estimated Fmax: 156.25 MHz
+Command     autosyn done; 0.84 sec.
+Command   csynth_design done; 10.36 sec.
+INFO: [HLS 200-111] Finished Command csynth_design CPU user time: 4.88 seconds. CPU system time: 0.55 seconds. Elapsed time: 10.36 seconds; current allocated memory: 82.195 MB.
+Execute   close_project 
+INFO: [HLS 200-1510] Running: close_project 
+Execute     close_solution 
+Execute       cleanup_all 
+Execute       cleanup_all 
+INFO-FLOW: Workspace /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls opened at Sat Jan 10 14:45:33 PST 2026
+Execute     send_msg_by_id INFO @200-1505@%s%s default  vivado 
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+Execute   apply_ini /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg 
+INFO: [HLS 200-1510] Running: apply_ini /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg 
+Execute     send_msg_by_id INFO @200-1909@%s /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg 
+INFO: [HLS 200-1909] Reading HLS ini file /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg
+Execute     send_msg_by_id INFO @200-1465@%s 'syn.file=correlator_top.cpp' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(7) 
+INFO: [HLS 200-1465] Applying ini 'syn.file=correlator_top.cpp' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(7)
+Execute     add_files /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp 
+INFO: [HLS 200-10] Adding design file '/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp' to the project
+Execute     send_msg_by_id INFO @200-1465@%s 'syn.file=correlator.h' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(8) 
+INFO: [HLS 200-1465] Applying ini 'syn.file=correlator.h' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(8)
+Execute     add_files /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator.h 
+INFO: [HLS 200-10] Adding design file '/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator.h' to the project
+Execute     send_msg_by_id INFO @200-1465@%s 'syn.file=correlator_io.cpp' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(9) 
+INFO: [HLS 200-1465] Applying ini 'syn.file=correlator_io.cpp' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(9)
+Execute     add_files /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_io.cpp 
+INFO: [HLS 200-10] Adding design file '/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_io.cpp' to the project
+Execute     send_msg_by_id INFO @200-1465@%s 'tb.file=correlator_tb.cpp' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(11) 
+INFO: [HLS 200-1465] Applying ini 'tb.file=correlator_tb.cpp' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(11)
+Execute     add_files -tb /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_tb.cpp 
+INFO: [HLS 200-10] Adding test bench file '/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_tb.cpp' to the project
+Execute     send_msg_by_id INFO @200-1465@%s 'syn.top=correlator' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(10) 
+INFO: [HLS 200-1465] Applying ini 'syn.top=correlator' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(10)
+Execute     set_top correlator 
+Execute     send_msg_by_id INFO @200-1465@%s 'flow_target=vivado' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(4) 
+INFO: [HLS 200-1465] Applying ini 'flow_target=vivado' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(4)
+Execute     send_msg_by_id INFO @200-1505@%s%s  vivado 
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Execute     send_msg_by_id INFO @200-1465@%s 'part=xc7z045ffg900-2' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(1) 
+INFO: [HLS 200-1465] Applying ini 'part=xc7z045ffg900-2' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(1)
+Execute     set_part xc7z045ffg900-2 
+Execute       create_platform xc7z045ffg900-2 -board  
+DBG:HLSDevice: Trying to load device library: /tools/Xilinx/Vitis_HLS/2023.2/lib/lnx64.o/libxv_hlsvwrap.so
+DBG:HLSDevice: first parts/arch.xml in RDI_DATADIR: /tools/Xilinx/Vivado/2023.2/data/parts/arch.xml
+DBG:HLSDevice: init success
+INFO: [HLS 200-1611] Setting target device to 'xc7z045-ffg900-2'
+Command       create_platform done; 0.37 sec.
+Execute       source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/common/xilinx.gen 
+Execute         source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/interface/plb46.gen 
+Execute         source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/interface/axi4.gen 
+Execute         source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/interface/nativeAXI4.gen 
+Execute           source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/interface/saxilite.gen 
+Execute         source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/scripts/xilinxcoregen.gen 
+Execute         source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/interface/XilEDKCoreGen.gen 
+Execute         source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/ip/util.gen 
+Execute         source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/ip/xfft.gen 
+Execute         source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/ip/xfir.gen 
+Execute         source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/ip/dds_compiler.gen 
+Execute         source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/DSP48/dsp48.gen 
+Execute       ap_part_info -name xc7z045-ffg900-2 -data info 
+Execute       config_compile -quiet -complex-mul-dsp=0 
+Command     set_part done; 0.41 sec.
+Execute     send_msg_by_id INFO @200-1465@%s 'package.output.format=ip_catalog' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(5) 
+INFO: [HLS 200-1465] Applying ini 'package.output.format=ip_catalog' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(5)
+Execute     config_export -format=ip_catalog 
+Command   apply_ini done; 0.41 sec.
+Execute   apply_ini /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/config.cmdline 
+INFO: [HLS 200-1510] Running: apply_ini /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/config.cmdline 
+Execute     send_msg_by_id INFO @200-1909@%s /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/config.cmdline 
+INFO: [HLS 200-1909] Reading HLS ini file /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/config.cmdline
+Execute   cosim_design 
+INFO: [HLS 200-1510] Running: cosim_design 
+Execute     source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/global.setting.tcl 
+Execute     source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/global.setting.tcl 
+Execute     source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/global.setting.tcl 
+INFO-FLOW: DBG:PUTS: read_platform_lib /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/global.setting.tcl
+Execute     source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/generic/autopilot/common.gen 
+Execute       source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/generic/autopilot/APCoreGen.gen 
+Execute     source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/generic/autopilot/op.gen 
+Execute     source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/generic/autopilot/op_simcore.gen 
+Execute     source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/generic/autopilot/interface.gen 
+Execute     source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/global.setting.tcl 
+Execute     source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/common/xilinx.gen 
+Execute       source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/interface/plb46.gen 
+Execute       source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/interface/axi4.gen 
+Execute       source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/interface/nativeAXI4.gen 
+Execute         source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/interface/saxilite.gen 
+Execute       source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/scripts/xilinxcoregen.gen 
+Execute       source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/interface/XilEDKCoreGen.gen 
+Execute       source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/ip/util.gen 
+Execute       source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/ip/xfft.gen 
+Execute       source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/ip/xfir.gen 
+Execute       source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/ip/dds_compiler.gen 
+Execute       source /tools/Xilinx/Vitis_HLS/2023.2/common/technology/xilinx/DSP48/dsp48.gen 
+INFO-FLOW: DBG:PUTS:   using AESL_AUTOCG::g_clock_period=10.000 (was NA)
+Execute     ap_part_info -name xc7z045-ffg900-2 -data names -quiet 
+Execute     ap_part_info -name xc7z045-ffg900-2 -data info -quiet 
+Execute     source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/global.setting.tcl 
+Execute     source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.rtl_wrap.cfg.tcl 
+Execute     source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.tbgen.tcl 
+Execute     source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.tbgen.tcl 
+Execute     source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.tbgen.tcl 
+Execute     source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.tbgen.tcl 
+INFO: [COSIM 212-47] Using XSIM for RTL simulation.
+INFO: [COSIM 212-14] Instrumenting C test bench ...
+Execute     ap_part_info -name xc7z045-ffg900-2 -data info 
+INFO-FLOW: TB processing: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_tb.cpp /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/./sim/autowrap/testbench/correlator_tb.cpp_pre.cpp
+Execute     clang_tidy xilinx-tb-process -desc tb-process /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/./sim/autowrap/testbench/correlator_tb.cpp_pre.cpp.tb.cpp std=c++14 
+INFO-FLOW: exec /tools/Xilinx/Vitis_HLS/2023.2/lnx64/tools/clang-3.9-csynth/bin/clang-tidy -header-filter=.* --checks=-*,xilinx-tb-process -fix-errors /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/./sim/autowrap/testbench/correlator_tb.cpp_pre.cpp.tb.cpp -- -std=c++14 -fhls -ferror-limit=0
+Command     clang_tidy done; 0.71 sec.
+Execute     ap_part_info -name xc7z045-ffg900-2 -data info 
+INFO-FLOW: TB processing: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_io.cpp /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/./sim/autowrap/testbench/correlator_io.cpp_pre.cpp
+Execute     clang_tidy xilinx-tb-process -desc tb-process /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/./sim/autowrap/testbench/correlator_io.cpp_pre.cpp.tb.cpp std=c++14 
+INFO-FLOW: exec /tools/Xilinx/Vitis_HLS/2023.2/lnx64/tools/clang-3.9-csynth/bin/clang-tidy -header-filter=.* --checks=-*,xilinx-tb-process -fix-errors /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/./sim/autowrap/testbench/correlator_io.cpp_pre.cpp.tb.cpp -- -std=c++14 -fhls -ferror-limit=0
+Command     clang_tidy done; 0.42 sec.
+Execute     ap_part_info -name xc7z045-ffg900-2 -data info 
+INFO-FLOW: TB processing: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/./sim/autowrap/testbench/correlator_top.cpp_pre.cpp
+Execute     clang_tidy xilinx-tb-process -desc tb-process /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/./sim/autowrap/testbench/correlator_top.cpp_pre.cpp.tb.cpp std=c++14 
+INFO-FLOW: exec /tools/Xilinx/Vitis_HLS/2023.2/lnx64/tools/clang-3.9-csynth/bin/clang-tidy -header-filter=.* --checks=-*,xilinx-tb-process -fix-errors /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/./sim/autowrap/testbench/correlator_top.cpp_pre.cpp.tb.cpp -- -std=c++14 -fhls -ferror-limit=0
+Command     clang_tidy done; 0.7 sec.
+Execute     source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/./sim/autowrap/testbench/tb.status.tcl 
+Execute     source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/global.setting.tcl 
+Execute     source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.rtl_wrap.cfg.tcl 
+Execute     source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.rtl_wrap.cfg.tcl 
+Execute     source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.rtl_wrap.cfg.tcl 
+Execute     source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.tbgen.tcl 
+Execute     source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.tbgen.tcl 
+Execute     ap_part_info -name xc7z045-ffg900-2 -data info 
+Execute     source .run_sim.tcl 
+INFO: [COSIM 212-302] Starting C TB testing ... 
+Command     ap_source done; 0.22 sec.
+INFO: [COSIM 212-333] Generating C post check test bench ...
+INFO: [COSIM 212-12] Generating RTL test bench ...
+Execute     source ../tv/cdatafile/ref.tcl 
+Execute     source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.tbgen.tcl 
+Execute     source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.tbgen.tcl 
+Execute     source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.tbgen.tcl 
+Execute     source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.tbgen.tcl 
+Execute     source ../tv/cdatafile/ref.tcl 
+Execute     source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.tbgen.tcl 
+Execute     source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.tbgen.tcl 
+Execute     source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.tbgen.tcl 
+Execute     source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.tbgen.tcl 
+Execute     source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.tbgen.tcl 
+Execute     source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.tbgen.tcl 
+Execute     source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.tbgen.tcl 
+Execute     source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.tbgen.tcl 
+Execute     source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.tbgen.tcl 
+Execute     source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.tbgen.tcl 
+Execute     source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.tbgen.tcl 
+Execute     source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.DependenceCheck.tcl 
+Execute     source /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/.autopilot/db/correlator.tbgen.tcl 
+INFO: [COSIM 212-1] *** C/RTL co-simulation file generation completed. ***
+Execute     source .run_sim.tcl 
+Execute       source check_sim.tcl 
+Execute       source dataflow_monitor_API.tcl 
+Execute       source .sim.status.tcl 
+INFO: [COSIM 212-323] Starting verilog simulation. 
+INFO: [COSIM 212-15] Starting XSIM ...
+INFO: [COSIM 212-316] Starting C post checking ...
+Command     ap_source done; 5.59 sec.
+INFO: [COSIM 212-1000] *** C/RTL co-simulation finished: PASS ***
+Command   cosim_design done; 12.51 sec.
+INFO: [HLS 200-111] Finished Command cosim_design CPU user time: 12.74 seconds. CPU system time: 0.82 seconds. Elapsed time: 12.51 seconds; current allocated memory: 7.801 MB.
+Execute   close_project 
+INFO: [HLS 200-1510] Running: close_project 
+Execute     close_solution 
+Execute       cleanup_all 
+Execute       cleanup_all 

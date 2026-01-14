@@ -1,0 +1,84 @@
+<root versionMajor = "1" versionMinor = "5">
+  <kernel src_name="correlator" language="c" hwCtrl="ap_ctrl_hs" mem_layout="fpga64-xilinx-none">
+    <args>
+      <arg id="0" access_type="r" src_name="din_data_0" src_type="stream&lt;ap_uint&lt;32&gt;, 0&gt;&amp;" src_isptr="1" src_bitwidth="32" src_size_or_depth="1">
+        <hw hw_usage="data" hw_interface="AXI-Stream" hw_name="din_data_0" hw_bitwidth="32" hw_size_or_depth="0" hw_kernel_support="true">
+          <constraint constraint_type="pragma interface" mode="axis" register_option="0" register_mode="both"/>
+        </hw>
+      </arg>
+      <arg id="1" access_type="r" src_name="din_data_1" src_type="stream&lt;ap_uint&lt;32&gt;, 0&gt;&amp;" src_isptr="1" src_bitwidth="32" src_size_or_depth="1">
+        <hw hw_usage="data" hw_interface="AXI-Stream" hw_name="din_data_1" hw_bitwidth="32" hw_size_or_depth="0" hw_kernel_support="true">
+          <constraint constraint_type="pragma interface" mode="axis" register_option="0" register_mode="both"/>
+        </hw>
+      </arg>
+      <arg id="2" access_type="r" src_name="din_data_2" src_type="stream&lt;ap_uint&lt;32&gt;, 0&gt;&amp;" src_isptr="1" src_bitwidth="32" src_size_or_depth="1">
+        <hw hw_usage="data" hw_interface="AXI-Stream" hw_name="din_data_2" hw_bitwidth="32" hw_size_or_depth="0" hw_kernel_support="true">
+          <constraint constraint_type="pragma interface" mode="axis" register_option="0" register_mode="both"/>
+        </hw>
+      </arg>
+      <arg id="3" access_type="r" src_name="din_data_3" src_type="stream&lt;ap_uint&lt;32&gt;, 0&gt;&amp;" src_isptr="1" src_bitwidth="32" src_size_or_depth="1">
+        <hw hw_usage="data" hw_interface="AXI-Stream" hw_name="din_data_3" hw_bitwidth="32" hw_size_or_depth="0" hw_kernel_support="true">
+          <constraint constraint_type="pragma interface" mode="axis" register_option="0" register_mode="both"/>
+        </hw>
+      </arg>
+      <arg id="4" access_type="w" src_name="dout_data_00" src_type="stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;" src_isptr="1" src_bitwidth="128" src_size_or_depth="1">
+        <hw hw_usage="data" hw_interface="AXI-Stream" hw_name="dout_data_00" hw_bitwidth="128" hw_size_or_depth="0" hw_kernel_support="true">
+          <constraint constraint_type="pragma interface" mode="axis" register_option="0" register_mode="both"/>
+        </hw>
+      </arg>
+      <arg id="5" access_type="w" src_name="dout_data_11" src_type="stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;" src_isptr="1" src_bitwidth="128" src_size_or_depth="1">
+        <hw hw_usage="data" hw_interface="AXI-Stream" hw_name="dout_data_11" hw_bitwidth="128" hw_size_or_depth="0" hw_kernel_support="true">
+          <constraint constraint_type="pragma interface" mode="axis" register_option="0" register_mode="both"/>
+        </hw>
+      </arg>
+      <arg id="6" access_type="w" src_name="dout_data_22" src_type="stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;" src_isptr="1" src_bitwidth="128" src_size_or_depth="1">
+        <hw hw_usage="data" hw_interface="AXI-Stream" hw_name="dout_data_22" hw_bitwidth="128" hw_size_or_depth="0" hw_kernel_support="true">
+          <constraint constraint_type="pragma interface" mode="axis" register_option="0" register_mode="both"/>
+        </hw>
+      </arg>
+      <arg id="7" access_type="w" src_name="dout_data_33" src_type="stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;" src_isptr="1" src_bitwidth="128" src_size_or_depth="1">
+        <hw hw_usage="data" hw_interface="AXI-Stream" hw_name="dout_data_33" hw_bitwidth="128" hw_size_or_depth="0" hw_kernel_support="true">
+          <constraint constraint_type="pragma interface" mode="axis" register_option="0" register_mode="both"/>
+        </hw>
+      </arg>
+      <arg id="8" access_type="w" src_name="dout_data_01" src_type="stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;" src_isptr="1" src_bitwidth="128" src_size_or_depth="1">
+        <hw hw_usage="data" hw_interface="AXI-Stream" hw_name="dout_data_01" hw_bitwidth="128" hw_size_or_depth="0" hw_kernel_support="true">
+          <constraint constraint_type="pragma interface" mode="axis" register_option="0" register_mode="both"/>
+        </hw>
+      </arg>
+      <arg id="9" access_type="w" src_name="dout_data_02" src_type="stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;" src_isptr="1" src_bitwidth="128" src_size_or_depth="1">
+        <hw hw_usage="data" hw_interface="AXI-Stream" hw_name="dout_data_02" hw_bitwidth="128" hw_size_or_depth="0" hw_kernel_support="true">
+          <constraint constraint_type="pragma interface" mode="axis" register_option="0" register_mode="both"/>
+        </hw>
+      </arg>
+      <arg id="10" access_type="w" src_name="dout_data_03" src_type="stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;" src_isptr="1" src_bitwidth="128" src_size_or_depth="1">
+        <hw hw_usage="data" hw_interface="AXI-Stream" hw_name="dout_data_03" hw_bitwidth="128" hw_size_or_depth="0" hw_kernel_support="true">
+          <constraint constraint_type="pragma interface" mode="axis" register_option="0" register_mode="both"/>
+        </hw>
+      </arg>
+      <arg id="11" access_type="w" src_name="dout_data_12" src_type="stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;" src_isptr="1" src_bitwidth="128" src_size_or_depth="1">
+        <hw hw_usage="data" hw_interface="AXI-Stream" hw_name="dout_data_12" hw_bitwidth="128" hw_size_or_depth="0" hw_kernel_support="true">
+          <constraint constraint_type="pragma interface" mode="axis" register_option="0" register_mode="both"/>
+        </hw>
+      </arg>
+      <arg id="12" access_type="w" src_name="dout_data_13" src_type="stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;" src_isptr="1" src_bitwidth="128" src_size_or_depth="1">
+        <hw hw_usage="data" hw_interface="AXI-Stream" hw_name="dout_data_13" hw_bitwidth="128" hw_size_or_depth="0" hw_kernel_support="true">
+          <constraint constraint_type="pragma interface" mode="axis" register_option="0" register_mode="both"/>
+        </hw>
+      </arg>
+      <arg id="13" access_type="w" src_name="dout_data_23" src_type="stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;" src_isptr="1" src_bitwidth="128" src_size_or_depth="1">
+        <hw hw_usage="data" hw_interface="AXI-Stream" hw_name="dout_data_23" hw_bitwidth="128" hw_size_or_depth="0" hw_kernel_support="true">
+          <constraint constraint_type="pragma interface" mode="axis" register_option="0" register_mode="both"/>
+        </hw>
+      </arg>
+      <arg id="14" access_type="r" src_name="integration_time_frames" src_type="int" src_isptr="0" src_bitwidth="32" src_size_or_depth="1">
+        <hw hw_usage="data" hw_interface="S_AXILite" hw_name="control" hw_bitwidth="32" hw_size_or_depth="1" hw_kernel_support="true">
+          <constraint constraint_type="pragma interface" mode="s_axilite" register_option="0" offset="16"/>
+        </hw>
+      </arg>
+    </args>
+    <return src_type="void" src_bitwidth="0" offset="0x0">
+      <hw hw_usage="data" hw_interface="" hw_name="" hw_bitwidth="0" hw_kernel_support="true"/>
+    </return>
+  </kernel>
+</root>

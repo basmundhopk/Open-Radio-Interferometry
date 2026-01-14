@@ -1,0 +1,280 @@
+
+
+================================================================
+== Vitis HLS Report for 'correlator_Pipeline_Offload_Loop'
+================================================================
+* Date:           Sat Jan 10 14:44:58 2026
+
+* Version:        2023.2 (Build 4023990 on Oct 11 2023)
+* Project:        hls_correlator
+* Solution:       hls (Vivado IP Flow Target)
+* Product family: zynq
+* Target device:  xc7z045-ffg900-2
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  5.550 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+-----------+-----------+------+------+---------+
+    |  Latency (cycles) |   Latency (absolute)  |   Interval  | Pipeline|
+    |   min   |   max   |    min    |    max    |  min |  max |   Type  |
+    +---------+---------+-----------+-----------+------+------+---------+
+    |     1026|     1026|  10.260 us|  10.260 us|  1026|  1026|       no|
+    +---------+---------+-----------+-----------+------+------+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +----------------+---------+---------+----------+-----------+-----------+------+----------+
+        |                |  Latency (cycles) | Iteration|  Initiation Interval  | Trip |          |
+        |    Loop Name   |   min   |   max   |  Latency |  achieved |   target  | Count| Pipelined|
+        +----------------+---------+---------+----------+-----------+-----------+------+----------+
+        |- Offload_Loop  |     1024|     1024|         2|          1|          1|  1024|       yes|
+        +----------------+---------+---------+----------+-----------+-----------+------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+-----+--------+--------+-----+
+|       Name      | BRAM_18K| DSP |   FF   |   LUT  | URAM|
++-----------------+---------+-----+--------+--------+-----+
+|DSP              |        -|    -|       -|       -|    -|
+|Expression       |        -|    -|       0|      39|    -|
+|FIFO             |        -|    -|       -|       -|    -|
+|Instance         |        -|    -|       -|       -|    -|
+|Memory           |        -|    -|       -|       -|    -|
+|Multiplexer      |        -|    -|       -|     126|    -|
+|Register         |        -|    -|      14|       -|    -|
++-----------------+---------+-----+--------+--------+-----+
+|Total            |        0|    0|      14|     165|    0|
++-----------------+---------+-----+--------+--------+-----+
+|Available        |     1090|  900|  437200|  218600|    0|
++-----------------+---------+-----+--------+--------+-----+
+|Utilization (%)  |        0|    0|      ~0|      ~0|    0|
++-----------------+---------+-----+--------+--------+-----+
+
++ Detail: 
+    * Instance: 
+    N/A
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +---------------------------+----------+----+---+----+------------+------------+
+    |       Variable Name       | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +---------------------------+----------+----+---+----+------------+------------+
+    |add_ln100_fu_570_p2        |         +|   0|  0|  11|          11|          11|
+    |add_ln97_fu_564_p2         |         +|   0|  0|  11|          11|           1|
+    |ap_block_pp0_stage0_01001  |       and|   0|  0|   1|           1|           1|
+    |ap_block_pp0_stage0_11001  |       and|   0|  0|   1|           1|           1|
+    |icmp_ln97_fu_558_p2        |      icmp|   0|  0|  12|          11|          12|
+    |ap_block_state2_io         |        or|   0|  0|   1|           1|           1|
+    |ap_enable_pp0              |       xor|   0|  0|   2|           1|           2|
+    +---------------------------+----------+----+---+----+------------+------------+
+    |Total                      |          |   0|  0|  39|          37|          29|
+    +---------------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +--------------------------+----+-----------+-----+-----------+
+    |           Name           | LUT| Input Size| Bits| Total Bits|
+    +--------------------------+----+-----------+-----+-----------+
+    |ap_done_int               |   9|          2|    1|          2|
+    |ap_enable_reg_pp0_iter1   |   9|          2|    1|          2|
+    |ap_sig_allocacmp_k_1      |   9|          2|   11|         22|
+    |dout_data_00_TDATA_blk_n  |   9|          2|    1|          2|
+    |dout_data_01_TDATA_blk_n  |   9|          2|    1|          2|
+    |dout_data_02_TDATA_blk_n  |   9|          2|    1|          2|
+    |dout_data_03_TDATA_blk_n  |   9|          2|    1|          2|
+    |dout_data_11_TDATA_blk_n  |   9|          2|    1|          2|
+    |dout_data_12_TDATA_blk_n  |   9|          2|    1|          2|
+    |dout_data_13_TDATA_blk_n  |   9|          2|    1|          2|
+    |dout_data_22_TDATA_blk_n  |   9|          2|    1|          2|
+    |dout_data_23_TDATA_blk_n  |   9|          2|    1|          2|
+    |dout_data_33_TDATA_blk_n  |   9|          2|    1|          2|
+    |k_fu_110                  |   9|          2|   11|         22|
+    +--------------------------+----+-----------+-----+-----------+
+    |Total                     | 126|         28|   34|         68|
+    +--------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +-------------------------+----+----+-----+-----------+
+    |           Name          | FF | LUT| Bits| Const Bits|
+    +-------------------------+----+----+-----+-----------+
+    |ap_CS_fsm                |   1|   0|    1|          0|
+    |ap_done_reg              |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter1  |   1|   0|    1|          0|
+    |k_fu_110                 |  11|   0|   11|          0|
+    +-------------------------+----+----+-----+-----------+
+    |Total                    |  14|   0|   14|          0|
+    +-------------------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++--------------------------------------------------------------------------------------+-----+-----+------------+-----------------------------------------------------------------------------+--------------+
+|                                       RTL Ports                                      | Dir | Bits|  Protocol  |                                Source Object                                |    C Type    |
++--------------------------------------------------------------------------------------+-----+-----+------------+-----------------------------------------------------------------------------+--------------+
+|ap_clk                                                                                |   in|    1|  ap_ctrl_hs|                                             correlator_Pipeline_Offload_Loop|  return value|
+|ap_rst                                                                                |   in|    1|  ap_ctrl_hs|                                             correlator_Pipeline_Offload_Loop|  return value|
+|ap_start                                                                              |   in|    1|  ap_ctrl_hs|                                             correlator_Pipeline_Offload_Loop|  return value|
+|ap_done                                                                               |  out|    1|  ap_ctrl_hs|                                             correlator_Pipeline_Offload_Loop|  return value|
+|ap_idle                                                                               |  out|    1|  ap_ctrl_hs|                                             correlator_Pipeline_Offload_Loop|  return value|
+|ap_ready                                                                              |  out|    1|  ap_ctrl_hs|                                             correlator_Pipeline_Offload_Loop|  return value|
+|dout_data_00_TREADY                                                                   |   in|    1|        axis|                                                                 dout_data_00|       pointer|
+|dout_data_00_TDATA                                                                    |  out|  128|        axis|                                                                 dout_data_00|       pointer|
+|dout_data_00_TVALID                                                                   |  out|    1|        axis|                                                                 dout_data_00|       pointer|
+|dout_data_11_TREADY                                                                   |   in|    1|        axis|                                                                 dout_data_11|       pointer|
+|dout_data_11_TDATA                                                                    |  out|  128|        axis|                                                                 dout_data_11|       pointer|
+|dout_data_11_TVALID                                                                   |  out|    1|        axis|                                                                 dout_data_11|       pointer|
+|dout_data_22_TREADY                                                                   |   in|    1|        axis|                                                                 dout_data_22|       pointer|
+|dout_data_22_TDATA                                                                    |  out|  128|        axis|                                                                 dout_data_22|       pointer|
+|dout_data_22_TVALID                                                                   |  out|    1|        axis|                                                                 dout_data_22|       pointer|
+|dout_data_33_TREADY                                                                   |   in|    1|        axis|                                                                 dout_data_33|       pointer|
+|dout_data_33_TDATA                                                                    |  out|  128|        axis|                                                                 dout_data_33|       pointer|
+|dout_data_33_TVALID                                                                   |  out|    1|        axis|                                                                 dout_data_33|       pointer|
+|dout_data_01_TREADY                                                                   |   in|    1|        axis|                                                                 dout_data_01|       pointer|
+|dout_data_01_TDATA                                                                    |  out|  128|        axis|                                                                 dout_data_01|       pointer|
+|dout_data_01_TVALID                                                                   |  out|    1|        axis|                                                                 dout_data_01|       pointer|
+|dout_data_02_TREADY                                                                   |   in|    1|        axis|                                                                 dout_data_02|       pointer|
+|dout_data_02_TDATA                                                                    |  out|  128|        axis|                                                                 dout_data_02|       pointer|
+|dout_data_02_TVALID                                                                   |  out|    1|        axis|                                                                 dout_data_02|       pointer|
+|dout_data_03_TREADY                                                                   |   in|    1|        axis|                                                                 dout_data_03|       pointer|
+|dout_data_03_TDATA                                                                    |  out|  128|        axis|                                                                 dout_data_03|       pointer|
+|dout_data_03_TVALID                                                                   |  out|    1|        axis|                                                                 dout_data_03|       pointer|
+|dout_data_12_TREADY                                                                   |   in|    1|        axis|                                                                 dout_data_12|       pointer|
+|dout_data_12_TDATA                                                                    |  out|  128|        axis|                                                                 dout_data_12|       pointer|
+|dout_data_12_TVALID                                                                   |  out|    1|        axis|                                                                 dout_data_12|       pointer|
+|dout_data_13_TREADY                                                                   |   in|    1|        axis|                                                                 dout_data_13|       pointer|
+|dout_data_13_TDATA                                                                    |  out|  128|        axis|                                                                 dout_data_13|       pointer|
+|dout_data_13_TVALID                                                                   |  out|    1|        axis|                                                                 dout_data_13|       pointer|
+|dout_data_23_TREADY                                                                   |   in|    1|        axis|                                                                 dout_data_23|       pointer|
+|dout_data_23_TDATA                                                                    |  out|  128|        axis|                                                                 dout_data_23|       pointer|
+|dout_data_23_TVALID                                                                   |  out|    1|        axis|                                                                 dout_data_23|       pointer|
+|zext_ln76                                                                             |   in|   11|     ap_none|                                                                    zext_ln76|        scalar|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_19_address1  |  out|   11|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_19|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_19_ce1       |  out|    1|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_19|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_19_we1       |  out|    1|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_19|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_19_d1        |  out|   64|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_19|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_19_q1        |   in|   64|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_19|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_17_address1  |  out|   11|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_17|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_17_ce1       |  out|    1|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_17|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_17_we1       |  out|    1|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_17|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_17_d1        |  out|    1|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_17|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_17_q1        |   in|    1|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_17|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_18_address1  |  out|   11|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_18|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_18_ce1       |  out|    1|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_18|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_18_we1       |  out|    1|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_18|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_18_d1        |  out|   64|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_18|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_18_q1        |   in|   64|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_18|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_16_address1  |  out|   11|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_16|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_16_ce1       |  out|    1|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_16|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_16_we1       |  out|    1|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_16|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_16_d1        |  out|    1|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_16|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_16_q1        |   in|    1|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_16|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_7_address1   |  out|   11|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_7|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_7_ce1        |  out|    1|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_7|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_7_we1        |  out|    1|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_7|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_7_d1         |  out|   64|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_7|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_7_q1         |   in|   64|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_7|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_15_address1  |  out|   11|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_15|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_15_ce1       |  out|    1|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_15|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_15_we1       |  out|    1|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_15|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_15_d1        |  out|    1|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_15|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_15_q1        |   in|    1|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_15|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_6_address1   |  out|   11|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_6|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_6_ce1        |  out|    1|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_6|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_6_we1        |  out|    1|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_6|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_6_d1         |  out|   64|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_6|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_6_q1         |   in|   64|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_6|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_14_address1  |  out|   11|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_14|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_14_ce1       |  out|    1|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_14|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_14_we1       |  out|    1|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_14|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_14_d1        |  out|    1|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_14|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_14_q1        |   in|    1|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_14|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_5_address1   |  out|   11|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_5|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_5_ce1        |  out|    1|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_5|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_5_we1        |  out|    1|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_5|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_5_d1         |  out|   64|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_5|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_5_q1         |   in|   64|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_5|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_13_address1  |  out|   11|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_13|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_13_ce1       |  out|    1|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_13|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_13_we1       |  out|    1|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_13|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_13_d1        |  out|   64|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_13|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_13_q1        |   in|   64|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_13|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_4_address1   |  out|   11|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_4|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_4_ce1        |  out|    1|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_4|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_4_we1        |  out|    1|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_4|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_4_d1         |  out|   64|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_4|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_4_q1         |   in|   64|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_4|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_12_address1  |  out|   11|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_12|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_12_ce1       |  out|    1|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_12|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_12_we1       |  out|    1|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_12|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_12_d1        |  out|   64|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_12|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_12_q1        |   in|   64|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_12|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_3_address1   |  out|   11|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_3|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_3_ce1        |  out|    1|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_3|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_3_we1        |  out|    1|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_3|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_3_d1         |  out|   64|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_3|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_3_q1         |   in|   64|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_3|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_11_address1  |  out|   11|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_11|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_11_ce1       |  out|    1|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_11|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_11_we1       |  out|    1|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_11|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_11_d1        |  out|   64|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_11|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_11_q1        |   in|   64|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_11|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_2_address1   |  out|   11|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_2|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_2_ce1        |  out|    1|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_2|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_2_we1        |  out|    1|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_2|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_2_d1         |  out|   64|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_2|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_2_q1         |   in|   64|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_2|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_10_address1  |  out|   11|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_10|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_10_ce1       |  out|    1|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_10|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_10_we1       |  out|    1|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_10|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_10_d1        |  out|   64|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_10|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_10_q1        |   in|   64|   ap_memory|  correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_10|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_1_address1   |  out|   11|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_1|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_1_ce1        |  out|    1|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_1|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_1_we1        |  out|    1|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_1|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_1_d1         |  out|   64|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_1|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_1_q1         |   in|   64|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_1|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_9_address1   |  out|   11|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_9|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_9_ce1        |  out|    1|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_9|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_9_we1        |  out|    1|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_9|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_9_d1         |  out|   64|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_9|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_9_q1         |   in|   64|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_9|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_address1     |  out|   11|   ap_memory|     correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_ce1          |  out|    1|   ap_memory|     correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_we1          |  out|    1|   ap_memory|     correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_d1           |  out|   64|   ap_memory|     correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_q1           |   in|   64|   ap_memory|     correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_8_address1   |  out|   11|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_8|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_8_ce1        |  out|    1|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_8|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_8_we1        |  out|    1|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_8|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_8_d1         |  out|   64|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_8|         array|
+|correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_8_q1         |   in|   64|   ap_memory|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_8|         array|
++--------------------------------------------------------------------------------------+-----+-----+------------+-----------------------------------------------------------------------------+--------------+
+

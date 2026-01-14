@@ -86,3 +86,8 @@ set_property -dict [list \
   CONFIG.SAMPLE_DATA_WIDTH {64} \
 ] [get_bd_cells util_ad9361_adc_pack]
 endgroup
+save_bd_design
+Wrote  : </home/brett/Documents/FX_Correlator/hdl/projects/fmcomms5/zc706/fmcomms5_zc706.srcs/sources_1/bd/system/system.bd> 
+Wrote  : </home/brett/Documents/FX_Correlator/hdl/projects/fmcomms5/zc706/fmcomms5_zc706.srcs/sources_1/bd/system/ui/bd_c954508f.ui> 
+exit
+INFO: [Common 17-206] Exiting Vivado at Sat Jan 10 19:07:33 2026...

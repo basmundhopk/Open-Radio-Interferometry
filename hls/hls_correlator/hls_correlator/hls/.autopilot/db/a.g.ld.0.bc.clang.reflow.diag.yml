@@ -1,0 +1,304 @@
+--- !Failure
+Pass:            reflow-check-pragma-conflict
+Name:            IgnoreTopHLSStreamDepth
+DebugLoc:        { File: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp, 
+                   Line: 21, Column: 0 }
+Function:        _Z10correlatorRN3hls6streamI7ap_uintILi32EELi0EEES4_S4_S4_RNS0_IS1_ILi128EELi0EEES7_S7_S7_S7_S7_S7_S7_S7_S7_i
+Args:            
+  - String:          'Ignore depth setting for top argument '''
+  - String:          din_data_0
+  - String:          ''''
+...
+--- !Failure
+Pass:            reflow-check-pragma-conflict
+Name:            IgnoreTopHLSStreamDepth
+DebugLoc:        { File: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp, 
+                   Line: 21, Column: 0 }
+Function:        _Z10correlatorRN3hls6streamI7ap_uintILi32EELi0EEES4_S4_S4_RNS0_IS1_ILi128EELi0EEES7_S7_S7_S7_S7_S7_S7_S7_S7_i
+Args:            
+  - String:          'Ignore depth setting for top argument '''
+  - String:          din_data_1
+  - String:          ''''
+...
+--- !Failure
+Pass:            reflow-check-pragma-conflict
+Name:            IgnoreTopHLSStreamDepth
+DebugLoc:        { File: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp, 
+                   Line: 21, Column: 0 }
+Function:        _Z10correlatorRN3hls6streamI7ap_uintILi32EELi0EEES4_S4_S4_RNS0_IS1_ILi128EELi0EEES7_S7_S7_S7_S7_S7_S7_S7_S7_i
+Args:            
+  - String:          'Ignore depth setting for top argument '''
+  - String:          din_data_2
+  - String:          ''''
+...
+--- !Failure
+Pass:            reflow-check-pragma-conflict
+Name:            IgnoreTopHLSStreamDepth
+DebugLoc:        { File: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp, 
+                   Line: 21, Column: 0 }
+Function:        _Z10correlatorRN3hls6streamI7ap_uintILi32EELi0EEES4_S4_S4_RNS0_IS1_ILi128EELi0EEES7_S7_S7_S7_S7_S7_S7_S7_S7_i
+Args:            
+  - String:          'Ignore depth setting for top argument '''
+  - String:          din_data_3
+  - String:          ''''
+...
+--- !Failure
+Pass:            reflow-check-pragma-conflict
+Name:            IgnoreTopHLSStreamDepth
+DebugLoc:        { File: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp, 
+                   Line: 21, Column: 0 }
+Function:        _Z10correlatorRN3hls6streamI7ap_uintILi32EELi0EEES4_S4_S4_RNS0_IS1_ILi128EELi0EEES7_S7_S7_S7_S7_S7_S7_S7_S7_i
+Args:            
+  - String:          'Ignore depth setting for top argument '''
+  - String:          dout_data_00
+  - String:          ''''
+...
+--- !Failure
+Pass:            reflow-check-pragma-conflict
+Name:            IgnoreTopHLSStreamDepth
+DebugLoc:        { File: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp, 
+                   Line: 21, Column: 0 }
+Function:        _Z10correlatorRN3hls6streamI7ap_uintILi32EELi0EEES4_S4_S4_RNS0_IS1_ILi128EELi0EEES7_S7_S7_S7_S7_S7_S7_S7_S7_i
+Args:            
+  - String:          'Ignore depth setting for top argument '''
+  - String:          dout_data_11
+  - String:          ''''
+...
+--- !Failure
+Pass:            reflow-check-pragma-conflict
+Name:            IgnoreTopHLSStreamDepth
+DebugLoc:        { File: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp, 
+                   Line: 21, Column: 0 }
+Function:        _Z10correlatorRN3hls6streamI7ap_uintILi32EELi0EEES4_S4_S4_RNS0_IS1_ILi128EELi0EEES7_S7_S7_S7_S7_S7_S7_S7_S7_i
+Args:            
+  - String:          'Ignore depth setting for top argument '''
+  - String:          dout_data_22
+  - String:          ''''
+...
+--- !Failure
+Pass:            reflow-check-pragma-conflict
+Name:            IgnoreTopHLSStreamDepth
+DebugLoc:        { File: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp, 
+                   Line: 21, Column: 0 }
+Function:        _Z10correlatorRN3hls6streamI7ap_uintILi32EELi0EEES4_S4_S4_RNS0_IS1_ILi128EELi0EEES7_S7_S7_S7_S7_S7_S7_S7_S7_i
+Args:            
+  - String:          'Ignore depth setting for top argument '''
+  - String:          dout_data_33
+  - String:          ''''
+...
+--- !Failure
+Pass:            reflow-check-pragma-conflict
+Name:            IgnoreTopHLSStreamDepth
+DebugLoc:        { File: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp, 
+                   Line: 21, Column: 0 }
+Function:        _Z10correlatorRN3hls6streamI7ap_uintILi32EELi0EEES4_S4_S4_RNS0_IS1_ILi128EELi0EEES7_S7_S7_S7_S7_S7_S7_S7_S7_i
+Args:            
+  - String:          'Ignore depth setting for top argument '''
+  - String:          dout_data_01
+  - String:          ''''
+...
+--- !Failure
+Pass:            reflow-check-pragma-conflict
+Name:            IgnoreTopHLSStreamDepth
+DebugLoc:        { File: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp, 
+                   Line: 21, Column: 0 }
+Function:        _Z10correlatorRN3hls6streamI7ap_uintILi32EELi0EEES4_S4_S4_RNS0_IS1_ILi128EELi0EEES7_S7_S7_S7_S7_S7_S7_S7_S7_i
+Args:            
+  - String:          'Ignore depth setting for top argument '''
+  - String:          dout_data_02
+  - String:          ''''
+...
+--- !Failure
+Pass:            reflow-check-pragma-conflict
+Name:            IgnoreTopHLSStreamDepth
+DebugLoc:        { File: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp, 
+                   Line: 21, Column: 0 }
+Function:        _Z10correlatorRN3hls6streamI7ap_uintILi32EELi0EEES4_S4_S4_RNS0_IS1_ILi128EELi0EEES7_S7_S7_S7_S7_S7_S7_S7_S7_i
+Args:            
+  - String:          'Ignore depth setting for top argument '''
+  - String:          dout_data_03
+  - String:          ''''
+...
+--- !Failure
+Pass:            reflow-check-pragma-conflict
+Name:            IgnoreTopHLSStreamDepth
+DebugLoc:        { File: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp, 
+                   Line: 21, Column: 0 }
+Function:        _Z10correlatorRN3hls6streamI7ap_uintILi32EELi0EEES4_S4_S4_RNS0_IS1_ILi128EELi0EEES7_S7_S7_S7_S7_S7_S7_S7_S7_i
+Args:            
+  - String:          'Ignore depth setting for top argument '''
+  - String:          dout_data_12
+  - String:          ''''
+...
+--- !Failure
+Pass:            reflow-check-pragma-conflict
+Name:            IgnoreTopHLSStreamDepth
+DebugLoc:        { File: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp, 
+                   Line: 21, Column: 0 }
+Function:        _Z10correlatorRN3hls6streamI7ap_uintILi32EELi0EEES4_S4_S4_RNS0_IS1_ILi128EELi0EEES7_S7_S7_S7_S7_S7_S7_S7_S7_i
+Args:            
+  - String:          'Ignore depth setting for top argument '''
+  - String:          dout_data_13
+  - String:          ''''
+...
+--- !Failure
+Pass:            reflow-check-pragma-conflict
+Name:            IgnoreTopHLSStreamDepth
+DebugLoc:        { File: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp, 
+                   Line: 21, Column: 0 }
+Function:        _Z10correlatorRN3hls6streamI7ap_uintILi32EELi0EEES4_S4_S4_RNS0_IS1_ILi128EELi0EEES7_S7_S7_S7_S7_S7_S7_S7_S7_i
+Args:            
+  - String:          'Ignore depth setting for top argument '''
+  - String:          dout_data_23
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-infer-unroll
+Name:            ImplicitUnroll
+DebugLoc:        { File: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp, 
+                   Line: 112, Column: 32 }
+Function:        _Z10correlatorRN3hls6streamI7ap_uintILi32EELi0EEES4_S4_S4_RNS0_IS1_ILi128EELi0EEES7_S7_S7_S7_S7_S7_S7_S7_S7_i
+Args:            
+  - String:          'Loop '''
+  - LoopName:        VITIS_LOOP_112_4
+  - String:          ''' is marked as complete unroll implied by the pipeline pragma'
+...
+--- !Passed
+Pass:            reflow-pragma-loop-unroll
+Name:            PragmaFullyUnroll
+DebugLoc:        { File: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp, 
+                   Line: 21, Column: 0 }
+Function:        _Z10correlatorRN3hls6streamI7ap_uintILi32EELi0EEES4_S4_S4_RNS0_IS1_ILi128EELi0EEES7_S7_S7_S7_S7_S7_S7_S7_S7_i
+Args:            
+  - String:          'Unrolling loop '''
+  - LoopName:        VITIS_LOOP_112_4
+  - String:          ''' ('
+  - LoopLoc:         '/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:112:32'
+  - String:          ') '
+  - String:          'in function '''
+  - String:          correlator
+  - String:          ''' completely with a factor of '
+  - Factor:          '10'
+...
+--- !Failure
+Pass:            reflow-function-uniquification
+Name:            FunctionUniquification
+DebugLoc:        { File: '/tools/Xilinx/Vitis_HLS/2023.2/tps/lnx64/gcc-8.3.0/lib/gcc/x86_64-pc-linux-gnu/8.3.0/../../../../include/c++/8.3.0/complex', 
+                   Line: 699, Column: 44 }
+Function:        _ZSt4conjI6ap_intILi16EEESt7complexIT_ERKS4_
+Args:            
+  - String:          'Duplicating function '''
+  - Name:            'std::complex<ap_int<16> >::imag() const (.35)'
+  - String:          ''' as different function signatures were detected between this call site and other call site(s). This may impact the resources used in the design.'
+...
+--- !Failure
+Pass:            reflow-function-uniquification
+Name:            FunctionUniquification
+Function:        _ZNSt7complexI6ap_intILi16EEEmLIS1_EERS2_RKS_IT_E.44.77
+Args:            
+  - String:          'Duplicating function '''
+  - Name:            'std::complex<ap_int<16> >::imag() const (.35)'
+  - String:          ''' as different function signatures were detected between this call site and other call site(s). This may impact the resources used in the design.'
+...
+--- !Failure
+Pass:            reflow-function-uniquification
+Name:            FunctionUniquification
+DebugLoc:        { File: '/tools/Xilinx/Vitis_HLS/2023.2/tps/lnx64/gcc-8.3.0/lib/gcc/x86_64-pc-linux-gnu/8.3.0/../../../../include/c++/8.3.0/complex', 
+                   Line: 699, Column: 31 }
+Function:        _ZSt4conjI6ap_intILi16EEESt7complexIT_ERKS4_
+Args:            
+  - String:          'Duplicating function '''
+  - Name:            'std::complex<ap_int<16> >::real() const (.38)'
+  - String:          ''' as different function signatures were detected between this call site and other call site(s). This may impact the resources used in the design.'
+...
+--- !Failure
+Pass:            reflow-function-uniquification
+Name:            FunctionUniquification
+Function:        _ZNSt7complexI6ap_intILi16EEEmLIS1_EERS2_RKS_IT_E.44.77
+Args:            
+  - String:          'Duplicating function '''
+  - Name:            'std::complex<ap_int<16> >::real() const (.38)'
+  - String:          ''' as different function signatures were detected between this call site and other call site(s). This may impact the resources used in the design.'
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp, 
+                   Line: 21, Column: 0 }
+Function:        _Z10correlatorRN3hls6streamI7ap_uintILi32EELi0EEES4_S4_S4_RNS0_IS1_ILi128EELi0EEES7_S7_S7_S7_S7_S7_S7_S7_S7_i
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'unpack(ap_uint<32>)'
+    DebugLoc:        { File: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_io.cpp, 
+                       Line: 5, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'correlator(hls::stream<ap_uint<32>, 0>&, hls::stream<ap_uint<32>, 0>&, hls::stream<ap_uint<32>, 0>&, hls::stream<ap_uint<32>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, int)'
+    DebugLoc:        { File: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp, 
+                       Line: 21, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp, 
+                   Line: 21, Column: 0 }
+Function:        _Z10correlatorRN3hls6streamI7ap_uintILi32EELi0EEES4_S4_S4_RNS0_IS1_ILi128EELi0EEES7_S7_S7_S7_S7_S7_S7_S7_S7_i
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'pack_output(std::complex<ap_int<64> >)'
+    DebugLoc:        { File: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_io.cpp, 
+                       Line: 13, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'correlator(hls::stream<ap_uint<32>, 0>&, hls::stream<ap_uint<32>, 0>&, hls::stream<ap_uint<32>, 0>&, hls::stream<ap_uint<32>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, int)'
+    DebugLoc:        { File: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp, 
+                       Line: 21, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-array-partition
+Name:            ArrayXform
+DebugLoc:        { File: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp, 
+                   Line: 41, Column: 0 }
+Function:        _Z10correlatorRN3hls6streamI7ap_uintILi32EELi0EEES4_S4_S4_RNS0_IS1_ILi128EELi0EEES7_S7_S7_S7_S7_S7_S7_S7_S7_i
+Args:            
+  - String:          'Applying '
+  - String:          array_partition
+  - String:          ' to '''
+  - UOName:          _ZZ10correlatorRN3hls6streamI7ap_uintILi32EELi0EEES4_S4_S4_RNS0_IS1_ILi128EELi0EEES7_S7_S7_S7_S7_S7_S7_S7_S7_iE15accumulator_ram._M_real
+  - String:          ''':'
+  - String:          ' '
+  - Mode:            Complete
+  - String:          ' partitioning'
+  - String:          ' on dimension '
+  - Dim:             '2'
+  - String:          .
+...
+--- !Passed
+Pass:            reflow-array-partition
+Name:            ArrayXform
+DebugLoc:        { File: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp, 
+                   Line: 41, Column: 0 }
+Function:        _Z10correlatorRN3hls6streamI7ap_uintILi32EELi0EEES4_S4_S4_RNS0_IS1_ILi128EELi0EEES7_S7_S7_S7_S7_S7_S7_S7_S7_i
+Args:            
+  - String:          'Applying '
+  - String:          array_partition
+  - String:          ' to '''
+  - UOName:          _ZZ10correlatorRN3hls6streamI7ap_uintILi32EELi0EEES4_S4_S4_RNS0_IS1_ILi128EELi0EEES7_S7_S7_S7_S7_S7_S7_S7_S7_iE15accumulator_ram._M_imag
+  - String:          ''':'
+  - String:          ' '
+  - Mode:            Complete
+  - String:          ' partitioning'
+  - String:          ' on dimension '
+  - Dim:             '2'
+  - String:          .
+...
+--- !HLSReportInfo
+Pass:            auto-loop-pipeline
+Name:            AutoLoopPipeline
+Args:            
+  - String:          'automatically set the pipeline for Loop< '
+  - LoopName:        VITIS_LOOP_54_3
+  - String:          '> at '
+  - LoopLoc:         '/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:54:34'
+  - String:          ' '
+...

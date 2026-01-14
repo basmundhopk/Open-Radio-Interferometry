@@ -138,3 +138,32 @@
 13:36:03 ERROR : Error in Creating Embedded Repositories at '/tmp/rigel_lopper_brett2418848931833829158'.
 13:36:03 ERROR : Error in Creating Embedded Repositories at '/tmp/rigel_lopper_brett2418848931833829158'.
 13:36:03 INFO  : created .gitignore file for the project /home/brett/Documents/FX_Correlator/pfb
+16:14:44 INFO  : updated workspace path: 
+16:14:44 INFO  : updated workspace path: 
+16:14:48 INFO  : bash, -c, source /tools/Xilinx/Vitis/2023.2/tps/lnx64/lopper-1.1.0/env/bin/activate && python /tools/Xilinx/Vitis/2023.2/data/embeddedsw/scripts/pyesw//repo.py -st  /tools/Xilinx/Vitis/2023.2/data/embeddedsw && deactivate
+16:14:48 INFO  : Traceback (most recent call last):
+16:14:48 INFO  :   File "/tools/Xilinx/Vitis/2023.2/data/embeddedsw/scripts/pyesw//repo.py", line 13, in <module>
+16:14:48 INFO  :     import utils
+16:14:48 INFO  :   File "/tools/Xilinx/Vitis/2023.2/data/embeddedsw/scripts/pyesw/utils.py", line 16, in <module>
+16:14:48 INFO  :     import yaml
+16:14:48 INFO  : ModuleNotFoundError: No module named 'yaml'
+16:14:48 ERROR : Error in Creating Embedded Repositories at '/tmp/rigel_lopper_brett60164128809157168'.
+16:14:48 ERROR : Error in Creating Embedded Repositories at '/tmp/rigel_lopper_brett60164128809157168'.
+16:14:48 INFO  : bash, -c, source /tools/Xilinx/Vitis/2023.2/tps/lnx64/lopper-1.1.0/env/bin/activate && python /tools/Xilinx/Vitis/2023.2/data/embeddedsw/scripts/pyesw//repo.py -st  /tools/Xilinx/Vitis/2023.2/data/embeddedsw && deactivate
+16:14:48 INFO  : Traceback (most recent call last):
+16:14:48 INFO  :   File "/tools/Xilinx/Vitis/2023.2/data/embeddedsw/scripts/pyesw//repo.py", line 13, in <module>
+16:14:48 INFO  :     import utils
+16:14:48 INFO  :   File "/tools/Xilinx/Vitis/2023.2/data/embeddedsw/scripts/pyesw/utils.py", line 16, in <module>
+16:14:48 INFO  :     import yaml
+16:14:48 INFO  : ModuleNotFoundError: No module named 'yaml'
+16:14:48 ERROR : Error in Creating Embedded Repositories at '/tmp/rigel_lopper_brett3244146230532266304'.
+16:14:48 ERROR : Error in Creating Embedded Repositories at '/tmp/rigel_lopper_brett3244146230532266304'.
+16:14:53 INFO  : bash, -c, source /tools/Xilinx/Vitis/2023.2/tps/lnx64/lopper-1.1.0/env/bin/activate && python /tools/Xilinx/Vitis/2023.2/data/embeddedsw/scripts/pyesw//repo.py -st  /tools/Xilinx/Vitis/2023.2/data/embeddedsw && deactivate
+16:14:53 INFO  : Traceback (most recent call last):
+16:14:53 INFO  :   File "/tools/Xilinx/Vitis/2023.2/data/embeddedsw/scripts/pyesw//repo.py", line 13, in <module>
+16:14:53 INFO  :     import utils
+16:14:53 INFO  :   File "/tools/Xilinx/Vitis/2023.2/data/embeddedsw/scripts/pyesw/utils.py", line 16, in <module>
+16:14:53 INFO  :     import yaml
+16:14:53 INFO  : ModuleNotFoundError: No module named 'yaml'
+16:14:53 ERROR : Error in Creating Embedded Repositories at '/tmp/rigel_lopper_brett17011748532362676436'.
+16:14:53 ERROR : Error in Creating Embedded Repositories at '/tmp/rigel_lopper_brett17011748532362676436'.

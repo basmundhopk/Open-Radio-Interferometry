@@ -1,0 +1,263 @@
+<profile>
+
+<section name = "Vitis HLS Report for 'correlator_Pipeline_Offload_Loop'" level="0">
+<item name = "Date">Sat Jan 10 14:44:58 2026
+</item>
+<item name = "Version">2023.2 (Build 4023990 on Oct 11 2023)</item>
+<item name = "Project">hls_correlator</item>
+<item name = "Solution">hls (Vivado IP Flow Target)</item>
+<item name = "Product family">zynq</item>
+<item name = "Target device">xc7z045-ffg900-2</item>
+</section>
+
+<section name = "Performance Estimates" level="0">
+<item name = "Timing">
+<section name = "" level="1">
+<item name = "Summary"><table name="" hasTotal="0">
+<keys size="4">Clock, Target, Estimated, Uncertainty</keys>
+<column name="ap_clk">10.00 ns, 5.550 ns, 2.70 ns</column>
+</table>
+</item>
+</section>
+</item>
+<item name = "Latency">
+<section name = "" level="1">
+<item name = "Summary"><table name="" hasTotal="0">
+<keys size="8">, min, max, min, max, min, max, Type</keys>
+<column name="">1026, 1026, 10.260 us, 10.260 us, 1026, 1026, no</column>
+</table>
+</item>
+<item name = "Detail">
+<section name = "" level="1">
+<item name = "Instance"><table name="" hasTotal="0">
+<keys size="9">Instance, Module, min, max, min, max, min, max, Type</keys>
+</table>
+</item>
+<item name = "Loop"><table name="" hasTotal="0">
+<keys size="8">Loop Name, min, max, Latency, achieved, target, Count, Pipelined</keys>
+<column name="- Offload_Loop">1024, 1024, 2, 1, 1, 1024, yes</column>
+</table>
+</item>
+</section>
+</item>
+</section>
+</item>
+</section>
+
+<section name = "Utilization Estimates" level="0">
+<item name = "Summary"><table name="" hasTotal="1">
+<keys size="6">Name, BRAM_18K, DSP, FF, LUT, URAM</keys>
+<column name="DSP">-, -, -, -, -</column>
+<column name="Expression">-, -, 0, 39, -</column>
+<column name="FIFO">-, -, -, -, -</column>
+<column name="Instance">-, -, -, -, -</column>
+<column name="Memory">-, -, -, -, -</column>
+<column name="Multiplexer">-, -, -, 126, -</column>
+<column name="Register">-, -, 14, -, -</column>
+<specialColumn name="Available">1090, 900, 437200, 218600, 0</specialColumn>
+<specialColumn name="Utilization (%)">0, 0, ~0, ~0, 0</specialColumn>
+</table>
+</item>
+<item name = "Detail">
+<section name = "" level="1">
+<item name = "Instance"><table name="" hasTotal="1">
+<keys size="7">Instance, Module, BRAM_18K, DSP, FF, LUT, URAM</keys>
+</table>
+</item>
+<item name = "DSP"><table name="" hasTotal="0">
+<keys size="3">Instance, Module, Expression</keys>
+</table>
+</item>
+<item name = "Memory"><table name="" hasTotal="1">
+<keys size="10">Memory, Module, BRAM_18K, FF, LUT, URAM, Words, Bits, Banks, W*Bits*Banks</keys>
+</table>
+</item>
+<item name = "FIFO"><table name="" hasTotal="1">
+<keys size="8">Name, BRAM_18K, FF, LUT, URAM, Depth, Bits, Size:D*B</keys>
+</table>
+</item>
+<item name = "Expression"><table name="" hasTotal="1">
+<keys size="7">Variable Name, Operation, DSP, FF, LUT, Bitwidth P0, Bitwidth P1</keys>
+<column name="add_ln100_fu_570_p2">+, 0, 0, 11, 11, 11</column>
+<column name="add_ln97_fu_564_p2">+, 0, 0, 11, 11, 1</column>
+<column name="ap_block_pp0_stage0_01001">and, 0, 0, 1, 1, 1</column>
+<column name="ap_block_pp0_stage0_11001">and, 0, 0, 1, 1, 1</column>
+<column name="icmp_ln97_fu_558_p2">icmp, 0, 0, 12, 11, 12</column>
+<column name="ap_block_state2_io">or, 0, 0, 1, 1, 1</column>
+<column name="ap_enable_pp0">xor, 0, 0, 2, 1, 2</column>
+</table>
+</item>
+<item name = "Multiplexer"><table name="" hasTotal="1">
+<keys size="5">Name, LUT, Input Size, Bits, Total Bits</keys>
+<column name="ap_done_int">9, 2, 1, 2</column>
+<column name="ap_enable_reg_pp0_iter1">9, 2, 1, 2</column>
+<column name="ap_sig_allocacmp_k_1">9, 2, 11, 22</column>
+<column name="dout_data_00_TDATA_blk_n">9, 2, 1, 2</column>
+<column name="dout_data_01_TDATA_blk_n">9, 2, 1, 2</column>
+<column name="dout_data_02_TDATA_blk_n">9, 2, 1, 2</column>
+<column name="dout_data_03_TDATA_blk_n">9, 2, 1, 2</column>
+<column name="dout_data_11_TDATA_blk_n">9, 2, 1, 2</column>
+<column name="dout_data_12_TDATA_blk_n">9, 2, 1, 2</column>
+<column name="dout_data_13_TDATA_blk_n">9, 2, 1, 2</column>
+<column name="dout_data_22_TDATA_blk_n">9, 2, 1, 2</column>
+<column name="dout_data_23_TDATA_blk_n">9, 2, 1, 2</column>
+<column name="dout_data_33_TDATA_blk_n">9, 2, 1, 2</column>
+<column name="k_fu_110">9, 2, 11, 22</column>
+</table>
+</item>
+<item name = "Register"><table name="" hasTotal="1">
+<keys size="5">Name, FF, LUT, Bits, Const Bits</keys>
+<column name="ap_CS_fsm">1, 0, 1, 0</column>
+<column name="ap_done_reg">1, 0, 1, 0</column>
+<column name="ap_enable_reg_pp0_iter1">1, 0, 1, 0</column>
+<column name="k_fu_110">11, 0, 11, 0</column>
+</table>
+</item>
+</section>
+</item>
+</section>
+
+<section name = "Interface" level="0">
+<item name = "Summary"><table name="" hasTotal="0">
+<keys size="6">RTL Ports, Dir, Bits, Protocol, Source Object, C Type</keys>
+<column name="ap_clk">in, 1, ap_ctrl_hs, correlator_Pipeline_Offload_Loop, return value</column>
+<column name="ap_rst">in, 1, ap_ctrl_hs, correlator_Pipeline_Offload_Loop, return value</column>
+<column name="ap_start">in, 1, ap_ctrl_hs, correlator_Pipeline_Offload_Loop, return value</column>
+<column name="ap_done">out, 1, ap_ctrl_hs, correlator_Pipeline_Offload_Loop, return value</column>
+<column name="ap_idle">out, 1, ap_ctrl_hs, correlator_Pipeline_Offload_Loop, return value</column>
+<column name="ap_ready">out, 1, ap_ctrl_hs, correlator_Pipeline_Offload_Loop, return value</column>
+<column name="dout_data_00_TREADY">in, 1, axis, dout_data_00, pointer</column>
+<column name="dout_data_00_TDATA">out, 128, axis, dout_data_00, pointer</column>
+<column name="dout_data_00_TVALID">out, 1, axis, dout_data_00, pointer</column>
+<column name="dout_data_11_TREADY">in, 1, axis, dout_data_11, pointer</column>
+<column name="dout_data_11_TDATA">out, 128, axis, dout_data_11, pointer</column>
+<column name="dout_data_11_TVALID">out, 1, axis, dout_data_11, pointer</column>
+<column name="dout_data_22_TREADY">in, 1, axis, dout_data_22, pointer</column>
+<column name="dout_data_22_TDATA">out, 128, axis, dout_data_22, pointer</column>
+<column name="dout_data_22_TVALID">out, 1, axis, dout_data_22, pointer</column>
+<column name="dout_data_33_TREADY">in, 1, axis, dout_data_33, pointer</column>
+<column name="dout_data_33_TDATA">out, 128, axis, dout_data_33, pointer</column>
+<column name="dout_data_33_TVALID">out, 1, axis, dout_data_33, pointer</column>
+<column name="dout_data_01_TREADY">in, 1, axis, dout_data_01, pointer</column>
+<column name="dout_data_01_TDATA">out, 128, axis, dout_data_01, pointer</column>
+<column name="dout_data_01_TVALID">out, 1, axis, dout_data_01, pointer</column>
+<column name="dout_data_02_TREADY">in, 1, axis, dout_data_02, pointer</column>
+<column name="dout_data_02_TDATA">out, 128, axis, dout_data_02, pointer</column>
+<column name="dout_data_02_TVALID">out, 1, axis, dout_data_02, pointer</column>
+<column name="dout_data_03_TREADY">in, 1, axis, dout_data_03, pointer</column>
+<column name="dout_data_03_TDATA">out, 128, axis, dout_data_03, pointer</column>
+<column name="dout_data_03_TVALID">out, 1, axis, dout_data_03, pointer</column>
+<column name="dout_data_12_TREADY">in, 1, axis, dout_data_12, pointer</column>
+<column name="dout_data_12_TDATA">out, 128, axis, dout_data_12, pointer</column>
+<column name="dout_data_12_TVALID">out, 1, axis, dout_data_12, pointer</column>
+<column name="dout_data_13_TREADY">in, 1, axis, dout_data_13, pointer</column>
+<column name="dout_data_13_TDATA">out, 128, axis, dout_data_13, pointer</column>
+<column name="dout_data_13_TVALID">out, 1, axis, dout_data_13, pointer</column>
+<column name="dout_data_23_TREADY">in, 1, axis, dout_data_23, pointer</column>
+<column name="dout_data_23_TDATA">out, 128, axis, dout_data_23, pointer</column>
+<column name="dout_data_23_TVALID">out, 1, axis, dout_data_23, pointer</column>
+<column name="zext_ln76">in, 11, ap_none, zext_ln76, scalar</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_19_address1">out, 11, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_19, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_19_ce1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_19, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_19_we1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_19, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_19_d1">out, 64, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_19, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_19_q1">in, 64, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_19, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_17_address1">out, 11, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_17, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_17_ce1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_17, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_17_we1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_17, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_17_d1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_17, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_17_q1">in, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_17, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_18_address1">out, 11, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_18, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_18_ce1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_18, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_18_we1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_18, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_18_d1">out, 64, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_18, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_18_q1">in, 64, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_18, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_16_address1">out, 11, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_16, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_16_ce1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_16, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_16_we1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_16, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_16_d1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_16, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_16_q1">in, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_16, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_7_address1">out, 11, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_7, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_7_ce1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_7, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_7_we1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_7, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_7_d1">out, 64, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_7, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_7_q1">in, 64, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_7, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_15_address1">out, 11, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_15, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_15_ce1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_15, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_15_we1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_15, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_15_d1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_15, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_15_q1">in, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_15, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_6_address1">out, 11, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_6, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_6_ce1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_6, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_6_we1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_6, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_6_d1">out, 64, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_6, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_6_q1">in, 64, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_6, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_14_address1">out, 11, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_14, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_14_ce1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_14, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_14_we1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_14, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_14_d1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_14, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_14_q1">in, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_14, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_5_address1">out, 11, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_5, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_5_ce1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_5, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_5_we1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_5, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_5_d1">out, 64, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_5, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_5_q1">in, 64, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_5, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_13_address1">out, 11, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_13, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_13_ce1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_13, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_13_we1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_13, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_13_d1">out, 64, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_13, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_13_q1">in, 64, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_13, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_4_address1">out, 11, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_4, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_4_ce1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_4, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_4_we1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_4, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_4_d1">out, 64, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_4, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_4_q1">in, 64, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_4, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_12_address1">out, 11, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_12, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_12_ce1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_12, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_12_we1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_12, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_12_d1">out, 64, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_12, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_12_q1">in, 64, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_12, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_3_address1">out, 11, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_3, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_3_ce1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_3, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_3_we1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_3, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_3_d1">out, 64, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_3, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_3_q1">in, 64, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_3, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_11_address1">out, 11, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_11, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_11_ce1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_11, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_11_we1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_11, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_11_d1">out, 64, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_11, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_11_q1">in, 64, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_11, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_2_address1">out, 11, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_2, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_2_ce1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_2, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_2_we1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_2, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_2_d1">out, 64, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_2, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_2_q1">in, 64, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_2, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_10_address1">out, 11, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_10, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_10_ce1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_10, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_10_we1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_10, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_10_d1">out, 64, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_10, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_10_q1">in, 64, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_10, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_1_address1">out, 11, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_1, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_1_ce1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_1, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_1_we1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_1, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_1_d1">out, 64, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_1, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_1_q1">in, 64, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_1, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_9_address1">out, 11, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_9, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_9_ce1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_9, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_9_we1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_9, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_9_d1">out, 64, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_9, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_9_q1">in, 64, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_9, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_address1">out, 11, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_ce1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_we1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_d1">out, 64, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_q1">in, 64, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_8_address1">out, 11, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_8, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_8_ce1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_8, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_8_we1">out, 1, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_8, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_8_d1">out, 64, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_8, array</column>
+<column name="correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_8_q1">in, 64, ap_memory, correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_8, array</column>
+</table>
+</item>
+</section>
+</profile>

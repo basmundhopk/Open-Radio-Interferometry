@@ -1,0 +1,180 @@
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:46121:7: warning: Added loop label VITIS_LOOP_1207_1:   [xilinx-label-all-loops]
+      for (i = 0; i < __N - 1; ++i) {
+      ^~~
+      VITIS_LOOP_1207_1: 
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:46121:7: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:47095:5: warning: Added loop label VITIS_LOOP_676_1:   [xilinx-label-all-loops]
+    for (unsigned i = low; i != high; ++i) {
+    ^~~
+    VITIS_LOOP_676_1: 
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:47095:5: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:47109:5: warning: Added loop label VITIS_LOOP_690_1:   [xilinx-label-all-loops]
+    for (unsigned i = low; i != high; ++i) {
+    ^~~
+    VITIS_LOOP_690_1: 
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:47109:5: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:47123:5: warning: Added loop label VITIS_LOOP_704_1:   [xilinx-label-all-loops]
+    for (unsigned i = low; i != high; ++i) {
+    ^~~
+    VITIS_LOOP_704_1: 
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:47123:5: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:48752:7: warning: Added loop label VITIS_LOOP_1247_1:   [xilinx-label-all-loops]
+      for (i = 0; i < __N - 1; ++i) {
+      ^~~
+      VITIS_LOOP_1247_1: 
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:48752:7: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:52766:7: warning: Added loop label VITIS_LOOP_446_1:   [xilinx-label-all-loops]
+      for (int i = 0; i < FFT_LENGTH; ++i)
+      ^~~
+      VITIS_LOOP_446_1: 
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:52766:7: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:52768:4: warning: Added loop label VITIS_LOOP_448_2:   [xilinx-label-all-loops]
+   for (int c = 0; c < FFT_CHANNELS; ++c)
+   ^~~
+   VITIS_LOOP_448_2: 
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:52768:4: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:52832:7: warning: Added loop label VITIS_LOOP_830_1:   [xilinx-label-all-loops]
+      for (int i = 0; i < FFT_LENGTH; ++i)
+      ^~~
+      VITIS_LOOP_830_1: 
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:52832:7: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:53214:7: warning: Added loop label VITIS_LOOP_89_1:   [xilinx-label-all-loops]
+      for (int i = 0; i < FFT_LENGTH; ++i)
+      ^~~
+      VITIS_LOOP_89_1: 
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:53214:7: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:53216:4: warning: Added loop label VITIS_LOOP_91_2:   [xilinx-label-all-loops]
+   for (int c = 0; c < FFT_CHANNELS; ++c)
+   ^~~
+   VITIS_LOOP_91_2: 
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:53216:4: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:53280:7: warning: Added loop label VITIS_LOOP_474_1:   [xilinx-label-all-loops]
+      for (int i = 0; i < FFT_LENGTH; ++i)
+      ^~~
+      VITIS_LOOP_474_1: 
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:53280:7: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:53344:7: warning: Added loop label VITIS_LOOP_559_1:   [xilinx-label-all-loops]
+      for (int i = 0; i < FFT_LENGTH; ++i)
+      ^~~
+      VITIS_LOOP_559_1: 
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:53344:7: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:53409:7: warning: Added loop label VITIS_LOOP_624_1:   [xilinx-label-all-loops]
+      for (int i = 0; i < FFT_LENGTH; ++i)
+      ^~~
+      VITIS_LOOP_624_1: 
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:53409:7: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:53450:5: warning: Added loop label VITIS_LOOP_665_1:   [xilinx-label-all-loops]
+    for (unsigned i = 0; i < (1 << CONFIG_T::max_nfft); i++) {
+    ^~~
+    VITIS_LOOP_665_1: 
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:53450:5: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:53465:5: warning: Added loop label VITIS_LOOP_680_1:   [xilinx-label-all-loops]
+    for (unsigned i = 0; i < (1 << CONFIG_T::max_nfft); i++) {
+    ^~~
+    VITIS_LOOP_680_1: 
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:53465:5: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:53562:5: warning: Added loop label VITIS_LOOP_792_1:   [xilinx-label-all-loops]
+    for (unsigned i = 0; i < (1 << CONFIG_T::max_nfft); i++) {
+    ^~~
+    VITIS_LOOP_792_1: 
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:53562:5: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:53577:5: warning: Added loop label VITIS_LOOP_807_1:   [xilinx-label-all-loops]
+    for (unsigned i = 0; i < (1 << CONFIG_T::max_nfft); i++) {
+    ^~~
+    VITIS_LOOP_807_1: 
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:53577:5: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:53638:7: warning: Added loop label VITIS_LOOP_868_1:   [xilinx-label-all-loops]
+      for (int i = 0; i < FFT_LENGTH; ++i) {
+      ^~~
+      VITIS_LOOP_868_1: 
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:53638:7: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:53694:7: warning: Added loop label VITIS_LOOP_924_1:   [xilinx-label-all-loops]
+      for (int i = 0; i < FFT_LENGTH; ++i) {
+      ^~~
+      VITIS_LOOP_924_1: 
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:53694:7: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:54007:5: warning: Added loop label VITIS_LOOP_19_1:   [xilinx-label-all-loops]
+    for (size_t i = 0; i < N / 2; ++i) {
+    ^~~
+    VITIS_LOOP_19_1: 
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:54007:5: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:54015:5: warning: Added loop label VITIS_LOOP_27_2:   [xilinx-label-all-loops]
+    for (size_t k = 0; k < N / 2; ++k) {
+    ^~~
+    VITIS_LOOP_27_2: 
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:54015:5: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:54029:5: warning: Added loop label VITIS_LOOP_41_1:   [xilinx-label-all-loops]
+    for (int i = 0; i < (4 - 1) * 1024; i++) {
+    ^~~
+    VITIS_LOOP_41_1: 
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:54029:5: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:54033:5: warning: Added loop label VITIS_LOOP_45_2:   [xilinx-label-all-loops]
+    for (int i = 0; i < 1024; i++) {
+    ^~~
+    VITIS_LOOP_45_2: 
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:54033:5: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:54038:5: warning: Added loop label VITIS_LOOP_50_3:   [xilinx-label-all-loops]
+    for (int k = 0; k < 1024; k++) {
+    ^~~
+    VITIS_LOOP_50_3: 
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:54038:5: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:54041:9: warning: Added loop label VITIS_LOOP_53_4:   [xilinx-label-all-loops]
+        for (int t = 0; t < 4; t++) {
+        ^~~
+        VITIS_LOOP_53_4: 
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:54041:9: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:54058:5: warning: Added loop label VITIS_LOOP_70_5:   [xilinx-label-all-loops]
+    for(int k=0; k<1024; k++) {
+    ^~~
+    VITIS_LOOP_70_5: 
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:54058:5: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:54081:5: warning: Added loop label VITIS_LOOP_93_1:   [xilinx-label-all-loops]
+    for (int i = 0; i < (1024 * 4); i++) {
+    ^~~
+    VITIS_LOOP_93_1: 
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:54081:5: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:54096:5: warning: Added loop label VITIS_LOOP_108_2:   [xilinx-label-all-loops]
+    for (int block = 0; block < NUM_BLOCKS; block++) {
+    ^~~
+    VITIS_LOOP_108_2: 
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:54096:5: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:54097:9: warning: Added loop label VITIS_LOOP_109_3:   [xilinx-label-all-loops]
+        for (int i = 0; i < 1024; i++) {
+        ^~~
+        VITIS_LOOP_109_3: 
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:54097:9: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:54106:13: warning: Added loop label VITIS_LOOP_118_4:   [xilinx-label-all-loops]
+            for(int c=0; c<4; c++) all_sw_inputs[block][c][i] = ch[c];
+            ^~~
+            VITIS_LOOP_118_4: 
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:54106:13: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:54117:5: warning: Added loop label VITIS_LOOP_137_5:   [xilinx-label-all-loops]
+    for (int block = 0; block < NUM_BLOCKS; block++) {
+    ^~~
+    VITIS_LOOP_137_5: 
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:54117:5: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:54133:5: warning: Added loop label VITIS_LOOP_153_6:   [xilinx-label-all-loops]
+    for (int block = 0; block < NUM_BLOCKS; block++) {
+    ^~~
+    VITIS_LOOP_153_6: 
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:54133:5: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:54137:9: warning: Added loop label VITIS_LOOP_157_7:   [xilinx-label-all-loops]
+        for(int c=0; c<4; c++) {
+        ^~~
+        VITIS_LOOP_157_7: 
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:54137:9: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:54144:13: warning: Added loop label VITIS_LOOP_164_8:   [xilinx-label-all-loops]
+            for(int k=0; k<1024; k++) { dout_0.read(); dout_1.read(); dout_2.read(); dout_3.read(); }
+            ^~~
+            VITIS_LOOP_164_8: 
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:54144:13: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:54149:9: warning: Added loop label VITIS_LOOP_169_9:   [xilinx-label-all-loops]
+        for (int i = 0; i < 1024; i++) {
+        ^~~
+        VITIS_LOOP_169_9: 
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:54149:9: note: FIX-IT applied suggested code changes
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:54161:13: warning: Added loop label VITIS_LOOP_181_10:   [xilinx-label-all-loops]
+            for(int c=0; c<4; c++) {
+            ^~~
+            VITIS_LOOP_181_10: 
+/home/brett/Documents/FX_Correlator/hls/hls_pfb/hls_pfb/hls/.autopilot/db/pfb_tb.pp.0.cpp:54161:13: note: FIX-IT applied suggested code changes

@@ -1,0 +1,254 @@
+INFO: [v++ 60-1548] Creating build summary session with primary output /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls_correlator.hlscompile_summary, at Sat Jan 10 14:44:47 2026
+INFO: [v++ 82-31] Launching vitis_hls: vitis_hls -nolog -run csynth -work_dir /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator -config /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg -cmdlineconfig /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/config.cmdline
+
+****** Vitis HLS - High-Level Synthesis from C, C++ and OpenCL v2023.2 (64-bit)
+  **** SW Build 4023990 on Oct 11 2023
+  **** IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+  **** SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source /tools/Xilinx/Vitis_HLS/2023.2/scripts/vitis_hls/hls.tcl -notrace
+INFO: [HLS 200-10] Running '/tools/Xilinx/Vitis_HLS/2023.2/bin/unwrapped/lnx64.o/vitis_hls'
+INFO: [HLS 200-10] For user 'brett' on host 'brett-System-Product-Name' (Linux_x86_64 version 6.8.0-90-generic) on Sat Jan 10 14:44:47 PST 2026
+INFO: [HLS 200-10] On os Ubuntu 22.04.5 LTS
+INFO: [HLS 200-10] In directory '/home/brett/Documents/FX_Correlator/pfb/hls_correlator'
+WARNING: [HLS 200-40] Environment variable 'C_INCLUDE_PATH' is set to /usr/include/x86_64-linux-gnu:.
+WARNING: [HLS 200-40] Environment variable 'CPLUS_INCLUDE_PATH' is set to /usr/include/x86_64-linux-gnu:.
+INFO: [HLS 200-1909] Reading HLS ini file /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg
+INFO: [HLS 200-1909] Reading HLS ini file /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/config.cmdline
+INFO: [HLS 200-2005] Using work_dir /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator 
+INFO: [HLS 200-1510] Running: open_project /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator -diskless 
+INFO: [HLS 200-1510] Running: open_solution hls 
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2023.2%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1510] Running: apply_ini /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg 
+INFO: [HLS 200-1909] Reading HLS ini file /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg
+INFO: [HLS 200-1465] Applying ini 'syn.file=correlator_top.cpp' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(7)
+INFO: [HLS 200-10] Adding design file '/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp' to the project
+INFO: [HLS 200-1465] Applying ini 'syn.file=correlator.h' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(8)
+INFO: [HLS 200-10] Adding design file '/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator.h' to the project
+INFO: [HLS 200-1465] Applying ini 'syn.file=correlator_io.cpp' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(9)
+INFO: [HLS 200-10] Adding design file '/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_io.cpp' to the project
+INFO: [HLS 200-1465] Applying ini 'tb.file=correlator_tb.cpp' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(11)
+INFO: [HLS 200-10] Adding test bench file '/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_tb.cpp' to the project
+INFO: [HLS 200-1465] Applying ini 'syn.top=correlator' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(10)
+INFO: [HLS 200-1465] Applying ini 'flow_target=vivado' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(4)
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2023.2%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1465] Applying ini 'part=xc7z045ffg900-2' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(1)
+INFO: [HLS 200-1611] Setting target device to 'xc7z045-ffg900-2'
+INFO: [HLS 200-1465] Applying ini 'package.output.format=ip_catalog' at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg(5)
+INFO: [HLS 200-1510] Running: apply_ini /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/config.cmdline 
+INFO: [HLS 200-1909] Reading HLS ini file /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/config.cmdline
+INFO: [HLS 200-1510] Running: csynth_design 
+INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 0.03 seconds. CPU system time: 0 seconds. Elapsed time: 0.03 seconds; current allocated memory: 274.117 MB.
+INFO: [HLS 200-10] Analyzing design file '/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_io.cpp' ... 
+INFO: [HLS 200-10] Analyzing design file '/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp' ... 
+INFO: [HLS 200-111] Finished Source Code Analysis and Preprocessing: CPU user time: 2.98 seconds. CPU system time: 0.36 seconds. Elapsed time: 3.36 seconds; current allocated memory: 276.816 MB.
+INFO: [HLS 200-777] Using interface defaults for 'Vivado' flow target.
+INFO: [HLS 200-1995] There were 9,678 instructions in the design after the 'Compile/Link' phase of compilation. See the Design Size Report for more details: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 1,872 instructions in the design after the 'Unroll/Inline (step 1)' phase of compilation. See the Design Size Report for more details: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 1,294 instructions in the design after the 'Unroll/Inline (step 2)' phase of compilation. See the Design Size Report for more details: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 1,158 instructions in the design after the 'Unroll/Inline (step 3)' phase of compilation. See the Design Size Report for more details: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 802 instructions in the design after the 'Unroll/Inline (step 4)' phase of compilation. See the Design Size Report for more details: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 1,345 instructions in the design after the 'Array/Struct (step 1)' phase of compilation. See the Design Size Report for more details: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 971 instructions in the design after the 'Array/Struct (step 2)' phase of compilation. See the Design Size Report for more details: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 971 instructions in the design after the 'Array/Struct (step 3)' phase of compilation. See the Design Size Report for more details: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 971 instructions in the design after the 'Array/Struct (step 4)' phase of compilation. See the Design Size Report for more details: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 972 instructions in the design after the 'Array/Struct (step 5)' phase of compilation. See the Design Size Report for more details: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 972 instructions in the design after the 'Performance (step 1)' phase of compilation. See the Design Size Report for more details: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 823 instructions in the design after the 'Performance (step 2)' phase of compilation. See the Design Size Report for more details: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 823 instructions in the design after the 'Performance (step 3)' phase of compilation. See the Design Size Report for more details: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 823 instructions in the design after the 'Performance (step 4)' phase of compilation. See the Design Size Report for more details: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 779 instructions in the design after the 'HW Transforms (step 1)' phase of compilation. See the Design Size Report for more details: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 767 instructions in the design after the 'HW Transforms (step 2)' phase of compilation. See the Design Size Report for more details: /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/syn/report/csynth_design_size.rpt
+WARNING: [HLS 214-387] Ignore depth setting for top argument 'din_data_0' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0)
+WARNING: [HLS 214-387] Ignore depth setting for top argument 'din_data_1' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0)
+WARNING: [HLS 214-387] Ignore depth setting for top argument 'din_data_2' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0)
+WARNING: [HLS 214-387] Ignore depth setting for top argument 'din_data_3' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0)
+WARNING: [HLS 214-387] Ignore depth setting for top argument 'dout_data_00' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0)
+WARNING: [HLS 214-387] Ignore depth setting for top argument 'dout_data_11' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0)
+WARNING: [HLS 214-387] Ignore depth setting for top argument 'dout_data_22' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0)
+WARNING: [HLS 214-387] Ignore depth setting for top argument 'dout_data_33' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0)
+WARNING: [HLS 214-387] Ignore depth setting for top argument 'dout_data_01' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0)
+WARNING: [HLS 214-387] Ignore depth setting for top argument 'dout_data_02' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0)
+WARNING: [HLS 214-387] Ignore depth setting for top argument 'dout_data_03' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0)
+WARNING: [HLS 214-387] Ignore depth setting for top argument 'dout_data_12' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0)
+WARNING: [HLS 214-387] Ignore depth setting for top argument 'dout_data_13' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0)
+WARNING: [HLS 214-387] Ignore depth setting for top argument 'dout_data_23' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_112_4' is marked as complete unroll implied by the pipeline pragma (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:112:32)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_112_4' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:112:32) in function 'correlator' completely with a factor of 10 (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0)
+WARNING: [HLS 214-366] Duplicating function 'std::complex<ap_int<16> >::imag() const (.35)' as different function signatures were detected between this call site and other call site(s). This may impact the resources used in the design. (/tools/Xilinx/Vitis_HLS/2023.2/tps/lnx64/gcc-8.3.0/lib/gcc/x86_64-pc-linux-gnu/8.3.0/../../../../include/c++/8.3.0/complex:699:44)
+WARNING: [HLS 214-366] Duplicating function 'std::complex<ap_int<16> >::imag() const (.35)' as different function signatures were detected between this call site and other call site(s). This may impact the resources used in the design.
+WARNING: [HLS 214-366] Duplicating function 'std::complex<ap_int<16> >::real() const (.38)' as different function signatures were detected between this call site and other call site(s). This may impact the resources used in the design. (/tools/Xilinx/Vitis_HLS/2023.2/tps/lnx64/gcc-8.3.0/lib/gcc/x86_64-pc-linux-gnu/8.3.0/../../../../include/c++/8.3.0/complex:699:31)
+WARNING: [HLS 214-366] Duplicating function 'std::complex<ap_int<16> >::real() const (.38)' as different function signatures were detected between this call site and other call site(s). This may impact the resources used in the design.
+INFO: [HLS 214-178] Inlining function 'unpack(ap_uint<32>)' into 'correlator(hls::stream<ap_uint<32>, 0>&, hls::stream<ap_uint<32>, 0>&, hls::stream<ap_uint<32>, 0>&, hls::stream<ap_uint<32>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, int)' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0)
+INFO: [HLS 214-178] Inlining function 'pack_output(std::complex<ap_int<64> >)' into 'correlator(hls::stream<ap_uint<32>, 0>&, hls::stream<ap_uint<32>, 0>&, hls::stream<ap_uint<32>, 0>&, hls::stream<ap_uint<32>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, hls::stream<ap_uint<128>, 0>&, int)' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0)
+INFO: [HLS 214-248] Applying array_partition to '_ZZ10correlatorRN3hls6streamI7ap_uintILi32EELi0EEES4_S4_S4_RNS0_IS1_ILi128EELi0EEES7_S7_S7_S7_S7_S7_S7_S7_S7_iE15accumulator_ram._M_real': Complete partitioning on dimension 2. (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:41:0)
+INFO: [HLS 214-248] Applying array_partition to '_ZZ10correlatorRN3hls6streamI7ap_uintILi32EELi0EEES4_S4_S4_RNS0_IS1_ILi128EELi0EEES7_S7_S7_S7_S7_S7_S7_S7_S7_iE15accumulator_ram._M_imag': Complete partitioning on dimension 2. (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:41:0)
+INFO: [HLS 214-376] automatically set the pipeline for Loop< VITIS_LOOP_54_3> at /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:54:34 
+INFO: [HLS 200-111] Finished Compiling Optimization and Transform: CPU user time: 1.06 seconds. CPU system time: 0.15 seconds. Elapsed time: 6 seconds; current allocated memory: 278.480 MB.
+INFO: [HLS 200-111] Finished Checking Pragmas: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0 seconds; current allocated memory: 278.480 MB.
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [HLS 200-111] Finished Standard Transforms: CPU user time: 0.01 seconds. CPU system time: 0 seconds. Elapsed time: 0.02 seconds; current allocated memory: 279.273 MB.
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO: [HLS 200-111] Finished Checking Synthesizability: CPU user time: 0.02 seconds. CPU system time: 0 seconds. Elapsed time: 0.01 seconds; current allocated memory: 280.172 MB.
+INFO: [HLS 200-111] Finished Loop, function and other optimizations: CPU user time: 0.06 seconds. CPU system time: 0 seconds. Elapsed time: 0.06 seconds; current allocated memory: 304.160 MB.
+INFO: [HLS 200-2061] Successfully converted nested loops 'VITIS_LOOP_52_1'(/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:52:26) and 'VITIS_LOOP_53_2'(/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:53:30) in function 'correlator' into perfectly nested loops.
+INFO: [XFORM 203-541] Flattening a loop nest 'VITIS_LOOP_53_2' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:53:30) in function 'correlator'.
+INFO: [XFORM 203-541] Flattening a loop nest 'VITIS_LOOP_52_1' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:52:26) in function 'correlator'.
+INFO: [HLS 200-111] Finished Architecture Synthesis: CPU user time: 0.04 seconds. CPU system time: 0 seconds. Elapsed time: 0.04 seconds; current allocated memory: 325.770 MB.
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO: [HLS 200-10] Synthesizing 'correlator' ...
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3'.
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 1, Depth = 3, loop 'VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.04 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.13 seconds; current allocated memory: 328.883 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.01 seconds. CPU system time: 0 seconds. Elapsed time: 0.01 seconds; current allocated memory: 328.883 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'correlator_Pipeline_Process_Frame_Loop' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln389_15) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln389_14) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln389_13) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln389_12) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln389_11) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln389_10) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln389_9) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln389_8) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln389_7) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln389_6) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln389_5) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln389_4) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln389_3) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln389_2) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln389_1) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln389) to 3 in order to utilize available DSP registers.
+INFO: [SCHED 204-61] Pipelining loop 'Process_Frame_Loop'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 5, loop 'Process_Frame_Loop'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.07 seconds. CPU system time: 0 seconds. Elapsed time: 0.11 seconds; current allocated memory: 329.930 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.01 seconds. CPU system time: 0 seconds. Elapsed time: 0.01 seconds; current allocated memory: 329.930 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'correlator_Pipeline_Offload_Loop' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'Offload_Loop'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 2, loop 'Offload_Loop'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.03 seconds. CPU system time: 0 seconds. Elapsed time: 0.02 seconds; current allocated memory: 330.461 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.01 seconds. CPU system time: 0 seconds. Elapsed time: 0.01 seconds; current allocated memory: 330.461 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'correlator' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.01 seconds. CPU system time: 0 seconds. Elapsed time: 0.02 seconds; current allocated memory: 331.023 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.01 seconds. CPU system time: 0 seconds. Elapsed time: 0.01 seconds; current allocated memory: 331.023 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3' pipeline 'VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Finished creating RTL model for 'correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.01 seconds. CPU system time: 0 seconds. Elapsed time: 0.01 seconds; current allocated memory: 331.262 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'correlator_Pipeline_Process_Frame_Loop' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'correlator_Pipeline_Process_Frame_Loop' pipeline 'Process_Frame_Loop' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'ama_submuladd_1ns_16s_16s_16ns_16_4_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mac_muladd_16s_16s_16ns_16_4_1': 15 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_16s_16s_16_1_1': 16 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'correlator_Pipeline_Process_Frame_Loop'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.04 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.04 seconds; current allocated memory: 334.938 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'correlator_Pipeline_Offload_Loop' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'correlator_Pipeline_Offload_Loop' pipeline 'Offload_Loop' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Finished creating RTL model for 'correlator_Pipeline_Offload_Loop'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.04 seconds. CPU system time: 0 seconds. Elapsed time: 0.06 seconds; current allocated memory: 338.812 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'correlator' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+WARNING: [RTGEN 206-101] Design contains AXI ports. Reset is fixed to synchronous and active low.
+INFO: [RTGEN 206-500] Setting interface mode on port 'correlator/din_data_0' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'correlator/din_data_1' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'correlator/din_data_2' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'correlator/din_data_3' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'correlator/dout_data_00' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'correlator/dout_data_11' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'correlator/dout_data_22' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'correlator/dout_data_33' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'correlator/dout_data_01' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'correlator/dout_data_02' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'correlator/dout_data_03' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'correlator/dout_data_12' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'correlator/dout_data_13' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'correlator/dout_data_23' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'correlator/integration_time_frames' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on function 'correlator' to 's_axilite & ap_ctrl_hs'.
+WARNING: [RTGEN 206-101] Register 'first_run' is power-on initialization.
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_19_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_19_Rbkb' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_17_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_17_Rcud' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_18_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_18_RdEe' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_16_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_16_ReOg' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_7_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_7_RAfYi' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_15_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_15_Rg8j' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_6_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_6_RAhbi' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_14_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_14_Ribs' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_5_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_5_RAjbC' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_13_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_13_RkbM' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_4_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_4_RAlbW' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_12_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_12_Rmb6' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_3_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_3_RAncg' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_11_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_11_Rocq' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_2_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_2_RApcA' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_10_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_10_RqcK' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_1_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_1_RArcU' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_9_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_9_RAsc4' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_RAM_tde' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_8_RAM_2P_BRAM_1R1W' to 'correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_8_RAudo' due to the length limit 80
+WARNING: [RTGEN 206-101] Register 'bank_sel' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'frame_count' is power-on initialization.
+INFO: [RTGEN 206-100] Bundling port 'integration_time_frames' and 'return' to AXI-Lite port control.
+INFO: [RTGEN 206-100] Finished creating RTL model for 'correlator'.
+INFO: [RTMG 210-278] Implementing memory 'correlator_correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_19_Rbkb' using block RAMs.
+INFO: [RTMG 210-278] Implementing memory 'correlator_correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_17_Rcud' using block RAMs.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.06 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.05 seconds; current allocated memory: 343.766 MB.
+INFO: [HLS 200-111] Finished Generating all RTL models: CPU user time: 0.12 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.13 seconds; current allocated memory: 348.082 MB.
+INFO: [HLS 200-111] Finished Updating report files: CPU user time: 0.22 seconds. CPU system time: 0 seconds. Elapsed time: 0.22 seconds; current allocated memory: 355.922 MB.
+INFO: [VHDL 208-304] Generating VHDL RTL for correlator.
+INFO: [VLOG 209-307] Generating Verilog RTL for correlator.
+INFO: [HLS 200-790] **** Loop Constraint Status: All loop constraints were satisfied.
+INFO: [HLS 200-789] **** Estimated Fmax: 156.25 MHz
+INFO: [HLS 200-111] Finished Command csynth_design CPU user time: 4.88 seconds. CPU system time: 0.55 seconds. Elapsed time: 10.36 seconds; current allocated memory: 82.195 MB.
+INFO: [HLS 200-1510] Running: close_project 
+INFO: [HLS 200-112] Total CPU user time: 5.65 seconds. Total CPU system time: 0.63 seconds. Total elapsed time: 11.17 seconds; peak allocated memory: 356.312 MB.
+INFO: [Common 17-206] Exiting vitis_hls at Sat Jan 10 14:44:58 2026...
+INFO: [v++ 60-791] Total elapsed time: 0h 0m 14s

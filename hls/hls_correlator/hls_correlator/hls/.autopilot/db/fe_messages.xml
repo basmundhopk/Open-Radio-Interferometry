@@ -1,0 +1,104 @@
+<xilinx:hls_fe_msgs>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="directive:1:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaContext="directive" ARG_PragmaFunction="correlator" ARG_PragmaIsValid="1" ARG_PragmaOptions="name=correlator" ARG_PragmaType="top" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:22:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="correlator" ARG_PragmaIsValid="1" ARG_PragmaOptions="axis port=din_data_0 depth=2048" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:23:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="correlator" ARG_PragmaIsValid="1" ARG_PragmaOptions="axis port=din_data_1 depth=2048" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:24:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="correlator" ARG_PragmaIsValid="1" ARG_PragmaOptions="axis port=din_data_2 depth=2048" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:25:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="correlator" ARG_PragmaIsValid="1" ARG_PragmaOptions="axis port=din_data_3 depth=2048" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:27:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="correlator" ARG_PragmaIsValid="1" ARG_PragmaOptions="axis port=dout_data_00 depth=2048" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:28:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="correlator" ARG_PragmaIsValid="1" ARG_PragmaOptions="axis port=dout_data_11 depth=2048" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:29:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="correlator" ARG_PragmaIsValid="1" ARG_PragmaOptions="axis port=dout_data_22 depth=2048" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:30:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="correlator" ARG_PragmaIsValid="1" ARG_PragmaOptions="axis port=dout_data_33 depth=2048" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:31:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="correlator" ARG_PragmaIsValid="1" ARG_PragmaOptions="axis port=dout_data_01 depth=2048" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:32:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="correlator" ARG_PragmaIsValid="1" ARG_PragmaOptions="axis port=dout_data_02 depth=2048" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:33:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="correlator" ARG_PragmaIsValid="1" ARG_PragmaOptions="axis port=dout_data_03 depth=2048" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:34:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="correlator" ARG_PragmaIsValid="1" ARG_PragmaOptions="axis port=dout_data_12 depth=2048" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:35:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="correlator" ARG_PragmaIsValid="1" ARG_PragmaOptions="axis port=dout_data_13 depth=2048" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:36:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="correlator" ARG_PragmaIsValid="1" ARG_PragmaOptions="axis port=dout_data_23 depth=2048" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:38:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="correlator" ARG_PragmaIsValid="1" ARG_PragmaOptions="s_axilite port=integration_time_frames bundle=control" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:39:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="correlator" ARG_PragmaIsValid="1" ARG_PragmaOptions="s_axilite port=return bundle=control" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:43:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="correlator" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=accumulator_ram type=ram_2p impl=bram" ARG_PragmaType="bind_storage" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:45:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="correlator" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=accumulator_ram dim=2 complete" ARG_PragmaType="array_partition" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:60:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="correlator" ARG_PragmaIsValid="1" ARG_PragmaOptions="II=1" ARG_PragmaType="pipeline" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:98:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="correlator" ARG_PragmaIsValid="1" ARG_PragmaOptions="II=1" ARG_PragmaType="pipeline" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INTERFACE" msg_id="214-387" msg_severity="WARNING" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0" msg_body="Ignore depth setting for top argument 'din_data_0'"/>
+    <msg msg_groups="PRAGMA_INTERFACE" msg_id="214-387" msg_severity="WARNING" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0" msg_body="Ignore depth setting for top argument 'din_data_1'"/>
+    <msg msg_groups="PRAGMA_INTERFACE" msg_id="214-387" msg_severity="WARNING" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0" msg_body="Ignore depth setting for top argument 'din_data_2'"/>
+    <msg msg_groups="PRAGMA_INTERFACE" msg_id="214-387" msg_severity="WARNING" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0" msg_body="Ignore depth setting for top argument 'din_data_3'"/>
+    <msg msg_groups="PRAGMA_INTERFACE" msg_id="214-387" msg_severity="WARNING" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0" msg_body="Ignore depth setting for top argument 'dout_data_00'"/>
+    <msg msg_groups="PRAGMA_INTERFACE" msg_id="214-387" msg_severity="WARNING" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0" msg_body="Ignore depth setting for top argument 'dout_data_11'"/>
+    <msg msg_groups="PRAGMA_INTERFACE" msg_id="214-387" msg_severity="WARNING" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0" msg_body="Ignore depth setting for top argument 'dout_data_22'"/>
+    <msg msg_groups="PRAGMA_INTERFACE" msg_id="214-387" msg_severity="WARNING" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0" msg_body="Ignore depth setting for top argument 'dout_data_33'"/>
+    <msg msg_groups="PRAGMA_INTERFACE" msg_id="214-387" msg_severity="WARNING" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0" msg_body="Ignore depth setting for top argument 'dout_data_01'"/>
+    <msg msg_groups="PRAGMA_INTERFACE" msg_id="214-387" msg_severity="WARNING" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0" msg_body="Ignore depth setting for top argument 'dout_data_02'"/>
+    <msg msg_groups="PRAGMA_INTERFACE" msg_id="214-387" msg_severity="WARNING" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0" msg_body="Ignore depth setting for top argument 'dout_data_03'"/>
+    <msg msg_groups="PRAGMA_INTERFACE" msg_id="214-387" msg_severity="WARNING" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0" msg_body="Ignore depth setting for top argument 'dout_data_12'"/>
+    <msg msg_groups="PRAGMA_INTERFACE" msg_id="214-387" msg_severity="WARNING" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0" msg_body="Ignore depth setting for top argument 'dout_data_13'"/>
+    <msg msg_groups="PRAGMA_INTERFACE" msg_id="214-387" msg_severity="WARNING" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0" msg_body="Ignore depth setting for top argument 'dout_data_23'"/>
+    <msg msg_groups="PRAGMA_UNROLL" msg_id="214-291" msg_severity="INFO" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:112:32" msg_body="Loop 'VITIS_LOOP_112_4' is marked as complete unroll implied by the pipeline pragma">
+        <args LoopName="VITIS_LOOP_112_4"/>
+    </msg>
+    <msg msg_groups="PRAGMA_UNROLL" msg_id="214-186" msg_severity="INFO" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0" msg_body="Unrolling loop 'VITIS_LOOP_112_4' (/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:112:32) in function 'correlator' completely with a factor of 10">
+        <args Factor="10" LoopLoc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:112:32" LoopName="VITIS_LOOP_112_4"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INTERFACE" msg_id="214-366" msg_severity="WARNING" msg_loc="/tools/Xilinx/Vitis_HLS/2023.2/tps/lnx64/gcc-8.3.0/lib/gcc/x86_64-pc-linux-gnu/8.3.0/../../../../include/c++/8.3.0/complex:699:44" msg_body="Duplicating function 'std::complex&lt;ap_int&lt;16&gt; &gt;::imag() const (.35)' as different function signatures were detected between this call site and other call site(s). This may impact the resources used in the design.">
+        <args Name="std::complex&lt;ap_int&lt;16&gt; &gt;::imag() const (.35)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INTERFACE" msg_id="214-366" msg_severity="WARNING" msg_loc="/tools/Xilinx/Vitis_HLS/2023.2/tps/lnx64/gcc-8.3.0/lib/gcc/x86_64-pc-linux-gnu/8.3.0/../../../../include/c++/8.3.0/complex:699:31" msg_body="Duplicating function 'std::complex&lt;ap_int&lt;16&gt; &gt;::real() const (.38)' as different function signatures were detected between this call site and other call site(s). This may impact the resources used in the design.">
+        <args Name="std::complex&lt;ap_int&lt;16&gt; &gt;::real() const (.38)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0" msg_body="Inlining function 'unpack(ap_uint&lt;32&gt;)' into 'correlator(hls::stream&lt;ap_uint&lt;32&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;32&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;32&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;32&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, int)'">
+        <args Callee="unpack(ap_uint&lt;32&gt;)" Callee-DebugLoc="File /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_io.cpp Line 5 Column 0" Caller="correlator(hls::stream&lt;ap_uint&lt;32&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;32&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;32&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;32&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, int)" Caller-DebugLoc="File /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp Line 21 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:21:0" msg_body="Inlining function 'pack_output(std::complex&lt;ap_int&lt;64&gt; &gt;)' into 'correlator(hls::stream&lt;ap_uint&lt;32&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;32&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;32&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;32&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, int)'">
+        <args Callee="pack_output(std::complex&lt;ap_int&lt;64&gt; &gt;)" Callee-DebugLoc="File /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_io.cpp Line 13 Column 0" Caller="correlator(hls::stream&lt;ap_uint&lt;32&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;32&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;32&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;32&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, hls::stream&lt;ap_uint&lt;128&gt;, 0&gt;&amp;, int)" Caller-DebugLoc="File /home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp Line 21 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_MISC" msg_id="214-248" msg_severity="INFO" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:41:0" msg_body="Applying array_partition to '_ZZ10correlatorRN3hls6streamI7ap_uintILi32EELi0EEES4_S4_S4_RNS0_IS1_ILi128EELi0EEES7_S7_S7_S7_S7_S7_S7_S7_S7_iE15accumulator_ram._M_real': Complete partitioning on dimension 2.">
+        <args Dim="2" Mode="Complete" UOName="_ZZ10correlatorRN3hls6streamI7ap_uintILi32EELi0EEES4_S4_S4_RNS0_IS1_ILi128EELi0EEES7_S7_S7_S7_S7_S7_S7_S7_S7_iE15accumulator_ram._M_real"/>
+    </msg>
+    <msg msg_groups="PRAGMA_MISC" msg_id="214-248" msg_severity="INFO" msg_loc="/home/brett/Documents/FX_Correlator/pfb/hls_correlator/correlator_top.cpp:41:0" msg_body="Applying array_partition to '_ZZ10correlatorRN3hls6streamI7ap_uintILi32EELi0EEES4_S4_S4_RNS0_IS1_ILi128EELi0EEES7_S7_S7_S7_S7_S7_S7_S7_S7_iE15accumulator_ram._M_imag': Complete partitioning on dimension 2.">
+        <args Dim="2" Mode="Complete" UOName="_ZZ10correlatorRN3hls6streamI7ap_uintILi32EELi0EEES4_S4_S4_RNS0_IS1_ILi128EELi0EEES7_S7_S7_S7_S7_S7_S7_S7_S7_iE15accumulator_ram._M_imag"/>
+    </msg>
+</xilinx:hls_fe_msgs>
+

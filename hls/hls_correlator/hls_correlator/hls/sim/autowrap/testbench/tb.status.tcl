@@ -1,0 +1,1 @@
+set ::AESL_AUTOSIM::gTopFileName /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_correlator/hls/./sim/autowrap/testbench/correlator_top.cpp_pre.cpp.tb.cpp

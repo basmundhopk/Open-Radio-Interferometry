@@ -21,3 +21,4 @@ set_property -dict [list \
   CONFIG.SAMPLE_DATA_WIDTH {64} \
 ] [get_bd_cells util_ad9361_adc_pack]
 endgroup
+save_bd_design

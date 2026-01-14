@@ -1,0 +1,100 @@
+[
+  {
+    "directory": "/home/brett/Documents/FX_Correlator/pfb/hls_pfb",
+    "arguments": [
+      "/tools/Xilinx/Vitis_HLS/2023.2/tps/lnx64/gcc-8.3.0/bin/g++",
+      "-isystem/tools/Xilinx/Vitis_HLS/2023.2/include",
+      "-isystem/tools/Xilinx/Vitis_HLS/2023.2/include/etc",
+      "-isystem/tools/Xilinx/Vitis_HLS/2023.2/include/ap_sysc",
+      "-isystem/tools/Xilinx/Vitis_HLS/2023.2/lnx64/tools/auto_cc/include",
+      "-isystem/tools/Xilinx/Vitis_HLS/2023.2/lnx64/tools/systemc/include",
+      "--compile",
+      "/home/brett/Documents/FX_Correlator/pfb/hls_pfb/pfb_io.cpp"
+    ],
+    "file": "/home/brett/Documents/FX_Correlator/pfb/hls_pfb/pfb_io.cpp"
+  },
+  {
+    "directory": "/home/brett/Documents/FX_Correlator/pfb/hls_pfb",
+    "arguments": [
+      "/tools/Xilinx/Vitis_HLS/2023.2/tps/lnx64/gcc-8.3.0/bin/g++",
+      "-isystem/tools/Xilinx/Vitis_HLS/2023.2/include",
+      "-isystem/tools/Xilinx/Vitis_HLS/2023.2/include/etc",
+      "-isystem/tools/Xilinx/Vitis_HLS/2023.2/include/ap_sysc",
+      "-isystem/tools/Xilinx/Vitis_HLS/2023.2/lnx64/tools/auto_cc/include",
+      "-isystem/tools/Xilinx/Vitis_HLS/2023.2/lnx64/tools/systemc/include",
+      "--compile",
+      "/home/brett/Documents/FX_Correlator/pfb/hls_pfb/pfb.h"
+    ],
+    "file": "/home/brett/Documents/FX_Correlator/pfb/hls_pfb/pfb.h"
+  },
+  {
+    "directory": "/home/brett/Documents/FX_Correlator/pfb/hls_pfb",
+    "arguments": [
+      "/tools/Xilinx/Vitis_HLS/2023.2/tps/lnx64/gcc-8.3.0/bin/g++",
+      "-isystem/tools/Xilinx/Vitis_HLS/2023.2/include",
+      "-isystem/tools/Xilinx/Vitis_HLS/2023.2/include/etc",
+      "-isystem/tools/Xilinx/Vitis_HLS/2023.2/include/ap_sysc",
+      "-isystem/tools/Xilinx/Vitis_HLS/2023.2/lnx64/tools/auto_cc/include",
+      "-isystem/tools/Xilinx/Vitis_HLS/2023.2/lnx64/tools/systemc/include",
+      "--compile",
+      "/home/brett/Documents/FX_Correlator/pfb/hls_pfb/pfb_fft.cpp"
+    ],
+    "file": "/home/brett/Documents/FX_Correlator/pfb/hls_pfb/pfb_fft.cpp"
+  },
+  {
+    "directory": "/home/brett/Documents/FX_Correlator/pfb/hls_pfb",
+    "arguments": [
+      "/tools/Xilinx/Vitis_HLS/2023.2/tps/lnx64/gcc-8.3.0/bin/g++",
+      "-isystem/tools/Xilinx/Vitis_HLS/2023.2/include",
+      "-isystem/tools/Xilinx/Vitis_HLS/2023.2/include/etc",
+      "-isystem/tools/Xilinx/Vitis_HLS/2023.2/include/ap_sysc",
+      "-isystem/tools/Xilinx/Vitis_HLS/2023.2/lnx64/tools/auto_cc/include",
+      "-isystem/tools/Xilinx/Vitis_HLS/2023.2/lnx64/tools/systemc/include",
+      "--compile",
+      "/home/brett/Documents/FX_Correlator/pfb/hls_pfb/pfb_helper.cpp"
+    ],
+    "file": "/home/brett/Documents/FX_Correlator/pfb/hls_pfb/pfb_helper.cpp"
+  },
+  {
+    "directory": "/home/brett/Documents/FX_Correlator/pfb/hls_pfb",
+    "arguments": [
+      "/tools/Xilinx/Vitis_HLS/2023.2/tps/lnx64/gcc-8.3.0/bin/g++",
+      "-isystem/tools/Xilinx/Vitis_HLS/2023.2/include",
+      "-isystem/tools/Xilinx/Vitis_HLS/2023.2/include/etc",
+      "-isystem/tools/Xilinx/Vitis_HLS/2023.2/include/ap_sysc",
+      "-isystem/tools/Xilinx/Vitis_HLS/2023.2/lnx64/tools/auto_cc/include",
+      "-isystem/tools/Xilinx/Vitis_HLS/2023.2/lnx64/tools/systemc/include",
+      "--compile",
+      "/home/brett/Documents/FX_Correlator/pfb/hls_pfb/pfb_compute.cpp"
+    ],
+    "file": "/home/brett/Documents/FX_Correlator/pfb/hls_pfb/pfb_compute.cpp"
+  },
+  {
+    "directory": "/home/brett/Documents/FX_Correlator/pfb/hls_pfb",
+    "arguments": [
+      "/tools/Xilinx/Vitis_HLS/2023.2/tps/lnx64/gcc-8.3.0/bin/g++",
+      "-isystem/tools/Xilinx/Vitis_HLS/2023.2/include",
+      "-isystem/tools/Xilinx/Vitis_HLS/2023.2/include/etc",
+      "-isystem/tools/Xilinx/Vitis_HLS/2023.2/include/ap_sysc",
+      "-isystem/tools/Xilinx/Vitis_HLS/2023.2/lnx64/tools/auto_cc/include",
+      "-isystem/tools/Xilinx/Vitis_HLS/2023.2/lnx64/tools/systemc/include",
+      "--compile",
+      "/home/brett/Documents/FX_Correlator/pfb/hls_pfb/pfb_tb.cpp"
+    ],
+    "file": "/home/brett/Documents/FX_Correlator/pfb/hls_pfb/pfb_tb.cpp"
+  },
+  {
+    "directory": "/home/brett/Documents/FX_Correlator/pfb/hls_pfb",
+    "arguments": [
+      "/tools/Xilinx/Vitis_HLS/2023.2/tps/lnx64/gcc-8.3.0/bin/g++",
+      "-isystem/tools/Xilinx/Vitis_HLS/2023.2/include",
+      "-isystem/tools/Xilinx/Vitis_HLS/2023.2/include/etc",
+      "-isystem/tools/Xilinx/Vitis_HLS/2023.2/include/ap_sysc",
+      "-isystem/tools/Xilinx/Vitis_HLS/2023.2/lnx64/tools/auto_cc/include",
+      "-isystem/tools/Xilinx/Vitis_HLS/2023.2/lnx64/tools/systemc/include",
+      "--compile",
+      "/home/brett/Documents/FX_Correlator/pfb/hls_pfb/pfb_top.cpp"
+    ],
+    "file": "/home/brett/Documents/FX_Correlator/pfb/hls_pfb/pfb_top.cpp"
+  }
+]

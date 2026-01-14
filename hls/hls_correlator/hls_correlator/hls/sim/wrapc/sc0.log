@@ -1,0 +1,8 @@
+   Build using "/tools/Xilinx/Vitis_HLS/2023.2/tps/lnx64/gcc-8.3.0/bin/g++"
+   Compiling apatb_correlator.cpp
+   Compiling apatb_correlator_util.cpp
+   Compiling correlator_io.cpp_pre.cpp.tb.cpp
+   Compiling correlator_tb.cpp_pre.cpp.tb.cpp
+   Compiling correlator_top.cpp_pre.cpp.tb.cpp
+   Compiling apatb_correlator_ir.ll
+   Generating cosim.tv.exe

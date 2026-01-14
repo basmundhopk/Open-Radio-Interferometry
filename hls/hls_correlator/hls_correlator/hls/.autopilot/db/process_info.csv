@@ -1,0 +1,4 @@
+,AESL_inst_correlator,,module_status1.csv
+,grp_correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3_fu_147,,module_status2.csv
+,grp_correlator_Pipeline_Process_Frame_Loop_fu_191,,module_status3.csv
+,grp_correlator_Pipeline_Offload_Loop_fu_236,,module_status4.csv

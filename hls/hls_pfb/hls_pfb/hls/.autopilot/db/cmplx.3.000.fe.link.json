@@ -1,0 +1,55 @@
+{
+  "0": {
+    "basicblocks": 4,
+    "calls": "1 3 1 2",
+    "file": "pfb_top.cpp",
+    "fileloc": 3,
+    "instructions": 47,
+    "loads": {
+      "G": 1
+    },
+    "name": "pfb_multichannel",
+    "total_instructions": 5018
+  },
+  "1": {
+    "basicblocks": 38,
+    "calls": "",
+    "file": "pfb_compute.cpp",
+    "fileloc": 3,
+    "instructions": 223,
+    "loads": {
+      "G": 4,
+      "L": 7
+    },
+    "name": "compute_pfb",
+    "stores": {
+      "G": 5,
+      "L": 6
+    },
+    "total_instructions": 2044
+  },
+  "2": {
+    "basicblocks": 1,
+    "calls": "",
+    "file": "pfb_io.cpp",
+    "fileloc": 23,
+    "instructions": 128,
+    "name": "write_outputs",
+    "total_instructions": 734
+  },
+  "3": {
+    "basicblocks": 1,
+    "calls": "",
+    "file": "pfb_io.cpp",
+    "fileloc": 3,
+    "instructions": 95,
+    "loads": {
+      "L": 8
+    },
+    "name": "read_inputs",
+    "stores": {
+      "L": 8
+    },
+    "total_instructions": 147
+  }
+}

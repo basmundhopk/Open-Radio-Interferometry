@@ -1,0 +1,3 @@
+relativeroot=/home/brett/Documents/FX_Correlator/pfb/hls_correlator
+original_argv=--mode hls --cosim --config /home/brett/Documents/FX_Correlator/pfb/hls_correlator/hls_config.cfg --work_dir hls_correlator 
+

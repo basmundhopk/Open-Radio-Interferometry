@@ -1,0 +1,76 @@
+{
+    "1": {
+        "name": "correlator_Pipeline_Process_Frame_Loop",
+        "file": "\/home\/brett\/Documents\/FX_Correlator\/pfb\/hls_correlator\/correlator_top.cpp",
+        "fileloc": "59",
+        "instructions": "179",
+        "total_instructions": "179",
+        "calls": "",
+        "basicblocks": "4",
+        "loads": {
+            "G": "16",
+            "L": "1"
+        },
+        "stores": {
+            "G": "16",
+            "L": "2"
+        },
+        "loops": {
+            "L": "1"
+        }
+    },
+    "2": {
+        "name": "correlator_Pipeline_Offload_Loop",
+        "file": "\/home\/brett\/Documents\/FX_Correlator\/pfb\/hls_correlator\/correlator_top.cpp",
+        "fileloc": "97",
+        "instructions": "130",
+        "total_instructions": "130",
+        "calls": "",
+        "basicblocks": "4",
+        "loads": {
+            "G": "20",
+            "L": "1"
+        },
+        "stores": {
+            "G": "20",
+            "L": "2"
+        },
+        "loops": {
+            "L": "1"
+        }
+    },
+    "0": {
+        "name": "correlator",
+        "file": "correlator_top.cpp",
+        "fileloc": "3",
+        "instructions": "76",
+        "total_instructions": "503",
+        "calls": "3 1 2",
+        "basicblocks": "5",
+        "loads": {
+            "G": "3"
+        },
+        "stores": {
+            "G": "3"
+        }
+    },
+    "3": {
+        "name": "correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3",
+        "file": "\/home\/brett\/Documents\/FX_Correlator\/pfb\/hls_correlator\/correlator_top.cpp",
+        "fileloc": "52",
+        "instructions": "118",
+        "total_instructions": "118",
+        "calls": "",
+        "basicblocks": "15",
+        "loads": {
+            "L": "5"
+        },
+        "stores": {
+            "G": "20",
+            "L": "10"
+        },
+        "loops": {
+            "L": "1"
+        }
+    }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "hls_correlator",
+  "type": "HLS",
+  "configuration": {
+    "componentType": "HLS",
+    "configFiles": [
+      "hls_config.cfg"
+    ],
+    "work_dir": "hls_correlator"
+  },
+  "previousBuildStatusMap": {}
+}

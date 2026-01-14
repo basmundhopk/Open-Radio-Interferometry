@@ -1,0 +1,282 @@
+
+
+================================================================
+== Synthesis Summary Report of 'correlator'
+================================================================
++ General Information: 
+    * Date:           Sat Jan 10 14:44:58 2026
+    * Version:        2023.2 (Build 4023990 on Oct 11 2023)
+    * Project:        hls_correlator
+    * Solution:       hls (Vivado IP Flow Target)
+    * Product family: zynq
+    * Target device:  xc7z045-ffg900-2
+    
+
++ Performance & Resource Estimates: 
+    
+    PS: '+' for module; 'o' for loop; '*' for dataflow
+    +------------------------------------------------------------------------+------+------+---------+-----------+----------+---------+-------+----------+-----------+---------+------------+------------+-----+
+    |                                 Modules                                | Issue|      | Latency |  Latency  | Iteration|         |  Trip |          |           |         |            |            |     |
+    |                                 & Loops                                | Type | Slack| (cycles)|    (ns)   |  Latency | Interval| Count | Pipelined|   BRAM    |   DSP   |     FF     |     LUT    | URAM|
+    +------------------------------------------------------------------------+------+------+---------+-----------+----------+---------+-------+----------+-----------+---------+------------+------------+-----+
+    |+ correlator                                                            |     -|  0.90|    22544|  2.254e+05|         -|    22545|      -|        no|  132 (12%)|  32 (3%)|  1907 (~0%)|   3348 (1%)|    -|
+    | + correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3  |     -|  1.38|    20482|  2.048e+05|         -|    20482|      -|        no|          -|        -|    66 (~0%)|   217 (~0%)|    -|
+    |  o VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3                     |     -|  7.30|    20480|  2.048e+05|         2|        1|  20480|       yes|          -|        -|           -|           -|    -|
+    | + correlator_Pipeline_Process_Frame_Loop                               |     -|  0.90|     1029|  1.029e+04|         -|     1029|      -|        no|          -|  32 (3%)|  1642 (~0%)|  1262 (~0%)|    -|
+    |  o Process_Frame_Loop                                                  |     -|  7.30|     1027|  1.027e+04|         5|        1|   1024|       yes|          -|        -|           -|           -|    -|
+    | + correlator_Pipeline_Offload_Loop                                     |     -|  1.75|     1026|  1.026e+04|         -|     1026|      -|        no|          -|        -|    14 (~0%)|   165 (~0%)|    -|
+    |  o Offload_Loop                                                        |     -|  7.30|     1024|  1.024e+04|         2|        1|   1024|       yes|          -|        -|           -|           -|    -|
+    +------------------------------------------------------------------------+------+------+---------+-----------+----------+---------+-------+----------+-----------+---------+------------+------------+-----+
+
+
+================================================================
+== HW Interfaces
+================================================================
+* S_AXILITE Interfaces
++---------------+------------+---------------+--------+----------+
+| Interface     | Data Width | Address Width | Offset | Register |
++---------------+------------+---------------+--------+----------+
+| s_axi_control | 32         | 5             | 16     | 0        |
++---------------+------------+---------------+--------+----------+
+
+* S_AXILITE Registers
++---------------+-------------------------+--------+-------+--------+----------------------------------------+----------------------------------------------------------------------+
+| Interface     | Register                | Offset | Width | Access | Description                            | Bit Fields                                                           |
++---------------+-------------------------+--------+-------+--------+----------------------------------------+----------------------------------------------------------------------+
+| s_axi_control | CTRL                    | 0x00   | 32    | RW     | Control signals                        | 0=AP_START 1=AP_DONE 2=AP_IDLE 3=AP_READY 7=AUTO_RESTART 9=INTERRUPT |
+| s_axi_control | GIER                    | 0x04   | 32    | RW     | Global Interrupt Enable Register       | 0=Enable                                                             |
+| s_axi_control | IP_IER                  | 0x08   | 32    | RW     | IP Interrupt Enable Register           | 0=CHAN0_INT_EN 1=CHAN1_INT_EN                                        |
+| s_axi_control | IP_ISR                  | 0x0c   | 32    | RW     | IP Interrupt Status Register           | 0=CHAN0_INT_ST 1=CHAN1_INT_ST                                        |
+| s_axi_control | integration_time_frames | 0x10   | 32    | W      | Data signal of integration_time_frames |                                                                      |
++---------------+-------------------------+--------+-------+--------+----------------------------------------+----------------------------------------------------------------------+
+
+* AXIS
++--------------+-----------+---------------+-------+--------+--------+
+| Interface    | Direction | Register Mode | TDATA | TREADY | TVALID |
++--------------+-----------+---------------+-------+--------+--------+
+| din_data_0   | in        | both          | 32    | 1      | 1      |
+| din_data_1   | in        | both          | 32    | 1      | 1      |
+| din_data_2   | in        | both          | 32    | 1      | 1      |
+| din_data_3   | in        | both          | 32    | 1      | 1      |
+| dout_data_00 | out       | both          | 128   | 1      | 1      |
+| dout_data_01 | out       | both          | 128   | 1      | 1      |
+| dout_data_02 | out       | both          | 128   | 1      | 1      |
+| dout_data_03 | out       | both          | 128   | 1      | 1      |
+| dout_data_11 | out       | both          | 128   | 1      | 1      |
+| dout_data_12 | out       | both          | 128   | 1      | 1      |
+| dout_data_13 | out       | both          | 128   | 1      | 1      |
+| dout_data_22 | out       | both          | 128   | 1      | 1      |
+| dout_data_23 | out       | both          | 128   | 1      | 1      |
+| dout_data_33 | out       | both          | 128   | 1      | 1      |
++--------------+-----------+---------------+-------+--------+--------+
+
+* TOP LEVEL CONTROL
++-----------+------------+-----------+
+| Interface | Type       | Ports     |
++-----------+------------+-----------+
+| ap_clk    | clock      | ap_clk    |
+| ap_rst_n  | reset      | ap_rst_n  |
+| interrupt | interrupt  | interrupt |
+| ap_ctrl   | ap_ctrl_hs |           |
++-----------+------------+-----------+
+
+
+================================================================
+== SW I/O Information
+================================================================
+* Top Function Arguments
++-------------------------+-----------+--------------------------+
+| Argument                | Direction | Datatype                 |
++-------------------------+-----------+--------------------------+
+| din_data_0              | in        | stream<ap_uint<32>, 0>&  |
+| din_data_1              | in        | stream<ap_uint<32>, 0>&  |
+| din_data_2              | in        | stream<ap_uint<32>, 0>&  |
+| din_data_3              | in        | stream<ap_uint<32>, 0>&  |
+| dout_data_00            | out       | stream<ap_uint<128>, 0>& |
+| dout_data_11            | out       | stream<ap_uint<128>, 0>& |
+| dout_data_22            | out       | stream<ap_uint<128>, 0>& |
+| dout_data_33            | out       | stream<ap_uint<128>, 0>& |
+| dout_data_01            | out       | stream<ap_uint<128>, 0>& |
+| dout_data_02            | out       | stream<ap_uint<128>, 0>& |
+| dout_data_03            | out       | stream<ap_uint<128>, 0>& |
+| dout_data_12            | out       | stream<ap_uint<128>, 0>& |
+| dout_data_13            | out       | stream<ap_uint<128>, 0>& |
+| dout_data_23            | out       | stream<ap_uint<128>, 0>& |
+| integration_time_frames | in        | int                      |
++-------------------------+-----------+--------------------------+
+
+* SW-to-HW Mapping
++-------------------------+---------------+-----------+---------------------------------------------------+
+| Argument                | HW Interface  | HW Type   | HW Info                                           |
++-------------------------+---------------+-----------+---------------------------------------------------+
+| din_data_0              | din_data_0    | interface |                                                   |
+| din_data_1              | din_data_1    | interface |                                                   |
+| din_data_2              | din_data_2    | interface |                                                   |
+| din_data_3              | din_data_3    | interface |                                                   |
+| dout_data_00            | dout_data_00  | interface |                                                   |
+| dout_data_11            | dout_data_11  | interface |                                                   |
+| dout_data_22            | dout_data_22  | interface |                                                   |
+| dout_data_33            | dout_data_33  | interface |                                                   |
+| dout_data_01            | dout_data_01  | interface |                                                   |
+| dout_data_02            | dout_data_02  | interface |                                                   |
+| dout_data_03            | dout_data_03  | interface |                                                   |
+| dout_data_12            | dout_data_12  | interface |                                                   |
+| dout_data_13            | dout_data_13  | interface |                                                   |
+| dout_data_23            | dout_data_23  | interface |                                                   |
+| integration_time_frames | s_axi_control | register  | name=integration_time_frames offset=0x10 range=32 |
++-------------------------+---------------+-----------+---------------------------------------------------+
+
+
+================================================================
+== Bind Op Report
+================================================================
++------------------------------------------------------------------------+-----+--------+---------------+-----+-----------+---------+
+| Name                                                                   | DSP | Pragma | Variable      | Op  | Impl      | Latency |
++------------------------------------------------------------------------+-----+--------+---------------+-----+-----------+---------+
+| + correlator                                                           | 32  |        |               |     |           |         |
+|   add_ln89_fu_328_p2                                                   |     |        | add_ln89      | add | fabric    | 0       |
+|  + correlator_Pipeline_VITIS_LOOP_52_1_VITIS_LOOP_53_2_VITIS_LOOP_54_3 | 0   |        |               |     |           |         |
+|    add_ln52_1_fu_529_p2                                                |     |        | add_ln52_1    | add | fabric    | 0       |
+|    add_ln52_fu_544_p2                                                  |     |        | add_ln52      | add | fabric    | 0       |
+|    add_ln53_fu_594_p2                                                  |     |        | add_ln53      | add | fabric    | 0       |
+|    add_ln55_fu_630_p2                                                  |     |        | add_ln55      | add | fabric    | 0       |
+|    add_ln54_fu_636_p2                                                  |     |        | add_ln54      | add | fabric    | 0       |
+|    add_ln53_1_fu_642_p2                                                |     |        | add_ln53_1    | add | fabric    | 0       |
+|  + correlator_Pipeline_Process_Frame_Loop                              | 32  |        |               |     |           |         |
+|    add_ln59_fu_414_p2                                                  |     |        | add_ln59      | add | fabric    | 0       |
+|    add_ln76_fu_420_p2                                                  |     |        | add_ln76      | add | fabric    | 0       |
+|    ama_submuladd_1ns_16s_16s_16ns_16_4_1_U37                           | 1   |        | sub_ln699     | sub | dsp_slice | 3       |
+|    sub_ln699_1_fu_487_p2                                               |     |        | sub_ln699_1   | sub | fabric    | 0       |
+|    sub_ln699_2_fu_492_p2                                               |     |        | sub_ln699_2   | sub | fabric    | 0       |
+|    mul_16s_16s_16_1_1_U21                                              | 1   |        | mul_ln389     | mul | auto      | 0       |
+|    mac_muladd_16s_16s_16ns_16_4_1_U38                                  | 1   |        | mul_ln389_1   | mul | dsp_slice | 3       |
+|    mac_muladd_16s_16s_16ns_16_4_1_U38                                  | 1   |        | add_ln389     | add | dsp_slice | 3       |
+|    this_0_0_i_fu_583_p2                                                |     |        | this_0_0_i    | add | fabric    | 0       |
+|    mul_16s_16s_16_1_1_U22                                              | 1   |        | mul_ln389_2   | mul | auto      | 0       |
+|    mac_muladd_16s_16s_16ns_16_4_1_U39                                  | 1   |        | mul_ln389_3   | mul | dsp_slice | 3       |
+|    mac_muladd_16s_16s_16ns_16_4_1_U39                                  | 1   |        | add_ln389_1   | add | dsp_slice | 3       |
+|    this_0_0_i129_fu_592_p2                                             |     |        | this_0_0_i129 | add | fabric    | 0       |
+|    mul_16s_16s_16_1_1_U23                                              | 1   |        | mul_ln389_4   | mul | auto      | 0       |
+|    mac_muladd_16s_16s_16ns_16_4_1_U40                                  | 1   |        | mul_ln389_5   | mul | dsp_slice | 3       |
+|    mac_muladd_16s_16s_16ns_16_4_1_U40                                  | 1   |        | add_ln389_2   | add | dsp_slice | 3       |
+|    this_0_0_i142_fu_601_p2                                             |     |        | this_0_0_i142 | add | fabric    | 0       |
+|    mul_16s_16s_16_1_1_U24                                              | 1   |        | mul_ln389_6   | mul | auto      | 0       |
+|    mac_muladd_16s_16s_16ns_16_4_1_U41                                  | 1   |        | mul_ln389_7   | mul | dsp_slice | 3       |
+|    mac_muladd_16s_16s_16ns_16_4_1_U41                                  | 1   |        | add_ln389_3   | add | dsp_slice | 3       |
+|    this_0_0_i155_fu_610_p2                                             |     |        | this_0_0_i155 | add | fabric    | 0       |
+|    mul_16s_16s_16_1_1_U25                                              | 1   |        | mul_ln389_8   | mul | auto      | 0       |
+|    mac_muladd_16s_16s_16ns_16_4_1_U42                                  | 1   |        | mul_ln389_9   | mul | dsp_slice | 3       |
+|    mac_muladd_16s_16s_16ns_16_4_1_U42                                  | 1   |        | add_ln389_4   | add | dsp_slice | 3       |
+|    ama_submuladd_1ns_16s_16s_16ns_16_4_1_U37                           | 1   |        | mul_ln389_10  | mul | dsp_slice | 3       |
+|    mul_16s_16s_16_1_1_U26                                              | 1   |        | mul_ln389_11  | mul | auto      | 0       |
+|    ama_submuladd_1ns_16s_16s_16ns_16_4_1_U37                           | 1   |        | add_ln389_5   | add | dsp_slice | 3       |
+|    this_0_0_i168_fu_619_p2                                             |     |        | this_0_0_i168 | add | fabric    | 0       |
+|    this_1_0_i170_fu_628_p2                                             |     |        | this_1_0_i170 | add | fabric    | 0       |
+|    mul_16s_16s_16_1_1_U27                                              | 1   |        | mul_ln389_12  | mul | auto      | 0       |
+|    mac_muladd_16s_16s_16ns_16_4_1_U43                                  | 1   |        | mul_ln389_13  | mul | dsp_slice | 3       |
+|    mac_muladd_16s_16s_16ns_16_4_1_U43                                  | 1   |        | add_ln389_6   | add | dsp_slice | 3       |
+|    mul_16s_16s_16_1_1_U28                                              | 1   |        | mul_ln389_14  | mul | auto      | 0       |
+|    mac_muladd_16s_16s_16ns_16_4_1_U44                                  | 1   |        | mul_ln389_15  | mul | dsp_slice | 3       |
+|    mac_muladd_16s_16s_16ns_16_4_1_U44                                  | 1   |        | add_ln389_7   | add | dsp_slice | 3       |
+|    this_0_0_i182_fu_637_p2                                             |     |        | this_0_0_i182 | add | fabric    | 0       |
+|    this_1_0_i184_fu_646_p2                                             |     |        | this_1_0_i184 | add | fabric    | 0       |
+|    mul_16s_16s_16_1_1_U29                                              | 1   |        | mul_ln389_16  | mul | auto      | 0       |
+|    mac_muladd_16s_16s_16ns_16_4_1_U45                                  | 1   |        | mul_ln389_17  | mul | dsp_slice | 3       |
+|    mac_muladd_16s_16s_16ns_16_4_1_U45                                  | 1   |        | add_ln389_8   | add | dsp_slice | 3       |
+|    mul_16s_16s_16_1_1_U30                                              | 1   |        | mul_ln389_18  | mul | auto      | 0       |
+|    mac_muladd_16s_16s_16ns_16_4_1_U46                                  | 1   |        | mul_ln389_19  | mul | dsp_slice | 3       |
+|    mac_muladd_16s_16s_16ns_16_4_1_U46                                  | 1   |        | add_ln389_9   | add | dsp_slice | 3       |
+|    this_0_0_i196_fu_655_p2                                             |     |        | this_0_0_i196 | add | fabric    | 0       |
+|    this_1_0_i198_fu_664_p2                                             |     |        | this_1_0_i198 | add | fabric    | 0       |
+|    mul_16s_16s_16_1_1_U31                                              | 1   |        | mul_ln389_20  | mul | auto      | 0       |
+|    mac_muladd_16s_16s_16ns_16_4_1_U47                                  | 1   |        | mul_ln389_21  | mul | dsp_slice | 3       |
+|    mac_muladd_16s_16s_16ns_16_4_1_U47                                  | 1   |        | add_ln389_10  | add | dsp_slice | 3       |
+|    mul_16s_16s_16_1_1_U32                                              | 1   |        | mul_ln389_22  | mul | auto      | 0       |
+|    mac_muladd_16s_16s_16ns_16_4_1_U48                                  | 1   |        | mul_ln389_23  | mul | dsp_slice | 3       |
+|    mac_muladd_16s_16s_16ns_16_4_1_U48                                  | 1   |        | add_ln389_11  | add | dsp_slice | 3       |
+|    this_0_0_i210_fu_673_p2                                             |     |        | this_0_0_i210 | add | fabric    | 0       |
+|    this_1_0_i212_fu_682_p2                                             |     |        | this_1_0_i212 | add | fabric    | 0       |
+|    mul_16s_16s_16_1_1_U33                                              | 1   |        | mul_ln389_24  | mul | auto      | 0       |
+|    mac_muladd_16s_16s_16ns_16_4_1_U49                                  | 1   |        | mul_ln389_25  | mul | dsp_slice | 3       |
+|    mac_muladd_16s_16s_16ns_16_4_1_U49                                  | 1   |        | add_ln389_12  | add | dsp_slice | 3       |
+|    mul_16s_16s_16_1_1_U34                                              | 1   |        | mul_ln389_26  | mul | auto      | 0       |
+|    mac_muladd_16s_16s_16ns_16_4_1_U50                                  | 1   |        | mul_ln389_27  | mul | dsp_slice | 3       |
+|    mac_muladd_16s_16s_16ns_16_4_1_U50                                  | 1   |        | add_ln389_13  | add | dsp_slice | 3       |
+|    this_0_0_i224_fu_691_p2                                             |     |        | this_0_0_i224 | add | fabric    | 0       |
+|    this_1_0_i226_fu_700_p2                                             |     |        | this_1_0_i226 | add | fabric    | 0       |
+|    mul_16s_16s_16_1_1_U35                                              | 1   |        | mul_ln389_28  | mul | auto      | 0       |
+|    mac_muladd_16s_16s_16ns_16_4_1_U51                                  | 1   |        | mul_ln389_29  | mul | dsp_slice | 3       |
+|    mac_muladd_16s_16s_16ns_16_4_1_U51                                  | 1   |        | add_ln389_14  | add | dsp_slice | 3       |
+|    mul_16s_16s_16_1_1_U36                                              | 1   |        | mul_ln389_30  | mul | auto      | 0       |
+|    mac_muladd_16s_16s_16ns_16_4_1_U52                                  | 1   |        | mul_ln389_31  | mul | dsp_slice | 3       |
+|    mac_muladd_16s_16s_16ns_16_4_1_U52                                  | 1   |        | add_ln389_15  | add | dsp_slice | 3       |
+|    this_0_0_i238_fu_709_p2                                             |     |        | this_0_0_i238 | add | fabric    | 0       |
+|    this_1_0_i240_fu_718_p2                                             |     |        | this_1_0_i240 | add | fabric    | 0       |
+|  + correlator_Pipeline_Offload_Loop                                    | 0   |        |               |     |           |         |
+|    add_ln97_fu_564_p2                                                  |     |        | add_ln97      | add | fabric    | 0       |
+|    add_ln100_fu_570_p2                                                 |     |        | add_ln100     | add | fabric    | 0       |
++------------------------------------------------------------------------+-----+--------+---------------+-----+-----------+---------+
+
+
+================================================================
+== Storage Report
+================================================================
++---------------------------------------------------------------------------------+-----------+-----------+------+------+--------+-----------------------------------------------------------------------------+------+---------+------------------+
+| Name                                                                            | Usage     | Type      | BRAM | URAM | Pragma | Variable                                                                    | Impl | Latency | Bitwidth, Depth, |
+|                                                                                 |           |           |      |      |        |                                                                             |      |         | Banks            |
++---------------------------------------------------------------------------------+-----------+-----------+------+------+--------+-----------------------------------------------------------------------------+------+---------+------------------+
+| + correlator                                                                    |           |           | 132  | 0    |        |                                                                             |      |         |                  |
+|   control_s_axi_U                                                               | interface | s_axilite |      |      |        |                                                                             |      |         |                  |
+|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_19_U | ram_2p    |           | 8    |      | pragma | correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_19 | bram | 1       | 64, 2048, 1      |
+|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_17_U | ram_2p    |           | 1    |      | pragma | correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_17 | bram | 1       | 1, 2048, 1       |
+|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_18_U | ram_2p    |           | 8    |      | pragma | correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_18 | bram | 1       | 64, 2048, 1      |
+|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_16_U | ram_2p    |           | 1    |      | pragma | correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_16 | bram | 1       | 1, 2048, 1       |
+|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_7_U  | ram_2p    |           | 8    |      | pragma | correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_7  | bram | 1       | 64, 2048, 1      |
+|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_15_U | ram_2p    |           | 1    |      | pragma | correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_15 | bram | 1       | 1, 2048, 1       |
+|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_6_U  | ram_2p    |           | 8    |      | pragma | correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_6  | bram | 1       | 64, 2048, 1      |
+|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_14_U | ram_2p    |           | 1    |      | pragma | correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_14 | bram | 1       | 1, 2048, 1       |
+|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_5_U  | ram_2p    |           | 8    |      | pragma | correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_5  | bram | 1       | 64, 2048, 1      |
+|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_13_U | ram_2p    |           | 8    |      | pragma | correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_13 | bram | 1       | 64, 2048, 1      |
+|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_4_U  | ram_2p    |           | 8    |      | pragma | correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_4  | bram | 1       | 64, 2048, 1      |
+|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_12_U | ram_2p    |           | 8    |      | pragma | correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_12 | bram | 1       | 64, 2048, 1      |
+|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_3_U  | ram_2p    |           | 8    |      | pragma | correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_3  | bram | 1       | 64, 2048, 1      |
+|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_11_U | ram_2p    |           | 8    |      | pragma | correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_11 | bram | 1       | 64, 2048, 1      |
+|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_2_U  | ram_2p    |           | 8    |      | pragma | correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_2  | bram | 1       | 64, 2048, 1      |
+|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_10_U | ram_2p    |           | 8    |      | pragma | correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_10 | bram | 1       | 64, 2048, 1      |
+|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_1_U  | ram_2p    |           | 8    |      | pragma | correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_1  | bram | 1       | 64, 2048, 1      |
+|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_9_U  | ram_2p    |           | 8    |      | pragma | correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_9  | bram | 1       | 64, 2048, 1      |
+|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_U    | ram_2p    |           | 8    |      | pragma | correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea    | bram | 1       | 64, 2048, 1      |
+|   correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_8_U  | ram_2p    |           | 8    |      | pragma | correlator_stream_stream_stream_stream_stream_stream_stream_stream_strea_8  | bram | 1       | 64, 2048, 1      |
++---------------------------------------------------------------------------------+-----------+-----------+------+------+--------+-----------------------------------------------------------------------------+------+---------+------------------+
+
+
+================================================================
+== Pragma Report
+================================================================
+* Valid Pragma Syntax
++-----------------+-------------------------------------------------------+--------------------------------------------------------------+
+| Type            | Options                                               | Location                                                     |
++-----------------+-------------------------------------------------------+--------------------------------------------------------------+
+| interface       | axis port=din_data_0 depth=2048                       | correlator_top.cpp:22 in correlator, din_data_0              |
+| interface       | axis port=din_data_1 depth=2048                       | correlator_top.cpp:23 in correlator, din_data_1              |
+| interface       | axis port=din_data_2 depth=2048                       | correlator_top.cpp:24 in correlator, din_data_2              |
+| interface       | axis port=din_data_3 depth=2048                       | correlator_top.cpp:25 in correlator, din_data_3              |
+| interface       | axis port=dout_data_00 depth=2048                     | correlator_top.cpp:27 in correlator, dout_data_00            |
+| interface       | axis port=dout_data_11 depth=2048                     | correlator_top.cpp:28 in correlator, dout_data_11            |
+| interface       | axis port=dout_data_22 depth=2048                     | correlator_top.cpp:29 in correlator, dout_data_22            |
+| interface       | axis port=dout_data_33 depth=2048                     | correlator_top.cpp:30 in correlator, dout_data_33            |
+| interface       | axis port=dout_data_01 depth=2048                     | correlator_top.cpp:31 in correlator, dout_data_01            |
+| interface       | axis port=dout_data_02 depth=2048                     | correlator_top.cpp:32 in correlator, dout_data_02            |
+| interface       | axis port=dout_data_03 depth=2048                     | correlator_top.cpp:33 in correlator, dout_data_03            |
+| interface       | axis port=dout_data_12 depth=2048                     | correlator_top.cpp:34 in correlator, dout_data_12            |
+| interface       | axis port=dout_data_13 depth=2048                     | correlator_top.cpp:35 in correlator, dout_data_13            |
+| interface       | axis port=dout_data_23 depth=2048                     | correlator_top.cpp:36 in correlator, dout_data_23            |
+| interface       | s_axilite port=integration_time_frames bundle=control | correlator_top.cpp:38 in correlator, integration_time_frames |
+| interface       | s_axilite port=return bundle=control                  | correlator_top.cpp:39 in correlator, return                  |
+| bind_storage    | variable=accumulator_ram type=ram_2p impl=bram        | correlator_top.cpp:43 in correlator, accumulator_ram         |
+| array_partition | variable=accumulator_ram dim=2 complete               | correlator_top.cpp:45 in correlator, accumulator_ram         |
+| pipeline        | II=1                                                  | correlator_top.cpp:60 in correlator                          |
+| pipeline        | II=1                                                  | correlator_top.cpp:98 in correlator                          |
++-----------------+-------------------------------------------------------+--------------------------------------------------------------+
+
+
