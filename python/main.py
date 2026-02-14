@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
+Main SDR data acquisition and visualization application.
+
 Created on Fri Feb 13 11:20:56 2026
 
 @author: bretthopkins
@@ -8,23 +10,38 @@ Created on Fri Feb 13 11:20:56 2026
 
 import adi
 import threading
-import numpy as np
+import signal
 
 from settings import configuration
-from fmcomms5_iio import data_read, get_sample_frame, get_all_channel_frames
-
-sdr = adi.fmcomms5.FMComms5()
-configuration(sdr)
-
-data_thread = threading.Thread(target=data_read, args=(sdr,), daemon=True)
-data_thread.start()
-
-print("SDR streaming started. Reading 1024-sample frames continuously...")
+from fmcomms5_iio import data_read, data_process, stop_event, run_plot_loop
 
 try:
-    while True:
-        chan_idx, frame = get_sample_frame()
-        print(f"Channel {chan_idx}: Received {len(frame)} samples, Mean power: {np.mean(np.abs(frame)**2):.2f}")
-        
+    sdr = adi.fmcomms5.FMComms5()
+    configuration(sdr)
+except Exception as e:
+    print(f"Failed to connect: {e}")
+    exit(1)
+
+process_thread = threading.Thread(target=data_process, daemon=True)
+process_thread.start()
+
+read_thread = threading.Thread(target=data_read, args=(sdr,), daemon=True)
+read_thread.start()
+
+signal.signal(signal.SIGINT, lambda *_: stop_event.set())
+
+try:
+    run_plot_loop(num_channels=len(sdr.rx_enabled_channels))
 except KeyboardInterrupt:
-    print("\nStopping...")
+    pass
+finally:
+    print("\nStopping capture.")
+    stop_event.set()
+
+read_thread.join(timeout=2)
+process_thread.join(timeout=2)
+print("Capture complete.")
+
+
+
+

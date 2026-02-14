@@ -7,38 +7,94 @@ Created on Wed Feb 9 11:11:02 2026
 """
 
 import numpy as np
-from queue import Queue
-from threading import Thread, Lock
+import queue
+import threading
+import time
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+from settings import QUEUE_SIZE
 
-data_queue = Queue(maxsize=100)
-sample_buffer = {0: [], 1: [], 2: [], 3: []}
-buffer_lock = Lock()
-FRAME_SIZE = 1024
+data_queue = queue.Queue(maxsize=QUEUE_SIZE)
+stop_event = threading.Event()
+
+# Shared slot for the latest frame to be plotted
+_plot_lock = threading.Lock()
+_latest_frame = None
 
 def data_read(sdr):
-    while True:
+    dropped_warnings = 0
+    
+    while not stop_event.is_set():
         try:
-            data_rx = sdr.rx()
-            with buffer_lock:
-                for chan_idx, chan_data in enumerate(data_rx):
-                    sample_buffer[chan_idx].extend(chan_data)
-                    
-                    while len(sample_buffer[chan_idx]) >= FRAME_SIZE:
-                        frame = np.array(sample_buffer[chan_idx][:FRAME_SIZE], dtype=np.complex64)
-                        sample_buffer[chan_idx] = sample_buffer[chan_idx][FRAME_SIZE:]
-                        
-                        data_queue.put((chan_idx, frame))
-                        
+            data = sdr.rx()
+            data_queue.put(data, block=False)            
+        except queue.Full:
+            print("Dropping frame!!!!!!!!!!!")
+            dropped_warnings += 1
         except Exception as e:
-            print(f"Error in data_read: {e}")
+            print(f"Capture Error: {e}")
+            break
+            
+    print("Read stopped")
+
+def data_process():
+    global _latest_frame
+    last_plot_time = 0.0
+    PLOT_INTERVAL = 0.05  # seconds
+
+    while not stop_event.is_set():
+        try:
+            frame = data_queue.get(timeout=0.1)
+            data_queue.task_done()
+        except queue.Empty:
             continue
+        except Exception as e:
+            print(f"Processing Error: {e}")
+            break
 
-def get_sample_frame():
-    return data_queue.get()
+        now = time.time()
+        if now - last_plot_time >= PLOT_INTERVAL:
+            with _plot_lock:
+                _latest_frame = frame
+            last_plot_time = now
 
-def get_all_channel_frames():
-    frames = {}
-    for _ in range(4):
-        chan_idx, frame = data_queue.get()
-        frames[chan_idx] = frame
-    return frames
+def run_plot_loop(num_channels=4):
+    fig, axes = plt.subplots(num_channels, 1, figsize=(12, 8), sharex=True)
+
+    i_lines = []
+    q_lines = []
+    for i, ax in enumerate(axes):
+        line_i, = ax.plot([], [], label='I', alpha=0.8)
+        line_q, = ax.plot([], [], label='Q', alpha=0.8)
+        i_lines.append(line_i)
+        q_lines.append(line_q)
+        ax.set_ylabel(f'Ch {i}')
+        ax.legend(loc='upper right', fontsize=8)
+        ax.grid(True, alpha=0.3)
+
+    axes[-1].set_xlabel('Sample')
+    fig.suptitle('Frame Capture')
+    plt.tight_layout()
+
+    def update(_frame_number):
+        global _latest_frame
+        with _plot_lock:
+            frame = _latest_frame
+            _latest_frame = None  # consume it
+
+        if frame is None:
+            return i_lines + q_lines
+
+        for i in range(min(len(frame), num_channels)):
+            samples = frame[i]
+            x = np.arange(len(samples))
+            i_lines[i].set_data(x, np.real(samples))
+            q_lines[i].set_data(x, np.imag(samples))
+            axes[i].relim()
+            axes[i].autoscale_view()
+
+        fig.suptitle(f'Frame Capture — {time.strftime("%H:%M:%S")}')
+        return i_lines + q_lines
+
+    _anim = FuncAnimation(fig, update, interval=50, blit=False, cache_frame_data=False)
+    plt.show()  # blocks on main thread
