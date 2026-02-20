@@ -12,14 +12,14 @@ import threading
 import time
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
-from settings import QUEUE_SIZE
+from settings import QUEUE_SIZE, PLOT_INTERVAL
 
 data_queue = queue.Queue(maxsize=QUEUE_SIZE)
 stop_event = threading.Event()
 
 # Shared slot for the latest frame to be plotted
 _plot_lock = threading.Lock()
-_latest_frame = None
+latest_frame = None
 
 def data_read(sdr):
     dropped_warnings = 0
@@ -38,25 +38,17 @@ def data_read(sdr):
     print("Read stopped")
 
 def data_process():
-    global _latest_frame
-    last_plot_time = 0.0
-    PLOT_INTERVAL = 0.05  # seconds
+    global latest_frame
 
     while not stop_event.is_set():
         try:
-            frame = data_queue.get(timeout=0.1)
+            latest_frame = data_queue.get(timeout=0.1)
             data_queue.task_done()
         except queue.Empty:
             continue
         except Exception as e:
             print(f"Processing Error: {e}")
             break
-
-        now = time.time()
-        if now - last_plot_time >= PLOT_INTERVAL:
-            with _plot_lock:
-                _latest_frame = frame
-            last_plot_time = now
 
 def run_plot_loop(num_channels=4):
     fig, axes = plt.subplots(num_channels, 1, figsize=(12, 8), sharex=True)
@@ -77,10 +69,10 @@ def run_plot_loop(num_channels=4):
     plt.tight_layout()
 
     def update(_frame_number):
-        global _latest_frame
+        global latest_frame
         with _plot_lock:
-            frame = _latest_frame
-            _latest_frame = None  # consume it
+            frame = latest_frame
+            latest_frame = None  # consume it
 
         if frame is None:
             return i_lines + q_lines

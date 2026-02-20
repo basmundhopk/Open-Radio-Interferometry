@@ -10,6 +10,7 @@ Created on Wed Feb 11 11:11:02 2026
 
 FRAME_SIZE = 4096
 QUEUE_SIZE = 100
+PLOT_INTERVAL = 0.05
 
 filter_fir = '' #Filepath to FIR filter file
 gain_control_mode = 'fast_attack' #Receive gain. Options are: slow_attack, fast_attack, manual

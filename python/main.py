@@ -43,5 +43,3 @@ process_thread.join(timeout=2)
 print("Capture complete.")
 
 
-
-
