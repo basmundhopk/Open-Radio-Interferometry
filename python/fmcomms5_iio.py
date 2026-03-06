@@ -12,7 +12,8 @@ import threading
 import time
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
-from settings import QUEUE_SIZE
+from settings import QUEUE_SIZE, PFB_ENABLE, PFB_P, PFB_M, PFB_WINDOW, PFB_FFTSHIFT
+from pfb_demo import generate_win_coeffs_np, pfb_channelize_multich_np, db_pwr
 
 data_queue = queue.Queue(maxsize=QUEUE_SIZE)
 stop_event = threading.Event()
@@ -20,6 +21,25 @@ stop_event = threading.Event()
 # Shared slot for the latest frame to be plotted
 _plot_lock = threading.Lock()
 _latest_frame = None
+
+def _to_4xN(frame):
+    """
+    pyadi-iio often returns list/tuple of arrays for multi-channel.
+    Convert to np.ndarray with shape (4, N).
+    """
+    
+    if isinstance(frame, (list, tuple)):
+        x = np.stack([np.asarray(ch) for ch in frame], axis=0)
+    else:
+        x = np.asarray(frame)
+        if x.ndim == 1:
+            x = x[None, :]  # (1, N)
+
+    if x.shape[0] < 4:
+        raise ValueError(f"Need 4 channels, got {x.shape[0]}")
+    return x[:4]
+
+_pfb_h = generate_win_coeffs_np(PFB_M, PFB_P, window=PFB_WINDOW, normalize=True)
 
 def data_read(sdr):
     dropped_warnings = 0
@@ -54,8 +74,26 @@ def data_process():
 
         now = time.time()
         if now - last_plot_time >= PLOT_INTERVAL:
-            with _plot_lock:
-                _latest_frame = frame
+            if PFB_ENABLE:
+                try:
+                    x4 = _to_4xN(frame)  # (4, N)
+
+                    # PFB: returns (4, n_frames, P)
+                    X4, _ = pfb_channelize_multich_np(
+                        x4, M=PFB_M, P=PFB_P, window=PFB_WINDOW, fftshift=PFB_FFTSHIFT, h=_pfb_h
+                    )
+
+                    latest = X4[:, -1, :]          # (4, P)
+                    spec_db = db_pwr(latest)       # (4, P)
+
+                    with _plot_lock:
+                        _latest_frame = spec_db    # now latest_frame is spectrum
+                except Exception as e:
+                    print(f"PFB Error: {e}")
+            else:
+                with _plot_lock:
+                    _latest_frame = frame          # raw IQ
+
             last_plot_time = now
 
 def run_plot_loop(num_channels=4):
