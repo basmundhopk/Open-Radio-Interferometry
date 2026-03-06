@@ -12,6 +12,13 @@ FRAME_SIZE = 4096
 QUEUE_SIZE = 100
 PLOT_INTERVAL = 0.05
 
+# KHOA PART
+PFB_ENABLE = True          # True = store PFB spectrum in latest frame, False = store raw IQ
+PFB_P = 1024               # FFT size / number of channels
+PFB_M = 4                  # taps-per-branch
+PFB_WINDOW = "hamming"
+PFB_FFTSHIFT = True        # center DC in plot
+
 filter_fir = '' #Filepath to FIR filter file
 gain_control_mode = 'fast_attack' #Receive gain. Options are: slow_attack, fast_attack, manual
 loopback = 0 #Options are: 0 (Disable), 1 (Digital), 2 (RF)

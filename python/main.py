@@ -8,9 +8,15 @@ Created on Fri Feb 13 11:20:56 2026
 @author: bretthopkins
 """
 
-import adi
+#import adi
 import threading
 import signal
+
+try:
+    import adi
+except ModuleNotFoundError:
+    print("Missing dependency: pyadi-iio (module 'adi'). Install with: pip install pyadi-iio")
+    raise
 
 from settings import configuration
 from fmcomms5_iio import data_read, data_process, stop_event, run_plot_loop
@@ -28,7 +34,8 @@ process_thread.start()
 read_thread = threading.Thread(target=data_read, args=(sdr,), daemon=True)
 read_thread.start()
 
-signal.signal(signal.SIGINT, lambda *_: stop_event.set())
+signal.signal(signal.SIGINT,  lambda *_: stop_event.set())
+signal.signal(signal.SIGTERM, lambda *_: stop_event.set())
 
 try:
     run_plot_loop(num_channels=len(sdr.rx_enabled_channels))

@@ -12,7 +12,8 @@ import threading
 import time
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
-from settings import QUEUE_SIZE, PLOT_INTERVAL
+from settings import QUEUE_SIZE, PLOT_INTERVAL, PFB_ENABLE, PFB_P, PFB_M, PFB_WINDOW, PFB_FFTSHIFT
+from pfb_demo import generate_win_coeffs_np, pfb_channelize_multich_np, db_pwr
 
 data_queue = queue.Queue(maxsize=QUEUE_SIZE)
 stop_event = threading.Event()
@@ -20,6 +21,25 @@ stop_event = threading.Event()
 # Shared slot for the latest frame to be plotted
 _plot_lock = threading.Lock()
 latest_frame = None
+
+def _to_4xN(frame):
+    """
+    pyadi-iio often returns list/tuple of arrays for multi-channel.
+    Convert to np.ndarray with shape (4, N).
+    """
+    
+    if isinstance(frame, (list, tuple)):
+        x = np.stack([np.asarray(ch) for ch in frame], axis=0)
+    else:
+        x = np.asarray(frame)
+        if x.ndim == 1:
+            x = x[None, :]  # (1, N)
+
+    if x.shape[0] < 4:
+        raise ValueError(f"Need 4 channels, got {x.shape[0]}")
+    return x[:4]
+
+_pfb_h = generate_win_coeffs_np(PFB_M, PFB_P, window=PFB_WINDOW, normalize=True)
 
 def data_read(sdr):
     dropped_warnings = 0

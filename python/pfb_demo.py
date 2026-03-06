@@ -2,9 +2,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 #Function: Convert linear to dB value 
-def db(c):
-    c = np.asarray(c)
-    return 10*np.log10(c + 1e-12)
+def db_mag(x, eps=1e-12):
+    x = np.asarray(x)
+    return 20*np.log10(np.abs(x) + eps)
+
+def db_pwr(x, eps=1e-12):
+    x = np.asarray(x)
+    return 10*np.log10(np.abs(x)**2 + eps)
 
 
 #Function: Generate the input to coeficients
@@ -20,7 +24,7 @@ def generate_win_coeffs_np(M: int, P: int, window: str = "hamming", normalize: b
     n0 = (L - 1) / 2.0
     t = n - n0
 
-    # Window
+    #Window
     window = window.lower()
 
     if window == "hamming":
@@ -140,7 +144,7 @@ def plot_channel_power(X, title="Average channel power"):
 
 
 #4 simultaneous coherent RX stream
-def pfb_channelize_multich_np(x4, M: int = 4, P: int = 1024, window="hamming", fftshift=False):
+def pfb_channelize_multich_np(x4, M: int = 4, P: int = 1024, window="hamming", fftshift=False, h=None):
     """
     x4: array of samples from 4 channels.
         Accepts shape (4, N) or (N, 4). Real or complex.
@@ -160,8 +164,8 @@ def pfb_channelize_multich_np(x4, M: int = 4, P: int = 1024, window="hamming", f
         x4 = x4.T         # convert (N, 4) -> (4, N)
     else:
         raise ValueError("x4 must have 4 channels on one axis")
-
-    h = generate_win_coeffs_np(M, P, window=window, normalize=True)
+    if h is None:
+        h = generate_win_coeffs_np(M, P, window=window, normalize=True)
 
     X_all = []
     for ch in range(4):
@@ -218,3 +222,12 @@ if __name__ == "__main__":
     x4 = fake_4ch_iq(N, P, bins=(100,), amps=(1.0,), delays=(0, 1, 3, 6), phases_deg=(0, 20, 70, 140), noise_std=0.01)
     X4, h = pfb_channelize_multich_np(x4, M=M, P=P)
     print("X4 shape:", X4.shape)  # (4, frames, P)
+
+"""
+Store the data from lates frame
+Threading data
+
+Need to fix: Forntend, channekized de compine dc vs fmcomms5_iio, va main 
+
+
+"""
