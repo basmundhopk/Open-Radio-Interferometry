@@ -1,5 +1,0 @@
-{
-    "python.defaultInterpreterPath": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
-    "python.languageServer": "Pylance",
-    "python.analysis.indexing": true
-}
