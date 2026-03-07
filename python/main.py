@@ -1,25 +1,14 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 Main SDR data acquisition and visualization application.
 
-Created on Fri Feb 13 11:20:56 2026
-
-@author: bretthopkins
 """
-
-#import adi
+import adi
 import threading
 import signal
-
-try:
-    import adi
-except ModuleNotFoundError:
-    print("Missing dependency: pyadi-iio (module 'adi'). Install with: pip install pyadi-iio")
-    raise
-
+import time
 from settings import configuration
-from fmcomms5_iio import data_read, data_process, stop_event, run_plot_loop
+from fmcomms5_iio import data_read, data_process, stop_event
+from plot import run_plot_loop
 
 try:
     sdr = adi.fmcomms5.FMComms5()
@@ -48,5 +37,3 @@ finally:
 read_thread.join(timeout=2)
 process_thread.join(timeout=2)
 print("Capture complete.")
-
-

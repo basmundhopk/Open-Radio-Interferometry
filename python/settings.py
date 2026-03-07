@@ -1,35 +1,36 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
-Created on Wed Feb 11 11:11:02 2026
+Settings File for Open Radio Interferometry
 
-@author: bretthopkins
 """
 
 #Default settings loaded on startup. 
 
-#IIO Settings
+# IIO Settings
 FRAME_SIZE = 4096
 QUEUE_SIZE = 100
 
 # PFB Settings
-PFB_ENABLE = True          # True = store PFB spectrum in latest frame, False = store raw IQ
-PFB_P = 1024               # FFT size / number of channels
-PFB_M = 4                  # taps-per-branch
-PFB_WINDOW = "hamming"
+P = 4096                   # Size of FFT
+M = 4                      # taps-per-branch
+PFB_WINDOW = "hamming"     # need to implement more window types if desired, currently only hamming and hann/hanning  
 PFB_FFTSHIFT = True        # center DC in plot
+PFB_ENABLE = True          # enable PFB channelizer (set to False to plot raw FFT instead)
 
+# FMCOMMS5 Settings
 filter_fir = '' #Filepath to FIR filter file
 gain_control_mode = 'fast_attack' #Receive gain. Options are: slow_attack, fast_attack, manual
 loopback = 0 #Options are: 0 (Disable), 1 (Digital), 2 (RF)
 rx_gain = 0 #Only applicable when gain_control_mode is set to ‘manual’
 rx_lo = 1420400000 #Carrier frequency
 rx_rf_bandwidth = 10000000 #Filter bandwidth
-rx_sample_rate = 1000000 #Transceiver sample rate
+rx_sample_rate = 521000 #Transceiver sample rate
 rx_buffer = FRAME_SIZE #Buffer size of rx samples
 rx_output_type = 'raw' #Options are: 'raw' or 'SI'
 rx_channels = [0, 1, 2, 3]
 rx_annotated = False
+
+# UI Settings
+PLOT_INTERVAL = 0.2 #Seconds between plot updates
 
 
 def configuration(sdr):
