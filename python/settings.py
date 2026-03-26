@@ -7,10 +7,11 @@ Settings File for Open Radio Interferometry
 
 # IIO Settings
 FRAME_SIZE = 4096
-QUEUE_SIZE = 100
+BUFFER_SIZE = FRAME_SIZE * 100
+QUEUE_SIZE = 1000
 
 # PFB Settings
-P = 4096                   # Size of FFT
+P = FRAME_SIZE                   # Size of FFT
 M = 4                      # taps-per-branch
 PFB_WINDOW = "hamming"     # need to implement more window types if desired, currently only hamming and hann/hanning  
 PFB_FFTSHIFT = True        # center DC in plot
@@ -23,14 +24,14 @@ loopback = 0 #Options are: 0 (Disable), 1 (Digital), 2 (RF)
 rx_gain = 0 #Only applicable when gain_control_mode is set to ‘manual’
 rx_lo = 1420400000 #Carrier frequency
 rx_rf_bandwidth = 10000000 #Filter bandwidth
-rx_sample_rate = 521000 #Transceiver sample rate
-rx_buffer = FRAME_SIZE #Buffer size of rx samples
+rx_sample_rate = 2000000 #Transceiver sample rate
+rx_buffer = BUFFER_SIZE #Buffer size of rx samples
 rx_output_type = 'raw' #Options are: 'raw' or 'SI'
 rx_channels = [0, 1, 2, 3]
 rx_annotated = False
 
 # UI Settings
-PLOT_INTERVAL = 0.2 #Seconds between plot updates
+PLOT_INTERVAL = 0.5 #Seconds between plot updates
 
 
 def configuration(sdr):
