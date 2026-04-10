@@ -7,8 +7,8 @@ Settings File for Open Radio Interferometry
 
 # IIO Settings
 FRAME_SIZE = 4096
-BUFFER_SIZE = FRAME_SIZE * 100
-QUEUE_SIZE = 1000
+BUFFER_SIZE = FRAME_SIZE * 200
+QUEUE_SIZE = 10000
 
 # PFB Settings
 P = FRAME_SIZE                   # Size of FFT
@@ -21,7 +21,7 @@ PFB_ENABLE = True          # enable PFB channelizer (set to False to plot raw FF
 filter_fir = '' #Filepath to FIR filter file
 gain_control_mode = 'fast_attack' #Receive gain. Options are: slow_attack, fast_attack, manual
 loopback = 0 #Options are: 0 (Disable), 1 (Digital), 2 (RF)
-rx_gain = 0 #Only applicable when gain_control_mode is set to ‘manual’
+rx_gain = 70 #Only applicable when gain_control_mode is set to ‘manual’
 rx_lo = 1420400000 #Carrier frequency
 rx_rf_bandwidth = 10000000 #Filter bandwidth
 rx_sample_rate = 2000000 #Transceiver sample rate
@@ -31,10 +31,19 @@ rx_channels = [0, 1, 2, 3]
 rx_annotated = False
 
 # UI Settings
-PLOT_INTERVAL = 0.5 #Seconds between plot updates
+PLOT_INTERVAL = 0.2 #Seconds between plot updates
 
 
 def configuration(sdr):
+
+    #general settings
+    #sdr.filter = filter_fir
+    sdr.sample_rate = rx_sample_rate
+    sdr.rx_buffer_size = rx_buffer
+    sdr.rx_output_type = rx_output_type
+    sdr.rx_annotated = rx_annotated
+    sdr.rx_enabled_channels = rx_channels
+    
     #chip a
     sdr.gain_control_mode_chan0 = gain_control_mode
     sdr.gain_control_mode_chan1 = gain_control_mode
@@ -50,17 +59,8 @@ def configuration(sdr):
     sdr.loopback_chip_b = loopback
     sdr.rx_hardwaregain_chip_b_chan0 = rx_gain
     sdr.rx_hardwaregain_chip_b_chan1 = rx_gain
-    sdr.rx_lo_chip_b = rx_lo
     sdr.rx_rf_bandwidth_chip_b = rx_rf_bandwidth
-    
-    #general settings
-    
-    #sdr.filter = filter_fir
-    sdr.sample_rate = rx_sample_rate
-    sdr.rx_buffer_size = rx_buffer
-    sdr.rx_output_type = rx_output_type
-    sdr.rx_annotated = rx_annotated
-    sdr.rx_enabled_channels = rx_channels
+    sdr.rx_lo_chip_b = rx_lo
     
     # Print all configuration values
     print("\n=== FMComms5 Configuration ===")
