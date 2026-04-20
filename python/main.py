@@ -1,12 +1,6 @@
 """
-Main SDR data acquisition and visualization application.
+Main SDR data acquisition and visualization file.
 
-All heavy work runs in separate processes (own GIL each):
-  - data_read:         SDR capture  (creates IIO connection internally)
-  - pfb_process:       PFB channelization
-  - correlate_process: cross-/auto-correlation
-
-The Qt UI runs on the main process / main thread.
 """
 import multiprocessing as mp
 import signal
@@ -20,10 +14,19 @@ if __name__ == "__main__":
 
     shared = create_shared_state()
 
+    monitor_queues = {
+        "pfb": shared["pfb_queue"],
+        "plot": shared["plot_queue"],
+        "corr_plot": shared["corr_plot_queue"],
+        "settings": shared["settings_queue"],
+        "pfb_cfg": shared["pfb_config_queue"],
+        "corr_cfg": shared["corr_config_queue"],
+    }
+
     read_proc = mp.Process(
         target=data_read,
         args=(SDR_URI, shared["raw_queue"], shared["settings_queue"],
-              shared["stop_event"]),
+              shared["stop_event"], monitor_queues),
         daemon=True,
     )
     read_proc.start()
@@ -38,7 +41,8 @@ if __name__ == "__main__":
 
     corr_proc = mp.Process(
         target=correlate_process,
-        args=(shared["pfb_queue"], shared["plot_queue"], shared["stop_event"]),
+        args=(shared["pfb_queue"], shared["corr_plot_queue"],
+              shared["stop_event"], shared["corr_config_queue"]),
         daemon=True,
     )
     corr_proc.start()

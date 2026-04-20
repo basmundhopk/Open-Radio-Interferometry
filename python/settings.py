@@ -11,11 +11,13 @@ BUFFER_SIZE = FRAME_SIZE * 200
 QUEUE_SIZE = 10000
 
 # PFB Settings
-P = FRAME_SIZE                   # Size of FFT
+P = FRAME_SIZE             # Size of FFT
 M = 4                      # taps-per-branch
 PFB_WINDOW = "hamming"     # need to implement more window types if desired, currently only hamming and hann/hanning  
 PFB_FFTSHIFT = True        # center DC in plot
 PFB_ENABLE = True          # enable PFB channelizer (set to False to plot raw FFT instead)
+DC_NOTCH_KHZ = 50           # zero ±N kHz of bins around DC (0 = disabled)
+LO_OFFSET_KHZ = 500          # shift LO by this amount to move DC spike away from target freq
 
 # FMCOMMS5 Settings
 filter_fir = '' #Filepath to FIR filter file
@@ -31,7 +33,22 @@ rx_channels = [0, 1, 2, 3]
 rx_annotated = False
 
 # UI Settings
-PLOT_INTERVAL = 0.2 #Seconds between plot updates
+PLOT_INTERVAL = 0.1 #Seconds between plot updates
+
+# Observing Settings
+INTEGRATION_COUNT = 10000    # Number of spectra to average before emitting
+OBSERVATION_LATITUDE_DEG  = 39.527   # Observatory latitude
+OBSERVATION_LONGITUDE_DEG = -119.822   # Observatory longitude
+OBSERVATION_DECLINATION_DEG = 40.734  # Source declination (zenith = lat for transit)
+
+# Array Geometry (antenna positions in local East-North-Up (ENU) coordinates [metres])
+ANTENNA_POSITIONS_ENU = [
+    (-25.0,  0.0, 0.0),      # Antenna 0  (RX channel 0)
+    (0.0,  25.0, 0.0),      # Antenna 1  (RX channel 1)
+    (25.0,  0.0, 0.0),      # Antenna 2  (RX channel 2)
+    (0.0,  -25.0, 0.0),      # Antenna 3  (RX channel 3)
+]
+CHANNEL_TO_ANTENNA = {0: 0, 1: 1, 2: 2, 3: 3}
 
 
 def configuration(sdr):

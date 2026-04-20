@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+"""
+Test file for plotting basic iq graphs
+
+"""
+
 import numpy as np
 import time
 import matplotlib.pyplot as plt
