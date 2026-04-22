@@ -1,7 +1,13 @@
 #!/usr/bin/env python3
 """
-Simulator to see data coverage in the UV plane for a given set of antenna positions, source declination, and observation time window
+UV-plane coverage simulator for a given antenna array, source declination, and time window.
 
+  - _apply_dark_palette(): apply dark theme palette to a QApplication
+  - _utc_to_jd():          Julian date from a UTC datetime
+  - _hour_angle_rad():     hour angle in radians from UTC + observatory longitude
+  - compute_uv_track():    UV track (in wavelengths) for a baseline over time
+  - SimWindow:             Qt window with controls and UV-plane plot
+  - main():                application entry point
 """
 
 import sys
@@ -23,7 +29,7 @@ from datetime import datetime, timezone, timedelta
 
 import settings
 
-# ── Dark palette ──────────────────────────────────────────────
+# Dark palette 
 def _apply_dark_palette(app):
     p = QPalette()
     p.setColor(QPalette.Window,          QColor(53, 53, 53))

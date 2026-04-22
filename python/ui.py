@@ -1,6 +1,11 @@
 """
-All GUI functions with PyQt5 and Matplotlib
+PyQt5 + Matplotlib GUI for the FX Correlator.
 
+  - PlotCanvas:           matplotlib canvas widget embedded in Qt
+  - SettingsPanel:        runtime control panel (SDR / PFB / correlator settings)
+  - MainWindow:           top-level window with all plots and dock panels
+  - _apply_dark_palette(): apply dark theme palette to a QApplication
+  - run_ui():             launch the Qt event loop with the worker queues
 """
 
 import sys
@@ -38,11 +43,110 @@ from PyQt5.QtWidgets import (
     QMessageBox,
     QFileDialog,
 )
-from PyQt5.QtCore import Qt, QTimer, pyqtSignal
+from PyQt5.QtCore import Qt, QTimer, pyqtSignal, QSettings
 from PyQt5.QtGui import QPalette, QColor
 
 import settings
-from pfb_coeffs import generate_win_coeffs_np
+from pfb import generate_win_coeffs_np
+
+
+# ──────────────────────────────────────────────────────────────────────────
+# Persistent-settings loader usable BEFORE any QApplication exists.
+#
+# main.py calls this before spawning worker processes so that each worker
+# receives the user's last-session values via its config queue on startup
+# (rather than the factory defaults from settings.py). This fixes two
+# problems:
+#
+#   1. Values shown in the UI after restart don't take effect until the
+#      user clicks Apply — the workers never heard about them.
+#   2. The SDR configuration printout on startup shows factory defaults
+#      instead of the user's actual values.
+#
+# Uses the exact same QSettings keys and dict shapes produced by
+# SettingsPanel._on_apply_device / _on_apply_pfb / _on_apply_corr so the
+# workers cannot tell the difference between these startup messages and
+# an Apply button click.
+# ──────────────────────────────────────────────────────────────────────────
+def load_persistent_configs():
+    """
+    Read persistent settings via QSettings and return
+    (device_cfg, pfb_cfg, corr_cfg, frame_size).
+
+    Returned dicts are ready to be put directly on
+    shared["settings_queue"], shared["pfb_config_queue"], and
+    shared["corr_config_queue"] respectively.
+    """
+    qs = QSettings("FX_Correlator", "FX_Correlator")
+
+    def _f(k, d):
+        return float(qs.value(k, d, type=float))
+
+    def _i(k, d):
+        return int(qs.value(k, d, type=int))
+
+    def _b(k, d):
+        raw = qs.value(k, d)
+        if isinstance(raw, str):
+            return raw.lower() in ("true", "1", "yes", "on")
+        return bool(raw)
+
+    def _s(k, d):
+        return str(qs.value(k, d, type=str))
+
+    S = settings
+
+    # ── device ──
+    lo_offset_hz = int(_f("device/lo_offset_khz", S.LO_OFFSET_KHZ) * 1e3)
+    target_lo_hz = int(_f("device/rx_lo_mhz", S.rx_lo / 1e6) * 1e6)
+    device_cfg = {
+        "rx_lo":              target_lo_hz + lo_offset_hz,
+        "rx_rf_bandwidth":    int(_f("device/rf_bw_mhz",    S.rx_rf_bandwidth / 1e6) * 1e6),
+        "rx_sample_rate":     int(_f("device/sample_rate_mhz", S.rx_sample_rate / 1e6) * 1e6),
+        "gain_control_mode":  _s("device/gain_mode",       S.gain_control_mode),
+        "rx_gain":            _i("device/gain_db",         S.rx_gain),
+        "loopback":           int(S.loopback),  # not persisted per _build_persistent_registry
+        "lo_offset_hz":       lo_offset_hz,
+    }
+
+    # ── pfb ──
+    pfb_cfg = {
+        "PFB_ENABLE":     _b("pfb/enabled",       S.PFB_ENABLE),
+        "P":              _i("pfb/fft_size",      S.P),
+        "M":              _i("pfb/taps_M",        S.M),
+        "PFB_WINDOW":     _s("pfb/window",        S.PFB_WINDOW),
+        "PFB_FFTSHIFT":   _b("pfb/fftshift",      S.PFB_FFTSHIFT),
+        "DC_NOTCH_KHZ":   _f("pfb/dc_notch_khz",  S.DC_NOTCH_KHZ),
+    }
+
+    # ── frame size follows P (the PFB FFT length) ──
+    frame_size = int(pfb_cfg["P"])
+
+    # ── correlator / integration / UV / RFI ──
+    ant_positions = []
+    for ai in range(4):
+        e_def = S.ANTENNA_POSITIONS_ENU[ai][0] if ai < len(S.ANTENNA_POSITIONS_ENU) else 0.0
+        n_def = S.ANTENNA_POSITIONS_ENU[ai][1] if ai < len(S.ANTENNA_POSITIONS_ENU) else 0.0
+        ant_positions.append((
+            _f(f"ant/{ai}_east",  e_def),
+            _f(f"ant/{ai}_north", n_def),
+            0.0,
+        ))
+    corr_cfg = {
+        "integration_count":    _i("corr/integration_count",   S.INTEGRATION_COUNT),
+        "ifft_grid_size":       _i("corr/ifft_grid_size",      int(S.IFFT_GRID_SIZE)),
+        "source_ra_deg":        _f("corr/source_ra_deg",       float(S.SOURCE_RA_DEG)),
+        "source_dec_deg":       _f("corr/source_dec_deg",      float(S.OBSERVATION_DECLINATION_DEG)),
+        "fringe_stop":          _b("corr/fringe_stop",         True),
+        "autocorr_norm_cross":  _b("corr/autocorr_norm_cross", True),
+        "autocorr_norm_autos":  _b("corr/autocorr_norm_autos", False),
+        "rfi_flag":             _b("corr/rfi_flag",            True),
+        "rfi_sigma":            _f("corr/rfi_sigma",           5.0),
+        "antenna_positions":    ant_positions,
+        "dc_notch_khz":         pfb_cfg["DC_NOTCH_KHZ"],
+    }
+
+    return device_cfg, pfb_cfg, corr_cfg, frame_size
 
 _MPL_DARK = {
     "figure.facecolor": "#2b2b2b",
@@ -146,9 +250,7 @@ class SettingsPanel(QWidget):
         self.lo_offset_spin.setSingleStep(100.0)
         self.lo_offset_spin.setValue(settings.LO_OFFSET_KHZ)
         self.lo_offset_spin.setToolTip(
-            "Offset the hardware LO from the target frequency to move the\n"
-            "DC spike away from band center. The actual LO = target + offset.\n"
-            "⚠ Changing LO triggers AD9361 recalibration (may shift phase)."
+            "Offset added to rx_lo so the DC spike falls outside the band of interest."
         )
         df.addRow("LO Offset:", self.lo_offset_spin)
 
@@ -159,8 +261,8 @@ class SettingsPanel(QWidget):
         dev.setLayout(df)
         root.addWidget(dev)
 
-        # ── PFB Channelizer Settings ──────────────────────────
-        pfb = QGroupBox("PFB Channelizer")
+        # PFB Settings
+        pfb = QGroupBox("PFB Settings")
         pf = QFormLayout()
 
         self.pfb_enable = QCheckBox("Enable PFB")
@@ -180,7 +282,7 @@ class SettingsPanel(QWidget):
         pf.addRow("Taps per Branch (M):", self.taps_input)
 
         self.window_combo = QComboBox()
-        self.window_combo.addItems(["hamming", "hann"])
+        self.window_combo.addItems(["hamming", "hann", "blackman-harris", "kaiser"])
         self.window_combo.setCurrentText(settings.PFB_WINDOW)
         pf.addRow("Window:", self.window_combo)
 
@@ -195,8 +297,7 @@ class SettingsPanel(QWidget):
         self.dc_notch_spin.setSingleStep(5.0)
         self.dc_notch_spin.setValue(settings.DC_NOTCH_KHZ)
         self.dc_notch_spin.setToolTip(
-            "Zero out ±N kHz of frequency bins around DC before correlation.\n"
-            "Set to 0 to disable. ~30-50 kHz removes the DC spike and shoulders."
+            "Zero ±N kHz of FFT bins around DC to suppress the LO leakage spike (0 = disabled)."
         )
         pf.addRow("DC Notch Width:", self.dc_notch_spin)
 
@@ -207,7 +308,7 @@ class SettingsPanel(QWidget):
         pfb.setLayout(pf)
         root.addWidget(pfb)
 
-        # ── Plot Visibility ───────────────────────────────────
+        # UV plane plotting and correlation settings
         vis = QGroupBox("Plot Visibility")
         vl = QVBoxLayout()
 
@@ -255,7 +356,7 @@ class SettingsPanel(QWidget):
             self.corr_checks[key] = cb
             vl.addWidget(cb)
 
-        # quick-select buttons
+        # Quick select buttons
         row1 = QHBoxLayout()
         b_all = QPushButton("All")
         b_all.clicked.connect(lambda: self._set_all(True))
@@ -285,7 +386,7 @@ class SettingsPanel(QWidget):
         vis.setLayout(vl)
         root.addWidget(vis)
 
-        # ── Display Settings ──────────────────────────────────
+        # Plot display settings
         disp = QGroupBox("Display")
         dlf = QFormLayout()
         self.interval_spin = QDoubleSpinBox()
@@ -298,7 +399,7 @@ class SettingsPanel(QWidget):
 
         self.waterfall_chk = QCheckBox("Waterfall mode (Corr)")
         self.waterfall_chk.setChecked(False)
-        self.waterfall_chk.toggled.connect(lambda *_: self.plot_selection_changed.emit())
+        self.waterfall_chk.toggled.connect(lambda *_: self.display_settings_changed.emit())
         dlf.addRow(self.waterfall_chk)
 
         self.waterfall_depth = QSpinBox()
@@ -309,10 +410,30 @@ class SettingsPanel(QWidget):
         self.waterfall_depth.setToolTip("Number of time-slices kept in the waterfall history")
         dlf.addRow("Waterfall Depth:", self.waterfall_depth)
 
+        # Sequential / scientific colormaps suitable for spectrograms & dirty images
+        _CMAP_CHOICES = [
+            "inferno", "magma", "plasma", "viridis", "cividis", "turbo",
+            "jet", "hot", "cubehelix", "gray", "bone", "afmhot",
+        ]
+
+        self.waterfall_cmap = QComboBox()
+        self.waterfall_cmap.addItems(_CMAP_CHOICES)
+        self.waterfall_cmap.setCurrentText("inferno")
+        self.waterfall_cmap.setToolTip("Colormap used for waterfall (Corr) plots")
+        self.waterfall_cmap.currentIndexChanged.connect(lambda *_: self.display_settings_changed.emit())
+        dlf.addRow("Waterfall Colormap:", self.waterfall_cmap)
+
+        self.dirty_cmap = QComboBox()
+        self.dirty_cmap.addItems(_CMAP_CHOICES)
+        self.dirty_cmap.setCurrentText("inferno")
+        self.dirty_cmap.setToolTip("Colormap used for the Dirty Image (2D IFFT)")
+        self.dirty_cmap.currentIndexChanged.connect(lambda *_: self.display_settings_changed.emit())
+        dlf.addRow("Dirty Image Colormap:", self.dirty_cmap)
+
         self.corr_avg_chk = QCheckBox("Use Integrated (Corr plots)")
-        self.corr_avg_chk.setChecked(False)
+        self.corr_avg_chk.setChecked(True)
         self.corr_avg_chk.setToolTip("Plot integrated/averaged correlations instead of instantaneous")
-        self.corr_avg_chk.stateChanged.connect(lambda *_: self.plot_selection_changed.emit())
+        self.corr_avg_chk.stateChanged.connect(lambda *_: self.display_settings_changed.emit())
         dlf.addRow(self.corr_avg_chk)
 
         self.uv_phase_chk = QCheckBox("UV colour = Phase (else Amplitude)")
@@ -323,7 +444,7 @@ class SettingsPanel(QWidget):
         disp.setLayout(dlf)
         root.addWidget(disp)
 
-        # ── Integration & UV Plane ───────────────────────────────
+        # Integration & UV Plane
         intg = QGroupBox("Integration & UV Plane")
         intf = QFormLayout()
 
@@ -333,6 +454,100 @@ class SettingsPanel(QWidget):
         self.int_count_spin.setSuffix("  frames")
         self.int_count_spin.setSingleStep(10)
         intf.addRow("Integration Count:", self.int_count_spin)
+
+        self.ifft_grid_combo = QComboBox()
+        for n in (32, 64, 128, 256, 512, 1024, 2048, 4096):
+            self.ifft_grid_combo.addItem(f"{n} × {n}", n)
+        # set default to current settings value (or nearest)
+        _default_idx = self.ifft_grid_combo.findData(int(settings.IFFT_GRID_SIZE))
+        if _default_idx < 0:
+            _default_idx = self.ifft_grid_combo.findData(128)
+        self.ifft_grid_combo.setCurrentIndex(max(_default_idx, 0))
+        self.ifft_grid_combo.setToolTip(
+            "Dirty-image IFFT grid resolution (N×N).\n"
+            "Larger → finer angular resolution but slower; applied on next integration."
+        )
+        intf.addRow("IFFT Resolution:", self.ifft_grid_combo)
+
+        self.source_ra_spin = QDoubleSpinBox()
+        self.source_ra_spin.setRange(0.0, 360.0)
+        self.source_ra_spin.setDecimals(4)
+        self.source_ra_spin.setSuffix("  °")
+        self.source_ra_spin.setSingleStep(0.1)
+        self.source_ra_spin.setValue(getattr(settings, "SOURCE_RA_DEG", 0.0))
+        self.source_ra_spin.setToolTip(
+            "Right ascension of the phase-tracking center.\n"
+            "Hour angle H = LST - RA. Set to 0 for transit/drift-scan mode."
+        )
+        intf.addRow("Source RA:", self.source_ra_spin)
+
+        self.source_dec_spin = QDoubleSpinBox()
+        self.source_dec_spin.setRange(-90.0, 90.0)
+        self.source_dec_spin.setDecimals(4)
+        self.source_dec_spin.setSuffix("  °")
+        self.source_dec_spin.setSingleStep(0.1)
+        self.source_dec_spin.setValue(getattr(settings, "OBSERVATION_DECLINATION_DEG", 0.0))
+        self.source_dec_spin.setToolTip(
+            "Declination of the phase-tracking center.\n"
+            "For zenith transit, set this equal to the observatory latitude."
+        )
+        intf.addRow("Source Dec:", self.source_dec_spin)
+
+        self.fringe_stop_chk = QCheckBox("Fringe-Stop (track source phase center)")
+        self.fringe_stop_chk.setChecked(True)
+        self.fringe_stop_chk.setToolTip(
+            "Apply  V' = V · exp(-j 2π w)  per channel before UV accumulation.\n"
+            "Required to keep coherence on a tracked source as Earth rotates."
+        )
+        intf.addRow(self.fringe_stop_chk)
+
+        self.autocorr_norm_cross_chk = QCheckBox("Auto-Corr Normalize — Crosses  (Vᵢⱼ / √(Vᵢᵢ Vⱼⱼ))")
+        self.autocorr_norm_cross_chk.setChecked(True)
+        self.autocorr_norm_cross_chk.setToolTip(
+            "Divide each cross-corr by √(auto_i · auto_j) so cross visibilities become\n"
+            "unitless coherence values in [0, 1], independent of per-channel gain.\n"
+            "Recommended ON."
+        )
+        intf.addRow(self.autocorr_norm_cross_chk)
+
+        self.autocorr_norm_autos_chk = QCheckBox("Auto-Corr Normalize — Autos  (Vᵢᵢ / |Vᵢᵢ|)")
+        self.autocorr_norm_autos_chk.setChecked(False)
+        self.autocorr_norm_autos_chk.setToolTip(
+            "Flatten auto-correlation spectra to unity per channel.\n"
+            "Leave OFF to preserve passband shape in the spectrum / waterfall plots.\n"
+            "Turn ON only if you want autos plotted as coherence (always ~1)."
+        )
+        intf.addRow(self.autocorr_norm_autos_chk)
+
+        # ── RFI flagging (MAD on auto-power) ──
+        self.rfi_flag_chk = QCheckBox("RFI Flagging  (MAD on autos → mask all baselines)")
+        self.rfi_flag_chk.setChecked(True)
+        self.rfi_flag_chk.setToolTip(
+            "Per integration: build a per-channel flag mask from the auto-corr\n"
+            "power spectra using Median Absolute Deviation (robust against the\n"
+            "RFI itself biasing the threshold). Channels deviating by more than\n"
+            "N·σ from the median are zeroed in every baseline before normalisation.\n"
+            "Catches AD9361 fractional-N spurs (which move every boot) plus\n"
+            "narrowband external interference, with no manual configuration."
+        )
+        intf.addRow(self.rfi_flag_chk)
+
+        self.rfi_sigma_spin = QDoubleSpinBox()
+        self.rfi_sigma_spin.setRange(2.0, 20.0)
+        self.rfi_sigma_spin.setDecimals(1)
+        self.rfi_sigma_spin.setSingleStep(0.5)
+        self.rfi_sigma_spin.setValue(5.0)
+        self.rfi_sigma_spin.setSuffix("  σ")
+        self.rfi_sigma_spin.setToolTip(
+            "Threshold above the robust noise estimate at which a channel is flagged.\n"
+            "5σ is a good default; lower = more aggressive (may clip weak sky lines),\n"
+            "higher = only flags the most egregious spurs."
+        )
+        intf.addRow("RFI Threshold:", self.rfi_sigma_spin)
+
+        self.rfi_status_lbl = QLabel("Flagged: —")
+        self.rfi_status_lbl.setToolTip("Fraction of frequency channels flagged in the latest integration.")
+        intf.addRow("", self.rfi_status_lbl)
 
         # 4 antenna positions (East, North) — one per RX channel
         self.ant_east = []
@@ -363,10 +578,27 @@ class SettingsPanel(QWidget):
         self.save_fits_btn = QPushButton("💾  Save UV to FITS")
         intf.addRow(self.save_fits_btn)
 
+        self.save_dirty_fits_btn = QPushButton("🖼  Save Dirty Image to FITS")
+        self.save_dirty_fits_btn.setToolTip(
+            "Export the current dirty image as a standard FITS file with WCS\n"
+            "headers (CTYPE RA---SIN/DEC--SIN). Compatible with DS9, CASA,\n"
+            "AIPS, astropy, and the standalone CLEAN app."
+        )
+        intf.addRow(self.save_dirty_fits_btn)
+
+        self.reset_defaults_btn = QPushButton("↻  Reset All Settings to Defaults")
+        self.reset_defaults_btn.setToolTip(
+            "Discard the saved session and restore every UI control to the\n"
+            "factory defaults from settings.py. Takes effect immediately;\n"
+            "click each Apply button to push the new values to the workers."
+        )
+        self.reset_defaults_btn.clicked.connect(self._reset_to_defaults)
+        intf.addRow(self.reset_defaults_btn)
+
         intg.setLayout(intf)
         root.addWidget(intg)
 
-        # ── Calibration ──────────────────────────────────────
+        # Calibration (Fringe Fitting)
         calg = QGroupBox("Calibration (Fringe Fitting)")
         calf = QFormLayout()
 
@@ -391,10 +623,138 @@ class SettingsPanel(QWidget):
 
         root.addStretch()
 
+        # ── persistent settings (QSettings) ──
+        # Built AFTER all widgets exist so the registry can reference them.
+        # Loads the last session's values, overriding the factory defaults
+        # populated above from settings.py. Saved on MainWindow.closeEvent.
+        self._qs = QSettings("FX_Correlator", "FX_Correlator")
+        self._build_persistent_registry()
+        self._load_persistent()
+
         # initial state of pfb-dependent checkboxes
+        # (run AFTER persistent load so it reflects the restored pfb_enable)
         self._on_pfb_enable_toggled(self.pfb_enable.isChecked())
 
-    # ── helpers ────────────────────────────────────────────────
+    # ── persistent settings ──
+    # Each entry: (key, widget, default_value, kind)
+    #   kind ∈ {"double", "int", "bool", "text", "combo_data_int"}
+    def _build_persistent_registry(self):
+        S = settings
+        ant = S.ANTENNA_POSITIONS_ENU
+        reg = [
+            # device
+            ("device/rx_lo_mhz",          self.lo_input,            S.rx_lo / 1e6,          "double"),
+            ("device/rf_bw_mhz",          self.bw_input,            S.rx_rf_bandwidth / 1e6,"double"),
+            ("device/sample_rate_mhz",    self.sr_input,            S.rx_sample_rate / 1e6, "double"),
+            ("device/gain_mode",          self.gain_mode,           S.gain_control_mode,    "text"),
+            ("device/gain_db",            self.gain_input,          S.rx_gain,              "int"),
+            ("device/lo_offset_khz",      self.lo_offset_spin,      S.LO_OFFSET_KHZ,        "double"),
+            # pfb
+            ("pfb/enabled",               self.pfb_enable,          S.PFB_ENABLE,           "bool"),
+            ("pfb/fft_size",              self.fft_size,            S.P,                    "combo_data_int"),
+            ("pfb/taps_M",                self.taps_input,          S.M,                    "int"),
+            ("pfb/window",                self.window_combo,        S.PFB_WINDOW,           "text"),
+            ("pfb/fftshift",              self.fftshift_chk,        S.PFB_FFTSHIFT,         "bool"),
+            ("pfb/dc_notch_khz",          self.dc_notch_spin,       S.DC_NOTCH_KHZ,         "double"),
+            # display
+            ("display/interval_s",        self.interval_spin,       S.PLOT_INTERVAL,        "double"),
+            ("display/waterfall_mode",    self.waterfall_chk,       False,                  "bool"),
+            ("display/waterfall_depth",   self.waterfall_depth,     100,                    "int"),
+            ("display/waterfall_cmap",    self.waterfall_cmap,      "inferno",              "text"),
+            ("display/dirty_cmap",        self.dirty_cmap,          "inferno",              "text"),
+            ("display/use_integrated",    self.corr_avg_chk,        True,                   "bool"),
+            ("display/uv_phase_color",    self.uv_phase_chk,        False,                  "bool"),
+            # corr / uv
+            ("corr/integration_count",    self.int_count_spin,      S.INTEGRATION_COUNT,    "int"),
+            ("corr/ifft_grid_size",       self.ifft_grid_combo,     int(S.IFFT_GRID_SIZE),  "combo_data_int"),
+            ("corr/source_ra_deg",        self.source_ra_spin,      float(S.SOURCE_RA_DEG), "double"),
+            ("corr/source_dec_deg",       self.source_dec_spin,     float(S.OBSERVATION_DECLINATION_DEG), "double"),
+            ("corr/fringe_stop",          self.fringe_stop_chk,     True,                   "bool"),
+            ("corr/autocorr_norm_cross",  self.autocorr_norm_cross_chk, True,               "bool"),
+            ("corr/autocorr_norm_autos",  self.autocorr_norm_autos_chk, False,              "bool"),
+            ("corr/rfi_flag",             self.rfi_flag_chk,        True,                   "bool"),
+            ("corr/rfi_sigma",            self.rfi_sigma_spin,      5.0,                    "double"),
+        ]
+        # antennas (4 × east/north)
+        for ai in range(4):
+            e_def = ant[ai][0] if ai < len(ant) else 0.0
+            n_def = ant[ai][1] if ai < len(ant) else 0.0
+            reg.append((f"ant/{ai}_east",  self.ant_east[ai],  e_def, "double"))
+            reg.append((f"ant/{ai}_north", self.ant_north[ai], n_def, "double"))
+        self._persistent_widgets = reg
+
+    def _load_persistent(self):
+        for key, w, default, kind in self._persistent_widgets:
+            try:
+                if kind == "double":
+                    w.setValue(float(self._qs.value(key, default, type=float)))
+                elif kind == "int":
+                    w.setValue(int(self._qs.value(key, default, type=int)))
+                elif kind == "bool":
+                    # QSettings stringifies bools; coerce robustly
+                    raw = self._qs.value(key, default)
+                    if isinstance(raw, str):
+                        raw = raw.lower() in ("true", "1", "yes", "on")
+                    w.setChecked(bool(raw))
+                elif kind == "text":
+                    w.setCurrentText(str(self._qs.value(key, default, type=str)))
+                elif kind == "combo_data_int":
+                    val = int(self._qs.value(key, default, type=int))
+                    idx = w.findData(val)
+                    if idx < 0:
+                        # try matching the displayed text (e.g. fft_size shows "4096")
+                        idx = w.findText(str(val))
+                    if idx >= 0:
+                        w.setCurrentIndex(idx)
+            except Exception as e:
+                print(f"persistent load failed for {key}: {e}")
+
+    def _save_persistent(self):
+        for key, w, _default, kind in self._persistent_widgets:
+            try:
+                if kind in ("double", "int"):
+                    self._qs.setValue(key, w.value())
+                elif kind == "bool":
+                    self._qs.setValue(key, bool(w.isChecked()))
+                elif kind == "text":
+                    self._qs.setValue(key, w.currentText())
+                elif kind == "combo_data_int":
+                    data = w.currentData()
+                    if data is None:
+                        # fall back to currentText() parsed as int
+                        try:
+                            data = int(w.currentText())
+                        except Exception:
+                            continue
+                    self._qs.setValue(key, int(data))
+            except Exception as e:
+                print(f"persistent save failed for {key}: {e}")
+        self._qs.sync()
+
+    def _reset_to_defaults(self):
+        self._qs.clear()
+        for key, w, default, kind in self._persistent_widgets:
+            try:
+                if kind == "double":
+                    w.setValue(float(default))
+                elif kind == "int":
+                    w.setValue(int(default))
+                elif kind == "bool":
+                    w.setChecked(bool(default))
+                elif kind == "text":
+                    w.setCurrentText(str(default))
+                elif kind == "combo_data_int":
+                    idx = w.findData(int(default))
+                    if idx < 0:
+                        idx = w.findText(str(default))
+                    if idx >= 0:
+                        w.setCurrentIndex(idx)
+            except Exception as e:
+                print(f"persistent reset failed for {key}: {e}")
+        self._qs.sync()
+        print("Settings reset to factory defaults — click each Apply button to push to workers.")
+
+    # helpers 
     def _on_pfb_enable_toggled(self, enabled):
         for cb in self.pfb_checks.values():
             cb.setEnabled(enabled)
@@ -404,25 +764,39 @@ class SettingsPanel(QWidget):
     def _set_all(self, state):
         for cb in list(self.iq_checks.values()) + list(self.pfb_checks.values()) + list(self.corr_checks.values()):
             cb.setChecked(state)
+        # Always emit — Qt suppresses stateChanged when state is unchanged,
+        # which would leave UV-Plane mode stuck if every box was already checked.
+        self.plot_selection_changed.emit()
 
     def _sel_iq(self):
         self._set_all(False)
         for cb in self.iq_checks.values():
             cb.setChecked(True)
+        self.plot_selection_changed.emit()
 
     def _sel_pfb(self):
         self._set_all(False)
         for cb in self.pfb_checks.values():
             cb.setChecked(True)
+        self.plot_selection_changed.emit()
 
     def _sel_corr(self):
         self._set_all(False)
         for cb in self.corr_checks.values():
             cb.setChecked(True)
+        self.plot_selection_changed.emit()
 
     def _on_apply_corr(self):
         self.corr_settings_changed.emit({
             "integration_count": self.int_count_spin.value(),
+            "ifft_grid_size": int(self.ifft_grid_combo.currentData()),
+            "source_ra_deg": float(self.source_ra_spin.value()),
+            "source_dec_deg": float(self.source_dec_spin.value()),
+            "fringe_stop": bool(self.fringe_stop_chk.isChecked()),
+            "autocorr_norm_cross": bool(self.autocorr_norm_cross_chk.isChecked()),
+            "autocorr_norm_autos": bool(self.autocorr_norm_autos_chk.isChecked()),
+            "rfi_flag":  bool(self.rfi_flag_chk.isChecked()),
+            "rfi_sigma": float(self.rfi_sigma_spin.value()),
             "antenna_positions": [
                 (self.ant_east[i].value(), self.ant_north[i].value(), 0.0)
                 for i in range(4)
@@ -465,13 +839,14 @@ class SettingsPanel(QWidget):
             "corr_averaged": self.corr_avg_chk.isChecked(),
             "waterfall": self.waterfall_chk.isChecked(),
             "waterfall_depth": self.waterfall_depth.value(),
+            "waterfall_cmap": self.waterfall_cmap.currentText(),
+            "dirty_cmap": self.dirty_cmap.currentText(),
             "uv_phase": self.uv_phase_chk.isChecked(),
         }
 
-
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#--------------
 #  Main window
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#--------------
 class MainWindow(QMainWindow):
     def __init__(self, num_channels=4, shared=None):
         super().__init__()
@@ -497,33 +872,31 @@ class MainWindow(QMainWindow):
 
         self._axes = {}
         self._lines = {}
-        self._wf_buffers = {}   # (ptype, key) -> 2-D ndarray  (depth, P)
-        self._wf_images = {}   # (ptype, key) -> AxesImage
-        self._uv_scatter = {}  # ("uv", "amp"|"phase") -> PathCollection
-        self._uv_dirty_im = None   # AxesImage for dirty image
-        self._uv_grid_size = 128   # NxN grid for UV gridding / IFFT
-        self._dirty_result = None  # latest computed dirty image from correlate process
+        self._wf_buffers = {}           # (ptype, key) -> 2-D ndarray  (depth, P)
+        self._wf_images = {}            # (ptype, key) -> AxesImage
+        self._uv_scatter = {}           # ("uv", "amp"|"phase") -> PathCollection
+        self._uv_dirty_im = None        # AxesImage for dirty image
+        self._uv_grid_size = 128        # NxN grid for UV gridding / IFFT
+        self._dirty_result = None       # latest computed dirty image from correlate process
         self._dirty_result_new = False  # flag: new dirty image arrived this tick
-        self._needs_redraw = False  # track whether canvas actually needs redraw
-        self._uv_showing = False
-        # cached downsampled UV scatter data from correlate process
-        self._uv_scatter_data = None  # dict with u,v,amp,phase (downsampled float32)
+        self._needs_redraw = False      # track whether canvas actually needs redraw
+        self._uv_showing = False        # cached downsampled UV scatter data from correlate process
+        self._uv_scatter_data = None    # dict with u,v,amp,phase (downsampled float32)
         self._waterfall = False
         self._wf_depth = 100
         self._last_pfb_seq = -1
         self._last_avg_seq = -1
-        self._last_corr = {}       # cached latest instantaneous correlations
-        self._last_avg_corr = {}   # cached latest averaged correlations
+        self._last_corr = {}            # cached latest instantaneous correlations
+        self._last_avg_corr = {}        # cached latest averaged correlations
         self._active_plots = []
         self._freq_mhz = np.array([])
         self._paused = False
 
         self._build_ui()
         self._start_timer()
-        # Defer the first rebuild until the window has its real geometry
         QTimer.singleShot(0, self._rebuild_plots)
 
-    # ── layout ─────────────────────────────────────────────────
+    # UI layout and widget setup
     def _build_ui(self):
         # sidebar
         self.panel = SettingsPanel()
@@ -534,6 +907,7 @@ class MainWindow(QMainWindow):
         self.panel.display_settings_changed.connect(self._rebuild_plots)
         self.panel.clear_uv_btn.clicked.connect(self._clear_uv_data)
         self.panel.save_fits_btn.clicked.connect(self._save_fits)
+        self.panel.save_dirty_fits_btn.clicked.connect(self._save_dirty_fits)
         self.panel.fringe_fit_btn.clicked.connect(self._fringe_fit)
         self.panel.clear_cal_btn.clicked.connect(self._clear_cal)
         self.panel.uv_btn.clicked.connect(self._show_uv)
@@ -585,7 +959,7 @@ class MainWindow(QMainWindow):
             self._q_labels[qname] = lbl
         self.sbar.showMessage("Ready — waiting for first frame …")
 
-    # ── timer ──────────────────────────────────────────────────
+    # timer
     def _start_timer(self):
         self._timer = QTimer(self)
         self._timer.timeout.connect(self._update_plots)
@@ -595,13 +969,12 @@ class MainWindow(QMainWindow):
             lambda v: self._timer.setInterval(int(v * 1000))
         )
 
-    # ── plot grid rebuild ──────────────────────────────────────
+    # plot grid rebuild
     def _rebuild_plots(self):
         sel = self.panel.get_plot_selection()
         self.canvas.fig.clear()
         self._axes.clear()
         self._lines.clear()
-        # _wf_buffers are persistent — do NOT clear
         self._wf_images.clear()
         self._uv_scatter.clear()
         self._uv_dirty_im = None
@@ -615,7 +988,7 @@ class MainWindow(QMainWindow):
 
         # collect active plot descriptors
         if self._uv_showing:
-            # UV-only mode: show amplitude, optionally phase, plus dirty image
+            # UV-only mode: show amplitude, optionally phase, and dirty image
             self._active_plots.append(("uv", "amp"))
             if sel.get("uv_phase"):
                 self._active_plots.append(("uv", "phase"))
@@ -722,7 +1095,7 @@ class MainWindow(QMainWindow):
                     aspect="auto",
                     origin="lower",
                     extent=[f_lo, f_hi, 0, self._wf_depth],
-                    cmap="inferno",
+                    cmap=sel.get("waterfall_cmap", "inferno"),
                     interpolation="nearest",
                 )
                 self._wf_images[(ptype, key)] = im
@@ -735,7 +1108,7 @@ class MainWindow(QMainWindow):
                 N = self._uv_grid_size
                 blank = np.zeros((N, N))
                 im = ax.imshow(
-                    blank, origin="lower", cmap="inferno",
+                    blank, origin="lower", cmap=sel.get("dirty_cmap", "inferno"),
                     extent=[-1, 1, -1, 1], aspect="equal",
                     interpolation="nearest",
                 )
@@ -783,13 +1156,13 @@ class MainWindow(QMainWindow):
         self.canvas.fig.tight_layout(rect=[0, 0, 1, 0.96])
         self.canvas.draw_idle()
 
-    # ── pause toggle ───────────────────────────────────────────
+    # pause toggle
     def _toggle_pause(self, checked):
         self._paused = checked
         self._pause_btn.setText("▶  Resume" if checked else "⏸  Pause")
         self.sbar.showMessage("⏸  Display paused" if checked else "▶  Display resumed")
 
-    # ── UV view ────────────────────────────────────────────────
+    # UV view
     def _on_plot_selection_changed(self):
         self._uv_showing = False
         self._rebuild_plots()
@@ -797,6 +1170,25 @@ class MainWindow(QMainWindow):
     def _show_uv(self):
         self._uv_showing = True
         self._rebuild_plots()
+
+    def _save_dirty_fits(self):
+        """Ask the user for a path, then tell correlate_process to write the
+        current dirty image as a standard FITS image with WCS headers."""
+        path, _ = QFileDialog.getSaveFileName(
+            self, "Save Dirty Image as FITS",
+            time.strftime("dirty_image_%Y%m%d_%H%M%S.fits"),
+            "FITS files (*.fits);;All files (*)",
+        )
+        if not path:
+            return
+        if self._corr_config_queue is not None:
+            try:
+                self._corr_config_queue.put_nowait({"save_dirty_fits": path})
+                self.sbar.showMessage(f"Saving dirty image to {path} …")
+            except Exception as e:
+                QMessageBox.warning(self, "Save Error", f"Could not queue save request: {e}")
+        else:
+            QMessageBox.warning(self, "Save Error", "Correlator process not connected.")
 
     def _save_fits(self):
         """Ask the user for a file path, then tell correlate_process to write a FITS file."""
@@ -828,7 +1220,7 @@ class MainWindow(QMainWindow):
             QMessageBox.warning(self, "Calibration Error", "Correlator process not connected.")
 
     def _clear_cal(self):
-        """Remove fringe-fit calibration. Does NOT touch hardware."""
+        """Removes fringe-fit calibration """
         if self._corr_config_queue is not None:
             try:
                 self._corr_config_queue.put_nowait({"clear_cal": True})
@@ -850,7 +1242,7 @@ class MainWindow(QMainWindow):
         self._rebuild_plots()
         self.sbar.showMessage("UV data cleared")
 
-    # ── periodic data pull ─────────────────────────────────────
+    # periodic data pull (plot update)
     def _update_plots(self):
         if self._plot_queue is None:
             return
@@ -914,6 +1306,11 @@ class MainWindow(QMainWindow):
             self._last_pfb_seq = pfb_seq
         if avg_new:
             self._last_avg_seq = avg_seq
+            # update RFI flagger status label
+            ff = corr_frame.get("flagged_frac") if corr_frame else None
+            if ff is not None:
+                pct = 100.0 * float(ff)
+                self.panel.rfi_status_lbl.setText(f"Flagged: {pct:.1f}%")
 
         self._needs_redraw = False
 
@@ -1083,7 +1480,7 @@ class MainWindow(QMainWindow):
             f"LO: {self._fs / 1e6:.3f} MSps"
         )
 
-    # ── apply device settings ──────────────────────────────────
+    # apply device settings
     def _apply_device(self, cfg):
         if self._settings_queue is None:
             self.sbar.showMessage("⚠  No settings queue — settings not applied")
@@ -1112,7 +1509,7 @@ class MainWindow(QMainWindow):
             QMessageBox.warning(self, "Device Error", str(exc))
             self.sbar.showMessage(f"⚠  Device error: {exc}")
 
-    # ── apply PFB settings ─────────────────────────────────────
+    # apply PFB settings
     def _apply_pfb(self, cfg):
         try:
             new_p = cfg["P"]
@@ -1179,7 +1576,7 @@ class MainWindow(QMainWindow):
             QMessageBox.warning(self, "PFB Error", str(exc))
             self.sbar.showMessage(f"⚠  PFB error: {exc}")
 
-    # ── apply correlator / integration settings ──────────────────
+    # apply correlator / integration settings
     def _apply_corr(self, cfg):
         if self._corr_config_queue is None:
             return
@@ -1197,7 +1594,7 @@ class MainWindow(QMainWindow):
         except Exception as exc:
             self.sbar.showMessage(f"⚠  Correlator error: {exc}")
 
-    # ── handle resize so tight_layout stays correct ────────────
+    # handle resize
     def resizeEvent(self, event):
         super().resizeEvent(event)
         try:
@@ -1206,17 +1603,19 @@ class MainWindow(QMainWindow):
         except Exception:
             pass
 
-    # ── clean shutdown ─────────────────────────────────────────
+    # clean shutdown
     def closeEvent(self, event):
+        try:
+            self.panel._save_persistent()
+        except Exception as e:
+            print(f"Persistent settings save failed: {e}")
         self._timer.stop()
         if self._stop_event is not None:
             self._stop_event.set()
         event.accept()
 
 
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-#  Dark Fusion palette
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  Dark color palette
 def _apply_dark_palette(app: QApplication):
     p = QPalette()
     p.setColor(QPalette.Window,          QColor(53, 53, 53))
@@ -1241,11 +1640,8 @@ def _apply_dark_palette(app: QApplication):
     )
 
 
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-#  Public entry point  (replaces run_plot_loop)
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# Public entry point for launching the UI
 def run_ui(num_channels=4, shared=None):
-    """Launch the FX Correlator GUI.  Blocks until the window is closed."""
     app = QApplication.instance()
     if app is None:
         app = QApplication(sys.argv)

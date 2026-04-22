@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 
 """
-Test file for plotting basic iq graphs
+Standalone matplotlib animation plot loop (alternative to PyQt UI).
 
+  - run_plot_loop(): live plot of IQ + PFB + correlations using FuncAnimation
 """
 
 import numpy as np
