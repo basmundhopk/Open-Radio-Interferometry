@@ -1,5 +1,5 @@
 """
-Polyphase filter bank channelizer, prototype filter generator, and PFB worker process.
+Polyphase filter bank channelizer, prototype filter generator, and PFB worker process
 
   - generate_win_coeffs_np():    windowed-sinc prototype FIR taps of length L = M*P
   - db_mag():                    20·log10 magnitude in dB
@@ -105,7 +105,6 @@ def pfb_fir_frontend_np(x, h, M: int, P: int):
     return y
 
 
-#Function: PFB channelizer
 def pfb_channelize_np(x, M: int, P: int, window="hamming", fftshift=False, do_plot=False):
     h = generate_win_coeffs_np(M, P, window=window, normalize=True)
 
@@ -117,7 +116,6 @@ def pfb_channelize_np(x, M: int, P: int, window="hamming", fftshift=False, do_pl
 
     return X, h
 
-#Plot the channelized output
 def plot_channel_power(X, title="Average channel power"):
     # X shape: (frames, P)
     pwr = np.mean(np.abs(X)**2, axis=0)

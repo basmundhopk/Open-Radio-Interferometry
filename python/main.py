@@ -1,5 +1,13 @@
 """
-Main SDR data acquisition and visualization file.
+Main file for Open Radio Interferometry.
+
+This script initialize multiple shared states and processes that allow for the parralization of the signal pipeline.
+
+Main process runs the UI powered by PyQt5.
+
+Secondary porcesses for initializing/reading from the SDR, performing the PFB, and performing correlation.
+
+Any entry point for further development should be made by adding a process, or modifying an existing process.
 
 """
 import multiprocessing as mp
@@ -16,7 +24,7 @@ if __name__ == "__main__":
 
     shared = create_shared_state()
 
-    # pre-load last session's settings (QSettings)
+    # Pre-loading settings to allow saving cross session configurations.
     try:
         device_cfg, pfb_cfg, corr_cfg, frame_size = load_persistent_configs()
         shared["settings_queue"].put({"frame_size": frame_size,
@@ -35,6 +43,7 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"main: could not pre-queue persistent settings: {e}")
 
+    # Shared queues for multi processing.
     monitor_queues = {
         "pfb": shared["pfb_queue"],
         "plot": shared["plot_queue"],
@@ -43,7 +52,7 @@ if __name__ == "__main__":
         "pfb_cfg": shared["pfb_config_queue"],
         "corr_cfg": shared["corr_config_queue"],
     }
-
+    
     read_proc = mp.Process(
         target=data_read,
         args=(SDR_URI, shared["raw_queue"], shared["settings_queue"],

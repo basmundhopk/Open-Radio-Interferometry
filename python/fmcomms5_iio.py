@@ -1,5 +1,5 @@
 """
-FMComms5 SDR data acquisition.
+File contatining functions for initialziing shared queues, applying FMComms5 configurations, and reading out data from the FPGA.
 
   - create_shared_state():  shared multiprocessing queues / events used by all workers
   - _apply_sdr_config():    push a runtime-config dict to the SDR hardware
@@ -13,7 +13,8 @@ import time
 
 from settings import QUEUE_SIZE, FRAME_SIZE
 
-
+# Shared state needs ample queue sizes to avoid dropped frames
+# If queues overflow, reduce sampling rate
 def create_shared_state():
     return {
         "raw_queue":         mp.Queue(maxsize=QUEUE_SIZE),
@@ -26,7 +27,7 @@ def create_shared_state():
         "stop_event":        mp.Event(),
     }
 
-
+# Settings are not currently applyable to individual channels
 def _apply_sdr_config(sdr, cfg, _last={}):
     mode = cfg.get("gain_control_mode")
     if mode is not None and mode != _last.get("gain_control_mode"):
@@ -122,7 +123,6 @@ def data_read(uri, raw_queue, settings_queue, stop_event, monitor_queues=None):
     t_call = time.perf_counter()
 
     while not stop_event.is_set():
-        # ── check for runtime settings changes from the UI ──
         try:
             while True:
                 cfg = settings_queue.get_nowait()
