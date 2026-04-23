@@ -1,5 +1,5 @@
 """
-PyQt5 + Matplotlib GUI for the FX Correlator.
+PyQt5 + Matplotlib GUI for the UI process.
 
   - PlotCanvas:           matplotlib canvas widget embedded in Qt
   - SettingsPanel:        runtime control panel (SDR / PFB / correlator settings)
@@ -70,80 +70,61 @@ from pfb import generate_win_coeffs_np
 # ──────────────────────────────────────────────────────────────────────────
 def load_persistent_configs():
     """
-    Read persistent settings via QSettings and return
-    (device_cfg, pfb_cfg, corr_cfg, frame_size).
+    Build startup config dicts from the already-loaded settings object.
+
+    settings.load() runs automatically on import and reads all persisted
+    values from QSettings, so device/pfb/correlator/antenna values are
+    read directly from settings attributes here.  Only the UI-only keys
+    that are not tracked by the settings class (fringe_stop, rfi_*, etc.)
+    still need a direct QSettings read.
 
     Returned dicts are ready to be put directly on
     shared["settings_queue"], shared["pfb_config_queue"], and
     shared["corr_config_queue"] respectively.
     """
-    qs = QSettings("FX_Correlator", "FX_Correlator")
-
-    def _f(k, d):
-        return float(qs.value(k, d, type=float))
-
-    def _i(k, d):
-        return int(qs.value(k, d, type=int))
-
-    def _b(k, d):
-        raw = qs.value(k, d)
-        if isinstance(raw, str):
-            return raw.lower() in ("true", "1", "yes", "on")
-        return bool(raw)
-
-    def _s(k, d):
-        return str(qs.value(k, d, type=str))
-
     S = settings
 
-    # ── device ──
-    lo_offset_hz = int(_f("device/lo_offset_khz", S.LO_OFFSET_KHZ) * 1e3)
-    target_lo_hz = int(_f("device/rx_lo_mhz", S.rx_lo / 1e6) * 1e6)
+    lo_offset_hz = int(S.LO_OFFSET_KHZ * 1e3)
     device_cfg = {
-        "rx_lo":              target_lo_hz + lo_offset_hz,
-        "rx_rf_bandwidth":    int(_f("device/rf_bw_mhz",    S.rx_rf_bandwidth / 1e6) * 1e6),
-        "rx_sample_rate":     int(_f("device/sample_rate_mhz", S.rx_sample_rate / 1e6) * 1e6),
-        "gain_control_mode":  _s("device/gain_mode",       S.gain_control_mode),
-        "rx_gain":            _i("device/gain_db",         S.rx_gain),
-        "loopback":           int(S.loopback),  # not persisted per _build_persistent_registry
-        "lo_offset_hz":       lo_offset_hz,
+        "rx_lo":             S.rx_lo + lo_offset_hz,
+        "rx_rf_bandwidth":   S.rx_rf_bandwidth,
+        "rx_sample_rate":    S.rx_sample_rate,
+        "gain_control_mode": S.gain_control_mode,
+        "rx_gain":           S.rx_gain,
+        "loopback":          int(S.loopback),
+        "lo_offset_hz":      lo_offset_hz,
     }
 
-    # ── pfb ──
     pfb_cfg = {
-        "PFB_ENABLE":     _b("pfb/enabled",       S.PFB_ENABLE),
-        "P":              _i("pfb/fft_size",      S.P),
-        "M":              _i("pfb/taps_M",        S.M),
-        "PFB_WINDOW":     _s("pfb/window",        S.PFB_WINDOW),
-        "PFB_FFTSHIFT":   _b("pfb/fftshift",      S.PFB_FFTSHIFT),
-        "DC_NOTCH_KHZ":   _f("pfb/dc_notch_khz",  S.DC_NOTCH_KHZ),
+        "PFB_ENABLE":   S.PFB_ENABLE,
+        "P":            S.P,
+        "M":            S.M,
+        "PFB_WINDOW":   S.PFB_WINDOW,
+        "PFB_FFTSHIFT": S.PFB_FFTSHIFT,
+        "DC_NOTCH_KHZ": S.DC_NOTCH_KHZ,
     }
 
-    # ── frame size follows P (the PFB FFT length) ──
-    frame_size = int(pfb_cfg["P"])
+    frame_size = S.P
 
-    # ── correlator / integration / UV / RFI ──
-    ant_positions = []
-    for ai in range(4):
-        e_def = S.ANTENNA_POSITIONS_ENU[ai][0] if ai < len(S.ANTENNA_POSITIONS_ENU) else 0.0
-        n_def = S.ANTENNA_POSITIONS_ENU[ai][1] if ai < len(S.ANTENNA_POSITIONS_ENU) else 0.0
-        ant_positions.append((
-            _f(f"ant/{ai}_east",  e_def),
-            _f(f"ant/{ai}_north", n_def),
-            0.0,
-        ))
+    # fringe/RFI/normalisation are UI-only — not tracked by the settings class
+    qs = QSettings("FX_Correlator", "FX_Correlator")
+    def _b(k, d):
+        raw = qs.value(k, d)
+        return raw.lower() in ("true", "1", "yes", "on") if isinstance(raw, str) else bool(raw)
+    def _f(k, d): return float(qs.value(k, d, type=float))
+
     corr_cfg = {
-        "integration_count":    _i("corr/integration_count",   S.INTEGRATION_COUNT),
-        "ifft_grid_size":       _i("corr/ifft_grid_size",      int(S.IFFT_GRID_SIZE)),
-        "source_ra_deg":        _f("corr/source_ra_deg",       float(S.SOURCE_RA_DEG)),
-        "source_dec_deg":       _f("corr/source_dec_deg",      float(S.OBSERVATION_DECLINATION_DEG)),
-        "fringe_stop":          _b("corr/fringe_stop",         True),
-        "autocorr_norm_cross":  _b("corr/autocorr_norm_cross", True),
-        "autocorr_norm_autos":  _b("corr/autocorr_norm_autos", False),
-        "rfi_flag":             _b("corr/rfi_flag",            True),
-        "rfi_sigma":            _f("corr/rfi_sigma",           5.0),
-        "antenna_positions":    ant_positions,
-        "dc_notch_khz":         pfb_cfg["DC_NOTCH_KHZ"],
+        "integration_count":   S.INTEGRATION_COUNT,
+        "ifft_grid_size":      int(S.IFFT_GRID_SIZE),
+        "source_ra_deg":       float(S.SOURCE_RA_DEG),
+        "source_dec_deg":      float(S.OBSERVATION_DECLINATION_DEG),
+        "fringe_stop":         _b("corr/fringe_stop",         True),
+        "autocorr_norm_cross": _b("corr/autocorr_norm_cross", True),
+        "autocorr_norm_autos": _b("corr/autocorr_norm_autos", False),
+        "rfi_flag":            _b("corr/rfi_flag",            True),
+        "rfi_sigma":           _f("corr/rfi_sigma",           5.0),
+        "antenna_positions":   list(S.ANTENNA_POSITIONS_ENU),
+        "dc_notch_khz":        S.DC_NOTCH_KHZ,
     }
 
     return device_cfg, pfb_cfg, corr_cfg, frame_size
@@ -170,10 +151,9 @@ _MPL_DARK = {
 }
 matplotlib.rcParams.update(_MPL_DARK)
 
+# 10 correlation products for 4 antennas: 4 auto + 6 unique cross products
 CORR_KEYS = ["00", "01", "02", "03", "11", "12", "13", "22", "23", "33"]
 
-
-#  Matplotlib canvas widget
 class PlotCanvas(FigureCanvasQTAgg):
     def __init__(self, parent=None, dpi=100):
         self.fig = Figure(dpi=dpi)
@@ -182,7 +162,6 @@ class PlotCanvas(FigureCanvasQTAgg):
         self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
 
-#  Settings panel (left sidebar)
 class SettingsPanel(QWidget):
     """All user-tweakable knobs live here."""
 
@@ -196,7 +175,6 @@ class SettingsPanel(QWidget):
         super().__init__(parent)
         self._init_ui()
 
-    # ── build ──────────────────────────────────────────────────
     def _init_ui(self):
         root = QVBoxLayout(self)
         root.setContentsMargins(6, 6, 6, 6)
@@ -261,7 +239,6 @@ class SettingsPanel(QWidget):
         dev.setLayout(df)
         root.addWidget(dev)
 
-        # PFB Settings
         pfb = QGroupBox("PFB Settings")
         pf = QFormLayout()
 
@@ -733,6 +710,7 @@ class SettingsPanel(QWidget):
 
     def _reset_to_defaults(self):
         self._qs.clear()
+        settings.reset()   # restore in-memory settings object to factory defaults
         for key, w, default, kind in self._persistent_widgets:
             try:
                 if kind == "double":
@@ -752,7 +730,11 @@ class SettingsPanel(QWidget):
             except Exception as e:
                 print(f"persistent reset failed for {key}: {e}")
         self._qs.sync()
-        print("Settings reset to factory defaults — click each Apply button to push to workers.")
+        # Auto-apply all three groups so workers immediately receive factory defaults
+        self._on_apply_device()
+        self._on_apply_pfb()
+        self._on_apply_corr()
+        print("Settings reset to factory defaults and applied to all workers.")
 
     # helpers 
     def _on_pfb_enable_toggled(self, enabled):
@@ -844,9 +826,7 @@ class SettingsPanel(QWidget):
             "uv_phase": self.uv_phase_chk.isChecked(),
         }
 
-#--------------
-#  Main window
-#--------------
+
 class MainWindow(QMainWindow):
     def __init__(self, num_channels=4, shared=None):
         super().__init__()
@@ -1640,7 +1620,6 @@ def _apply_dark_palette(app: QApplication):
     )
 
 
-# Public entry point for launching the UI
 def run_ui(num_channels=4, shared=None):
     app = QApplication.instance()
     if app is None:
