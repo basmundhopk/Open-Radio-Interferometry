@@ -29,7 +29,6 @@ from datetime import datetime, timezone, timedelta
 
 import settings
 
-# Dark palette 
 def _apply_dark_palette(app):
     p = QPalette()
     p.setColor(QPalette.Window,          QColor(53, 53, 53))
@@ -62,7 +61,7 @@ _MPL_DARK = {
 matplotlib.rcParams.update(_MPL_DARK)
 
 
-# ── Sidereal-time helpers ─────────────────────────────────────
+# Sidereal-time helpers
 def _utc_to_jd(dt):
     y, m = dt.year, dt.month
     if m <= 2:
@@ -101,7 +100,6 @@ def compute_uv_track(bl_enu, times, lat_deg, lon_deg, dec_deg, freq_hz, ra_deg=0
     return u, v
 
 
-# ── GUI ───────────────────────────────────────────────────────
 class SimWindow(QMainWindow):
     def __init__(self):
         super().__init__()
