@@ -34,7 +34,7 @@ class _Settings(types.ModuleType):
     _DEFAULTS = dict(
         # IIO
         FRAME_SIZE                   = 4096,
-        BUFFER_SIZE                  = 4096 * 100,
+        BUFFER_FRAMES                = 100,          # of frames
         QUEUE_SIZE                   = 10000,
         
         # PFB
@@ -54,7 +54,6 @@ class _Settings(types.ModuleType):
         rx_lo                        = 1420400000,      # carrier frequency (Hz)
         rx_rf_bandwidth              = 2000000,         # filter bandwidth (Hz)
         rx_sample_rate               = 2500000,         # sample rate (Hz)
-        rx_buffer                    = 4096 * 100,      # RX buffer size (samples)
         rx_output_type               = 'raw',           # 'raw' or 'SI'
         rx_channels                  = [0, 1, 2, 3],
         rx_annotated                 = False,
@@ -79,6 +78,14 @@ class _Settings(types.ModuleType):
         ],
         CHANNEL_TO_ANTENNA           = {0: 0, 1: 1, 2: 2, 3: 3},
     )
+
+    @property
+    def BUFFER_SIZE(self):
+        return self.P * self.BUFFER_FRAMES
+
+    @property
+    def rx_buffer(self):
+        return self.P * self.BUFFER_FRAMES
 
     def __init__(self, name, doc=""):
         super().__init__(name, doc)
@@ -109,8 +116,6 @@ class _Settings(types.ModuleType):
             self.PFB_ENABLE              = _b("pfb/enabled",              self.PFB_ENABLE)
             self.P                       = _i("pfb/fft_size",             self.P)
             self.FRAME_SIZE              = self.P           # kept in sync with P
-            self.BUFFER_SIZE             = self.P * 100
-            self.rx_buffer               = self.BUFFER_SIZE
             self.M                       = _i("pfb/taps_M",               self.M)
             self.PFB_WINDOW              = _s("pfb/window",               self.PFB_WINDOW)
             self.PFB_FFTSHIFT            = _b("pfb/fftshift",             self.PFB_FFTSHIFT)

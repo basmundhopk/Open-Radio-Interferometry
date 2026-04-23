@@ -1504,7 +1504,6 @@ class MainWindow(QMainWindow):
             settings.PFB_FFTSHIFT = cfg["PFB_FFTSHIFT"]
             settings.DC_NOTCH_KHZ = cfg.get("DC_NOTCH_KHZ", 0)
             settings.FRAME_SIZE = new_p
-            settings.BUFFER_SIZE = new_p * 100
 
             # send DC notch setting to correlate_process
             if self._corr_config_queue is not None:
