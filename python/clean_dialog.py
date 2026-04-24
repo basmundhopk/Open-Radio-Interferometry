@@ -33,6 +33,7 @@ from PyQt5.QtWidgets import (
     QDialog,
     QVBoxLayout,
     QHBoxLayout,
+    QGridLayout,
     QLabel,
     QPushButton,
     QSpinBox,
@@ -188,15 +189,17 @@ class CleanDialog(QDialog):
         # control bar
         ctrl_row = QHBoxLayout()
 
-        # parameters group
+        # parameters group (2x2 grid: label + spin per cell)
         param_grp = QGroupBox("Parameters")
-        pf = QFormLayout()
+        pg_layout = QGridLayout()
+        pg_layout.setHorizontalSpacing(8)
+        pg_layout.setVerticalSpacing(4)
+
         self.gain_spin = QDoubleSpinBox()
         self.gain_spin.setRange(0.01, 1.0)
         self.gain_spin.setDecimals(2)
         self.gain_spin.setSingleStep(0.05)
         self.gain_spin.setValue(gain)
-        pf.addRow("Loop Gain:", self.gain_spin)
 
         self.threshold_spin = QDoubleSpinBox()
         self.threshold_spin.setRange(0.0001, 1.0)
@@ -204,13 +207,11 @@ class CleanDialog(QDialog):
         self.threshold_spin.setSingleStep(0.01)
         self.threshold_spin.setValue(threshold)
         self.threshold_spin.setSuffix("  × peak")
-        pf.addRow("Threshold:", self.threshold_spin)
 
         self.max_iter_spin = QSpinBox()
         self.max_iter_spin.setRange(1, 1000000)
         self.max_iter_spin.setSingleStep(100)
         self.max_iter_spin.setValue(max_iter)
-        pf.addRow("Run-All Cap:", self.max_iter_spin)
 
         # Image resolution (re-grids the UV snapshot on change)
         self.res_combo = QComboBox()
@@ -223,39 +224,65 @@ class CleanDialog(QDialog):
         self.res_combo.setToolTip(
             "Image grid size (NxN). Changing this re-grids the UV "
             "snapshot and resets the CLEAN state.")
-        pf.addRow("Resolution:", self.res_combo)
 
-        param_grp.setLayout(pf)
+        # 2x2 layout: (Loop Gain | Threshold) / (Run-All Cap | Resolution)
+        cells = [
+            ("Loop Gain:",   self.gain_spin),
+            ("Threshold:",   self.threshold_spin),
+            ("Run-All Cap:", self.max_iter_spin),
+            ("Resolution:",  self.res_combo),
+        ]
+        for i, (text, widget) in enumerate(cells):
+            r, c = divmod(i, 2)
+            lbl = QLabel(text)
+            lbl.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
+            pg_layout.addWidget(lbl,    r, 2 * c)
+            pg_layout.addWidget(widget, r, 2 * c + 1)
+
+        param_grp.setLayout(pg_layout)
         ctrl_row.addWidget(param_grp)
 
-        # step buttons
+        # step buttons (compact column on the right)
         step_grp = QGroupBox("Iterate")
         sl = QHBoxLayout()
+        sl.setContentsMargins(6, 4, 6, 4)
+        sl.setSpacing(4)
         self.btn_1    = QPushButton("+1")
         self.btn_10   = QPushButton("+10")
         self.btn_100  = QPushButton("+100")
         self.btn_1000 = QPushButton("+1000")
-        self.btn_run  = QPushButton("▶  Run to Convergence")
+        self.btn_run  = QPushButton("▶  Run")
         self.btn_reset= QPushButton("↺  Reset")
         self.btn_rescale = QPushButton("🔆  Rescale")
         self.btn_rescale.setToolTip(
             "Re-stretch every panel's brightness range to its current "
             "min/max. After rescaling, the on-screen view matches what "
             "would be saved as PNG.")
+        self.btn_run.setToolTip("Run to convergence (or stop if already running)")
         for b in (self.btn_1, self.btn_10, self.btn_100, self.btn_1000):
             b.setMinimumWidth(56)
-        self.btn_run.setMinimumWidth(170)
+            b.setMaximumWidth(80)
+        for b in (self.btn_run, self.btn_reset, self.btn_rescale):
+            b.setMinimumWidth(90)
         for b in (self.btn_1, self.btn_10, self.btn_100, self.btn_1000,
                   self.btn_run, self.btn_rescale, self.btn_reset):
+            b.setMinimumHeight(36)
             sl.addWidget(b)
         step_grp.setLayout(sl)
-        ctrl_row.addWidget(step_grp, 1)
-        root.addLayout(ctrl_row)
-
-        # status line
+        # status line lives directly under the Iterate row so it doesn't
+        # consume an extra full-width strip above the plots.
         self.status_lbl = QLabel("ready  —  right-click any panel to save it")
-        self.status_lbl.setStyleSheet("font-size: 11px; color: #cccccc; padding: 4px;")
-        root.addWidget(self.status_lbl)
+        self.status_lbl.setStyleSheet(
+            "font-size: 11px; color: #cccccc; padding: 2px 6px;")
+
+        right_col = QVBoxLayout()
+        right_col.setContentsMargins(0, 0, 0, 0)
+        right_col.setSpacing(2)
+        right_col.addWidget(step_grp)
+        right_col.addWidget(self.status_lbl)
+        right_col.addStretch(1)
+        ctrl_row.addLayout(right_col, 1)
+        root.addLayout(ctrl_row)
 
         # ---- pyqtgraph 2x2 panel grid -----------------------------------
         self.gview = pg.GraphicsLayoutWidget()

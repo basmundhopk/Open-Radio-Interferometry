@@ -228,7 +228,17 @@ class SimWindow(QMainWindow):
         self.start_hour  = _LabeledSlider(-48.0, 48.0, 0.0, step=0.25, suffix=" h")
         tf.addRow("Start offset:", self.start_hour)
         self.duration_spin = _LabeledSlider(0.1, 24.0, 6.0, step=0.1, suffix=" h")
-        tf.addRow("Duration:",     self.duration_spin)
+        dur_row = QWidget(); _dl = QHBoxLayout(dur_row)
+        _dl.setContentsMargins(0, 0, 0, 0); _dl.setSpacing(4)
+        _dl.addWidget(self.duration_spin, stretch=1)
+        self.duration_sweep_btn = QPushButton("▶")
+        self.duration_sweep_btn.setCheckable(True)
+        self.duration_sweep_btn.setFixedWidth(28)
+        self.duration_sweep_btn.setToolTip(
+            "Sweep duration 1→ 24→ 1 h continuously")
+        self.duration_sweep_btn.toggled.connect(self._toggle_duration_sweep)
+        _dl.addWidget(self.duration_sweep_btn)
+        tf.addRow("Duration:", dur_row)
         self.steps_spin    = QSpinBox(); self.steps_spin.setRange(50, 5000)
         self.steps_spin.setSingleStep(10); self.steps_spin.setValue(500)
         tf.addRow("Time steps:",   self.steps_spin)
@@ -418,6 +428,37 @@ class SimWindow(QMainWindow):
     def _run_pending_recalc(self):
         self._recalc_pending = False
         self._recalculate()
+
+    # Duration sweep ---------------------------------------------------
+    _SWEEP_MIN_H = 1.0
+    _SWEEP_MAX_H = 24.0
+    _SWEEP_STEP_H = 0.1   # change per tick
+    _SWEEP_INTERVAL_MS = 50
+
+    def _toggle_duration_sweep(self, on):
+        if on:
+            self.duration_sweep_btn.setText("■")
+            if not hasattr(self, "_sweep_timer"):
+                self._sweep_timer = QTimer(self)
+                self._sweep_timer.timeout.connect(self._sweep_tick)
+            # If we're already at the top, restart from the bottom so the
+            # button always produces a visible sweep.
+            if self.duration_spin.value() >= self._SWEEP_MAX_H:
+                self.duration_spin.setValue(self._SWEEP_MIN_H)
+            self._sweep_timer.start(self._SWEEP_INTERVAL_MS)
+        else:
+            self.duration_sweep_btn.setText("▶")
+            if hasattr(self, "_sweep_timer"):
+                self._sweep_timer.stop()
+
+    def _sweep_tick(self):
+        v = self.duration_spin.value() + self._SWEEP_STEP_H
+        if v >= self._SWEEP_MAX_H:
+            self.duration_spin.setValue(self._SWEEP_MAX_H)
+            # Stop the sweep when we hit the cap.
+            self.duration_sweep_btn.setChecked(False)
+            return
+        self.duration_spin.setValue(v)  # triggers _schedule_recalc via slider
 
     def _reset_defaults(self):
         """Restore every control to the value in settings._DEFAULTS."""
