@@ -17,7 +17,7 @@ from pfb import pfb_process
 from correlator import correlate_process
 from ui import run_ui, load_persistent_configs
 
-SDR_URI = "ip:192.168.1.2"
+SDR_URI = "ip:analog.local"
 
 if __name__ == "__main__":
     mp.set_start_method("spawn", force=True)

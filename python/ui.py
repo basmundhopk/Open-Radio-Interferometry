@@ -1,7 +1,7 @@
 """
-PyQt5 + Matplotlib GUI for the UI process.
+PyQt5 + pyqtgraph GUI for the UI process.
 
-  - PlotCanvas:           matplotlib canvas widget embedded in Qt
+  - PlotCanvas:           pyqtgraph GraphicsLayoutWidget embedded in Qt
   - SettingsPanel:        runtime control panel (SDR / PFB / correlator settings)
   - MainWindow:           top-level window with all plots and dock panels
   - _apply_dark_palette(): apply dark theme palette to a QApplication
@@ -13,14 +13,16 @@ import math
 import time
 import numpy as np
 
-import matplotlib
-matplotlib.use("Qt5Agg")
+import pyqtgraph as pg
 
-from matplotlib.backends.backend_qt5agg import (
-    FigureCanvasQTAgg,
-    NavigationToolbar2QT,
+# pyqtgraph global config — dark theme, antialias, row-major image axes
+pg.setConfigOptions(
+    antialias=True,
+    background="#1e1e1e",
+    foreground="#cccccc",
+    imageAxisOrder="row-major",
+    useOpenGL=False,
 )
-from matplotlib.figure import Figure
 
 from PyQt5.QtWidgets import (
     QApplication,
@@ -129,37 +131,36 @@ def load_persistent_configs():
 
     return device_cfg, pfb_cfg, corr_cfg, frame_size
 
-_MPL_DARK = {
-    "figure.facecolor": "#2b2b2b",
-    "axes.facecolor": "#1e1e1e",
-    "axes.edgecolor": "#555555",
-    "axes.labelcolor": "#cccccc",
-    "axes.titlesize": 9,
-    "axes.labelsize": 8,
-    "text.color": "#cccccc",
-    "xtick.color": "#aaaaaa",
-    "ytick.color": "#aaaaaa",
-    "xtick.labelsize": 7,
-    "ytick.labelsize": 7,
-    "grid.color": "#444444",
-    "grid.alpha": 0.5,
-    "legend.fontsize": 7,
-    "legend.facecolor": "#2b2b2b",
-    "legend.edgecolor": "#555555",
-    "figure.titlesize": 11,
-    "lines.linewidth": 0.8,
-}
-matplotlib.rcParams.update(_MPL_DARK)
+_TITLE_STYLE = {"color": "#cccccc", "size": "9pt"}
+_LABEL_STYLE = {"color": "#cccccc", "font-size": "8pt"}
+
+
+def _get_cmap(name, fallback="inferno"):
+    """Return a pyqtgraph ColorMap by name; fall back to a built-in if missing."""
+    try:
+        cm = pg.colormap.get(name)
+        if cm is not None:
+            return cm
+    except Exception:
+        pass
+    try:
+        return pg.colormap.get(fallback)
+    except Exception:
+        # absolute last resort — grayscale
+        return pg.ColorMap([0.0, 1.0], [(0, 0, 0, 255), (255, 255, 255, 255)])
+
 
 # 10 correlation products for 4 antennas: 4 auto + 6 unique cross products
 CORR_KEYS = ["00", "01", "02", "03", "11", "12", "13", "22", "23", "33"]
 
-class PlotCanvas(FigureCanvasQTAgg):
-    def __init__(self, parent=None, dpi=100):
-        self.fig = Figure(dpi=dpi)
-        super().__init__(self.fig)
-        self.setParent(parent)
+
+class PlotCanvas(pg.GraphicsLayoutWidget):
+    """Thin wrapper around pg.GraphicsLayoutWidget for a consistent API."""
+
+    def __init__(self, parent=None):
+        super().__init__(parent=parent)
         self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        self.setBackground("#1e1e1e")
 
 
 class SettingsPanel(QWidget):
@@ -908,13 +909,12 @@ class MainWindow(QMainWindow):
         central = QWidget()
         cl = QVBoxLayout(central)
         cl.setContentsMargins(0, 0, 0, 0)
-        self.canvas = PlotCanvas(central, dpi=100)
-        self.toolbar = NavigationToolbar2QT(self.canvas, central)
+        self.canvas = PlotCanvas(central)
 
-        # pause button (sits beside the mpl toolbar)
+        # pause button (no mpl toolbar — pyqtgraph has built-in mouse zoom/pan)
         toolbar_row = QHBoxLayout()
         toolbar_row.setContentsMargins(0, 0, 0, 0)
-        toolbar_row.addWidget(self.toolbar, stretch=1)
+        toolbar_row.addStretch(1)
         self._pause_btn = QPushButton("⏸  Pause")
         self._pause_btn.setCheckable(True)
         self._pause_btn.setFixedWidth(100)
@@ -952,7 +952,7 @@ class MainWindow(QMainWindow):
     # plot grid rebuild
     def _rebuild_plots(self):
         sel = self.panel.get_plot_selection()
-        self.canvas.fig.clear()
+        self.canvas.clear()
         self._axes.clear()
         self._lines.clear()
         self._wf_images.clear()
@@ -981,30 +981,31 @@ class MainWindow(QMainWindow):
                 for i in range(4):
                     if sel["pfb"].get(i):
                         self._active_plots.append(("pfb", i))
-                for k in CORR_KEYS:
+                # Autos first (in channel order) so they line up with IQ/PFB columns,
+                # then crosses.
+                auto_keys  = ["00", "11", "22", "33"]
+                cross_keys = [k for k in CORR_KEYS if k not in auto_keys]
+                for k in auto_keys + cross_keys:
                     if sel["corr"].get(k):
                         self._active_plots.append(("corr", k))
 
         n = len(self._active_plots)
         if n == 0:
-            ax = self.canvas.fig.add_subplot(111)
-            ax.text(
-                0.5, 0.5, "No plots selected",
-                ha="center", va="center", fontsize=16, color="#888888",
-                transform=ax.transAxes,
+            placeholder = self.canvas.addLabel(
+                "No plots selected", row=0, col=0,
+                color="#888888", size="14pt",
             )
-            ax.set_xticks([])
-            ax.set_yticks([])
-            self.canvas.draw_idle()
             return
 
-        # choose grid layout: square-ish for PFB-only or IQ-only, wide otherwise
+        # Layout: fill columns top-to-bottom in groups of 4, then add columns.
+        # UV mode keeps its existing horizontal arrangement.
         ptypes = {p for p, _ in self._active_plots}
-        if ptypes <= {"pfb", "iq"} and len(ptypes) == 1:
-            cols = math.ceil(math.sqrt(n))
-        else:
+        if "uv" in ptypes:
             cols = min(n, 4)
-        rows = math.ceil(n / cols)
+            rows = math.ceil(n / cols)
+        else:
+            rows = min(n, 4)
+            cols = math.ceil(n / rows)
 
         # recompute frequency axis
         freq = np.fft.fftfreq(self._P, d=1.0 / self._fs)
@@ -1012,56 +1013,61 @@ class MainWindow(QMainWindow):
             freq = np.fft.fftshift(freq)
         self._freq_mhz = freq / 1e6
 
-        f_lo = self._freq_mhz[0]  if len(self._freq_mhz) else 0
-        f_hi = self._freq_mhz[-1] if len(self._freq_mhz) else 1
+        f_lo = float(self._freq_mhz[0])  if len(self._freq_mhz) else 0.0
+        f_hi = float(self._freq_mhz[-1]) if len(self._freq_mhz) else 1.0
+
+        wf_cmap_name    = sel.get("waterfall_cmap", "inferno")
+        dirty_cmap_name = sel.get("dirty_cmap", "inferno")
 
         for idx, (ptype, key) in enumerate(self._active_plots):
-            ax = self.canvas.fig.add_subplot(rows, cols, idx + 1)
-            self._axes[(ptype, key)] = ax
+            if "uv" in ptypes:
+                row, col = divmod(idx, cols)         # row-major for UV mode
+            else:
+                col, row = divmod(idx, rows)         # column-major: fill down first
+            plot = self.canvas.addPlot(row=row, col=col)
+            plot.showGrid(x=True, y=True, alpha=0.3)
+            plot.getAxis("left").setPen("#666666")
+            plot.getAxis("bottom").setPen("#666666")
+            self._axes[(ptype, key)] = plot
 
             use_wf = self._waterfall and ptype == "corr"
 
             if ptype == "iq":
                 if self._iq_component == "I Only":
-                    li, = ax.plot([], [], label="I", alpha=0.85)
+                    li = plot.plot([], [], pen=pg.mkPen("#1f77b4", width=1), name="I")
                     self._lines[(ptype, key)] = (li, None)
-                    ax.set_title(f"I Channel {key}", fontsize=9)
+                    plot.setTitle(f"I Channel {key}", **_TITLE_STYLE)
                 elif self._iq_component == "Q Only":
-                    lq, = ax.plot([], [], label="Q", color="tab:orange", alpha=0.85)
+                    lq = plot.plot([], [], pen=pg.mkPen("#ff7f0e", width=1), name="Q")
                     self._lines[(ptype, key)] = (None, lq)
-                    ax.set_title(f"Q Channel {key}", fontsize=9)
+                    plot.setTitle(f"Q Channel {key}", **_TITLE_STYLE)
                 else:
-                    li, = ax.plot([], [], label="I", alpha=0.85)
-                    lq, = ax.plot([], [], label="Q", alpha=0.85)
+                    plot.addLegend(offset=(-5, 5), labelTextColor="#cccccc")
+                    li = plot.plot([], [], pen=pg.mkPen("#1f77b4", width=1), name="I")
+                    lq = plot.plot([], [], pen=pg.mkPen("#ff7f0e", width=1), name="Q")
                     self._lines[(ptype, key)] = (li, lq)
-                    ax.set_title(f"IQ Channel {key}", fontsize=9)
-                ax.set_xlabel("Sample")
-                ax.legend(loc="upper right")
-                ax.grid(True)
+                    plot.setTitle(f"IQ Channel {key}", **_TITLE_STYLE)
+                plot.setLabel("bottom", "Sample", **_LABEL_STYLE)
 
             elif ptype == "pfb":
-                lp, = ax.plot([], [], color="tab:green", alpha=0.85)
+                lp = plot.plot([], [], pen=pg.mkPen("#2ca02c", width=1))
                 self._lines[(ptype, key)] = (lp,)
-                ax.set_title(f"PFB Ch {key}  (dB)", fontsize=9)
-                ax.set_xlabel("Frequency (MHz)")
-                ax.grid(True)
+                plot.setTitle(f"PFB Ch {key}  (dB)", **_TITLE_STYLE)
+                plot.setLabel("bottom", "Frequency (MHz)", **_LABEL_STYLE)
 
             elif ptype == "corr" and not use_wf:
                 a, b = int(key[0]), int(key[1])
                 tag = f"Auto {a}" if a == b else f"Cross {a}×{b}"
-                lc, = ax.plot([], [], color="tab:purple", alpha=0.85)
+                lc = plot.plot([], [], pen=pg.mkPen("#9467bd", width=1))
                 self._lines[(ptype, key)] = (lc,)
-                ax.set_title(f"{tag}  (dB)", fontsize=9)
-                ax.set_xlabel("Frequency (MHz)")
-                ax.grid(True)
+                plot.setTitle(f"{tag}  (dB)", **_TITLE_STYLE)
+                plot.setLabel("bottom", "Frequency (MHz)", **_LABEL_STYLE)
                 # seed with cached data so plot is immediately visible
                 src = self._last_avg_corr if self._corr_averaged else self._last_corr
                 if src and key in src:
-                    row = 10 * np.log10(np.abs(src[key]) + 1e-12)
-                    if row.shape[0] == self._freq_mhz.shape[0]:
-                        lc.set_data(self._freq_mhz, row)
-                        ax.relim()
-                        ax.autoscale_view()
+                    row_data = 10 * np.log10(np.abs(src[key]) + 1e-12)
+                    if row_data.shape[0] == self._freq_mhz.shape[0]:
+                        lc.setData(self._freq_mhz, row_data)
 
             elif ptype == "corr" and use_wf:
                 a, b = int(key[0]), int(key[1])
@@ -1070,71 +1076,52 @@ class MainWindow(QMainWindow):
                 if buf is None or buf.shape != (self._wf_depth, self._P):
                     buf = np.full((self._wf_depth, self._P), np.nan)
                     self._wf_buffers[(ptype, key)] = buf
-                im = ax.imshow(
-                    buf,
-                    aspect="auto",
-                    origin="lower",
-                    extent=[f_lo, f_hi, 0, self._wf_depth],
-                    cmap=sel.get("waterfall_cmap", "inferno"),
-                    interpolation="nearest",
-                )
+                im = pg.ImageItem(buf)
+                lut = _get_cmap(wf_cmap_name).getLookupTable(0.0, 1.0, 256)
+                im.setLookupTable(lut)
+                im.setRect(pg.QtCore.QRectF(f_lo, 0.0, f_hi - f_lo, float(self._wf_depth)))
+                plot.addItem(im)
                 self._wf_images[(ptype, key)] = im
-                ax.set_title(f"{tag}  waterfall (dB)", fontsize=9)
-                ax.set_xlabel("Frequency (MHz)")
-                ax.set_ylabel("Time (frames)")
+                plot.setTitle(f"{tag}  waterfall (dB)", **_TITLE_STYLE)
+                plot.setLabel("bottom", "Frequency (MHz)", **_LABEL_STYLE)
+                plot.setLabel("left", "Time (frames)", **_LABEL_STYLE)
 
             elif ptype == "uv" and key == "image":
                 # Dirty image via 2D IFFT of gridded visibilities
                 N = self._uv_grid_size
                 blank = np.zeros((N, N))
-                im = ax.imshow(
-                    blank, origin="lower", cmap=sel.get("dirty_cmap", "inferno"),
-                    extent=[-1, 1, -1, 1], aspect="equal",
-                    interpolation="nearest",
-                )
+                im = pg.ImageItem(blank)
+                lut = _get_cmap(dirty_cmap_name).getLookupTable(0.0, 1.0, 256)
+                im.setLookupTable(lut)
+                im.setRect(pg.QtCore.QRectF(-1.0, -1.0, 2.0, 2.0))
+                plot.addItem(im)
                 self._uv_dirty_im = im
-                ax.set_title("Dirty Image (2D IFFT)", fontsize=9)
-                ax.set_xlabel("l  (direction cosine)")
-                ax.set_ylabel("m  (direction cosine)")
+                plot.setTitle("Dirty Image (2D IFFT)", **_TITLE_STYLE)
+                plot.setLabel("bottom", "l  (direction cosine)", **_LABEL_STYLE)
+                plot.setLabel("left", "m  (direction cosine)", **_LABEL_STYLE)
+                plot.setAspectLocked(True)
                 # seed with cached dirty image result if available
                 if self._dirty_result is not None:
                     dirty_abs = self._dirty_result["dirty_abs"]
-                    lm_extent = self._dirty_result["lm_extent"]
-                    im.set_data(dirty_abs)
-                    im.set_extent([-lm_extent, lm_extent, -lm_extent, lm_extent])
+                    lm_extent = float(self._dirty_result["lm_extent"])
+                    im.setImage(dirty_abs, autoLevels=False)
                     if dirty_abs.max() > 0:
-                        im.set_clim(0, dirty_abs.max())
+                        im.setLevels((0.0, float(dirty_abs.max())))
+                    im.setRect(pg.QtCore.QRectF(-lm_extent, -lm_extent, 2 * lm_extent, 2 * lm_extent))
 
             elif ptype == "uv":
                 is_phase = (key == "phase")
-                cmap = "twilight" if is_phase else "inferno"
                 title = "UV Plane — Phase" if is_phase else "UV Plane — Amplitude"
-                # init with a dummy invisible point to avoid empty-array issues
-                sc = ax.scatter([0], [0], c=[0], cmap=cmap, s=4, alpha=0.0)
+                sc = pg.ScatterPlotItem(size=4, pen=None)
+                plot.addItem(sc)
                 self._uv_scatter[(ptype, key)] = sc
-                ax.set_title(title, fontsize=9)
-                ax.set_xlabel("u  (wavelengths)")
-                ax.set_ylabel("v  (wavelengths)")
-                ax.set_aspect("equal")
-                ax.grid(True, alpha=0.3)
+                plot.setTitle(title, **_TITLE_STYLE)
+                plot.setLabel("bottom", "u  (wavelengths)", **_LABEL_STYLE)
+                plot.setLabel("left", "v  (wavelengths)", **_LABEL_STYLE)
+                plot.setAspectLocked(True)
                 # restore persistent UV data
                 if self._uv_scatter_data is not None:
-                    sd = self._uv_scatter_data
-                    c_data = sd["phase"] if is_phase else np.log10(sd["amp"] + 1e-12)
-                    offsets = np.column_stack([sd["u"], sd["v"]])
-                    sc.set_offsets(offsets)
-                    sc.set_array(c_data)
-                    sc.set_alpha(0.8)
-                    if c_data.size:
-                        sc.set_clim(c_data.min(), c_data.max())
-                    span = max(sd["u_max"] - sd["u_min"], 1.0)
-                    margin = max(1.0, 0.05 * span)
-                    ax.set_xlim(sd["u_min"] - margin, sd["u_max"] + margin)
-                    ax.set_ylim(sd["v_min"] - margin, sd["v_max"] + margin)
-
-        self.canvas.fig.suptitle("FX Correlator", fontsize=11)
-        self.canvas.fig.tight_layout(rect=[0, 0, 1, 0.96])
-        self.canvas.draw_idle()
+                    self._update_uv_scatter_item(sc, plot, key)
 
     # pause toggle
     def _toggle_pause(self, checked):
@@ -1223,6 +1210,44 @@ class MainWindow(QMainWindow):
         self.sbar.showMessage("UV data cleared")
 
     # periodic data pull (plot update)
+    def _update_uv_scatter_item(self, sc, plot, key):
+        """Push self._uv_scatter_data into a ScatterPlotItem with colormap."""
+        sd = self._uv_scatter_data
+        if sd is None:
+            return
+        is_phase = (key == "phase")
+        c_data = sd["phase"] if is_phase else np.log10(sd["amp"] + 1e-12)
+        if not c_data.size:
+            return
+        cmin = float(c_data.min())
+        cmax = float(c_data.max())
+        rng = cmax - cmin if cmax > cmin else 1.0
+        norm = (c_data - cmin) / rng
+        cmap_name = "twilight" if is_phase else "inferno"
+        try:
+            cmap = _get_cmap(cmap_name)
+            colors = cmap.map(norm.astype(np.float32), mode="byte")  # (N, 4) uint8
+        except Exception:
+            # fallback gray
+            g = (norm * 255).astype(np.uint8)
+            colors = np.stack([g, g, g, np.full_like(g, 200)], axis=-1)
+        brushes = [pg.mkBrush(int(c[0]), int(c[1]), int(c[2]), int(c[3]))
+                   for c in colors]
+        sc.setData(x=sd["u"], y=sd["v"], brush=brushes, pen=None, size=4)
+        if plot is not None:
+            span_u = max(sd["u_max"] - sd["u_min"], 1.0)
+            span_v = max(sd["v_max"] - sd["v_min"], 1.0)
+            margin_u = max(1.0, 0.05 * span_u)
+            margin_v = max(1.0, 0.05 * span_v)
+            # Use a single setRange call so setAspectLocked doesn't clip one axis
+            rect = pg.QtCore.QRectF(
+                sd["u_min"] - margin_u,
+                sd["v_min"] - margin_v,
+                (sd["u_max"] - sd["u_min"]) + 2 * margin_u,
+                (sd["v_max"] - sd["v_min"]) + 2 * margin_v,
+            )
+            plot.getViewBox().setRange(rect=rect, padding=0)
+
     def _update_plots(self):
         if self._plot_queue is None:
             return
@@ -1240,7 +1265,10 @@ class MainWindow(QMainWindow):
             }
             for qname, qobj in q_map.items():
                 if qobj and qname in self._q_labels:
-                    self._q_labels[qname].setText(f"{qname}: {qobj.qsize()}")
+                    try:
+                        self._q_labels[qname].setText(f"{qname}: {qobj.qsize()}")
+                    except (NotImplementedError, OSError):
+                        self._q_labels[qname].setText(f"{qname}: ?")
         except Exception:
             pass
 
@@ -1292,13 +1320,21 @@ class MainWindow(QMainWindow):
                 pct = 100.0 * float(ff)
                 self.panel.rfi_status_lbl.setText(f"Flagged: {pct:.1f}%")
 
-        self._needs_redraw = False
+        # Per-source freshness flags — only refresh plots whose data arrived this tick
+        have_pfb_data  = pfb_frame is not None
+        have_corr_data = corr_frame is not None
 
-        for (ptype, key), ax in self._axes.items():
+        for (ptype, key), plot in self._axes.items():
             is_wf = (ptype, key) in self._wf_images
 
             # skip non-UV plot types when in UV-only mode
             if self._uv_showing and ptype not in ("uv",):
+                continue
+
+            # Skip per-plot work if the queue feeding this plot had no new data
+            if ptype in ("iq", "pfb") and not have_pfb_data:
+                continue
+            if ptype == "corr" and not have_corr_data:
                 continue
 
             # ── IQ (always line mode) ──────────────────────────
@@ -1320,12 +1356,9 @@ class MainWindow(QMainWindow):
                 x = np.arange(len(samples))
                 li, lq = lines
                 if li is not None:
-                    li.set_data(x, np.real(samples))
+                    li.setData(x, np.real(samples))
                 if lq is not None:
-                    lq.set_data(x, np.imag(samples))
-                ax.relim()
-                ax.autoscale_view()
-                self._needs_redraw = True
+                    lq.setData(x, np.imag(samples))
 
             # ── PFB (line plot only) ───────────────────────────
             elif ptype == "pfb" and pfb is not None:
@@ -1335,10 +1368,7 @@ class MainWindow(QMainWindow):
                 row = pfb[ch]                                    # already dB
                 lines = self._lines.get((ptype, key))
                 if lines and row.shape[0] == self._freq_mhz.shape[0]:
-                    lines[0].set_data(self._freq_mhz, row)
-                    ax.relim()
-                    ax.autoscale_view()
-                    self._needs_redraw = True
+                    lines[0].setData(self._freq_mhz, row)
 
             # ── Correlations ───────────────────────────────────
             elif ptype == "corr":
@@ -1349,22 +1379,20 @@ class MainWindow(QMainWindow):
                     wf_key = (ptype, key)
                     buf = self._wf_buffers.get(wf_key)
                     im = self._wf_images.get(wf_key)
-                    if im and buf is not None:
-                        im.set_data(buf)
+                    if im is not None and buf is not None:
                         finite = buf[np.isfinite(buf)]
                         if finite.size:
-                            im.set_clim(vmin=finite.min(), vmax=finite.max())
-                        self._needs_redraw = True
+                            im.setImage(buf, autoLevels=False)
+                            im.setLevels((float(finite.min()), float(finite.max())))
+                        else:
+                            im.setImage(buf, autoLevels=False)
                 else:
                     if not src_line or key not in src_line:
                         continue
                     row = 10 * np.log10(np.abs(src_line[key]) + 1e-12)
                     lines = self._lines.get((ptype, key))
                     if lines and row.shape[0] == self._freq_mhz.shape[0]:
-                        lines[0].set_data(self._freq_mhz, row)
-                        ax.relim()
-                        ax.autoscale_view()
-                        self._needs_redraw = True
+                        lines[0].setData(self._freq_mhz, row)
 
         # ── update cached UV data from correlate process ──
         # pre-accumulate waterfall buffers for all corr keys (even when not displayed)
@@ -1410,50 +1438,28 @@ class MainWindow(QMainWindow):
         # Only update UV scatter when new integration data arrived
         if avg_new and self._uv_scatter_data is not None and self._uv_scatter:
             try:
-                sd = self._uv_scatter_data
-                offsets = np.column_stack([sd["u"], sd["v"]])
                 for (ptype, key), sc in self._uv_scatter.items():
-                    c_data = sd["phase"] if key == "phase" else np.log10(sd["amp"] + 1e-12)
-                    sc.set_offsets(offsets)
-                    sc.set_array(c_data)
-                    sc.set_alpha(0.8)
-                    if c_data.size:
-                        sc.set_clim(c_data.min(), c_data.max())
-                    ax = self._axes.get((ptype, key))
-                    if ax:
-                        span = max(sd["u_max"] - sd["u_min"], 1.0)
-                        margin = max(1.0, 0.05 * span)
-                        ax.set_xlim(sd["u_min"] - margin, sd["u_max"] + margin)
-                        ax.set_ylim(sd["v_min"] - margin, sd["v_max"] + margin)
-                self._needs_redraw = True
+                    plot = self._axes.get((ptype, key))
+                    self._update_uv_scatter_item(sc, plot, key)
             except Exception as e:
                 print(f"UV update error: {e}")
 
         # display dirty image only when a new result arrives
         if self._dirty_result_new and self._uv_dirty_im is not None and self._dirty_result is not None:
             try:
-                ax_img = self._axes.get(("uv", "image"))
-                if ax_img:
-                    dirty_abs = self._dirty_result["dirty_abs"]
-                    lm_extent = self._dirty_result["lm_extent"]
-                    self._uv_dirty_im.set_data(dirty_abs)
-                    self._uv_dirty_im.set_extent([-lm_extent, lm_extent, -lm_extent, lm_extent])
-                    if dirty_abs.max() > 0:
-                        self._uv_dirty_im.set_clim(0, dirty_abs.max())
-                    ax_img.set_xlabel("l  (rad)")
-                    ax_img.set_ylabel("m  (rad)")
-                    self._needs_redraw = True
+                dirty_abs = self._dirty_result["dirty_abs"]
+                lm_extent = float(self._dirty_result["lm_extent"])
+                self._uv_dirty_im.setImage(dirty_abs, autoLevels=False)
+                if dirty_abs.max() > 0:
+                    self._uv_dirty_im.setLevels((0.0, float(dirty_abs.max())))
+                self._uv_dirty_im.setRect(
+                    pg.QtCore.QRectF(-lm_extent, -lm_extent, 2 * lm_extent, 2 * lm_extent)
+                )
             except Exception as e:
                 print(f"Dirty image display error: {e}")
             self._dirty_result_new = False
 
-        if self._needs_redraw:
-            ts = time.strftime("%H:%M:%S")
-            self.canvas.fig.suptitle(f"FX Correlator — {ts}", fontsize=11)
-            self.canvas.draw_idle()
-        else:
-            ts = time.strftime("%H:%M:%S")
-
+        ts = time.strftime("%H:%M:%S")
         self.sbar.showMessage(
             f"Last update: {ts}  |  PFB: {'ON' if self._pfb_enable else 'OFF'}  |  "
             f"Plots: {len(self._active_plots)}  |  "
@@ -1576,11 +1582,7 @@ class MainWindow(QMainWindow):
     # handle resize
     def resizeEvent(self, event):
         super().resizeEvent(event)
-        try:
-            self.canvas.fig.tight_layout(rect=[0, 0, 1, 0.96])
-            self.canvas.draw_idle()
-        except Exception:
-            pass
+        # pyqtgraph auto-handles layout reflow on resize
 
     # clean shutdown
     def closeEvent(self, event):

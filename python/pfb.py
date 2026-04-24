@@ -17,7 +17,6 @@ import queue          # only for queue.Full / queue.Empty
 import time
 
 import numpy as np
-import matplotlib.pyplot as plt
 from settings import (PFB_ENABLE, P, M, PFB_WINDOW, PFB_FFTSHIFT,
                       DC_NOTCH_KHZ, PLOT_INTERVAL)
 
@@ -118,14 +117,15 @@ def pfb_channelize_np(x, M: int, P: int, window="hamming", fftshift=False, do_pl
 
 def plot_channel_power(X, title="Average channel power"):
     # X shape: (frames, P)
+    import pyqtgraph as pg
+    from PyQt5.QtWidgets import QApplication
     pwr = np.mean(np.abs(X)**2, axis=0)
-    plt.figure()
-    plt.plot(pwr)
-    plt.title(title)
-    plt.xlabel("Bin k")
-    plt.ylabel("Power")
-    plt.grid(True)
-    plt.show()
+    app = QApplication.instance() or QApplication([])
+    win = pg.plot(pwr, title=title, pen="y")
+    win.setLabel("bottom", "Bin k")
+    win.setLabel("left", "Power")
+    win.showGrid(x=True, y=True, alpha=0.3)
+    app.exec_()
 
 
 def pfb_channelize_multich_np(x4, M: int = 4, P: int = 1024, window="hamming", fftshift=False, h=None):

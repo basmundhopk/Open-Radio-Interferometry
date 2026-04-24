@@ -43,9 +43,6 @@ import os
 import argparse
 import numpy as np
 
-import matplotlib
-matplotlib.use("Qt5Agg")
-
 from PyQt5.QtWidgets import (
     QApplication, QFileDialog, QMessageBox, QDialog,
 )
@@ -191,7 +188,7 @@ def main():
         u=snap["u"], v=snap["v"],
         amp=snap["amp"], phase=snap["phase"],
         grid_size=N,
-        gain=0.1, threshold=0.05, max_iter=1000,
+        gain=0.1, threshold=0.01, max_iter=1000,
         cmap="inferno", parent=None,
     )
     title = f"Interactive CLEAN — {os.path.basename(fits_path)}"

@@ -12,22 +12,32 @@ UV-plane coverage simulator for a given antenna array, source declination, and t
 
 import sys
 import numpy as np
-import matplotlib
-matplotlib.use("Qt5Agg")
+import pyqtgraph as pg
 
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg, NavigationToolbar2QT
-from matplotlib.figure import Figure
+pg.setConfigOptions(
+    antialias=True,
+    background="#1e1e1e",
+    foreground="#cccccc",
+    useOpenGL=False,
+)
 
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
     QFormLayout, QGroupBox, QDoubleSpinBox, QSpinBox, QPushButton,
-    QLabel, QScrollArea, QDockWidget, QSizePolicy,
+    QLabel, QScrollArea, QDockWidget, QSizePolicy, QSlider,
 )
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QTimer, QDateTime
 from PyQt5.QtGui import QPalette, QColor
 from datetime import datetime, timezone, timedelta
 
 import settings
+
+# 10 distinguishable colors (tab10-equivalent)
+_TAB10 = [
+    (31, 119, 180),  (255, 127, 14), (44, 160, 44),  (214, 39, 40),
+    (148, 103, 189), (140, 86, 75),  (227, 119, 194), (127, 127, 127),
+    (188, 189, 34),  (23, 190, 207),
+]
 
 def _apply_dark_palette(app):
     p = QPalette()
@@ -43,23 +53,6 @@ def _apply_dark_palette(app):
     p.setColor(QPalette.Highlight,       QColor(42, 130, 218))
     p.setColor(QPalette.HighlightedText, QColor(35, 35, 35))
     app.setPalette(p)
-
-_MPL_DARK = {
-    "figure.facecolor": "#2b2b2b",
-    "axes.facecolor":   "#1e1e1e",
-    "axes.edgecolor":   "#555555",
-    "axes.labelcolor":  "#cccccc",
-    "text.color":       "#cccccc",
-    "xtick.color":      "#aaaaaa",
-    "ytick.color":      "#aaaaaa",
-    "grid.color":       "#444444",
-    "grid.alpha":       0.5,
-    "legend.facecolor": "#2b2b2b",
-    "legend.edgecolor": "#555555",
-    "legend.fontsize":  8,
-}
-matplotlib.rcParams.update(_MPL_DARK)
-
 
 # Sidereal-time helpers
 def _utc_to_jd(dt):
@@ -98,6 +91,88 @@ def compute_uv_track(bl_enu, times, lat_deg, lon_deg, dec_deg, freq_hz, ra_deg=0
         u[k] = (dE * cH - dN * sin_l * sH) / lam
         v[k] = (dE * sin_d * sH + dN * (sin_l * sin_d * cH + cos_l * cos_d)) / lam
     return u, v
+
+
+def _hour_angles_rad(jds, lon_deg, ra_deg=0.0):
+    """Vectorized GMST -> hour angle (radians) for an array of Julian dates."""
+    jds = np.asarray(jds, dtype=np.float64)
+    T = (jds - 2451545.0) / 36525.0
+    gmst = (280.46061837
+            + 360.98564736629 * (jds - 2451545.0)
+            + 0.000387933 * T**2
+            - T**3 / 38710000.0) % 360.0
+    lst = (gmst + lon_deg) % 360.0
+    return np.radians(lst - ra_deg)
+
+
+def compute_uv_tracks(baselines, jds, lat_deg, lon_deg, dec_deg, freq_hz, ra_deg=0.0):
+    """Vectorized UV tracks for many baselines at many times.
+
+    baselines: array (B, 3) of ENU vectors (metres)
+    jds:       array (T,)   of Julian dates
+    Returns:   u, v of shape (B, T) in wavelengths.
+    """
+    c = 299792458.0
+    lam = c / freq_hz
+    bl = np.asarray(baselines, dtype=np.float64)        # (B, 3)
+    dE = bl[:, 0:1]                                     # (B, 1)
+    dN = bl[:, 1:2]
+    lat = np.radians(lat_deg)
+    dec = np.radians(dec_deg)
+    sin_l, cos_l = np.sin(lat), np.cos(lat)
+    sin_d, cos_d = np.sin(dec), np.cos(dec)
+    H = _hour_angles_rad(jds, lon_deg, ra_deg)          # (T,)
+    sH = np.sin(H)[None, :]                             # (1, T)
+    cH = np.cos(H)[None, :]
+    u = (dE * cH - dN * sin_l * sH) / lam               # (B, T)
+    v = (dE * sin_d * sH + dN * (sin_l * sin_d * cH + cos_l * cos_d)) / lam
+    return u, v
+
+
+class _LabeledSlider(QWidget):
+    """Horizontal slider with a value label. Floating-point values are
+    represented as integers internally (scale = 1/step).
+    Connect to .valueChanged(float) signal-style via .slider.valueChanged."""
+
+    def __init__(self, vmin, vmax, value, step=0.1, suffix="", parent=None):
+        super().__init__(parent)
+        self._step = step
+        self._suffix = suffix
+        self._scale = round(1.0 / step) if step < 1 else 1
+
+        lay = QHBoxLayout(self)
+        lay.setContentsMargins(0, 0, 0, 0)
+        lay.setSpacing(6)
+
+        self.slider = QSlider(Qt.Horizontal)
+        self.slider.setRange(int(round(vmin * self._scale)), int(round(vmax * self._scale)))
+        self.slider.setValue(int(round(value * self._scale)))
+        self.slider.valueChanged.connect(self._on_change)
+
+        self.label = QLabel()
+        self.label.setMinimumWidth(70)
+        self.label.setStyleSheet("color: #cccccc; font-size: 11px;")
+        self._update_label()
+
+        lay.addWidget(self.slider, stretch=1)
+        lay.addWidget(self.label)
+
+    def _on_change(self, _):
+        self._update_label()
+
+    def _update_label(self):
+        v = self.value()
+        if self._step >= 1:
+            self.label.setText(f"{int(v)}{self._suffix}")
+        else:
+            decimals = max(0, -int(round(np.log10(self._step))))
+            self.label.setText(f"{v:.{decimals}f}{self._suffix}")
+
+    def value(self):
+        return self.slider.value() / self._scale
+
+    def setValue(self, v):
+        self.slider.setValue(int(round(v * self._scale)))
 
 
 class SimWindow(QMainWindow):
@@ -150,17 +225,13 @@ class SimWindow(QMainWindow):
         # Time
         tg = QGroupBox("Observation Window")
         tf = QFormLayout()
-        self.start_hour = QDoubleSpinBox(); self.start_hour.setRange(-48, 48)
-        self.start_hour.setDecimals(2); self.start_hour.setSuffix("  h from now")
-        self.start_hour.setValue(0.0)
+        self.start_hour  = _LabeledSlider(-48.0, 48.0, 0.0, step=0.25, suffix=" h")
         tf.addRow("Start offset:", self.start_hour)
-        self.duration_spin = QDoubleSpinBox(); self.duration_spin.setRange(0.1, 24)
-        self.duration_spin.setDecimals(2); self.duration_spin.setSuffix("  hours")
-        self.duration_spin.setValue(6.0)
-        tf.addRow("Duration:", self.duration_spin)
-        self.steps_spin = QSpinBox(); self.steps_spin.setRange(50, 5000)
-        self.steps_spin.setValue(500)
-        tf.addRow("Time steps:", self.steps_spin)
+        self.duration_spin = _LabeledSlider(0.1, 24.0, 6.0, step=0.1, suffix=" h")
+        tf.addRow("Duration:",     self.duration_spin)
+        self.steps_spin    = QSpinBox(); self.steps_spin.setRange(50, 5000)
+        self.steps_spin.setSingleStep(10); self.steps_spin.setValue(500)
+        tf.addRow("Time steps:",   self.steps_spin)
         tg.setLayout(tf)
         root.addWidget(tg)
 
@@ -182,11 +253,10 @@ class SimWindow(QMainWindow):
         ag.setLayout(af)
         root.addWidget(ag)
 
-        # Recalculate button
-        self.recalc_btn = QPushButton("⟳  Recalculate")
-        self.recalc_btn.setStyleSheet("padding: 8px; font-weight: bold;")
-        self.recalc_btn.clicked.connect(self._recalculate)
-        root.addWidget(self.recalc_btn)
+        self.reset_btn = QPushButton("⟲  Reset to Defaults")
+        self.reset_btn.setStyleSheet("padding: 8px; font-weight: bold;")
+        self.reset_btn.clicked.connect(self._reset_defaults)
+        root.addWidget(self.reset_btn)
 
         self.summary_label = QLabel("")
         self.summary_label.setWordWrap(True)
@@ -194,6 +264,25 @@ class SimWindow(QMainWindow):
         root.addWidget(self.summary_label)
 
         root.addStretch()
+
+        # ── auto-recalc wiring (debounced) ─────────────────────────
+        # Throttle: redraw at a steady ~30 fps during continuous input.
+        # A pure debounce starves under fast slider/marker motion because
+        # every new event resets the timer before it can fire.
+        self._min_interval_ms = 33
+        self._last_recalc_ms = 0
+        self._recalc_pending = False
+        self._recalc_timer = QTimer(self)
+        self._recalc_timer.setSingleShot(True)
+        self._recalc_timer.timeout.connect(self._run_pending_recalc)
+
+        for w in (self.lat_spin, self.lon_spin, self.dec_spin,
+                  self.ra_spin, self.freq_spin, self.steps_spin):
+            w.valueChanged.connect(self._schedule_recalc)
+        for w in (self.start_hour, self.duration_spin):
+            w.slider.valueChanged.connect(self._schedule_recalc)
+        for w in self.ant_east + self.ant_north:
+            w.valueChanged.connect(self._schedule_recalc)
 
         scroll = QScrollArea()
         scroll.setWidget(panel)
@@ -211,27 +300,160 @@ class SimWindow(QMainWindow):
         central = QWidget()
         cl = QVBoxLayout(central)
         cl.setContentsMargins(0, 0, 0, 0)
-        self.fig = Figure(dpi=100)
-        self.canvas = FigureCanvasQTAgg(self.fig)
-        self.canvas.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        self.toolbar = NavigationToolbar2QT(self.canvas, central)
-        cl.addWidget(self.toolbar)
-        cl.addWidget(self.canvas)
+        self.gview = pg.GraphicsLayoutWidget(parent=central)
+        self.gview.setBackground("#1e1e1e")
+        self.gview.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        self.plot = self.gview.addPlot(row=0, col=0)
+        self.plot.showGrid(x=True, y=True, alpha=0.3)
+        self.plot.setAspectLocked(True)
+        self.plot.setLabel("bottom", "u  (wavelengths)", color="#cccccc")
+        self.plot.setLabel("left",   "v  (wavelengths)", color="#cccccc")
+        self._legend = self.plot.addLegend(offset=(-10, 10), labelTextColor="#cccccc")
+
+        # Antenna layout plot (draggable markers)
+        self.ant_plot = self.gview.addPlot(row=0, col=1)
+        self.ant_plot.showGrid(x=True, y=True, alpha=0.3)
+        self.ant_plot.setAspectLocked(True)
+        self.ant_plot.setLabel("bottom", "East  (m)", color="#cccccc")
+        self.ant_plot.setLabel("left",   "North (m)", color="#cccccc")
+        self.ant_plot.setTitle("Antenna Layout (drag markers)", color="#cccccc", size="10pt")
+        # UV plot gets ~2x the horizontal space of the antenna plot
+        self.gview.ci.layout.setColumnStretchFactor(0, 2)
+        self.gview.ci.layout.setColumnStretchFactor(1, 1)
+
+        # Build draggable target markers + text labels for each antenna
+        self._ant_targets = []
+        self._ant_labels = []
+        self._suppress_target_sync = False
+        for i in range(4):
+            r, g, b = _TAB10[i % len(_TAB10)]
+            tgt = pg.TargetItem(
+                pos=(self.ant_east[i].value(), self.ant_north[i].value()),
+                size=14,
+                movable=True,
+                pen=pg.mkPen(r, g, b, width=2),
+                brush=pg.mkBrush(r, g, b, 160),
+                hoverPen=pg.mkPen(255, 255, 255, width=2),
+                hoverBrush=pg.mkBrush(r, g, b, 220),
+            )
+            tgt.sigPositionChanged.connect(lambda t, idx=i: self._on_target_moved(idx, t))
+            self.ant_plot.addItem(tgt)
+
+            txt = pg.TextItem(text=f" Ant {i}", color=(r, g, b), anchor=(0, 0.5))
+            txt.setPos(self.ant_east[i].value(), self.ant_north[i].value())
+            self.ant_plot.addItem(txt)
+
+            self._ant_targets.append(tgt)
+            self._ant_labels.append(txt)
+
+        # Keep targets in sync when spinboxes are edited directly
+        for i in range(4):
+            self.ant_east[i].valueChanged.connect(lambda _v, idx=i: self._sync_target_from_spin(idx))
+            self.ant_north[i].valueChanged.connect(lambda _v, idx=i: self._sync_target_from_spin(idx))
+
+        self._fit_antenna_view()
+
+        cl.addWidget(self.gview)
         self.setCentralWidget(central)
 
+    def _on_target_moved(self, idx, target):
+        """User dragged an antenna marker — push the new position into the
+        spinboxes (which schedules a recalc via the existing wiring)."""
+        if self._suppress_target_sync:
+            return
+        pos = target.pos()
+        e, n = float(pos.x()), float(pos.y())
+        # Block spinbox signals so we only schedule one recalc per move
+        self._suppress_target_sync = True
+        try:
+            self.ant_east[idx].blockSignals(True)
+            self.ant_north[idx].blockSignals(True)
+            self.ant_east[idx].setValue(e)
+            self.ant_north[idx].setValue(n)
+            self.ant_east[idx].blockSignals(False)
+            self.ant_north[idx].blockSignals(False)
+            self._ant_labels[idx].setPos(e, n)
+        finally:
+            self._suppress_target_sync = False
+        self._schedule_recalc()
+
+    def _sync_target_from_spin(self, idx):
+        """Spinbox edited externally — move the corresponding marker."""
+        if self._suppress_target_sync:
+            return
+        e = self.ant_east[idx].value()
+        n = self.ant_north[idx].value()
+        self._suppress_target_sync = True
+        try:
+            self._ant_targets[idx].setPos(e, n)
+            self._ant_labels[idx].setPos(e, n)
+        finally:
+            self._suppress_target_sync = False
+
+    def _fit_antenna_view(self, pad_frac=0.25, min_half=5.0):
+        es = [w.value() for w in self.ant_east]
+        ns = [w.value() for w in self.ant_north]
+        cx = (max(es) + min(es)) / 2.0
+        cy = (max(ns) + min(ns)) / 2.0
+        half = max(max(es) - min(es), max(ns) - min(ns)) / 2.0
+        half = max(half * (1.0 + pad_frac), min_half)
+        self.ant_plot.setRange(
+            xRange=(cx - half, cx + half),
+            yRange=(cy - half, cy + half),
+            padding=0,
+        )
+
+    def _schedule_recalc(self, *_):
+        """Throttle recalcs so continuous input still produces frames."""
+        if self._recalc_pending:
+            return
+        now_ms = QDateTime.currentMSecsSinceEpoch()
+        elapsed = now_ms - self._last_recalc_ms
+        if elapsed >= self._min_interval_ms:
+            self._recalculate()
+        else:
+            self._recalc_pending = True
+            self._recalc_timer.start(self._min_interval_ms - int(elapsed))
+
+    def _run_pending_recalc(self):
+        self._recalc_pending = False
+        self._recalculate()
+
+    def _reset_defaults(self):
+        """Restore every control to the value in settings._DEFAULTS."""
+        d = settings._DEFAULTS
+        self.lat_spin.setValue(d["OBSERVATION_LATITUDE_DEG"])
+        self.lon_spin.setValue(d["OBSERVATION_LONGITUDE_DEG"])
+        self.dec_spin.setValue(d["OBSERVATION_DECLINATION_DEG"])
+        self.ra_spin.setValue(d.get("SOURCE_RA_DEG", 0.0))
+        self.freq_spin.setValue(d["rx_lo"] / 1e6)
+        self.start_hour.setValue(0.0)
+        self.duration_spin.setValue(6.0)
+        self.steps_spin.setValue(500)
+        positions = d["ANTENNA_POSITIONS_ENU"]
+        for i in range(4):
+            pos = positions[i] if i < len(positions) else (0.0, 0.0, 0.0)
+            self.ant_east[i].setValue(pos[0])
+            self.ant_north[i].setValue(pos[1])
+        self._fit_antenna_view()
+
     def _recalculate(self):
+        self._last_recalc_ms = QDateTime.currentMSecsSinceEpoch()
         lat  = self.lat_spin.value()
         lon  = self.lon_spin.value()
         dec  = self.dec_spin.value()
         ra   = self.ra_spin.value()
         freq = self.freq_spin.value() * 1e6
         steps = self.steps_spin.value()
+        steps = max(2, int(steps))
 
         now = datetime.now(timezone.utc)
         t_start = now + timedelta(hours=self.start_hour.value())
         t_stop  = t_start + timedelta(hours=self.duration_spin.value())
         dt_total = (t_stop - t_start).total_seconds()
-        times = [t_start + timedelta(seconds=dt_total * i / (steps - 1)) for i in range(steps)]
+        # Linearly spaced JDs (no per-step datetime objects needed)
+        jd_start = _utc_to_jd(t_start)
+        jds = jd_start + np.linspace(0.0, dt_total / 86400.0, steps)
 
         positions = np.array([
             (self.ant_east[i].value(), self.ant_north[i].value(), 0.0)
@@ -249,32 +471,41 @@ class SimWindow(QMainWindow):
                 labels.append(f"{i}×{j}  (Ant {ai}–{aj})")
 
         # ── draw ──────────────────────────────────────────────
-        self.fig.clear()
-        ax = self.fig.add_subplot(111)
-        colours = matplotlib.colormaps["tab10"](np.linspace(0, 1, max(len(baselines), 1)))
+        self.plot.clear()
+        try:
+            self._legend.scene().removeItem(self._legend)
+        except Exception:
+            pass
+        self._legend = self.plot.addLegend(offset=(-10, 10), labelTextColor="#cccccc")
 
-        for idx, (bl, lbl) in enumerate(zip(baselines, labels)):
-            u, v = compute_uv_track(bl, times, lat, lon, dec, freq, ra_deg=ra)
-            col = colours[idx]
-            ax.plot(u, v, ".", markersize=1.5, color=col, alpha=0.7, label=lbl)
-            ax.plot(-u, -v, ".", markersize=1.5, color=col, alpha=0.35)
+        if baselines:
+            uu, vv = compute_uv_tracks(
+                np.asarray(baselines), jds, lat, lon, dec, freq, ra_deg=ra
+            )
+        else:
+            uu = vv = np.empty((0, steps))
 
-        ax.set_xlabel("u  (wavelengths)")
-        ax.set_ylabel("v  (wavelengths)")
-        ax.set_title(
+        for idx, lbl in enumerate(labels):
+            u, v = uu[idx], vv[idx]
+            r, g, b = _TAB10[idx % len(_TAB10)]
+            self.plot.plot(
+                u, v, pen=None, symbol="o", symbolSize=2,
+                symbolBrush=pg.mkBrush(r, g, b, 180),
+                symbolPen=None, name=lbl,
+            )
+            self.plot.plot(
+                -u, -v, pen=None, symbol="o", symbolSize=2,
+                symbolBrush=pg.mkBrush(r, g, b, 90),
+                symbolPen=None,
+            )
+
+        self.plot.setTitle(
             f"UV Tracks — {t_start.strftime('%Y-%m-%d %H:%M')} → "
             f"{t_stop.strftime('%H:%M')} UTC  |  "
             f"{self.duration_spin.value():.1f}h  |  "
             f"{freq/1e6:.1f} MHz  |  Dec {dec:.1f}°",
-            fontsize=10,
+            color="#cccccc", size="10pt",
         )
-        ax.set_aspect("equal")
-        ax.grid(True, alpha=0.3)
-        if baselines:
-            ax.legend(loc="upper right", fontsize=8)
-
-        self.fig.tight_layout()
-        self.canvas.draw_idle()
 
         # ── summary ───────────────────────────────────────────
         c_val = 299792458.0

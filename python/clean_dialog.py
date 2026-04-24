@@ -17,7 +17,17 @@ Functions:
 import numpy as np
 import time
 
-from PyQt5.QtCore import Qt
+import pyqtgraph as pg
+
+pg.setConfigOptions(
+    antialias=True,
+    background="#1e1e1e",
+    foreground="#cccccc",
+    imageAxisOrder="row-major",
+    useOpenGL=False,
+)
+
+from PyQt5.QtCore import Qt, QRectF
 from PyQt5.QtGui import QKeySequence, QCursor
 from PyQt5.QtWidgets import (
     QDialog,
@@ -39,12 +49,6 @@ from PyQt5.QtWidgets import (
     QMessageBox,
 )
 
-from matplotlib.backends.backend_qt5agg import (
-    FigureCanvasQTAgg,
-    NavigationToolbar2QT,
-)
-from matplotlib.figure import Figure
-
 from clean import (
     _grid_uv,
     _ifft_image,
@@ -53,6 +57,24 @@ from clean import (
     _restore,
     hogbom_clean,
 )
+
+
+def _get_cmap(name, fallback="inferno"):
+    """Return a pyqtgraph ColorMap for `name`, falling back if unknown."""
+    try:
+        cm = pg.colormap.get(name, source="matplotlib", skipCache=False)
+        if cm is not None:
+            return cm
+    except Exception:
+        pass
+    try:
+        return pg.colormap.get(fallback, source="matplotlib")
+    except Exception:
+        return pg.colormap.get("viridis")
+
+
+_TITLE_STYLE = {"color": "#dddddd", "size": "10pt"}
+_LABEL_STYLE = {"color": "#cccccc", "font-size": "8pt"}
 
 
 class CleanDialog(QDialog):
@@ -152,13 +174,12 @@ class CleanDialog(QDialog):
         self._lm_extent = dl * N / 2.0
 
         if rebuild_images:
-            ext = [-self._lm_extent, self._lm_extent,
-                   -self._lm_extent, self._lm_extent]
             blank = np.zeros_like(self._dirty)
             for im in (self._im_dirty, self._im_clean,
                        self._im_resid, self._im_restr):
-                im.set_data(blank)
-                im.set_extent(ext)
+                im.setImage(blank, autoLevels=False)
+                im.setRect(QRectF(-self._lm_extent, -self._lm_extent,
+                                  2 * self._lm_extent, 2 * self._lm_extent))
 
     # ── UI construction ───────────────────────────────────────────────────
     def _build_ui(self, gain, threshold, max_iter):
@@ -236,50 +257,45 @@ class CleanDialog(QDialog):
         self.status_lbl.setStyleSheet("font-size: 11px; color: #cccccc; padding: 4px;")
         root.addWidget(self.status_lbl)
 
-        # figure with four subplots  (2x2: Dirty | Model / Residual | Restored)
-        # constrained_layout makes matplotlib reflow subplot margins on every
-        # resize so titles / axis labels never overlap and the plots fill the
-        # available canvas area as the window grows.
-        self.fig = Figure(figsize=(10, 8), dpi=100, facecolor="#1e1e1e",
-                          constrained_layout=True)
-        self.canvas = FigureCanvasQTAgg(self.fig)
-        self.canvas.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        self.canvas.setMinimumSize(300, 300)
-        self.toolbar = NavigationToolbar2QT(self.canvas, self)
+        # ---- pyqtgraph 2x2 panel grid -----------------------------------
+        self.gview = pg.GraphicsLayoutWidget()
+        self.gview.setBackground("#1e1e1e")
+        self.gview.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        self.gview.setMinimumSize(300, 300)
 
-        self.ax_dirty = self.fig.add_subplot(2, 2, 1)
-        self.ax_clean = self.fig.add_subplot(2, 2, 2)
-        self.ax_resid = self.fig.add_subplot(2, 2, 3)
-        self.ax_restr = self.fig.add_subplot(2, 2, 4)
-        for ax in (self.ax_dirty, self.ax_clean, self.ax_resid, self.ax_restr):
-            ax.set_facecolor("#1a1a1a")
-            ax.tick_params(colors="#cccccc", labelsize=8)
-            for s in ax.spines.values():
-                s.set_color("#666666")
-            ax.set_xlabel("l  (rad)", color="#cccccc", fontsize=8)
-            ax.set_ylabel("m  (rad)", color="#cccccc", fontsize=8)
+        cmap = _get_cmap(self._cmap)
+        lut = cmap.getLookupTable(0.0, 1.0, 256)
 
-        ext = [-self._lm_extent, self._lm_extent, -self._lm_extent, self._lm_extent]
+        def _make_panel(row, col, title):
+            plot = self.gview.addPlot(row=row, col=col)
+            plot.setAspectLocked(True)
+            plot.setMenuEnabled(False)
+            plot.showGrid(x=False, y=False)
+            plot.setLabel("bottom", "l  (rad)", **_LABEL_STYLE)
+            plot.setLabel("left",   "m  (rad)", **_LABEL_STYLE)
+            plot.setTitle(title, **_TITLE_STYLE)
+            img = pg.ImageItem(axisOrder="row-major")
+            img.setLookupTable(lut)
+            plot.addItem(img)
+            return plot, img
+
+        ext = self._lm_extent
+        rect = QRectF(-ext, -ext, 2 * ext, 2 * ext)
         blank = np.zeros_like(self._dirty)
-        self._im_dirty = self.ax_dirty.imshow(
-            blank, origin="lower", cmap=self._cmap, extent=ext, aspect="equal",
-            interpolation="nearest")
-        self._im_clean = self.ax_clean.imshow(
-            blank, origin="lower", cmap=self._cmap, extent=ext, aspect="equal",
-            interpolation="nearest")
-        self._im_resid = self.ax_resid.imshow(
-            blank, origin="lower", cmap=self._cmap, extent=ext, aspect="equal",
-            interpolation="nearest")
-        self._im_restr = self.ax_restr.imshow(
-            blank, origin="lower", cmap=self._cmap, extent=ext, aspect="equal",
-            interpolation="nearest")
-        self.ax_dirty.set_title("Dirty Image (snapshot)", color="#dddddd", fontsize=10)
-        self.ax_clean.set_title("Model  (components ⊛ clean beam)", color="#dddddd", fontsize=10)
-        self.ax_resid.set_title("Residual", color="#dddddd", fontsize=10)
-        self.ax_restr.set_title("Restored  (model + residual)", color="#dddddd", fontsize=10)
 
-        root.addWidget(self.toolbar)
-        root.addWidget(self.canvas, 1)
+        self.ax_dirty, self._im_dirty = _make_panel(0, 0, "Dirty Image (snapshot)")
+        self.ax_clean, self._im_clean = _make_panel(0, 1, "Model  (components ⊛ clean beam)")
+        self.ax_resid, self._im_resid = _make_panel(1, 0, "Residual")
+        self.ax_restr, self._im_restr = _make_panel(1, 1, "Restored  (model + residual)")
+        for im in (self._im_dirty, self._im_clean,
+                   self._im_resid, self._im_restr):
+            im.setImage(blank, autoLevels=False)
+            im.setRect(rect)
+
+        # Track current display levels per panel (pyqtgraph equivalent of clim)
+        self._dirty_clim = (0.0, 1.0)
+
+        root.addWidget(self.gview, 1)
 
         # connect buttons
         self.btn_1.clicked.connect(lambda: self._step(1))
@@ -298,23 +314,25 @@ class CleanDialog(QDialog):
         self._esc_shortcut.activated.connect(self._leave_fullscreen)
 
         # Right-click on any panel → "Save this panel…" menu.
-        self.canvas.mpl_connect("button_press_event", self._on_canvas_click)
+        self.gview.scene().sigMouseClicked.connect(self._on_canvas_click)
 
     # ── right-click "Save panel" ───────────────────────────────────────────
     def _on_canvas_click(self, event):
-        # matplotlib buttons: 1=left 2=middle 3=right
-        if event.button != 3 or event.inaxes is None:
+        if event.button() != Qt.RightButton:
             return
-        # Each entry: (label, data getter, the live AxesImage whose clim
-        # the saved PNG should copy so the export looks IDENTICAL to the
-        # on-screen view).
+        scene_pos = event.scenePos()
         ax_map = {
             self.ax_dirty: ("Dirty",    lambda: self._dirty,        self._im_dirty),
             self.ax_clean: ("Model",    lambda: self._model_img,    self._im_clean),
             self.ax_resid: ("Residual", lambda: self._residual,     self._im_resid),
             self.ax_restr: ("Restored", lambda: self._restored_img, self._im_restr),
         }
-        hit = ax_map.get(event.inaxes)
+        hit = None
+        for plot, info in ax_map.items():
+            vb = plot.getViewBox()
+            if vb.sceneBoundingRect().contains(scene_pos):
+                hit = info
+                break
         if hit is None:
             return
         label, getter, live_im = hit
@@ -329,12 +347,10 @@ class CleanDialog(QDialog):
         menu.exec_(QCursor.pos())
 
     def _rescale_panels(self):
-        """Re-stretch every panel to its own current min/max so faint
-        features become visible. After this, the on-screen view exactly
-        matches what 'Save as PNG' would write."""
+        """Re-stretch every panel to its own current min/max."""
         for im in (self._im_dirty, self._im_clean,
                    self._im_resid, self._im_restr):
-            arr = im.get_array()
+            arr = im.image
             if arr is None:
                 continue
             a = np.asarray(arr)
@@ -342,8 +358,10 @@ class CleanDialog(QDialog):
             vmax = float(a.max())
             if vmax <= vmin:
                 vmax = vmin + 1e-30
-            im.set_clim(vmin, vmax)
-        self.canvas.draw_idle()
+            im.setLevels((vmin, vmax))
+        # Stop _refresh_displays from re-imposing the dirty-image levels
+        # on every iteration. Reset / Resolution-change clear this back.
+        self._manual_levels = True
         self.status_lbl.setText(
             "rescaled — each panel now stretched to its own min/max "
             "(saved PNG will match)")
@@ -367,12 +385,17 @@ class CleanDialog(QDialog):
 
         # Match the on-screen colour stretch.
         if live_im is not None:
-            vmin, vmax = live_im.get_clim()
+            lv = live_im.getLevels()
+            if lv is not None:
+                vmin, vmax = float(lv[0]), float(lv[1])
+            else:
+                arr = np.abs(data)
+                vmin, vmax = float(arr.min()), float(arr.max())
         else:
             arr = np.abs(data)
             vmin, vmax = float(arr.min()), float(arr.max())
-            if vmax <= vmin:
-                vmax = vmin + 1e-30
+        if vmax <= vmin:
+            vmax = vmin + 1e-30
 
         # Make a dedicated standalone figure (so we don't disturb the
         # interactive canvas) with matching styling.
@@ -517,33 +540,44 @@ class CleanDialog(QDialog):
         self._refresh_displays(elapsed_ms=elapsed_ms, batch=n_done, requested=n)
 
     def _run_to_convergence(self):
-        """Run up to Run-All Cap iterations or until the threshold is met."""
+        """Run up to Run-All Cap iterations or until the threshold is met,
+        repainting after every single iteration so the panels animate."""
         cap = int(self.max_iter_spin.value())
-        # iterate in chunks so the UI can paint between batches
-        chunk = max(50, min(1000, cap // 10))
-        remaining = cap
         gain = float(self.gain_spin.value())
         abs_stop = float(self.threshold_spin.value()) * self._initial_peak
         t0 = time.time()
         total = 0
-        while remaining > 0:
-            n = min(chunk, remaining)
-            new_components, new_residual, n_done = _stepwise_hogbom(
-                self._residual, self._psf, gain=gain,
-                abs_stop=abs_stop, max_iter=n,
-            )
-            self._residual = new_residual
-            self._components += new_components
-            self._n_iter += n_done
-            total += n_done
-            remaining -= n
-            # Early exit when below threshold
-            if n_done < n:
-                break
-            # Repaint between chunks
-            self._refresh_displays(elapsed_ms=(time.time() - t0) * 1000.0,
-                                   batch=total, requested=cap, partial=True)
-            self.canvas.flush_events()
+        # Allow the user to interrupt by clicking the button again.
+        if getattr(self, "_running", False):
+            self._stop_requested = True
+            return
+        self._running = True
+        self._stop_requested = False
+        original_text = self.btn_run.text()
+        self.btn_run.setText("■  Stop")
+        try:
+            for _ in range(cap):
+                new_components, new_residual, n_done = _stepwise_hogbom(
+                    self._residual, self._psf, gain=gain,
+                    abs_stop=abs_stop, max_iter=1,
+                )
+                if n_done == 0:
+                    break  # threshold met
+                self._residual = new_residual
+                self._components += new_components
+                self._n_iter += n_done
+                total += n_done
+                self._refresh_displays(
+                    elapsed_ms=(time.time() - t0) * 1000.0,
+                    batch=total, requested=cap, partial=True,
+                )
+                QApplication.processEvents()
+                if self._stop_requested:
+                    break
+        finally:
+            self._running = False
+            self._stop_requested = False
+            self.btn_run.setText(original_text)
         self._refresh_displays(elapsed_ms=(time.time() - t0) * 1000.0,
                                batch=total, requested=cap)
 
@@ -561,48 +595,47 @@ class CleanDialog(QDialog):
         # (2D IFFT)" panel (which also shows magnitude) and so positive and
         # negative CLEAN components both register visually.
         if initial:
-            # Display the real part of the dirty image (same as what CLEAN
-            # operates on) so the Dirty and Residual panels are directly
-            # comparable: at iter 0, residual IS dirty.real, so the two
-            # panels should be pixel-identical.
+            # A fresh snapshot / reset / re-grid clears any manual stretch.
+            self._manual_levels = False
+            # Display |·| of the dirty image; record its level range as the
+            # shared baseline for the Residual + Restored panels.
             d_abs = np.abs(self._dirty)
-            self._im_dirty.set_data(d_abs)
             dmin, dmax = float(d_abs.min()), float(d_abs.max())
             if dmax <= dmin:
                 dmax = dmin + 1e-30
             self._dirty_clim = (dmin, dmax)
-            self._im_dirty.set_clim(dmin, dmax)
-            self._im_clean.set_clim(dmin, dmax)
-            self._im_resid.set_clim(dmin, dmax)
-            self._im_restr.set_clim(dmin, dmax)
+            self._im_dirty.setImage(d_abs, autoLevels=False, levels=(dmin, dmax))
 
         # Show the MODEL image (components convolved with the clean beam,
         # no residual added back) rather than the conventional full
-        # restored image. Reason: while stepping interactively the
-        # residual dominates the restored image, making it visually
-        # identical to the residual panel. The model image starts black
-        # and visibly builds up as CLEAN finds point-sources.
+        # restored image. The model image starts black and visibly builds
+        # up as CLEAN finds point-sources.
         N = self._components.shape[0]
         beam = _gaussian_2d(N, self._beam_sigma, self._beam_sigma)
         F_b = np.fft.fft2(np.fft.ifftshift(beam))
         F_c = np.fft.fft2(self._components)
         model_img = np.real(np.fft.ifft2(F_c * F_b))
-        self._im_clean.set_data(np.abs(model_img))
-        # Auto-clim the model panel (it grows from zero, so a fixed dirty
-        # clim would keep it near-black for the first hundred iterations).
-        m_max = float(np.abs(model_img).max())
-        if m_max > 0:
-            self._im_clean.set_clim(0.0, m_max)
+        m_abs = np.abs(model_img)
+        m_max = float(m_abs.max())
+        if m_max <= 0:
+            m_max = 1e-30
 
-        # Residual (same clim as dirty so it visibly fades as CLEAN proceeds)
-        self._im_resid.set_data(np.abs(self._residual))
-
-        # Restored = model + residual (the conventional "final" CLEAN image)
-        # Displayed with the dirty-image clim so it's directly comparable
-        # to the top-left panel: at iter 0 it IS the dirty image; as CLEAN
-        # progresses the sidelobes disappear but noise floor + sources stay.
-        restored_img = model_img + self._residual
-        self._im_restr.set_data(np.abs(restored_img))
+        if self._manual_levels:
+            # User hit Rescale — keep their per-panel levels intact.
+            self._im_clean.setImage(m_abs, autoLevels=False)
+            self._im_resid.setImage(np.abs(self._residual), autoLevels=False)
+            restored_img = model_img + self._residual
+            self._im_restr.setImage(np.abs(restored_img), autoLevels=False)
+        else:
+            # Default behaviour: model auto-levels from 0→peak; residual +
+            # restored share the dirty image's level range.
+            self._im_clean.setImage(m_abs, autoLevels=False, levels=(0.0, m_max))
+            dmin, dmax = self._dirty_clim
+            self._im_resid.setImage(np.abs(self._residual),
+                                    autoLevels=False, levels=(dmin, dmax))
+            restored_img = model_img + self._residual
+            self._im_restr.setImage(np.abs(restored_img),
+                                    autoLevels=False, levels=(dmin, dmax))
 
         # Cache the latest real-valued panels so "Save this panel" can
         # export them as FITS (without the |·| display squashing).
@@ -627,8 +660,6 @@ class CleanDialog(QDialog):
             tag = "batch" if not partial else "partial"
             bits.append(f"{tag}: {batch}/{requested} in {elapsed_ms:.0f} ms")
         self.status_lbl.setText("   |   ".join(bits))
-
-        self.canvas.draw_idle()
 
 
 # ── helper: stepwise Hogbom with absolute stop level ────────────────────────

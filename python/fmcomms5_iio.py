@@ -171,7 +171,10 @@ def data_read(uri, raw_queue, settings_queue, stop_event, monitor_queues=None):
 
         now = time.time()
         elapsed = now - last_report
-        qd = raw_queue.qsize()
+        try:
+            qd = raw_queue.qsize()
+        except NotImplementedError:
+            qd = -1   # macOS does not support qsize()
         pct = 100 * dropped / total if total else 0
         sps = (total - dropped) * _frame_size / elapsed if elapsed else 0
         q_str = f"raw={qd}"
