@@ -77,6 +77,12 @@ def _get_cmap(name, fallback="inferno"):
 _TITLE_STYLE = {"color": "#dddddd", "size": "10pt"}
 _LABEL_STYLE = {"color": "#cccccc", "font-size": "8pt"}
 
+# Sequential / scientific colormaps (matches ui.py:_CMAP_CHOICES)
+_CMAP_CHOICES = [
+    "inferno", "magma", "plasma", "viridis", "cividis", "turbo",
+    "jet", "hot", "cubehelix", "gray", "bone", "afmhot",
+]
+
 
 class CleanDialog(QDialog):
     """
@@ -146,7 +152,10 @@ class CleanDialog(QDialog):
         vis_grid, _wt, uv_max = _grid_uv(self._u, self._v, vis, N)
         self._uv_max = float(uv_max)
         _dirty_complex = np.fft.ifftshift(np.fft.ifft2(np.fft.fftshift(vis_grid)))
-        self._dirty_abs = np.abs(_dirty_complex).astype(np.float64)
+        # For display, clip negatives rather than np.abs(): rectifying the
+        # signed image folds PSF sidelobes back as bright stripes and turns
+        # zero crossings into hard black lines.
+        self._dirty_abs = np.clip(_dirty_complex.real, 0.0, None).astype(np.float64)
         # Hogbom operates on .real (signed peaks, physically correct for
         # Hermitian-symmetric visibilities).
         self._dirty = _dirty_complex.real
@@ -225,12 +234,21 @@ class CleanDialog(QDialog):
             "Image grid size (NxN). Changing this re-grids the UV "
             "snapshot and resets the CLEAN state.")
 
+        # Colormap selector — applies to all four image panels
+        self.cmap_combo = QComboBox()
+        for name in _CMAP_CHOICES:
+            self.cmap_combo.addItem(name)
+        _ci = self.cmap_combo.findText(self._cmap)
+        self.cmap_combo.setCurrentIndex(_ci if _ci >= 0 else 0)
+        self.cmap_combo.setToolTip("Colormap used for all four image panels.")
+
         # 2x2 layout: (Loop Gain | Threshold) / (Run-All Cap | Resolution)
         cells = [
             ("Loop Gain:",   self.gain_spin),
             ("Threshold:",   self.threshold_spin),
             ("Run-All Cap:", self.max_iter_spin),
             ("Resolution:",  self.res_combo),
+            ("Colormap:",    self.cmap_combo),
         ]
         for i, (text, widget) in enumerate(cells):
             r, c = divmod(i, 2)
@@ -333,6 +351,7 @@ class CleanDialog(QDialog):
         self.btn_reset.clicked.connect(self._reset)
         self.btn_rescale.clicked.connect(self._rescale_panels)
         self.res_combo.currentIndexChanged.connect(self._on_resolution_changed)
+        self.cmap_combo.currentIndexChanged.connect(self._on_cmap_changed)
 
         # F11 toggles fullscreen, Esc leaves fullscreen
         self._fs_shortcut = QShortcut(QKeySequence("F11"), self)
@@ -517,6 +536,16 @@ class CleanDialog(QDialog):
     def _leave_fullscreen(self):
         if self.isFullScreen():
             self.showNormal()
+
+    # ── colormap change ────────────────────────────────────────────────────
+    def _on_cmap_changed(self, idx):
+        name = self.cmap_combo.currentText()
+        self._cmap = name
+        lut = _get_cmap(name).getLookupTable(0.0, 1.0, 256)
+        for im in (self._im_dirty, self._im_clean,
+                   self._im_resid, self._im_restr):
+            im.setLookupTable(lut)
+        self.status_lbl.setText(f"colormap → {name}")
 
     # ── resolution change ──────────────────────────────────────────────────
     def _on_resolution_changed(self, idx):

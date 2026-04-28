@@ -326,7 +326,7 @@ class SimWindow(QMainWindow):
         self.ant_plot.setAspectLocked(True)
         self.ant_plot.setLabel("bottom", "East  (m)", color="#cccccc")
         self.ant_plot.setLabel("left",   "North (m)", color="#cccccc")
-        self.ant_plot.setTitle("Antenna Layout (drag markers)", color="#cccccc", size="10pt")
+        self.ant_plot.setTitle("Antenna Layout", color="#cccccc", size="10pt")
         # UV plot gets ~2x the horizontal space of the antenna plot
         self.gview.ci.layout.setColumnStretchFactor(0, 2)
         self.gview.ci.layout.setColumnStretchFactor(1, 1)

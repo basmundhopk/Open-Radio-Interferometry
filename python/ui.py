@@ -427,7 +427,7 @@ class SettingsPanel(QWidget):
         intf = QFormLayout()
 
         self.int_count_spin = QSpinBox()
-        self.int_count_spin.setRange(1, 100000)
+        self.int_count_spin.setRange(1, 1000000)
         self.int_count_spin.setValue(settings.INTEGRATION_COUNT)
         self.int_count_spin.setSuffix("  frames")
         self.int_count_spin.setSingleStep(10)

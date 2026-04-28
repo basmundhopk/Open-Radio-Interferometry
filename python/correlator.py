@@ -176,8 +176,9 @@ def _save_dirty_fits(path, u, v, amp, phase, N, ant_pos, chan_to_ant, int_count)
 
         # ── grid UV and compute dirty image + PSF ───────────────────────────
         uv_max = max(np.abs(u).max(), np.abs(v).max(), 1.0) * 1.05
-        ui = np.round((u / uv_max + 1.0) * 0.5 * (N - 1)).astype(int)
-        vi = np.round((v / uv_max + 1.0) * 0.5 * (N - 1)).astype(int)
+        # FFT-centered gridding: DC bin at index N//2 (see live correlator).
+        ui = np.floor((u / uv_max + 1.0) * 0.5 * N).astype(int)
+        vi = np.floor((v / uv_max + 1.0) * 0.5 * N).astype(int)
         np.clip(ui, 0, N - 1, out=ui)
         np.clip(vi, 0, N - 1, out=vi)
 
@@ -590,12 +591,17 @@ def correlate_process(pfb_queue, corr_plot_queue, stop_event, corr_config_queue)
                     print(f"UV compute error: {e}")
 
                 # ── apply fringe-stop rotation (track source phase center) ──
+                # With V_ij = X_i · conj(X_j) and baseline D = r_j − r_i (i<j),
+                # the raw correlator output for a point source at the phase
+                # center carries phase exp(−i 2π w). Removing that fringe
+                # requires multiplying by exp(+i 2π w) so the corrected
+                # visibility is real-positive at field center.
                 if _avg and _uv and _fringe_stop_enabled:
                     for bkey, vis in list(_avg.items()):
                         if bkey in _uv:
                             w_arr = _uv[bkey][2]   # (n_freq,) wavelengths
                             if w_arr.shape == vis.shape:
-                                _avg[bkey] = vis * np.exp(-1j * 2.0 * np.pi * w_arr)
+                                _avg[bkey] = vis * np.exp(+1j * 2.0 * np.pi * w_arr)
 
                 # ── apply fringe-fit calibration to cross-baselines ──
                 _avg_cal = {}
@@ -647,8 +653,13 @@ def correlate_process(pfb_queue, corr_plot_queue, stop_event, corr_config_queue)
                         N = _grid_size
                         _vis = _uv_acc_amp * np.exp(1j * _uv_acc_phase)
                         _uv_max = max(np.abs(_uv_acc_u).max(), np.abs(_uv_acc_v).max(), 1.0) * 1.05
-                        _ui = np.round((_uv_acc_u / _uv_max + 1.0) * 0.5 * (N - 1)).astype(int)
-                        _vi = np.round((_uv_acc_v / _uv_max + 1.0) * 0.5 * (N - 1)).astype(int)
+                        # Map (u,v) ∈ [-uv_max, +uv_max] → integer cell with the
+                        # FFT DC bin at index N//2 so the appended Hermitian
+                        # conjugate pair (-u,-v) lands symmetrically about the
+                        # FFT center. Using (N-1) here would offset by half a
+                        # pixel and leak power into the imaginary part.
+                        _ui = np.floor((_uv_acc_u / _uv_max + 1.0) * 0.5 * N).astype(int)
+                        _vi = np.floor((_uv_acc_v / _uv_max + 1.0) * 0.5 * N).astype(int)
                         np.clip(_ui, 0, N - 1, out=_ui)
                         np.clip(_vi, 0, N - 1, out=_vi)
                         _grid = np.zeros((N, N), dtype=complex)
@@ -662,10 +673,13 @@ def correlate_process(pfb_queue, corr_plot_queue, stop_event, corr_config_queue)
                         # The UV accumulator is Hermitian-symmetrized (conjugate
                         # baselines appended), so the IFFT is mathematically real.
                         # Any imaginary residue is pure gridding noise — take the
-                        # real part (same image CLEAN operates on). np.abs() gives
-                        # the positive brightness map for display.
+                        # real part (same image CLEAN operates on). Clip negative
+                        # PSF sidelobes to zero for display: rectifying with
+                        # np.abs() instead would fold negative troughs into bright
+                        # stripes and turn the zero crossings into hard black
+                        # lines (visible as diagonal streaks across the image).
                         _dirty_result = {
-                            "dirty_abs": np.abs(_dirty.real).astype(np.float32),
+                            "dirty_abs": np.clip(_dirty.real, 0.0, None).astype(np.float32),
                             "lm_extent": _dl * N / 2.0,
                         }
                     except Exception as e:

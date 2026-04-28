@@ -27,8 +27,10 @@ def _grid_uv(u, v, vis, N, uv_max=None):
     """
     if uv_max is None:
         uv_max = max(np.abs(u).max(), np.abs(v).max(), 1.0) * 1.05
-    ui = np.round((u / uv_max + 1.0) * 0.5 * (N - 1)).astype(int)
-    vi = np.round((v / uv_max + 1.0) * 0.5 * (N - 1)).astype(int)
+    # Place the DC cell at index N//2 (matches np.fft.fftshift), so the
+    # Hermitian-conjugate pair (-u,-v) lands symmetric about the FFT center.
+    ui = np.floor((u / uv_max + 1.0) * 0.5 * N).astype(int)
+    vi = np.floor((v / uv_max + 1.0) * 0.5 * N).astype(int)
     np.clip(ui, 0, N - 1, out=ui)
     np.clip(vi, 0, N - 1, out=vi)
     grid = np.zeros((N, N), dtype=np.complex128)
