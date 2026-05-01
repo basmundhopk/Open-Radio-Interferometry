@@ -17,7 +17,7 @@ import queue          # only for queue.Full / queue.Empty
 import time
 
 import numpy as np
-from settings import (PFB_ENABLE, P, M, PFB_WINDOW, PFB_FFTSHIFT,
+from open_radio_interferometry.settings import (PFB_ENABLE, P, M, PFB_WINDOW, PFB_FFTSHIFT,
                       DC_NOTCH_KHZ, PLOT_INTERVAL)
 
 # Kaiser window beta parameter (used when window=='kaiser')

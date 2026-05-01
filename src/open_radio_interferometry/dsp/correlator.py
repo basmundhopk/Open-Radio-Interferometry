@@ -12,7 +12,7 @@ import multiprocessing as mp
 import numpy as np
 import queue
 
-from settings import (INTEGRATION_COUNT, ANTENNA_POSITIONS_ENU,
+from open_radio_interferometry.settings import (INTEGRATION_COUNT, ANTENNA_POSITIONS_ENU,
                       CHANNEL_TO_ANTENNA, DC_NOTCH_KHZ, IFFT_GRID_SIZE,
                       SOURCE_RA_DEG, OBSERVATION_DECLINATION_DEG)
 

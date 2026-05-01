@@ -1,5 +1,35 @@
-.vscode/
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+*.egg
+.eggs/
+pip-wheel-metadata/
+
+# Virtual environments
 .venv/
-python/__pycache__/clean_dialog.cpython-310.pyc
-python/__pycache__/clean.cpython-310.pyc
-python/__pycache__/settings.cpython-310.pyc
+venv/
+env/
+
+# Test / lint caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+*.swp
+
+# Generated outputs
+*.fits
+!examples/*.fits

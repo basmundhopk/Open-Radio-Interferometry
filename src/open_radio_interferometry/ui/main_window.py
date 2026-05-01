@@ -48,8 +48,8 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtCore import Qt, QTimer, pyqtSignal, QSettings
 from PyQt5.QtGui import QPalette, QColor
 
-import settings
-from pfb import generate_win_coeffs_np
+from open_radio_interferometry import settings
+from open_radio_interferometry.dsp.pfb import generate_win_coeffs_np
 
 
 # ──────────────────────────────────────────────────────────────────────────

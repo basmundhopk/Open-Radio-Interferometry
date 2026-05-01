@@ -30,7 +30,7 @@ from PyQt5.QtCore import Qt, QTimer, QDateTime
 from PyQt5.QtGui import QPalette, QColor
 from datetime import datetime, timezone, timedelta
 
-import settings
+from open_radio_interferometry import settings
 
 # 10 distinguishable colors (tab10-equivalent)
 _TAB10 = [

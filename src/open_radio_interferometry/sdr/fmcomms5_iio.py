@@ -11,7 +11,7 @@ import numpy as np
 import queue          # only for queue.Full / queue.Empty
 import time
 
-from settings import QUEUE_SIZE, FRAME_SIZE
+from open_radio_interferometry.settings import QUEUE_SIZE, FRAME_SIZE
 
 # Shared state needs ample queue sizes to avoid dropped frames
 # If queues overflow, reduce sampling rate

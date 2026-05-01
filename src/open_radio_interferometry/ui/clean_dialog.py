@@ -50,7 +50,7 @@ from PyQt5.QtWidgets import (
     QMessageBox,
 )
 
-from clean import (
+from open_radio_interferometry.imaging.clean import (
     _grid_uv,
     _ifft_image,
     _fit_psf_gaussian,

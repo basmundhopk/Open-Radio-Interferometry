@@ -1,5 +1,8 @@
 # Open-Radio-Interferometry
 
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+![Python](https://img.shields.io/badge/python-3.9%2B-blue)
+
 A software FX correlator and aperture-synthesis imager for amateur radio
 astronomy, built around the **Analog Devices FMCOMMS5** (dual-AD9361, four
 coherent RX channels) paired with a host PC. All signal processing — channel
@@ -9,6 +12,17 @@ streams raw IQ to the host over the standard ADI IIO interface.
 
 The default configuration targets the **1420.405 MHz neutral-hydrogen line**
 with a 4-element interferometer.
+
+![Main UI](docs/images/main_ui.png)
+
+## Results
+
+Hogbom CLEAN restored images produced by [`ori-clean`](src/open_radio_interferometry/apps/clean_app.py)
+on a recorded HI-line capture:
+
+| 2 800 iterations | 2 900 iterations |
+|------------------|------------------|
+| ![Restored, 2800 iters](docs/images/clean_restored_iter2800.png) | ![Restored, 2900 iters](docs/images/clean_restored_iter2900.png) |
 
 ## Features
 
@@ -26,89 +40,92 @@ with a 4-element interferometer.
 - Interactive Hogbom CLEAN deconvolution dialog (step 1 / 10 / 100 / 1000
   iterations, restored beam fit)
 - FITS export of UV visibilities and dirty images (astropy)
-- Standalone tools:
-  - `uv_app.py` — open and inspect a UV-plane FITS file
-  - `clean_app.py` — run interactive CLEAN on any compatible FITS
-  - `uv_simulator.py` — simulate UV coverage for a given array, source, and
-    observation window
+- Standalone tools — work without any hardware:
+  - `ori-uv`    — open and inspect a UV-plane FITS file
+  - `ori-clean` — run interactive CLEAN on any compatible FITS
+  - `ori-sim`   — simulate UV coverage for a given array, source, and window
 - Persistent settings (QSettings) so the last-used SDR / PFB / correlator
   parameters are restored on launch
 - Dark-themed PyQt5 + pyqtgraph UI with dockable plot panels
 
-## Repository Layout
+## Install
+
+```bash
+git clone https://github.com/basmundhopk/Open-Radio-Interferometry.git
+cd Open-Radio-Interferometry
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -e .              # core: numpy, PyQt5, pyqtgraph, astropy
+pip install -e ".[sdr]"       # add pyadi-iio for live FMCOMMS5 capture
+```
+
+Requires Python 3.9+. `pyadi-iio` additionally needs the `libiio` runtime
+from your OS package manager.
+
+## Run
+
+### Live capture (requires FMCOMMS5)
+
+```bash
+ori-live
+```
+
+The default IIO URI is `ip:analog.local`. Change it by editing `SDR_URI` at
+the top of [src/open_radio_interferometry/apps/main.py](src/open_radio_interferometry/apps/main.py).
+
+The UI opens with live time-domain, spectrum, baseline, UV-plane, and
+dirty-image panels. Use the dockable settings panel to change LO frequency,
+sample rate, RF bandwidth, gain, PFB parameters, and integration count, then
+click **Apply** for each section.
+
+### Try it without hardware
+
+```bash
+ori-sim                          # UV-coverage simulator
+ori-uv    examples/test.fits     # open a UV-plane FITS
+ori-clean examples/test.fits     # interactive Hogbom CLEAN
+```
+
+(Drop additional sample FITS captures into [examples/](examples/) so others
+can do the same — the folder is whitelisted in `.gitignore`.)
+
+## Repository layout
 
 ```
-python/
-  main.py            # Entry point — launches capture / PFB / correlator / UI processes
-  fmcomms5_iio.py    # FMCOMMS5 IIO capture worker and shared-state factory
-  settings.py        # Persistent settings (SDR, PFB, correlator, antenna geometry)
-  pfb.py             # Polyphase filter bank prototype + worker process
-  correlator.py      # Cross-correlation, UV synthesis, fringe stopping, FITS export
-  ui.py              # PyQt5 + pyqtgraph main window, control panels, live plots
-  clean.py           # Hogbom CLEAN core (gridding, dirty image, PSF fit, restore)
-  clean_dialog.py    # Interactive CLEAN dialog
-  clean_app.py       # Standalone CLEAN viewer
-  uv_app.py          # Standalone UV-plane viewer
-  uv_simulator.py    # UV-coverage simulator
-LICENSE
-README.md
+src/open_radio_interferometry/
+  settings.py          Default parameters + persistent QSettings schema
+  sdr/fmcomms5_iio.py  FMCOMMS5 IIO capture worker
+  dsp/pfb.py           Polyphase filter bank prototype + worker
+  dsp/correlator.py    Cross-correlation, UV synthesis, fringe stopping, FITS export
+  imaging/clean.py     Hogbom CLEAN core (gridding, dirty image, PSF fit, restore)
+  ui/main_window.py    PyQt5 main window, control panels, live plots
+  ui/clean_dialog.py   Interactive CLEAN dialog
+  apps/main.py         Live capture entry point (ori-live)
+  apps/uv_app.py       Standalone UV viewer (ori-uv)
+  apps/clean_app.py    Standalone CLEAN viewer (ori-clean)
+  apps/uv_simulator.py UV-coverage simulator (ori-sim)
+
+docs/                  Architecture and hardware-setup docs
+examples/              Sample FITS files for the standalone viewers
+tests/                 pytest suite
+.github/workflows/     CI (ruff + pytest)
 ```
+
+See [docs/architecture.md](docs/architecture.md) for the multi-process
+pipeline diagram, and [docs/hardware-setup.md](docs/hardware-setup.md) for
+FMCOMMS5 wiring and antenna-geometry notes.
 
 ## Hardware
 
 - **Analog Devices FMCOMMS5** (EVAL-AD-FMCOMMS5-EBZ) — dual AD9361, 4 coherent
   RX channels, tunable 70 MHz – 6 GHz
 - Any host carrier supported by ADI's stock FMCOMMS5 image (e.g. ZC706,
-  ZCU102) running the standard ADI Linux + IIO daemon. The application
-  connects to the board over the network using its IIO URI
-  (default `ip:analog.local`)
+  ZCU102) running the standard ADI Linux + IIO daemon
 - 4 antennas with known local East-North-Up positions — defaults are an
   edge-on 25 m square; edit `ANTENNA_POSITIONS_ENU` in
-  [python/settings.py](python/settings.py) to match your array
+  [src/open_radio_interferometry/settings.py](src/open_radio_interferometry/settings.py)
 
-## Software Requirements
-
-- Python 3.9+
-- `pyadi-iio` (and `libiio` runtime)
-- `numpy`
-- `PyQt5`
-- `pyqtgraph`
-- `astropy` (for FITS I/O)
-
-Install with:
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install pyadi-iio numpy PyQt5 pyqtgraph astropy
-```
-
-## Running
-
-With the FMCOMMS5 reachable on the network:
-
-```bash
-cd python
-python3 main.py
-```
-
-The default IIO URI is `ip:analog.local`. To use a different host, edit
-`SDR_URI` at the top of [python/main.py](python/main.py).
-
-The UI opens with live time-domain, spectrum, baseline, UV-plane, and
-dirty-image panels. Use the dockable settings panel to change LO frequency,
-sample rate, RF bandwidth, gain, PFB parameters, and integration count, then
-click **Apply** for each section to push the change to the running workers.
-
-### Standalone tools
-
-```bash
-python3 uv_app.py            [path/to/file.fits]   # UV viewer
-python3 clean_app.py         [path/to/file.fits]   # Interactive CLEAN
-python3 uv_simulator.py                            # UV-coverage simulator
-```
-
-## Default Configuration
+## Default configuration
 
 | Parameter             | Default                                  |
 |-----------------------|------------------------------------------|
@@ -127,29 +144,9 @@ python3 uv_simulator.py                            # UV-coverage simulator
 
 All values are persisted via `QSettings` between runs.
 
-## Architecture
+## Contributing
 
-`main.py` spawns four cooperating processes communicating through bounded
-`multiprocessing.Queue`s:
-
-```
-FMCOMMS5 ──IIO──► data_read ──raw_queue──► pfb_process ──pfb_queue──► correlate_process
-                      │                         │                          │
-                      ▼                         ▼                          ▼
-                 settings_queue           plot_queue                 corr_plot_queue
-                      ▲                         │                          │
-                      └────────── UI process (PyQt5) ◄──────────────────────┘
-```
-
-- `data_read` (fmcomms5_iio.py) configures the SDR and pushes raw 4-channel
-  IQ frames into `raw_queue`.
-- `pfb_process` (pfb.py) consumes raw frames, applies the polyphase FIR /
-  FFT, optionally notches DC, and pushes channelized spectra.
-- `correlate_process` (correlator.py) computes all 10 baseline products,
-  integrates, projects baselines onto the UV plane for the current LST,
-  and emits UV / correlation frames for plotting and FITS export.
-- The UI process (ui.py) drains the plot queues, renders dockable panels,
-  and pushes user changes back to the workers via the `*_config_queue`s.
+See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 

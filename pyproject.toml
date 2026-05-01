@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "open-radio-interferometry"
+version = "0.1.0"
+description = "Software FX correlator and aperture-synthesis imager for the Analog Devices FMCOMMS5."
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.9"
+authors = [{ name = "Brett Hopkins" }]
+keywords = ["radio-astronomy", "interferometry", "sdr", "fmcomms5", "correlator", "aperture-synthesis"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Astronomy",
+]
+dependencies = [
+    "numpy>=1.22",
+    "PyQt5>=5.15",
+    "pyqtgraph>=0.13",
+    "astropy>=5.0",
+]
+
+[project.optional-dependencies]
+sdr = ["pyadi-iio>=0.0.14"]
+dev = ["pytest>=7", "ruff>=0.4"]
+
+[project.urls]
+Homepage = "https://github.com/basmundhopk/Open-Radio-Interferometry"
+Issues   = "https://github.com/basmundhopk/Open-Radio-Interferometry/issues"
+Source   = "https://github.com/basmundhopk/Open-Radio-Interferometry"
+
+[project.scripts]
+ori-live  = "open_radio_interferometry.apps.main:main"
+ori-uv    = "open_radio_interferometry.apps.uv_app:main"
+ori-clean = "open_radio_interferometry.apps.clean_app:main"
+ori-sim   = "open_radio_interferometry.apps.uv_simulator:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = ["E501"]

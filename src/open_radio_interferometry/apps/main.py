@@ -12,14 +12,15 @@ Any entry point for further development should be made by adding a process, or m
 """
 import multiprocessing as mp
 import signal
-from fmcomms5_iio import create_shared_state, data_read
-from pfb import pfb_process
-from correlator import correlate_process
-from ui import run_ui, load_persistent_configs
+from open_radio_interferometry.sdr.fmcomms5_iio import create_shared_state, data_read
+from open_radio_interferometry.dsp.pfb import pfb_process
+from open_radio_interferometry.dsp.correlator import correlate_process
+from open_radio_interferometry.ui.main_window import run_ui, load_persistent_configs
 
 SDR_URI = "ip:analog.local"
 
-if __name__ == "__main__":
+
+def main():
     mp.set_start_method("spawn", force=True)
 
     shared = create_shared_state()
@@ -92,3 +93,6 @@ if __name__ == "__main__":
     pfb_proc.join(timeout=2)
     corr_proc.join(timeout=2)
     print("Capture complete.")
+
+if __name__ == "__main__":
+    main()

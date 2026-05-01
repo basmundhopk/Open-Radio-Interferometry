@@ -49,7 +49,7 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtGui import QPalette, QColor
 from PyQt5.QtCore import Qt
 
-from clean_dialog import CleanDialog
+from open_radio_interferometry.ui.clean_dialog import CleanDialog
 
 
 # ── dark palette (matches the main app) ─────────────────────────────────────
