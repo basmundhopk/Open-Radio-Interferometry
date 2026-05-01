@@ -1,75 +1,103 @@
 # References
 
-Sources consulted during the design and implementation of
-Open-Radio-Interferometry.
+Bibliography of sources consulted during the design and implementation of
+Open-Radio-Interferometry. Formatted in APA 7th edition style.
 
-## Textbooks
+## Books
 
-- **Wilson, Rohlfs & Hüttemeister.** *Tools of Radio Astronomy.* Springer.
-  (General radio-astronomy background — antennas, receivers, calibration.)
-- **Thompson, Moran & Swenson.** *Interferometry and Synthesis in Radio
-  Astronomy.* Springer (3rd ed., 2017). The standard reference for
-  interferometer geometry, fringe stopping, UV synthesis, and
-  calibration theory.
-- **Wilkinson, P.N., et al. (eds.).** *Phased Arrays for Radio Astronomy,
-  Remote Sensing, and Satellite Communications.* Cambridge University
-  Press. Phased-array theory and beamforming for radio-astronomy
-  applications.
-- **Kraus, J.D.** *Antennas.* McGraw-Hill. Antenna fundamentals,
-  patterns, gain, and aperture theory.
-- **Balanis, C.A.** *Engineering Electromagnetics.* Wiley.
-  Electromagnetic propagation, transmission lines, and antenna
-  fundamentals supporting the front-end design.
+Balanis, C. A. (2012). *Advanced engineering electromagnetics* (2nd ed.).
+Wiley.
 
-## Algorithms
+Kraus, J. D., & Marhefka, R. J. (2002). *Antennas for all applications*
+(3rd ed.). McGraw-Hill.
 
-- **Högbom, J.A.** "Aperture Synthesis with a Non-Regular Distribution
-  of Interferometer Baselines." *Astronomy & Astrophysics Supplement
-  Series*, 15:417, 1974. The original CLEAN algorithm — implemented in
-  [src/open_radio_interferometry/imaging/clean.py](../src/open_radio_interferometry/imaging/clean.py).
-- **Meeus, J.** *Astronomical Algorithms* (2nd ed.). Willmann-Bell, 1998.
-  Standard reference for sidereal-time, hour-angle, and equatorial /
-  horizontal coordinate conversions used in baseline projection.
+Meeus, J. (1998). *Astronomical algorithms* (2nd ed.). Willmann-Bell.
 
-## Online lectures and tutorials
+Thompson, A. R., Moran, J. M., & Swenson, G. W. (2017). *Interferometry
+and synthesis in radio astronomy* (3rd ed.). Springer.
+https://doi.org/10.1007/978-3-319-44431-4
 
-- **NRAO Synthesis Imaging Summer School lectures and proceedings.**
-  <https://science.nrao.edu/science/meetings/synthesis-imaging>
-  Lectures on aperture synthesis, calibration, gridding, weighting, and
-  deconvolution.
-- **AstroBaki** (UC Berkeley radio-astronomy wiki).
-  <https://casper.astro.berkeley.edu/astrobaki/>
-  Practical notes on radiometry, interferometry, and basic radio-astronomy
-  observing.
-- **CASPER collaboration documentation and memos.**
-  <https://casper.berkeley.edu/>
-  Polyphase filter bank design, FX-correlator architecture, and reference
-  implementations used as a guide for the channelizer in
-  [src/open_radio_interferometry/dsp/pfb.py](../src/open_radio_interferometry/dsp/pfb.py).
+Warnick, K. F., Maaskant, R., Ivashina, M. V., Davidson, D. B., & Jeffs,
+B. D. (2018). *Phased arrays for radio astronomy, remote sensing, and
+satellite communications*. Cambridge University Press.
+https://doi.org/10.1017/9781108539258
 
-## Hardware datasheets and documentation
+Wilson, T. L., Rohlfs, K., & Hüttemeister, S. (2013). *Tools of radio
+astronomy* (6th ed.). Springer.
+https://doi.org/10.1007/978-3-642-39950-3
 
-- **Analog Devices.** *AD9361 Reference Manual* (UG-570). Transceiver
-  programming model, RF chain, and clocking.
-- **Analog Devices.** *FMCOMMS5 hardware reference.*
-  <https://wiki.analog.com/resources/eval/user-guides/ad-fmcomms5-ebz>
-  Board schematics, clock distribution, and ADI Linux / IIO image notes.
-- **Analog Devices.** *libiio and pyadi-iio documentation.*
-  <https://analogdevicesinc.github.io/libiio/> and
-  <https://analogdevicesinc.github.io/pyadi-iio/>
-  IIO API used by [src/open_radio_interferometry/sdr/fmcomms5_iio.py](../src/open_radio_interferometry/sdr/fmcomms5_iio.py)
-  to configure the SDR and stream IQ samples.
-- **Nooelec.** *SAWbird+ H1 datasheet.*
-  <https://www.nooelec.com/store/sawbird-h1.html>
-  1420 MHz SAW-filtered LNA used as the per-channel front end.
+## Journal articles
 
-## Software citations
+Astropy Collaboration, Robitaille, T. P., Tollerud, E. J., Greenfield,
+P., Droettboom, M., Bray, E., Aldcroft, T., Davis, M., Ginsburg, A.,
+Price-Whelan, A. M., Kerzendorf, W. E., Conley, A., Crighton, N.,
+Barbary, K., Muna, D., Ferguson, H., Grollier, F., Parikh, M. M., Nair,
+P. H., … Streicher, O. (2013). Astropy: A community Python package for
+astronomy. *Astronomy & Astrophysics*, *558*, A33.
+https://doi.org/10.1051/0004-6361/201322068
 
-- **Astropy Collaboration.** "Astropy: A community Python package for
-  astronomy." *A&A* 558, A33 (2013).
-- **Astropy Collaboration.** "The Astropy Project: Building an Open-science
-  Project and Status of the v2.0 Core Package." *AJ* 156, 123 (2018).
-- **Astropy Collaboration.** "The Astropy Project: Sustaining and Growing
-  a Community-oriented Open-source Project and the Latest Major Release
-  (v5.0) of the Core Package." *ApJ* 935, 167 (2022).
-  Used for FITS I/O of UV visibilities and dirty images.
+Astropy Collaboration, Price-Whelan, A. M., Sipőcz, B. M., Günther,
+H. M., Lim, P. L., Crawford, S. M., Conseil, S., Shupe, D. L., Craig,
+M. W., Dencheva, N., Ginsburg, A., VanderPlas, J. T., Bradley, L. D.,
+Pérez-Suárez, D., de Val-Borro, M., Aldcroft, T. L., Cruz, K. L.,
+Robitaille, T. P., Tollerud, E. J., … Astropy Contributors. (2018). The
+Astropy Project: Building an open-science project and status of the
+v2.0 core package. *The Astronomical Journal*, *156*(3), 123.
+https://doi.org/10.3847/1538-3881/aabc4f
+
+Astropy Collaboration, Price-Whelan, A. M., Lim, P. L., Earl, N.,
+Starkman, N., Bradley, L., Shupe, D. L., Patil, A. A., Corrales, L.,
+Brasseur, C. E., Nöthe, M., Donath, A., Tollerud, E., Morris, B. M.,
+Ginsburg, A., Vaher, E., Weaver, B. A., Tocknell, J., Jamieson, W., …
+Astropy Project Contributors. (2022). The Astropy Project: Sustaining
+and growing a community-oriented open-source project and the latest
+major release (v5.0) of the core package. *The Astrophysical Journal*,
+*935*(2), 167. https://doi.org/10.3847/1538-4357/ac7c74
+
+Högbom, J. A. (1974). Aperture synthesis with a non-regular distribution
+of interferometer baselines. *Astronomy & Astrophysics Supplement
+Series*, *15*, 417–426.
+https://ui.adsabs.harvard.edu/abs/1974A%26AS...15..417H
+
+## Edited proceedings
+
+Taylor, G. B., Carilli, C. L., & Perley, R. A. (Eds.). (1999).
+*Synthesis imaging in radio astronomy II* (Astronomical Society of the
+Pacific Conference Series, Vol. 180). Astronomical Society of the
+Pacific.
+
+## Online resources
+
+AstroBaki. (n.d.). *AstroBaki: Berkeley radio astronomy wiki*. Retrieved
+April 30, 2026, from https://casper.astro.berkeley.edu/astrobaki/
+
+CASPER Collaboration. (n.d.). *Collaboration for Astronomy Signal
+Processing and Electronics Research*. University of California,
+Berkeley. Retrieved April 30, 2026, from https://casper.berkeley.edu/
+
+National Radio Astronomy Observatory. (n.d.). *Synthesis imaging
+workshops*. Retrieved April 30, 2026, from
+https://science.nrao.edu/science/meetings/synthesis-imaging
+
+## Hardware datasheets and technical documentation
+
+Analog Devices. (n.d.-a). *AD9361 reference manual* (UG-570). Retrieved
+April 30, 2026, from
+https://www.analog.com/media/en/technical-documentation/user-guides/AD9361_Reference_Manual_UG-570.pdf
+
+Analog Devices. (n.d.-b). *EVAL-AD-FMCOMMS5-EBZ user guide*. Retrieved
+April 30, 2026, from
+https://wiki.analog.com/resources/eval/user-guides/ad-fmcomms5-ebz
+
+Analog Devices. (n.d.-c). *libiio: Library for interfacing with Linux
+IIO devices*. Retrieved April 30, 2026, from
+https://analogdevicesinc.github.io/libiio/
+
+Analog Devices. (n.d.-d). *pyadi-iio: Python interfaces for ADI hardware*.
+Retrieved April 30, 2026, from
+https://analogdevicesinc.github.io/pyadi-iio/
+
+Nooelec. (n.d.). *SAWbird+ H1 barebones — premium SAW filter and
+cascaded ultra-low-noise LNA module for hydrogen line (1420 MHz)
+applications*. Retrieved April 30, 2026, from
+https://www.nooelec.com/store/sawbird-h1.html
