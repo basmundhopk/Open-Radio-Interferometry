@@ -1,7 +1,2 @@
 .vscode/
 .venv/
-python/__pycache__/clean_dialog.cpython-310.pyc
-python/__pycache__/clean.cpython-310.pyc
-python/__pycache__/settings.cpython-310.pyc
-vivado.jou
-vivado.log
