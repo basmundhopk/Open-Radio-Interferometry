@@ -3,12 +3,12 @@
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 ![Python](https://img.shields.io/badge/python-3.9%2B-blue)
 
-A software FX correlator and aperture-synthesis imager for amateur radio
+A software FX correlator and aperture-synthesis imager for radio
 astronomy, built around the **Analog Devices FMCOMMS5** (dual-AD9361, four
-coherent RX channels) paired with a host PC. All signal processing — channel
+coherent RX channels) paired with a host PC. All signal processing, including channel
 acquisition, polyphase channelization, cross-correlation, UV synthesis, dirty
-imaging, and CLEAN deconvolution — runs in Python on the host. The FPGA simply
-streams raw IQ to the host over the standard ADI IIO interface.
+imaging, and CLEAN deconvolution runs in Python on the host. The FPGA serves to
+streams raw IQ from the FMCOMMS5 over the standard ADI IIO interface.
 
 The default configuration targets the **1420.405 MHz neutral-hydrogen line**
 with a 4-element interferometer.
@@ -39,14 +39,11 @@ on a recorded HI-line capture:
 - Dirty-image gridding + 2-D IFFT, configurable image grid (64²–2048²)
 - Interactive Hogbom CLEAN deconvolution dialog (step 1 / 10 / 100 / 1000
   iterations, restored beam fit)
-- FITS export of UV visibilities and dirty images (astropy)
-- Standalone tools — work without any hardware:
+- FITS export of UV visibilities and dirty images
+- Standalone tools:
   - `ori-uv`    — open and inspect a UV-plane FITS file
   - `ori-clean` — run interactive CLEAN on any compatible FITS
   - `ori-sim`   — simulate UV coverage for a given array, source, and window
-- Persistent settings (QSettings) so the last-used SDR / PFB / correlator
-  parameters are restored on launch
-- Dark-themed PyQt5 + pyqtgraph UI with dockable plot panels
 
 ## Install
 
@@ -85,9 +82,6 @@ ori-sim                          # UV-coverage simulator
 ori-uv    examples/test.fits     # open a UV-plane FITS
 ori-clean examples/test.fits     # interactive Hogbom CLEAN
 ```
-
-(Drop additional sample FITS captures into [examples/](examples/) so others
-can do the same — the folder is whitelisted in `.gitignore`.)
 
 ## Repository layout
 
