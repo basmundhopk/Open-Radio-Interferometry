@@ -38,16 +38,18 @@ Functions:
   - main():                       application entry point
 """
 
-import sys
-import os
 import argparse
-import numpy as np
+import os
+import sys
 
-from PyQt5.QtWidgets import (
-    QApplication, QFileDialog, QMessageBox, QDialog,
-)
-from PyQt5.QtGui import QPalette, QColor
+import numpy as np
 from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QColor, QPalette
+from PyQt5.QtWidgets import (
+    QApplication,
+    QFileDialog,
+    QMessageBox,
+)
 
 from open_radio_interferometry.ui.clean_dialog import CleanDialog
 

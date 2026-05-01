@@ -55,4 +55,7 @@ target-version = "py39"
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I"]
-ignore = ["E501"]
+# E501 line-too-long, E402 module-import-not-at-top (Qt apps set attributes
+# before importing widgets), E701/E702 multi-statement lines (used for compact
+# coordinate / setup code), F841 unused locals (some are intentional scaffolds)
+ignore = ["E501", "E402", "E701", "E702", "F841"]

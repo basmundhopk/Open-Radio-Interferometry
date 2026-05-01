@@ -9,13 +9,19 @@ dirty-image generation, and FITS export.
 """
 
 import multiprocessing as mp
-import numpy as np
 import queue
 
-from open_radio_interferometry.settings import (INTEGRATION_COUNT, ANTENNA_POSITIONS_ENU,
-                      CHANNEL_TO_ANTENNA, DC_NOTCH_KHZ, IFFT_GRID_SIZE,
-                      SOURCE_RA_DEG, OBSERVATION_DECLINATION_DEG)
+import numpy as np
 
+from open_radio_interferometry.settings import (
+    ANTENNA_POSITIONS_ENU,
+    CHANNEL_TO_ANTENNA,
+    DC_NOTCH_KHZ,
+    IFFT_GRID_SIZE,
+    INTEGRATION_COUNT,
+    OBSERVATION_DECLINATION_DEG,
+    SOURCE_RA_DEG,
+)
 
 # Correlation helpers
 _triu_i, _triu_j = np.triu_indices(4)
@@ -90,9 +96,10 @@ def _compute_baselines_wavelengths(antenna_positions, chan_to_ant, freq_hz,
 
 def _save_uv_to_fits(path, u, v, amp, phase, avg_corr, ant_pos, chan_to_ant, int_count):
     try:
-        from astropy.io import fits
-        import settings as _s
         from datetime import datetime, timezone
+
+        import settings as _s
+        from astropy.io import fits
 
         hdr = fits.Header()
         hdr["ORIGIN"]   = "FX_Correlator"
@@ -170,9 +177,10 @@ def _save_dirty_fits(path, u, v, amp, phase, N, ant_pos, chan_to_ant, int_count)
         is self-contained and can be re-gridded or CLEANed offline.
     """
     try:
-        from astropy.io import fits
-        import settings as _s
         from datetime import datetime, timezone
+
+        import settings as _s
+        from astropy.io import fits
 
         # ── grid UV and compute dirty image + PSF ───────────────────────────
         uv_max = max(np.abs(u).max(), np.abs(v).max(), 1.0) * 1.05

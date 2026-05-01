@@ -7,11 +7,11 @@ File contatining functions for initialziing shared queues, applying FMComms5 con
 """
 
 import multiprocessing as mp
-import numpy as np
-import queue          # only for queue.Full / queue.Empty
+import queue  # only for queue.Full / queue.Empty
 import time
 
-from open_radio_interferometry.settings import QUEUE_SIZE, FRAME_SIZE
+from open_radio_interferometry.settings import FRAME_SIZE, QUEUE_SIZE
+
 
 # Shared state needs ample queue sizes to avoid dropped frames
 # If queues overflow, reduce sampling rate

@@ -14,9 +14,9 @@ Functions:
   - CleanDialog(QDialog)   :  the interactive window
 """
 
-import numpy as np
 import time
 
+import numpy as np
 import pyqtgraph as pg
 
 pg.setConfigOptions(
@@ -27,36 +27,33 @@ pg.setConfigOptions(
     useOpenGL=False,
 )
 
-from PyQt5.QtCore import Qt, QRectF
-from PyQt5.QtGui import QKeySequence, QCursor
+from PyQt5.QtCore import QRectF, Qt
+from PyQt5.QtGui import QCursor, QKeySequence
 from PyQt5.QtWidgets import (
-    QDialog,
-    QVBoxLayout,
-    QHBoxLayout,
-    QGridLayout,
-    QLabel,
-    QPushButton,
-    QSpinBox,
-    QDoubleSpinBox,
-    QComboBox,
-    QFormLayout,
-    QGroupBox,
-    QSizePolicy,
-    QApplication,
-    QShortcut,
-    QMenu,
     QAction,
+    QApplication,
+    QComboBox,
+    QDialog,
+    QDoubleSpinBox,
     QFileDialog,
+    QGridLayout,
+    QGroupBox,
+    QHBoxLayout,
+    QLabel,
+    QMenu,
     QMessageBox,
+    QPushButton,
+    QShortcut,
+    QSizePolicy,
+    QSpinBox,
+    QVBoxLayout,
 )
 
 from open_radio_interferometry.imaging.clean import (
-    _grid_uv,
-    _ifft_image,
     _fit_psf_gaussian,
     _gaussian_2d,
-    _restore,
-    hogbom_clean,
+    _grid_uv,
+    _ifft_image,
 )
 
 
@@ -445,8 +442,8 @@ class CleanDialog(QDialog):
 
         # Make a dedicated standalone figure (so we don't disturb the
         # interactive canvas) with matching styling.
-        from matplotlib.figure import Figure
         from matplotlib.backends.backend_agg import FigureCanvasAgg
+        from matplotlib.figure import Figure
         fig = Figure(figsize=(7, 6), dpi=150, facecolor="#1e1e1e",
                      constrained_layout=True)
         FigureCanvasAgg(fig)

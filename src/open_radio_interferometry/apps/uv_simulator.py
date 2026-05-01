@@ -11,6 +11,7 @@ UV-plane coverage simulator for a given antenna array, source declination, and t
 """
 
 import sys
+
 import numpy as np
 import pyqtgraph as pg
 
@@ -21,14 +22,27 @@ pg.setConfigOptions(
     useOpenGL=False,
 )
 
+from datetime import datetime, timedelta, timezone
+
+from PyQt5.QtCore import QDateTime, Qt, QTimer
+from PyQt5.QtGui import QColor, QPalette
 from PyQt5.QtWidgets import (
-    QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
-    QFormLayout, QGroupBox, QDoubleSpinBox, QSpinBox, QPushButton,
-    QLabel, QScrollArea, QDockWidget, QSizePolicy, QSlider,
+    QApplication,
+    QDockWidget,
+    QDoubleSpinBox,
+    QFormLayout,
+    QGroupBox,
+    QHBoxLayout,
+    QLabel,
+    QMainWindow,
+    QPushButton,
+    QScrollArea,
+    QSizePolicy,
+    QSlider,
+    QSpinBox,
+    QVBoxLayout,
+    QWidget,
 )
-from PyQt5.QtCore import Qt, QTimer, QDateTime
-from PyQt5.QtGui import QPalette, QColor
-from datetime import datetime, timezone, timedelta
 
 from open_radio_interferometry import settings
 

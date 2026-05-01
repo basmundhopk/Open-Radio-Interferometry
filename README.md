@@ -20,9 +20,9 @@ with a 4-element interferometer.
 Hogbom CLEAN restored images produced by [`ori-clean`](src/open_radio_interferometry/apps/clean_app.py)
 on a recorded HI-line capture:
 
-| 2 800 iterations | 2 900 iterations |
-|------------------|------------------|
-| ![Restored, 2800 iters](docs/images/clean_restored_iter2800.png) | ![Restored, 2900 iters](docs/images/clean_restored_iter2900.png) |
+|   |   |
+|---|---|
+| ![Restored CLEAN image](docs/images/clean_restored_iter2800.png) | ![Restored CLEAN image](docs/images/clean_restored_iter4441.png) |
 
 ## Features
 

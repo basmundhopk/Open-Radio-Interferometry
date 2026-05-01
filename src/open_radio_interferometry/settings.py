@@ -13,8 +13,8 @@ New helpers:
   - settings.print_sdr_config(sdr) — print the live SDR configuration
 """
 
-import sys
 import copy
+import sys
 import types
 
 
@@ -36,7 +36,7 @@ class _Settings(types.ModuleType):
         FRAME_SIZE                   = 4096,
         BUFFER_FRAMES                = 100,          # of frames
         QUEUE_SIZE                   = 10000,
-        
+
         # PFB
         P                            = 4096,            # FFT size (= FRAME_SIZE)
         M                            = 4,               # taps-per-branch
@@ -45,7 +45,7 @@ class _Settings(types.ModuleType):
         PFB_ENABLE                   = True,            # False → raw FFT
         DC_NOTCH_KHZ                 = 20,              # ±N kHz zeroed around DC (0 = off)
         LO_OFFSET_KHZ                = 500,             # shift LO to move DC spike
-        
+
         # FMCOMMS5
         filter_fir                   = '',              # path to FIR filter file
         gain_control_mode            = 'fast_attack',   # slow_attack | fast_attack | manual
@@ -57,10 +57,10 @@ class _Settings(types.ModuleType):
         rx_output_type               = 'raw',           # 'raw' or 'SI'
         rx_channels                  = [0, 1, 2, 3],
         rx_annotated                 = False,
-        
+
         # UI
         PLOT_INTERVAL                = 0.1,             # seconds between plot updates
-        
+
         # Observing
         INTEGRATION_COUNT            = 10000,           # spectra averaged before emit
         IFFT_GRID_SIZE               = 128,             # dirty-image IFFT size (NxN)
@@ -68,7 +68,7 @@ class _Settings(types.ModuleType):
         OBSERVATION_LONGITUDE_DEG    = -119.822,        # observatory longitude
         OBSERVATION_DECLINATION_DEG  = 40.734,          # source declination
         SOURCE_RA_DEG                = 299.75,          # source RA (0 = drift mode)
-        
+
         # Array geometry — local East-North-Up coordinates (metres)
         ANTENNA_POSITIONS_ENU        = [
             (-25.0,  0.0, 0.0),         # Antenna 0  (RX channel 0)

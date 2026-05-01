@@ -12,10 +12,11 @@ Any entry point for further development should be made by adding a process, or m
 """
 import multiprocessing as mp
 import signal
-from open_radio_interferometry.sdr.fmcomms5_iio import create_shared_state, data_read
-from open_radio_interferometry.dsp.pfb import pfb_process
+
 from open_radio_interferometry.dsp.correlator import correlate_process
-from open_radio_interferometry.ui.main_window import run_ui, load_persistent_configs
+from open_radio_interferometry.dsp.pfb import pfb_process
+from open_radio_interferometry.sdr.fmcomms5_iio import create_shared_state, data_read
+from open_radio_interferometry.ui.main_window import load_persistent_configs, run_ui
 
 SDR_URI = "ip:analog.local"
 
@@ -53,7 +54,7 @@ def main():
         "pfb_cfg": shared["pfb_config_queue"],
         "corr_cfg": shared["corr_config_queue"],
     }
-    
+
     read_proc = mp.Process(
         target=data_read,
         args=(SDR_URI, shared["raw_queue"], shared["settings_queue"],

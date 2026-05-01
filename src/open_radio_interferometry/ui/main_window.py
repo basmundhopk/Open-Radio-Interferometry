@@ -8,11 +8,11 @@ PyQt5 + pyqtgraph GUI for the UI process.
   - run_ui():             launch the Qt event loop with the worker queues
 """
 
-import sys
 import math
+import sys
 import time
-import numpy as np
 
+import numpy as np
 import pyqtgraph as pg
 
 # pyqtgraph global config — dark theme, antialias, row-major image axes
@@ -24,32 +24,31 @@ pg.setConfigOptions(
     useOpenGL=False,
 )
 
+from PyQt5.QtCore import QSettings, Qt, QTimer, pyqtSignal
+from PyQt5.QtGui import QColor, QPalette
 from PyQt5.QtWidgets import (
     QApplication,
-    QMainWindow,
-    QWidget,
-    QVBoxLayout,
-    QHBoxLayout,
-    QGroupBox,
-    QLabel,
-    QComboBox,
     QCheckBox,
+    QComboBox,
+    QDockWidget,
+    QDoubleSpinBox,
+    QFileDialog,
+    QFormLayout,
+    QGroupBox,
+    QHBoxLayout,
+    QLabel,
+    QMainWindow,
+    QMessageBox,
     QPushButton,
     QScrollArea,
-    QDockWidget,
-    QStatusBar,
-    QFormLayout,
-    QSpinBox,
-    QDoubleSpinBox,
     QSizePolicy,
-    QMessageBox,
-    QFileDialog,
+    QSpinBox,
+    QStatusBar,
+    QVBoxLayout,
+    QWidget,
 )
-from PyQt5.QtCore import Qt, QTimer, pyqtSignal, QSettings
-from PyQt5.QtGui import QPalette, QColor
 
 from open_radio_interferometry import settings
-from open_radio_interferometry.dsp.pfb import generate_win_coeffs_np
 
 
 # ──────────────────────────────────────────────────────────────────────────
@@ -737,7 +736,7 @@ class SettingsPanel(QWidget):
         self._on_apply_corr()
         print("Settings reset to factory defaults and applied to all workers.")
 
-    # helpers 
+    # helpers
     def _on_pfb_enable_toggled(self, enabled):
         for cb in self.pfb_checks.values():
             cb.setEnabled(enabled)

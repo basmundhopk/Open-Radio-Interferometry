@@ -13,12 +13,20 @@ Polyphase filter bank channelizer, prototype filter generator, and PFB worker pr
 
 import collections
 import multiprocessing as mp
-import queue          # only for queue.Full / queue.Empty
+import queue  # only for queue.Full / queue.Empty
 import time
 
 import numpy as np
-from open_radio_interferometry.settings import (PFB_ENABLE, P, M, PFB_WINDOW, PFB_FFTSHIFT,
-                      DC_NOTCH_KHZ, PLOT_INTERVAL)
+
+from open_radio_interferometry.settings import (
+    DC_NOTCH_KHZ,
+    PFB_ENABLE,
+    PFB_FFTSHIFT,
+    PFB_WINDOW,
+    PLOT_INTERVAL,
+    M,
+    P,
+)
 
 # Kaiser window beta parameter (used when window=='kaiser')
 KAISER_BETA = 8.6

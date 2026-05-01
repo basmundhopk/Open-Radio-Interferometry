@@ -18,11 +18,11 @@ Usage:
 If no file is given, a file picker is shown.
 """
 
-import sys
-import os
 import argparse
-import numpy as np
+import os
+import sys
 
+import numpy as np
 import pyqtgraph as pg
 
 pg.setConfigOptions(
@@ -33,13 +33,20 @@ pg.setConfigOptions(
     useOpenGL=False,
 )
 
+from PyQt5.QtGui import QColor, QPalette
 from PyQt5.QtWidgets import (
-    QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
-    QFileDialog, QMessageBox, QStatusBar, QLabel, QComboBox, QCheckBox,
+    QApplication,
+    QCheckBox,
+    QComboBox,
+    QFileDialog,
+    QHBoxLayout,
+    QLabel,
+    QMainWindow,
+    QMessageBox,
+    QStatusBar,
+    QVBoxLayout,
+    QWidget,
 )
-from PyQt5.QtGui import QPalette, QColor
-from PyQt5.QtCore import Qt
-
 
 # ── style constants (matches ui.py) ─────────────────────────────────────────
 _TITLE_STYLE = {"color": "#dddddd", "size": "10pt"}
