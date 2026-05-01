@@ -36,6 +36,6 @@ ruff check .
 
 ## Pull requests
 
-- Keep changes focused — separate refactors from feature work.
-- Include a test when fixing a bug in the DSP / imaging code.
+- Keep changes focused/small in scope.
+- Include a test when fixing a bug in any DSP / imaging code.
 - Update `docs/` if you change architecture or public APIs.

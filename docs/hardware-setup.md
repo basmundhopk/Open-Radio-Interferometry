@@ -9,6 +9,9 @@
 - Network connection between the carrier and the host PC running this
   software.
 - 4 antennas with known local East-North-Up positions.
+- 4 × **Nooelec SAWbird+ H1** — 1420 MHz SAW-filtered LNA, one per RX
+  channel, inserted between each antenna and its FMCOMMS5 input. Provides
+  ~40 dB gain and a tight band-pass around the HI line.
 
 ## SDR configuration
 

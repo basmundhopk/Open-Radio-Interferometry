@@ -118,6 +118,8 @@ FMCOMMS5 wiring and antenna-geometry notes.
 - 4 antennas with known local East-North-Up positions — defaults are an
   edge-on 25 m square; edit `ANTENNA_POSITIONS_ENU` in
   [src/open_radio_interferometry/settings.py](src/open_radio_interferometry/settings.py)
+- One **Nooelec SAWbird+ H1** LNA / 1420 MHz SAW-filter front-end per RX
+  channel (4 total), inserted between each antenna and its FMCOMMS5 input
 
 ## Default configuration
 
@@ -141,6 +143,11 @@ All values are persisted via `QSettings` between runs.
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## References
+
+See [docs/references.md](docs/references.md) for the textbooks, papers,
+lectures, and datasheets that informed this project.
 
 ## License
 
