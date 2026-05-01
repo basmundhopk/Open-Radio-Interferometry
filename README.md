@@ -1,100 +1,148 @@
-# FX-Correlator
+# Open-Radio-Interferometry — IP Branch
 
-An FPGA-based FX correlator for radio astronomy, targeting the **Xilinx ZC706** development board with the **Analog Devices FMCOMMS5** dual-AD9361 RF front-end. The system implements a polyphase filter bank (PFB) channelizer and a baseline correlator in hardware, with Python-based control, data acquisition, and visualization.
+This branch extends the host-only [Open-Radio-Interferometry](README.md)
+software correlator with **FPGA-accelerated channelization** for the
+**Xilinx ZC706 + Analog Devices FMCOMMS5** platform. The polyphase filter
+bank that normally runs in Python is replaced by a Vitis-HLS-generated IP
+block instantiated in the ADI FMCOMMS5 reference HDL design, freeing the
+host CPU and enabling higher continuous sample rates.
 
-## Overview
+The correlator, UV synthesis, dirty imaging, and CLEAN deconvolution still
+run on the host (see the main-branch README for details on those stages
+and the run-time UI). This document covers only the additional FPGA
+hardware that lives on this branch.
 
-The FX correlator architecture splits the processing into two stages:
-
-- **F (Frequency)** — A 1024-point polyphase filter bank channelizes the incoming time-domain samples from 4 receive channels into narrow frequency bins.
-- **X (Cross-correlation)** — A correlator computes all 10 baseline products (4 auto + 6 cross) across the channelized data, with configurable integration time.
-
-The RF front-end is the FMCOMMS5 evaluation board, which provides 4 coherent receive channels (2× AD9361) tunable from 70 MHz to 6 GHz. The default configuration targets the **1420.4 MHz hydrogen line**.
-
-## Repository Structure
+## Branch Layout
 
 ```
-├── hdl/            # Vivado HDL project (based on ADI's FMCOMMS5 reference design)
-│   ├── library/    # IP cores (ADI + custom)
-│   └── projects/
-│       └── fmcomms5/zc706/   # Top-level Vivado project for ZC706
-│
-├── hls/            # Vitis HLS source code
-│   ├── hls_correlator/       # FX correlator core (4-input, 10-baseline)
-│   ├── hls_pfb/              # Polyphase filter bank channelizer
-│   └── hls_pfb_sample/       # PFB sample/reference design
-│
-├── IP/             # Exported/packaged IP blocks
-│   ├── pfb_block_decimator/
-│   └── pfb_multichannel_decimator/
-│
-├── python/         # Host-side control and data acquisition
-│   ├── main.py               # Main application entry point
-│   ├── fmcomms5_iio.py       # IIO data capture, processing, and plotting
-│   ├── settings.py           # SDR configuration (freq, gain, sample rate, etc.)
-│   ├── pfb.py                # PFB utilities
-│   └── test.py               # Threading test
-│
-└── logs/           # Build and runtime logs
+hdl/                         # ADI HDL fork — Vivado project sources
+  library/                   # ADI + custom IP cores
+  projects/fmcomms5/zc706/   # Top-level Vivado project for ZC706
+  Makefile, docs/, scripts/
+
+hls/                         # Vitis HLS source for the custom blocks
+  hls_pfb/                   # Streaming multichannel PFB channelizer
+    pfb.h, pfb_top.cpp, pfb_compute.cpp, pfb_fft.cpp,
+    pfb_io.cpp, pfb_helper.cpp, pfb_tb.cpp
+  hls_pfb_sample/            # Reduced reference design / sandbox
+  hls_correlator/            # Streaming FX correlator core
+    correlator.h, correlator_top.cpp, correlator_io.cpp,
+    correlator_tb.cpp, correlator_tb2.cpp
+
+IP/                          # Packaged Vivado IP (component.xml + RTL)
+  pfb_block_decimator/       # Single-stream block-decimating PFB
+  pfb_multichannel_decimator/# 4-channel coherent PFB (used in the design)
+  pfb_multichannel_decimator.zip
+
+python/                      # Same host application as the main branch
+                             # — but the PFB worker can be bypassed when
+                             #   the FPGA already produces channelized data.
 ```
 
-## Hardware Requirements
+## Hardware Targets
 
-- **Xilinx ZC706** evaluation board (Zynq-7000 SoC)
-- **Analog Devices FMCOMMS5** (EVAL-AD-FMCOMMS5-EBZ) — dual AD9361 FMC card
+- **Xilinx ZC706** evaluation board (Zynq-7000 XC7Z045)
+- **Analog Devices FMCOMMS5** (dual AD9361, 4 coherent RX channels)
+- Vivado-supported host PC for synthesis & implementation
 
-## Software Requirements
+## Tool Requirements
 
-- **Vivado** (for HDL synthesis and implementation)
-- **Vitis HLS** (for building the PFB and correlator IP cores)
-- **Python 3** with the following packages:
-  - `pyadi-iio` — ADI hardware abstraction via IIO
-  - `numpy`
-  - `matplotlib`
+| Tool                 | Tested with    | Used for                                  |
+|----------------------|----------------|-------------------------------------------|
+| Vivado               | 2022.2+        | Block design, synthesis, implementation   |
+| Vitis HLS            | 2022.2+        | Building the PFB and correlator IP cores  |
+| ADI HDL build flow   | latest         | FMCOMMS5 reference project & libraries    |
 
-## HLS IP Cores
+The `hdl/` tree follows the standard ADI build flow. See
+[the ADI HDL build guide](https://wiki.analog.com/resources/fpga/docs/build)
+for prerequisites.
 
-### Polyphase Filter Bank (`hls_pfb`)
+## IP Cores
 
-- 4-channel, 1024-point FFT with 4-tap FIR filter per bin
-- Pipelined streaming architecture
-- 16-bit fixed-point I/Q input, configurable output width
-- Uses Xilinx FFT IP core via HLS
+### `pfb_multichannel_decimator` (used in the design)
 
-### Correlator (`hls_correlator`)
+A 4-channel coherent polyphase filter bank decimator generated from
+[hls/hls_pfb](hls/hls_pfb). Packaged as a Vivado IP under
+[IP/pfb_multichannel_decimator](IP/pfb_multichannel_decimator).
 
-- Accepts 4 channelized input streams (16-bit complex)
-- Computes all 10 unique baseline products (auto: 00, 11, 22, 33; cross: 01, 02, 03, 12, 13, 23)
-- 64-bit complex accumulation with configurable integration time
-- AXI-Stream interfaces for input and output
+- 4 AXI-Stream IQ inputs (16-bit complex), 4 AXI-Stream channelized outputs
+- Configurable FFT length `P` and taps-per-branch `M` (default `P = 4096`,
+  `M = 4`, matching the host-side defaults in
+  [python/settings.py](python/settings.py))
+- Prototype FIR coefficients generated offline by the same routine the
+  Python pipeline uses (`generate_win_coeffs_np` in
+  [python/pfb.py](python/pfb.py)) — Blackman-Harris by default
+- Fully pipelined streaming architecture; uses the Xilinx FFT IP core
+- AXI4-Lite control register for run/halt and (optional) coefficient reload
 
-## Python Application
+### `pfb_block_decimator`
 
-The Python application connects to the FMCOMMS5 via `libiio` / `pyadi-iio` and provides:
+Single-stream block-decimating variant under
+[IP/pfb_block_decimator](IP/pfb_block_decimator). Useful for testing,
+single-antenna spectroscopy, or as a building block for arrays larger
+than four elements.
 
-- Real-time multi-channel I/Q data capture
-- Threaded acquisition pipeline with frame buffering
-- Live time-domain plotting of all 4 channels (I and Q)
+### `hls_correlator` (HLS source only — not yet packaged into `IP/`)
 
-### Default Configuration
+Streaming FX correlator skeleton in [hls/hls_correlator](hls/hls_correlator):
 
-| Parameter         | Value          |
-|-------------------|----------------|
-| Center Frequency  | 1420.4 MHz     |
-| Sample Rate       | 1 MSPS         |
-| RF Bandwidth      | 10 MHz         |
-| Gain Control      | Fast Attack    |
-| Buffer Size       | 4096 samples   |
-| Channels          | 0, 1, 2, 3    |
+- 4 channelized AXI-Stream inputs (16-bit complex)
+- Computes all 10 unique baseline products
+  (autos `00 11 22 33`, crosses `01 02 03 12 13 23`)
+- 64-bit complex accumulation with run-time configurable integration count
+- AXI-Stream output of integrated visibilities
 
-## Building the HDL Project
+Once packaged, this block can replace the host-side
+`correlate_process` (in [python/correlator.py](python/correlator.py)) for
+even greater offload.
 
-The HDL project is based on [Analog Devices' HDL reference design](https://github.com/analogdevicesinc/hdl).
+## Build Flow
 
-Refer to the [ADI HDL build guide](https://wiki.analog.com/resources/fpga/docs/build) for prerequisites and detailed instructions.
+### 1. Build the HLS IP
+
+```bash
+cd hls/hls_pfb
+vitis_hls -f hls_config.cfg     # generates Vivado IP
+```
+
+Repeat for `hls/hls_correlator` and `hls/hls_pfb_sample` as needed. The
+generated IPs are exported into the matching directory under `IP/`.
+
+### 2. Build the HDL project
+
+```bash
+cd hdl/projects/fmcomms5/zc706
+make
+```
+
+This invokes the ADI flow: it pulls in the FMCOMMS5 reference design,
+adds the custom `pfb_multichannel_decimator` IP into the block design,
+runs synthesis & implementation, and produces a bitstream + boot files.
+
+Build logs land in [logs/](logs/) and `vivado.jou`.
+
+### 3. Boot the ZC706 and run the host app
+
+Flash the resulting boot files to the ZC706 SD card (standard ADI
+procedure), bring the board up on the network, then run the same Python
+application as the main branch:
+
+```bash
+cd python
+python3 main.py
+```
+
+When the FPGA PFB is active the host's PFB worker can be bypassed by
+disabling it in the UI ("PFB enable" checkbox / `PFB_ENABLE = False` in
+[python/settings.py](python/settings.py)); the host then ingests the
+already-channelized data directly into the correlator.
 
 ## License
 
-This project is licensed under the **Apache License 2.0**. See [LICENSE](LICENSE) for details.
+The Python and HLS sources are licensed under the **Apache License 2.0**
+(see [LICENSE](LICENSE)).
 
-The HDL submodule contains components under various licenses (BSD, GPL2, LGPL) — see [hdl/LICENSE](hdl/LICENSE) and related license files for specifics.
+The `hdl/` tree is a fork of Analog Devices' HDL repository and contains
+components under several licenses (ADI BSD, JESD204, BSD-1-Clause, GPL-2,
+LGPL). See [hdl/LICENSE](hdl/LICENSE) and the per-license files in
+[hdl/](hdl/) for the specifics.
