@@ -1,100 +1,156 @@
-# FX-Correlator
+# Open-Radio-Interferometry
 
-An FPGA-based FX correlator for radio astronomy, targeting the **Xilinx ZC706** development board with the **Analog Devices FMCOMMS5** dual-AD9361 RF front-end. The system implements a polyphase filter bank (PFB) channelizer and a baseline correlator in hardware, with Python-based control, data acquisition, and visualization.
+A software FX correlator and aperture-synthesis imager for amateur radio
+astronomy, built around the **Analog Devices FMCOMMS5** (dual-AD9361, four
+coherent RX channels) paired with a host PC. All signal processing — channel
+acquisition, polyphase channelization, cross-correlation, UV synthesis, dirty
+imaging, and CLEAN deconvolution — runs in Python on the host. The FPGA simply
+streams raw IQ to the host over the standard ADI IIO interface.
 
-## Overview
+The default configuration targets the **1420.405 MHz neutral-hydrogen line**
+with a 4-element interferometer.
 
-The FX correlator architecture splits the processing into two stages:
+## Features
 
-- **F (Frequency)** — A 1024-point polyphase filter bank channelizes the incoming time-domain samples from 4 receive channels into narrow frequency bins.
-- **X (Cross-correlation)** — A correlator computes all 10 baseline products (4 auto + 6 cross) across the channelized data, with configurable integration time.
+- Live capture of 4 coherent IQ streams from the FMCOMMS5 over `libiio`
+- Multi-process pipeline (capture → PFB → correlator → UI) for low-latency
+  real-time operation
+- Polyphase filter bank channelizer with selectable prototype window
+  (Blackman-Harris, Hamming, Hann, Kaiser) and configurable FFT size / taps
+- Full baseline cross-correlator (4 autos + 6 crosses) with configurable
+  integration time and DC notch
+- UV-plane synthesis from local antenna ENU coordinates, source RA/Dec, and
+  observatory lat/lon, with proper LST/hour-angle projection and fringe
+  stopping
+- Dirty-image gridding + 2-D IFFT, configurable image grid (64²–2048²)
+- Interactive Hogbom CLEAN deconvolution dialog (step 1 / 10 / 100 / 1000
+  iterations, restored beam fit)
+- FITS export of UV visibilities and dirty images (astropy)
+- Standalone tools:
+  - `uv_app.py` — open and inspect a UV-plane FITS file
+  - `clean_app.py` — run interactive CLEAN on any compatible FITS
+  - `uv_simulator.py` — simulate UV coverage for a given array, source, and
+    observation window
+- Persistent settings (QSettings) so the last-used SDR / PFB / correlator
+  parameters are restored on launch
+- Dark-themed PyQt5 + pyqtgraph UI with dockable plot panels
 
-The RF front-end is the FMCOMMS5 evaluation board, which provides 4 coherent receive channels (2× AD9361) tunable from 70 MHz to 6 GHz. The default configuration targets the **1420.4 MHz hydrogen line**.
-
-## Repository Structure
+## Repository Layout
 
 ```
-├── hdl/            # Vivado HDL project (based on ADI's FMCOMMS5 reference design)
-│   ├── library/    # IP cores (ADI + custom)
-│   └── projects/
-│       └── fmcomms5/zc706/   # Top-level Vivado project for ZC706
-│
-├── hls/            # Vitis HLS source code
-│   ├── hls_correlator/       # FX correlator core (4-input, 10-baseline)
-│   ├── hls_pfb/              # Polyphase filter bank channelizer
-│   └── hls_pfb_sample/       # PFB sample/reference design
-│
-├── IP/             # Exported/packaged IP blocks
-│   ├── pfb_block_decimator/
-│   └── pfb_multichannel_decimator/
-│
-├── python/         # Host-side control and data acquisition
-│   ├── main.py               # Main application entry point
-│   ├── fmcomms5_iio.py       # IIO data capture, processing, and plotting
-│   ├── settings.py           # SDR configuration (freq, gain, sample rate, etc.)
-│   ├── pfb.py                # PFB utilities
-│   └── test.py               # Threading test
-│
-└── logs/           # Build and runtime logs
+python/
+  main.py            # Entry point — launches capture / PFB / correlator / UI processes
+  fmcomms5_iio.py    # FMCOMMS5 IIO capture worker and shared-state factory
+  settings.py        # Persistent settings (SDR, PFB, correlator, antenna geometry)
+  pfb.py             # Polyphase filter bank prototype + worker process
+  correlator.py      # Cross-correlation, UV synthesis, fringe stopping, FITS export
+  ui.py              # PyQt5 + pyqtgraph main window, control panels, live plots
+  clean.py           # Hogbom CLEAN core (gridding, dirty image, PSF fit, restore)
+  clean_dialog.py    # Interactive CLEAN dialog
+  clean_app.py       # Standalone CLEAN viewer
+  uv_app.py          # Standalone UV-plane viewer
+  uv_simulator.py    # UV-coverage simulator
+LICENSE
+README.md
 ```
 
-## Hardware Requirements
+## Hardware
 
-- **Xilinx ZC706** evaluation board (Zynq-7000 SoC)
-- **Analog Devices FMCOMMS5** (EVAL-AD-FMCOMMS5-EBZ) — dual AD9361 FMC card
+- **Analog Devices FMCOMMS5** (EVAL-AD-FMCOMMS5-EBZ) — dual AD9361, 4 coherent
+  RX channels, tunable 70 MHz – 6 GHz
+- Any host carrier supported by ADI's stock FMCOMMS5 image (e.g. ZC706,
+  ZCU102) running the standard ADI Linux + IIO daemon. The application
+  connects to the board over the network using its IIO URI
+  (default `ip:analog.local`)
+- 4 antennas with known local East-North-Up positions — defaults are an
+  edge-on 25 m square; edit `ANTENNA_POSITIONS_ENU` in
+  [python/settings.py](python/settings.py) to match your array
 
 ## Software Requirements
 
-- **Vivado** (for HDL synthesis and implementation)
-- **Vitis HLS** (for building the PFB and correlator IP cores)
-- **Python 3** with the following packages:
-  - `pyadi-iio` — ADI hardware abstraction via IIO
-  - `numpy`
-  - `matplotlib`
+- Python 3.9+
+- `pyadi-iio` (and `libiio` runtime)
+- `numpy`
+- `PyQt5`
+- `pyqtgraph`
+- `astropy` (for FITS I/O)
 
-## HLS IP Cores
+Install with:
 
-### Polyphase Filter Bank (`hls_pfb`)
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install pyadi-iio numpy PyQt5 pyqtgraph astropy
+```
 
-- 4-channel, 1024-point FFT with 4-tap FIR filter per bin
-- Pipelined streaming architecture
-- 16-bit fixed-point I/Q input, configurable output width
-- Uses Xilinx FFT IP core via HLS
+## Running
 
-### Correlator (`hls_correlator`)
+With the FMCOMMS5 reachable on the network:
 
-- Accepts 4 channelized input streams (16-bit complex)
-- Computes all 10 unique baseline products (auto: 00, 11, 22, 33; cross: 01, 02, 03, 12, 13, 23)
-- 64-bit complex accumulation with configurable integration time
-- AXI-Stream interfaces for input and output
+```bash
+cd python
+python3 main.py
+```
 
-## Python Application
+The default IIO URI is `ip:analog.local`. To use a different host, edit
+`SDR_URI` at the top of [python/main.py](python/main.py).
 
-The Python application connects to the FMCOMMS5 via `libiio` / `pyadi-iio` and provides:
+The UI opens with live time-domain, spectrum, baseline, UV-plane, and
+dirty-image panels. Use the dockable settings panel to change LO frequency,
+sample rate, RF bandwidth, gain, PFB parameters, and integration count, then
+click **Apply** for each section to push the change to the running workers.
 
-- Real-time multi-channel I/Q data capture
-- Threaded acquisition pipeline with frame buffering
-- Live time-domain plotting of all 4 channels (I and Q)
+### Standalone tools
 
-### Default Configuration
+```bash
+python3 uv_app.py            [path/to/file.fits]   # UV viewer
+python3 clean_app.py         [path/to/file.fits]   # Interactive CLEAN
+python3 uv_simulator.py                            # UV-coverage simulator
+```
 
-| Parameter         | Value          |
-|-------------------|----------------|
-| Center Frequency  | 1420.4 MHz     |
-| Sample Rate       | 1 MSPS         |
-| RF Bandwidth      | 10 MHz         |
-| Gain Control      | Fast Attack    |
-| Buffer Size       | 4096 samples   |
-| Channels          | 0, 1, 2, 3    |
+## Default Configuration
 
-## Building the HDL Project
+| Parameter             | Default                                  |
+|-----------------------|------------------------------------------|
+| Center frequency      | 1 420.400 MHz (HI line)                  |
+| Sample rate           | 2.5 MSPS                                 |
+| RF bandwidth          | 2 MHz                                    |
+| Gain control          | Fast attack                              |
+| Frame size / FFT (P)  | 4096                                     |
+| PFB taps per branch (M) | 4                                      |
+| Window                | Blackman-Harris                          |
+| Integration count     | 10 000 spectra                           |
+| Dirty-image grid      | 128 × 128                                |
+| RX channels           | 0, 1, 2, 3                               |
+| Observatory           | 39.527° N, −119.822° E                   |
+| Source declination    | 40.734°                                  |
 
-The HDL project is based on [Analog Devices' HDL reference design](https://github.com/analogdevicesinc/hdl).
+All values are persisted via `QSettings` between runs.
 
-Refer to the [ADI HDL build guide](https://wiki.analog.com/resources/fpga/docs/build) for prerequisites and detailed instructions.
+## Architecture
+
+`main.py` spawns four cooperating processes communicating through bounded
+`multiprocessing.Queue`s:
+
+```
+FMCOMMS5 ──IIO──► data_read ──raw_queue──► pfb_process ──pfb_queue──► correlate_process
+                      │                         │                          │
+                      ▼                         ▼                          ▼
+                 settings_queue           plot_queue                 corr_plot_queue
+                      ▲                         │                          │
+                      └────────── UI process (PyQt5) ◄──────────────────────┘
+```
+
+- `data_read` (fmcomms5_iio.py) configures the SDR and pushes raw 4-channel
+  IQ frames into `raw_queue`.
+- `pfb_process` (pfb.py) consumes raw frames, applies the polyphase FIR /
+  FFT, optionally notches DC, and pushes channelized spectra.
+- `correlate_process` (correlator.py) computes all 10 baseline products,
+  integrates, projects baselines onto the UV plane for the current LST,
+  and emits UV / correlation frames for plotting and FITS export.
+- The UI process (ui.py) drains the plot queues, renders dockable panels,
+  and pushes user changes back to the workers via the `*_config_queue`s.
 
 ## License
 
-This project is licensed under the **Apache License 2.0**. See [LICENSE](LICENSE) for details.
-
-The HDL submodule contains components under various licenses (BSD, GPL2, LGPL) — see [hdl/LICENSE](hdl/LICENSE) and related license files for specifics.
+Licensed under the **Apache License 2.0**. See [LICENSE](LICENSE) for details.
