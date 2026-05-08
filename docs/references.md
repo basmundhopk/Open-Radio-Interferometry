@@ -1,7 +1,7 @@
 # References
 
-Bibliography of sources consulted during the design and implementation of
-Open-Radio-Interferometry. Formatted in APA 7th edition style.
+Bibliography of sources used during the design and implementation of
+Open-Radio-Interferometry.
 
 ## Books
 
